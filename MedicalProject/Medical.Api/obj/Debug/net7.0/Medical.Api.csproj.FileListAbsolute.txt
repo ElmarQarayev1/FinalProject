@@ -93,3 +93,4 @@
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/obj/Debug/net7.0/ref/Medical.Api.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/obj/Debug/net7.0/Medical.Api.sourcelink.json
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/obj/Debug/net7.0/Medical..4933C338.Up2Date
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/Medical.Api.staticwebassets.runtime.json

@@ -26,6 +26,8 @@
     <Content Remove="wwwroot\" />
     <Content Remove="wwwroot\uploads\" />
     <Content Remove="wwwroot\uploads\sliders\" />
+    <Content Remove="wwwroot\uploads\departments\" />
+    <Content Remove="wwwroot\uploads\services\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
@@ -33,6 +35,8 @@
     <Folder Include="MiddleWares\" />
     <Folder Include="Controllers\" />
     <Folder Include="wwwroot\uploads\sliders\" />
+    <Folder Include="wwwroot\uploads\departments\" />
+    <Folder Include="wwwroot\uploads\services\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="MiddleWares\" />

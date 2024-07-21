@@ -2,6 +2,8 @@
 using AutoMapper;
 using Medical.Core.Entities;
 using Medical.Service.Dtos.Admin.CategoryDtos;
+using Medical.Service.Dtos.Admin.DepartmentDtos;
+using Medical.Service.Dtos.Admin.ServiceDtos;
 using Medical.Service.Dtos.Admin.SliderDtos;
 using Microsoft.AspNetCore.Http;
 
@@ -36,13 +38,34 @@ namespace Medical.Service.Profiles
 
 
 
-            //Sliders
+            //sliders
             CreateMap<Slider, SliderCreateDto>().ReverseMap();
             CreateMap<Slider, SliderPaginatedGetDto>()
                  .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/sliders/" + src.ImageName));
 
             CreateMap<Slider, SliderGetDto>()
                 .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/sliders/" + src.ImageName));
+
+
+
+            //departments
+            CreateMap<Department, DepartmentCreateDto>().ReverseMap();
+            CreateMap<Department,DepartmentPaginatedGetDto>()
+                .ForMember(dest=>dest.DoctorCount,s=>s.MapFrom(s=>s.Doctors.Count))
+                .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/departments/" + src.ImageName));
+
+            CreateMap<Department, DepartmentGetDto>();
+
+
+
+            //services
+            CreateMap<Medical.Core.Entities.Service, ServiceCreateDto>().ReverseMap();
+            CreateMap<Medical.Core.Entities.Service, ServicePaginatedGetDto>()
+                .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/services/" + src.ImageName));
+
+            CreateMap<Medical.Core.Entities.Service, ServiceGetDto>()
+                 .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/services/" + src.ImageName));
+
 
         }
     }

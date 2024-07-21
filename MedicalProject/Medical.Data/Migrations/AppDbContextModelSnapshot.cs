@@ -36,8 +36,8 @@ namespace Medical.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DepartmentId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
@@ -56,8 +56,6 @@ namespace Medical.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
-
-                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("DoctorId");
 
@@ -694,10 +692,6 @@ namespace Medical.Data.Migrations
                         .WithMany()
                         .HasForeignKey("AppUserId");
 
-                    b.HasOne("Medical.Core.Entities.Department", null)
-                        .WithMany("Appointments")
-                        .HasForeignKey("DepartmentId");
-
                     b.HasOne("Medical.Core.Entities.Doctor", "Doctor")
                         .WithMany("Appointments")
                         .HasForeignKey("DoctorId")
@@ -866,8 +860,6 @@ namespace Medical.Data.Migrations
 
             modelBuilder.Entity("Medical.Core.Entities.Department", b =>
                 {
-                    b.Navigation("Appointments");
-
                     b.Navigation("Doctors");
                 });
 

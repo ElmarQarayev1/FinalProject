@@ -21,6 +21,8 @@ namespace Medical.Core.Entities
 
         public Doctor Doctor { get; set; }
 
+        public DateTime Date { get; set; }
+
     }
 }
 
