@@ -1,0 +1,13 @@
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Core/bin/Debug/net7.0/Medical.Core.deps.json
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Core/bin/Debug/net7.0/Medical.Core.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Core/bin/Debug/net7.0/Medical.Core.pdb
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Core/obj/Debug/net7.0/Medical.Core.csproj.AssemblyReference.cache
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Core/obj/Debug/net7.0/Medical.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Core/obj/Debug/net7.0/Medical.Core.AssemblyInfoInputs.cache
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Core/obj/Debug/net7.0/Medical.Core.AssemblyInfo.cs
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Core/obj/Debug/net7.0/Medical.Core.csproj.CoreCompileInputs.cache
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Core/obj/Debug/net7.0/Medical.Core.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Core/obj/Debug/net7.0/refint/Medical.Core.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Core/obj/Debug/net7.0/Medical.Core.pdb
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Core/obj/Debug/net7.0/ref/Medical.Core.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Core/obj/Debug/net7.0/Medical.Core.sourcelink.json
