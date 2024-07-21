@@ -1,0 +1,17 @@
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/bin/Release/net7.0/Medical.Service.deps.json
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/bin/Release/net7.0/Medical.Service.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/bin/Release/net7.0/Medical.Service.pdb
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/bin/Release/net7.0/Medical.Core.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/bin/Release/net7.0/Medical.Data.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/bin/Release/net7.0/Medical.Data.pdb
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/bin/Release/net7.0/Medical.Core.pdb
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/obj/Release/net7.0/Medical.Service.csproj.AssemblyReference.cache
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/obj/Release/net7.0/Medical.Service.GeneratedMSBuildEditorConfig.editorconfig
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/obj/Release/net7.0/Medical.Service.AssemblyInfoInputs.cache
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/obj/Release/net7.0/Medical.Service.AssemblyInfo.cs
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/obj/Release/net7.0/Medical.Service.csproj.CoreCompileInputs.cache
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/obj/Release/net7.0/Medical.Service.csproj.CopyComplete
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/obj/Release/net7.0/Medical.Service.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/obj/Release/net7.0/refint/Medical.Service.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/obj/Release/net7.0/Medical.Service.pdb
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/obj/Release/net7.0/ref/Medical.Service.dll

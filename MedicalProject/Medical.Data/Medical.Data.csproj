@@ -24,9 +24,13 @@
   <ItemGroup>
     <None Remove="Repositories\" />
     <None Remove="Configuration\" />
+    <None Remove="Repositories\Implementations\" />
+    <None Remove="Repositories\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\" />
     <Folder Include="Configuration\" />
+    <Folder Include="Repositories\Implementations\" />
+    <Folder Include="Repositories\Interfaces\" />
   </ItemGroup>
 </Project>

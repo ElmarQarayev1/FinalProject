@@ -14,4 +14,48 @@
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="JWT" Version="10.1.1" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Exceptions\" />
+    <None Remove="Helpers\" />
+    <None Remove="Implementations\" />
+    <None Remove="Interfaces\" />
+    <None Remove="Dtos\" />
+    <None Remove="Dtos\Admin\" />
+    <None Remove="Dtos\User\" />
+    <None Remove="Dtos\Admin\CategoryDtos\" />
+    <None Remove="Dtos\Admin\DepartmentDtos\" />
+    <None Remove="Dtos\Admin\DoctorDtos\" />
+    <None Remove="Dtos\Admin\FeatureDtos\" />
+    <None Remove="Dtos\Admin\MedicineDtos\" />
+    <None Remove="Dtos\Admin\ServiceDtos\" />
+    <None Remove="Dtos\Admin\SettingDtos\" />
+    <None Remove="Dtos\Admin\SliderDtos\" />
+    <None Remove="Dtos\Admin\AuthDtos\" />
+    <None Remove="Interfaces\Admin\" />
+    <None Remove="Interfaces\User\" />
+    <None Remove="Implementations\Admin\" />
+    <None Remove="Profiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Implementations\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Dtos\" />
+    <Folder Include="Dtos\Admin\" />
+    <Folder Include="Dtos\User\" />
+    <Folder Include="Dtos\Admin\CategoryDtos\" />
+    <Folder Include="Dtos\Admin\DepartmentDtos\" />
+    <Folder Include="Dtos\Admin\DoctorDtos\" />
+    <Folder Include="Dtos\Admin\FeatureDtos\" />
+    <Folder Include="Dtos\Admin\MedicineDtos\" />
+    <Folder Include="Dtos\Admin\ServiceDtos\" />
+    <Folder Include="Dtos\Admin\SettingDtos\" />
+    <Folder Include="Dtos\Admin\SliderDtos\" />
+    <Folder Include="Dtos\Admin\AuthDtos\" />
+    <Folder Include="Interfaces\Admin\" />
+    <Folder Include="Interfaces\User\" />
+    <Folder Include="Implementations\Admin\" />
+    <Folder Include="Profiles\" />
+  </ItemGroup>
 </Project>

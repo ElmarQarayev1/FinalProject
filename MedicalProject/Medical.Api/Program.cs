@@ -1,6 +1,18 @@
-﻿using Medical.Core.Entities;
+﻿using AutoMapper;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Medical.Api.MiddleWares;
+using Medical.Core.Entities;
 using Medical.Data;
+using Medical.Data.Repositories.Implementations;
+using Medical.Data.Repositories.Interfaces;
+using Medical.Service.Dtos.Admin.CategoryDtos;
+using Medical.Service.Exceptions;
+using Medical.Service.Implementations.Admin;
+using Medical.Service.Interfaces.Admin;
+using Medical.Service.Profiles;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -8,6 +20,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+
+builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
+{
+    options.InvalidModelStateResponseFactory = context =>
+    {
+
+        var errors = context.ModelState.Where(x => x.Value.Errors.Count > 0)
+        .Select(x => new RestExceptionError(x.Key, x.Value.Errors.First().ErrorMessage)).ToList();
+
+        return new BadRequestObjectResult(new { message = "", errors });
+    };
+
+});
 
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
@@ -22,6 +47,17 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+
+
+
+
+
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -68,7 +104,17 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 
 
 
+builder.Services.AddSingleton(provider => new MapperConfiguration(cf =>
+{
+    cf.AddProfile(new MapProfile(provider.GetService<IHttpContextAccessor>()));
+}).CreateMapper());
 
+
+
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
+builder.Services.AddValidatorsFromAssemblyContaining<CategoryCreateDtoValidator>();
 
 
 
@@ -90,6 +136,10 @@ app.UseAuthorization();
 app.UseStaticFiles();
 
 app.MapControllers();
+
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
+
 
 app.Run();
 

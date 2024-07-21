@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "t2OoAL47QEB3+aXdZqf2ZyKy9eo+hxnMMxEObcgbnrs=",
+  "Source": "Medical.Api",
+  "BasePath": "_content/Medical.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Medical.Api/wwwroot",
+      "Source": "Medical.Api",
+      "ContentRoot": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/",
+      "BasePath": "_content/Medical.Api",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
