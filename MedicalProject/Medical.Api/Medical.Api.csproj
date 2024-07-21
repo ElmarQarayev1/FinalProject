@@ -25,12 +25,14 @@
   <ItemGroup>
     <Content Remove="wwwroot\" />
     <Content Remove="wwwroot\uploads\" />
+    <Content Remove="wwwroot\uploads\sliders\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
     <Folder Include="wwwroot\uploads\" />
     <Folder Include="MiddleWares\" />
     <Folder Include="Controllers\" />
+    <Folder Include="wwwroot\uploads\sliders\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="MiddleWares\" />

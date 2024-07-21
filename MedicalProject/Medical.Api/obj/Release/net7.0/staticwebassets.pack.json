@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/sliders/a464ab93-0612-4613-806f-b858ff61f049slider1.jpg",
+      "PackagePath": "staticwebassets/uploads/sliders/a464ab93-0612-4613-806f-b858ff61f049slider1.jpg"
+    },
+    {
+      "Id": "obj/Release/net7.0/staticwebassets/msbuild.Medical.Api.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Release/net7.0/staticwebassets/msbuild.build.Medical.Api.props",
+      "PackagePath": "build\\Medical.Api.props"
+    },
+    {
+      "Id": "obj/Release/net7.0/staticwebassets/msbuild.buildMultiTargeting.Medical.Api.props",
+      "PackagePath": "buildMultiTargeting\\Medical.Api.props"
+    },
+    {
+      "Id": "obj/Release/net7.0/staticwebassets/msbuild.buildTransitive.Medical.Api.props",
+      "PackagePath": "buildTransitive\\Medical.Api.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

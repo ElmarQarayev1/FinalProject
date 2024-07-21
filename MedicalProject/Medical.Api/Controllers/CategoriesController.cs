@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Medical.Api.Controllers
 {
-	public class CategoriesController:ControllerBase
+    [ApiController]
+    public class CategoriesController:ControllerBase
 	{
         private readonly ICategoryService _categoryService;
 
@@ -37,6 +38,13 @@ namespace Medical.Api.Controllers
         public ActionResult<CategoryGetDto> GetById(int id)
         {
             return StatusCode(200, _categoryService.GetById(id));
+        }
+
+        [HttpPut("api/admin/Categories/{id}")]
+        public IActionResult Update(int id, CategoryUpdateDto updateDto)
+        {
+            _categoryService.Update(id, updateDto);
+            return NoContent();
         }
 
         [HttpDelete("api/admin/categories/{id}")]

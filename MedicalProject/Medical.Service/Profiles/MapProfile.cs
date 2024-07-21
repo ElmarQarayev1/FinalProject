@@ -2,6 +2,7 @@
 using AutoMapper;
 using Medical.Core.Entities;
 using Medical.Service.Dtos.Admin.CategoryDtos;
+using Medical.Service.Dtos.Admin.SliderDtos;
 using Microsoft.AspNetCore.Http;
 
 namespace Medical.Service.Profiles
@@ -32,6 +33,16 @@ namespace Medical.Service.Profiles
 
 
 
+
+
+
+            //Sliders
+            CreateMap<Slider, SliderCreateDto>().ReverseMap();
+            CreateMap<Slider, SliderPaginatedGetDto>()
+                 .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/sliders/" + src.ImageName));
+
+            CreateMap<Slider, SliderGetDto>()
+                .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/sliders/" + src.ImageName));
 
         }
     }
