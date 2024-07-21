@@ -1,0 +1,7 @@
+﻿<Properties StartupConfiguration="{5DF610E8-7126-4BF7-9557-B9AF63AB645E}|https">
+  <MonoDevelop.Ide.ItemProperties.Medical.Data FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.Medical.Service FirstBuild="True" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Medical.Api FirstBuild="True" PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.ItemProperties.Medical.Core FirstBuild="True" />
+</Properties>
