@@ -5,6 +5,7 @@ using Medical.Service.Dtos.Admin.CategoryDtos;
 using Medical.Service.Dtos.Admin.DepartmentDtos;
 using Medical.Service.Dtos.Admin.DoctorDtos;
 using Medical.Service.Dtos.Admin.FeatureDtos;
+using Medical.Service.Dtos.Admin.MedicineDtos;
 using Medical.Service.Dtos.Admin.ServiceDtos;
 using Medical.Service.Dtos.Admin.SettingDtos;
 using Medical.Service.Dtos.Admin.SliderDtos;
@@ -97,6 +98,30 @@ namespace Medical.Service.Profiles
                  .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/doctors/" + src.ImageName));
 
 
+            //medicines
+
+            CreateMap<Medicine, MedicineCreateDto>()
+              .ForMember(dest => dest.FileUrls, opt => opt.Ignore());
+
+            CreateMap<MedicineCreateDto, Medicine>();
+
+
+            CreateMap<Medicine, MedicineDetailsDto>()
+     .ForMember(dest => dest.MedicineImages,
+                opt => opt.MapFrom(src => src.MedicineImages.Select(rc => new MedicineImageResponseDto
+                {
+                    Id = rc.Id,
+                    FileUrl = baseUrl + "/uploads/medicines/" + rc.ImageName
+                }).ToList()));
+    
+
+            CreateMap<Medicine, MedicineGetDto>().ReverseMap();
+
+            CreateMap<Medicine, MedicinePaginatedGetDto>();
+
+
+
+                
 
         }
     }

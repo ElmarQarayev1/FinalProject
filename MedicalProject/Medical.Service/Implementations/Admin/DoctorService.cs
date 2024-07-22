@@ -57,14 +57,14 @@ namespace Medical.Service.Implementations.Admin
 
             if (doctorEmail != null)
             {
-                throw new RestException(StatusCodes.Status404NotFound, "There cannot be a doctor with the same email");
+                throw new RestException(StatusCodes.Status404NotFound,"Email", "Doctor already exists by given Email");
             }
 
             Doctor doctorPhone = _doctorRepository.Get(x => x.Phone == createDto.Phone);
 
             if (doctorPhone != null)
             {
-                throw new RestException(StatusCodes.Status404NotFound, "There cannot be a doctor with the same phone");
+                throw new RestException(StatusCodes.Status404NotFound, "Phone", "Doctor already exists by given Phone");
             }
 
             Doctor doctor = new Doctor()

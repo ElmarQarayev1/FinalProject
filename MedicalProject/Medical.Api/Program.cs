@@ -65,6 +65,8 @@ builder.Services.AddScoped<ISettingRepository, SettingRepository>();
 builder.Services.AddScoped<ISettingService, SettingService>();
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
+builder.Services.AddScoped<IMedicineRepository, MedicineRepository>();
+builder.Services.AddScoped<IMedicineService, MedicineService>();
 
 
 

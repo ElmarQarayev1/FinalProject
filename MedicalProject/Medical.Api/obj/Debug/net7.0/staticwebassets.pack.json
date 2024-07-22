@@ -9,8 +9,36 @@
       "PackagePath": "staticwebassets/uploads/doctors/2fde873f-5c28-4fd5-8626-e8370f6f73cbteam-2.jpg"
     },
     {
+      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/doctors/b2138fba-5278-42f8-a6bd-62cf3de66775team-2.jpg",
+      "PackagePath": "staticwebassets/uploads/doctors/b2138fba-5278-42f8-a6bd-62cf3de66775team-2.jpg"
+    },
+    {
+      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/doctors/d0defd0b-bc81-4180-a9ca-96ff7f14f923team-3.jpg",
+      "PackagePath": "staticwebassets/uploads/doctors/d0defd0b-bc81-4180-a9ca-96ff7f14f923team-3.jpg"
+    },
+    {
       "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/features/40ce2513-f1e5-4cdd-b0fa-67db11d1cf45team-3.jpg",
       "PackagePath": "staticwebassets/uploads/features/40ce2513-f1e5-4cdd-b0fa-67db11d1cf45team-3.jpg"
+    },
+    {
+      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/58976f8f-4c3a-4125-b33c-cc5b9e5cab38comments-6.jpg",
+      "PackagePath": "staticwebassets/uploads/medicines/58976f8f-4c3a-4125-b33c-cc5b9e5cab38comments-6.jpg"
+    },
+    {
+      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/d67a6803-1d18-4f01-bfa2-5cac058a2183comments-5.jpg",
+      "PackagePath": "staticwebassets/uploads/medicines/d67a6803-1d18-4f01-bfa2-5cac058a2183comments-5.jpg"
+    },
+    {
+      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/dd3e5b82-b519-489b-bc41-4a784a492677team-1.jpg",
+      "PackagePath": "staticwebassets/uploads/medicines/dd3e5b82-b519-489b-bc41-4a784a492677team-1.jpg"
+    },
+    {
+      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/ef24fcad-1572-4ed7-b963-40c9a9938812blog-3.jpg",
+      "PackagePath": "staticwebassets/uploads/medicines/ef24fcad-1572-4ed7-b963-40c9a9938812blog-3.jpg"
+    },
+    {
+      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/f03621fb-f19c-41cc-8a06-0782319afc53blog-inside-post.jpg",
+      "PackagePath": "staticwebassets/uploads/medicines/f03621fb-f19c-41cc-8a06-0782319afc53blog-inside-post.jpg"
     },
     {
       "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/sliders/a464ab93-0612-4613-806f-b858ff61f049slider1.jpg",
