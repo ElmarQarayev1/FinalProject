@@ -1,5 +1,4 @@
 ﻿using System;
-using Medical.Service.Dtos.Admin.DepartmentDtos;
 using Medical.Service.Dtos.Admin.ServiceDtos;
 
 namespace Medical.Service.Interfaces.Admin

@@ -28,6 +28,7 @@
     <Content Remove="wwwroot\uploads\sliders\" />
     <Content Remove="wwwroot\uploads\departments\" />
     <Content Remove="wwwroot\uploads\services\" />
+    <Content Remove="wwwroot\uploads\features\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
@@ -37,6 +38,7 @@
     <Folder Include="wwwroot\uploads\sliders\" />
     <Folder Include="wwwroot\uploads\departments\" />
     <Folder Include="wwwroot\uploads\services\" />
+    <Folder Include="wwwroot\uploads\features\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="MiddleWares\" />

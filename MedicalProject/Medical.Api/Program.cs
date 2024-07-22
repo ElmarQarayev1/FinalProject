@@ -58,6 +58,9 @@ builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+builder.Services.AddScoped<IFeatureService, FeatureService>();
+builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
+
 
 
 

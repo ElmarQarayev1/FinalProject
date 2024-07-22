@@ -9,8 +9,6 @@ namespace Medical.Core.Entities
 
 		public string ImageName { get; set; }
 
-
-
 		
 	}
 }

@@ -1,7 +1,122 @@
 ﻿<Properties StartupConfiguration="{5DF610E8-7126-4BF7-9557-B9AF63AB645E}|https">
-  <MonoDevelop.Ide.ItemProperties.Medical.Data FirstBuild="True" />
-  <MonoDevelop.Ide.ItemProperties.Medical.Service FirstBuild="True" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.Medical.Api FirstBuild="True" PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
-  <MonoDevelop.Ide.ItemProperties.Medical.Core FirstBuild="True" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Medical.Service/Dtos/Admin/ServiceDtos/ServiceCreateDto.cs">
+    <Files>
+      <File FileName="Medical.Api/Program.cs" />
+      <File FileName="Medical.Core/Entities/BaseEntity.cs" />
+      <File FileName="Medical.Core/Entities/AuditEntity.cs" />
+      <File FileName="Medical.Core/Entities/Slider.cs" />
+      <File FileName="Medical.Core/Entities/Feature.cs" />
+      <File FileName="Medical.Core/Entities/Department.cs" />
+      <File FileName="Medical.Core/Entities/Doctor.cs" />
+      <File FileName="Medical.Core/Entities/Service.cs" />
+      <File FileName="Medical.Core/Entities/Category.cs" />
+      <File FileName="Medical.Core/Entities/Medicine.cs" />
+      <File FileName="Medical.Core/Entities/MedicineImage.cs" />
+      <File FileName="Medical.Core/Entities/MedicineReview.cs" />
+      <File FileName="Medical.Core/Entities/AppUser.cs" />
+      <File FileName="Medical.Core/Enum/ReviewStatus.cs" />
+      <File FileName="Medical.Core/Entities/BasketItem.cs" />
+      <File FileName="Medical.Core/Entities/OrderItem.cs" />
+      <File FileName="Medical.Core/Entities/Order.cs" />
+      <File FileName="Medical.Core/Entities/Appointment.cs" />
+      <File FileName="Medical.Data/AppDbContext.cs" />
+      <File FileName="Medical.Data/Configuration/CategoryConfiguration.cs" />
+      <File FileName="Medical.Data/Configuration/MedicalimageConfiguration.cs" />
+      <File FileName="Medical.Core/Entities/Setting.cs" />
+      <File FileName="Medical.Data/Configuration/SettingConfiguration.cs" />
+      <File FileName="Medical.Api/appsettings.json" />
+      <File FileName="Medical.Api/MiddleWares/ExceptionHandlerMiddleware.cs" />
+      <File FileName="Medical.Service/Exceptions/RestException.cs" />
+      <File FileName="Medical.Data/Repositories/Interfaces/IRepository.cs" />
+      <File FileName="Medical.Data/Repositories/Interfaces/ICategoryRepository.cs" />
+      <File FileName="Medical.Data/Repositories/Interfaces/IDoctorRepository.cs" />
+      <File FileName="Medical.Data/Repositories/Interfaces/IDepartmentRepository.cs" />
+      <File FileName="Medical.Data/Repositories/Interfaces/IFeatureRepository.cs" />
+      <File FileName="Medical.Data/Repositories/Interfaces/IMedicineRepository.cs" />
+      <File FileName="Medical.Data/Repositories/Interfaces/ISettingRepository.cs" />
+      <File FileName="Medical.Data/Repositories/Interfaces/IServiceRepository.cs" />
+      <File FileName="Medical.Data/Repositories/Interfaces/ISliderRepository.cs" />
+      <File FileName="Medical.Data/Repositories/Implementations/Repository.cs" />
+      <File FileName="Medical.Data/Repositories/Implementations/CategoryRepository.cs" />
+      <File FileName="Medical.Data/Repositories/Implementations/DepartmentRepository.cs" />
+      <File FileName="Medical.Data/Repositories/Implementations/DoctorRepository.cs" />
+      <File FileName="Medical.Data/Repositories/Implementations/FeatureRepository.cs" />
+      <File FileName="Medical.Data/Repositories/Implementations/MedicineRepository.cs" />
+      <File FileName="Medical.Data/Repositories/Implementations/ServiceRepository.cs" />
+      <File FileName="Medical.Data/Repositories/Implementations/SettingRepository.cs" />
+      <File FileName="Medical.Data/Repositories/Implementations/SliderRepository.cs" />
+      <File FileName="Medical.Service/Helpers/FileManager.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/CategoryDtos/CategoryCreateDto.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/CategoryDtos/CategoryGetDto.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/CategoryDtos/CategoryPaginatedGetDto.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/CategoryDtos/CategoryUpdateDto.cs" />
+      <File FileName="Medical.Service/Interfaces/Admin/ICategoryService.cs" />
+      <File FileName="Medical.Service/PaginatedList.cs" />
+      <File FileName="Medical.Service/Implementations/Admin/CategoryService.cs" />
+      <File FileName="Medical.Service/Profiles/MapProfile.cs" />
+      <File FileName="Medical.Api/Controllers/CategoriesController.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/SliderDtos/SliderGetDto.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/SliderDtos/SliderCreateDto.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/SliderDtos/SliderUpdateDto.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/SliderDtos/SliderPaginatedGetDto.cs" />
+      <File FileName="Medical.Service/Interfaces/Admin/ISliderService.cs" />
+      <File FileName="Medical.Service/Implementations/Admin/SliderService.cs" />
+      <File FileName="Medical.Api/Controllers/SlidersController.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/DepartmentDtos/DepartmentCreateDto.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/DepartmentDtos/DepartmentGetDto.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/DepartmentDtos/DepartmentPaginatedGetDto.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/DepartmentDtos/DepartmentUpdateDto.cs" />
+      <File FileName="Medical.Data/Migrations/20240721112133_TablesCreated.cs" />
+      <File FileName="Medical.Service/Interfaces/Admin/IDepartmentService.cs" />
+      <File FileName="Medical.Service/Implementations/Admin/DepartmentService.cs" />
+      <File FileName="Medical.Api/Controllers/DepartmentsController.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/ServiceDtos/ServiceCreateDto.cs" Line="26" Column="8" />
+      <File FileName="Medical.Service/Dtos/Admin/ServiceDtos/ServiceGetDto.cs" Line="17" Column="1" />
+      <File FileName="Medical.Service/Dtos/Admin/ServiceDtos/ServicePaginatedGetDto.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/ServiceDtos/ServiceUpdateDto.cs" />
+      <File FileName="Medical.Service/Interfaces/Admin/IServiceService.cs" />
+      <File FileName="Medical.Service/Implementations/Admin/ServiceService.cs" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MedicalProject" expanded="True">
+            <Node name="Medical.Api">
+              <Node name="Controllers" expanded="True" />
+              <Node name="MiddleWares" expanded="True" />
+              <Node name="wwwroot" expanded="True">
+                <Node name="uploads" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="Medical.Service">
+              <Node name="Dtos" expanded="True">
+                <Node name="Admin" expanded="True">
+                  <Node name="CategoryDtos" expanded="True" />
+                  <Node name="DepartmentDtos" expanded="True" />
+                  <Node name="ServiceDtos" expanded="True">
+                    <Node name="ServiceCreateDto.cs" selected="True" />
+                  </Node>
+                  <Node name="SliderDtos" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="Implementations" expanded="True">
+                <Node name="Admin" expanded="True" />
+              </Node>
+              <Node name="Interfaces" expanded="True">
+                <Node name="Admin" expanded="True" />
+              </Node>
+              <Node name="Profiles" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Medical.Api PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
 </Properties>

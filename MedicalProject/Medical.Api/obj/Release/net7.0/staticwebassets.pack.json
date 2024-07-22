@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/services/086d9c54-5a19-41d6-9771-aca3e1b4c821team-1.jpg",
-      "PackagePath": "staticwebassets/uploads/services/086d9c54-5a19-41d6-9771-aca3e1b4c821team-1.jpg"
-    },
-    {
       "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/sliders/a464ab93-0612-4613-806f-b858ff61f049slider1.jpg",
       "PackagePath": "staticwebassets/uploads/sliders/a464ab93-0612-4613-806f-b858ff61f049slider1.jpg"
     },

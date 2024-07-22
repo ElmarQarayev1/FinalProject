@@ -3,6 +3,7 @@ using AutoMapper;
 using Medical.Core.Entities;
 using Medical.Service.Dtos.Admin.CategoryDtos;
 using Medical.Service.Dtos.Admin.DepartmentDtos;
+using Medical.Service.Dtos.Admin.FeatureDtos;
 using Medical.Service.Dtos.Admin.ServiceDtos;
 using Medical.Service.Dtos.Admin.SliderDtos;
 using Microsoft.AspNetCore.Http;
@@ -65,6 +66,18 @@ namespace Medical.Service.Profiles
 
             CreateMap<Medical.Core.Entities.Service, ServiceGetDto>()
                  .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/services/" + src.ImageName));
+
+
+
+
+            //features
+            CreateMap<Feature, FeatureCreateDto>().ReverseMap();
+            CreateMap<Feature, FeaturePaginatedGetDto>()
+                .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/features/" + src.ImageName));
+
+            CreateMap<Feature, FeatureGetDto>()
+                 .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/features/" + src.ImageName));
+
 
 
         }
