@@ -141,12 +141,10 @@ namespace Medical.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BehanceUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Compassion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("CompassionSkil")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime2");
@@ -162,7 +160,10 @@ namespace Medical.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EthicSkil")
+                    b.Property<double>("EthicSkil")
+                        .HasColumnType("float");
+
+                    b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -171,15 +172,10 @@ namespace Medical.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("InstagramUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModifiedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -189,16 +185,13 @@ namespace Medical.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ResilienceSkil")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("ResilienceSkil")
+                        .HasColumnType("float");
 
                     b.Property<string>("TwitterUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VimeoUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -305,7 +298,7 @@ namespace Medical.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MedicineId")
+                    b.Property<int?>("MedicineId")
                         .HasColumnType("int");
 
                     b.Property<byte>("Rate")
@@ -765,9 +758,7 @@ namespace Medical.Data.Migrations
 
                     b.HasOne("Medical.Core.Entities.Medicine", "Medicine")
                         .WithMany("MedicineReviews")
-                        .HasForeignKey("MedicineId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MedicineId");
 
                     b.Navigation("AppUser");
 

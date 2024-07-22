@@ -1,6 +1,18 @@
 {
   "Files": [
     {
+      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/departments/cd82f1b0-416d-44fe-835c-2c5f1fc3ce2eteam-1.jpg",
+      "PackagePath": "staticwebassets/uploads/departments/cd82f1b0-416d-44fe-835c-2c5f1fc3ce2eteam-1.jpg"
+    },
+    {
+      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/doctors/2fde873f-5c28-4fd5-8626-e8370f6f73cbteam-2.jpg",
+      "PackagePath": "staticwebassets/uploads/doctors/2fde873f-5c28-4fd5-8626-e8370f6f73cbteam-2.jpg"
+    },
+    {
+      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/features/40ce2513-f1e5-4cdd-b0fa-67db11d1cf45team-3.jpg",
+      "PackagePath": "staticwebassets/uploads/features/40ce2513-f1e5-4cdd-b0fa-67db11d1cf45team-3.jpg"
+    },
+    {
       "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/sliders/a464ab93-0612-4613-806f-b858ff61f049slider1.jpg",
       "PackagePath": "staticwebassets/uploads/sliders/a464ab93-0612-4613-806f-b858ff61f049slider1.jpg"
     },

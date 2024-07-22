@@ -3,6 +3,7 @@ using AutoMapper;
 using Medical.Core.Entities;
 using Medical.Service.Dtos.Admin.CategoryDtos;
 using Medical.Service.Dtos.Admin.DepartmentDtos;
+using Medical.Service.Dtos.Admin.DoctorDtos;
 using Medical.Service.Dtos.Admin.FeatureDtos;
 using Medical.Service.Dtos.Admin.ServiceDtos;
 using Medical.Service.Dtos.Admin.SettingDtos;
@@ -84,7 +85,18 @@ namespace Medical.Service.Profiles
             //settings
             CreateMap<Setting, SettingGetDto>();
             CreateMap<Setting, SettingPaginatedGetDto>();
-                
+
+
+            //doctors
+
+            CreateMap<Doctor, DoctorCreateDto>().ReverseMap();
+            CreateMap<Doctor, DoctorPaginatedGetDto>()
+                .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/doctors/" + src.ImageName));
+
+            CreateMap<Doctor, DoctorGetDto>()
+                 .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/doctors/" + src.ImageName));
+
+
 
         }
     }

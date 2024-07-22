@@ -8,7 +8,7 @@ namespace Medical.Core.Entities
 
 		public string AppUserId { get; set; }
 
-		public int MedicineId { get; set; }
+		public int? MedicineId { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 

@@ -29,6 +29,7 @@
     <Content Remove="wwwroot\uploads\departments\" />
     <Content Remove="wwwroot\uploads\services\" />
     <Content Remove="wwwroot\uploads\features\" />
+    <Content Remove="wwwroot\uploads\doctors\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
@@ -39,6 +40,7 @@
     <Folder Include="wwwroot\uploads\departments\" />
     <Folder Include="wwwroot\uploads\services\" />
     <Folder Include="wwwroot\uploads\features\" />
+    <Folder Include="wwwroot\uploads\doctors\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="MiddleWares\" />

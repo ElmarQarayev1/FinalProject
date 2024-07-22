@@ -3,7 +3,7 @@ namespace Medical.Core.Entities
 {
 	public class Doctor:AuditEntity
 	{
-		public string Name { get; set; }
+		public string FullName { get; set; }
 
 		public string Position { get; set; }
 
@@ -19,24 +19,24 @@ namespace Medical.Core.Entities
 
         public string ImageName { get; set; }
 
-        public string TwitterUrl { get; set; }
+        public string? TwitterUrl { get; set; }
 
-		public string InstagramUrl { get; set; }
+		public string? InstagramUrl { get; set; }
 
-		public string VimeoUrl { get; set; }
+		public string? VimeoUrl { get; set; }
 
-		public string BehanceUrl { get; set; }
+		public string? BehanceUrl { get; set; }
 
-		public string ResilienceSkil { get; set; }
+		public double ResilienceSkil { get; set; }
 
-		public string EthicSkil { get; set; }
+		public double EthicSkil { get; set; }
 
-		public string Compassion { get; set; }
+		public double CompassionSkil { get; set; }
 
 		public Department Department { get; set; }
 
 		public List<Appointment>? Appointments { get; set; }
     }
-
+ 
 }
 

@@ -15,7 +15,7 @@ namespace Medical.Core.Entities
 
 		public List<MedicineImage> MedicineImages { get; set; }
 
-		public List<MedicineReview> MedicineReviews { get; set; }
+		public List<MedicineReview>? MedicineReviews { get; set; }
 	}
 }
 
