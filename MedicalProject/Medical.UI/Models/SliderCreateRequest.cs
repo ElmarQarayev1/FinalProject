@@ -16,7 +16,7 @@ namespace Medical.UI.Models
         public string SubTitle2 { get; set; }
 
 
-        public IFormFile? FileUrl { get; set; }
+        public IFormFile? File { get; set; }
 
         [Required]
         public int Order { get; set; }

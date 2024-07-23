@@ -57,7 +57,8 @@ namespace Medical.Service.Profiles
                 .ForMember(dest=>dest.DoctorCount,s=>s.MapFrom(s=>s.Doctors.Count))
                 .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/departments/" + src.ImageName));
 
-            CreateMap<Department, DepartmentGetDto>();
+            CreateMap<Department, DepartmentGetDto>()
+                 .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/departments/" + src.ImageName));
 
 
 

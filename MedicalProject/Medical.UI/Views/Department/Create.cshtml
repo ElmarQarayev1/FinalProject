@@ -1,4 +1,4 @@
-﻿@model SliderCreateRequest
+﻿@model DepartmentCreateRequest
 @{
     ViewData["Title"] = "Create";
 }
@@ -8,7 +8,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Sliders</h1>
+        <h1 class="h3 mb-0 text-gray-800">Departments</h1>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
             Create
         </a>
@@ -17,29 +17,12 @@
         <div class="col-md-8 mx-auto">
             <form class="user" asp-action="create" method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="FullNameInput">Title</label>
-                    <input asp-for="MainTitle" class="form-control" id="FullNameInput" placeholder="" style="background-color:white;">
-                    <span class="text-danger" asp-validation-for="MainTitle"></span>
+                    <label for="FullNameInput">Name</label>
+                    <input asp-for="Name" class="form-control" id="FullNameInput" placeholder="" style="background-color:white;">
+                    <span class="text-danger" asp-validation-for="Name"></span>
                 </div>
 
-                <div class="form-group">
-                    <label for="EmailInput">Subtitle1</label>
-                    <input asp-for="SubTitle1" class="form-control" id="EmailInput" placeholder="" style="background-color:white;">
-                    <span class="text-danger" asp-validation-for="SubTitle1"></span>
-                </div>
-
-                <div class="form-group">
-                    <label for="OrderInpu">SubTitle2</label>
-                    <input asp-for="SubTitle2" class="form-control" id="OrderInpu" style="background-color:white;">
-                    <span class="text-danger" asp-validation-for="SubTitle2"></span>
-                </div>
-
-                <div class="form-group">
-                    <label for="OrderInput">Order</label>
-                    <input asp-for="Order" class="form-control" id="OrderInput" style="background-color:white;">
-                    <span class="text-danger" asp-validation-for="Order"></span>
-                </div>
-
+              
                 <div class="form-group">
                     <label for="FileInput">File</label>
                     <input type="file" asp-for="File" class="form-control" id="FileInput" style="background-color:white;">
@@ -47,9 +30,8 @@
                 </div>
 
                 <div class="preview-box mt-2"></div>
-
                 <button class="btn btn-primary" type="submit">
-                    Create Slider
+                    Create Department
                 </button>
             </form>
         </div>

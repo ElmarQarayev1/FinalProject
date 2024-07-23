@@ -43,7 +43,7 @@ namespace Medical.Service.Implementations.Admin
             {
                 Name = createDto.Name,
                 
-                ImageName = FileManager.Save(createDto.FileUrl, _env.WebRootPath, "uploads/departments")
+                ImageName = FileManager.Save(createDto.File, _env.WebRootPath, "uploads/departments")
 
             };
 
@@ -77,7 +77,7 @@ namespace Medical.Service.Implementations.Admin
 
         public PaginatedList<DepartmentPaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10)
         {
-            var query = _departmentRepository.GetAll(x => x.Name.Contains(search) || search == null);
+            var query = _departmentRepository.GetAll(x => x.Name.Contains(search) || search == null,"Doctors");
 
 
             var paginated = PaginatedList<Department>.Create(query, page, size);
@@ -123,9 +123,9 @@ namespace Medical.Service.Implementations.Admin
             }
 
 
-            if (updateDto.FileUrl != null)
+            if (updateDto.File != null)
             {
-                department.ImageName = FileManager.Save(updateDto.FileUrl, _env.WebRootPath, "uploads/departments");
+                department.ImageName = FileManager.Save(updateDto.File, _env.WebRootPath, "uploads/departments");
             }
 
             _departmentRepository.Save();

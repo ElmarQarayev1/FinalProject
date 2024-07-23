@@ -43,7 +43,7 @@ namespace Medical.Service.Implementations.Admin
                 SubTitle1=createDto.SubTitle1,
                 SubTitle2=createDto.SubTitle2,
                 Order=createDto.Order,
-                ImageName=FileManager.Save(createDto.FileUrl,_env.WebRootPath,"uploads/sliders")
+                ImageName=FileManager.Save(createDto.File,_env.WebRootPath,"uploads/sliders")
 
             };
 

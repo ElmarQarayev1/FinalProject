@@ -1,5 +1,21 @@
 ﻿<Project>
   <ItemGroup>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\departments\aca1bf37-da38-4ddf-8655-4fcca8f9a4c9portfolio-1.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>Medical.Api</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Medical.Api</BasePath>
+      <RelativePath>uploads/departments/aca1bf37-da38-4ddf-8655-4fcca8f9a4c9portfolio-1.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\departments\aca1bf37-da38-4ddf-8655-4fcca8f9a4c9portfolio-1.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\departments\cd82f1b0-416d-44fe-835c-2c5f1fc3ce2eteam-1.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Medical.Api</SourceId>
@@ -128,12 +144,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\medicines\e34d79e5-2fb6-49b5-82ea-90470b25e936portfolio-2.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\sliders\61dbd3e9-5524-4bcd-9982-55c170e18c30portfolio-6.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\sliders\09228c4e-e8bd-4856-8b0d-666b77970412about.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Medical.Api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Medical.Api</BasePath>
-      <RelativePath>uploads/sliders/61dbd3e9-5524-4bcd-9982-55c170e18c30portfolio-6.jpg</RelativePath>
+      <RelativePath>uploads/sliders/09228c4e-e8bd-4856-8b0d-666b77970412about.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -142,7 +158,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\sliders\61dbd3e9-5524-4bcd-9982-55c170e18c30portfolio-6.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\sliders\09228c4e-e8bd-4856-8b0d-666b77970412about.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\sliders\a464ab93-0612-4613-806f-b858ff61f049slider1.jpg))">
       <SourceType>Package</SourceType>
@@ -159,6 +175,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\sliders\a464ab93-0612-4613-806f-b858ff61f049slider1.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\sliders\da105b8b-033e-440c-8162-3f06854cab72apple-touch-icon.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>Medical.Api</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Medical.Api</BasePath>
+      <RelativePath>uploads/sliders/da105b8b-033e-440c-8162-3f06854cab72apple-touch-icon.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\sliders\da105b8b-033e-440c-8162-3f06854cab72apple-touch-icon.png))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

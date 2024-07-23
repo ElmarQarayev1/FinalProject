@@ -12,7 +12,7 @@ namespace Medical.Service.Dtos.Admin.SliderDtos
 
 		public string SubTitle2 { get; set; }
 
-		public IFormFile FileUrl { get; set; }
+		public IFormFile File { get; set; }
 
 		public int Order { get; set; }
 	}
@@ -27,7 +27,7 @@ namespace Medical.Service.Dtos.Admin.SliderDtos
             RuleFor(x => x.Order).NotEmpty().GreaterThan(0);
 
 
-            RuleFor(x => x.FileUrl)
+            RuleFor(x => x.File)
                 .Must(file => file == null || file.Length <= 2 * 1024 * 1024)
                 .WithMessage("File must be less than or equal to 2MB.")
                 .Must(file => file == null || new[] { "image/png", "image/jpeg" }.Contains(file.ContentType))

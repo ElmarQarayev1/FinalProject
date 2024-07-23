@@ -17,6 +17,7 @@
     <None Remove="Views\Account\" />
     <None Remove="Views\Category\" />
     <None Remove="Views\Slider\" />
+    <None Remove="Views\Department\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filter\" />
@@ -27,5 +28,6 @@
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Category\" />
     <Folder Include="Views\Slider\" />
+    <Folder Include="Views\Department\" />
   </ItemGroup>
 </Project>

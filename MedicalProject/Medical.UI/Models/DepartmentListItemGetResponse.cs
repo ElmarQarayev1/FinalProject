@@ -1,7 +1,7 @@
 ﻿using System;
-namespace Medical.Service.Dtos.Admin.DepartmentDtos
+namespace Medical.UI.Models
 {
-	public class DepartmentGetDto
+	public class DepartmentListItemGetResponse
 	{
         public int Id { get; set; }
 
@@ -9,6 +9,7 @@ namespace Medical.Service.Dtos.Admin.DepartmentDtos
 
         public string FileUrl { get; set; }
 
+        public int DoctorCount { get; set; }
     }
 }
 
