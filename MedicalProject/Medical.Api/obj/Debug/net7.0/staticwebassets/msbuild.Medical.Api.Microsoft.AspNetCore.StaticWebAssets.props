@@ -80,12 +80,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\features\40ce2513-f1e5-4cdd-b0fa-67db11d1cf45team-3.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\medicines\58976f8f-4c3a-4125-b33c-cc5b9e5cab38comments-6.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\medicines\09631e0e-deac-4322-91ac-29874466c1f5portfolio-3.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Medical.Api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Medical.Api</BasePath>
-      <RelativePath>uploads/medicines/58976f8f-4c3a-4125-b33c-cc5b9e5cab38comments-6.jpg</RelativePath>
+      <RelativePath>uploads/medicines/09631e0e-deac-4322-91ac-29874466c1f5portfolio-3.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -94,14 +94,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\medicines\58976f8f-4c3a-4125-b33c-cc5b9e5cab38comments-6.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\medicines\09631e0e-deac-4322-91ac-29874466c1f5portfolio-3.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\medicines\d67a6803-1d18-4f01-bfa2-5cac058a2183comments-5.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\medicines\499d735f-7ed9-444e-ac17-64fe35a7e414portfolio-5.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Medical.Api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Medical.Api</BasePath>
-      <RelativePath>uploads/medicines/d67a6803-1d18-4f01-bfa2-5cac058a2183comments-5.jpg</RelativePath>
+      <RelativePath>uploads/medicines/499d735f-7ed9-444e-ac17-64fe35a7e414portfolio-5.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -110,14 +110,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\medicines\d67a6803-1d18-4f01-bfa2-5cac058a2183comments-5.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\medicines\499d735f-7ed9-444e-ac17-64fe35a7e414portfolio-5.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\medicines\dd3e5b82-b519-489b-bc41-4a784a492677team-1.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\medicines\e34d79e5-2fb6-49b5-82ea-90470b25e936portfolio-2.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Medical.Api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Medical.Api</BasePath>
-      <RelativePath>uploads/medicines/dd3e5b82-b519-489b-bc41-4a784a492677team-1.jpg</RelativePath>
+      <RelativePath>uploads/medicines/e34d79e5-2fb6-49b5-82ea-90470b25e936portfolio-2.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -126,39 +126,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\medicines\dd3e5b82-b519-489b-bc41-4a784a492677team-1.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\medicines\ef24fcad-1572-4ed7-b963-40c9a9938812blog-3.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Medical.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Medical.Api</BasePath>
-      <RelativePath>uploads/medicines/ef24fcad-1572-4ed7-b963-40c9a9938812blog-3.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\medicines\ef24fcad-1572-4ed7-b963-40c9a9938812blog-3.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\medicines\f03621fb-f19c-41cc-8a06-0782319afc53blog-inside-post.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Medical.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Medical.Api</BasePath>
-      <RelativePath>uploads/medicines/f03621fb-f19c-41cc-8a06-0782319afc53blog-inside-post.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\medicines\f03621fb-f19c-41cc-8a06-0782319afc53blog-inside-post.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\medicines\e34d79e5-2fb6-49b5-82ea-90470b25e936portfolio-2.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\sliders\a464ab93-0612-4613-806f-b858ff61f049slider1.jpg))">
       <SourceType>Package</SourceType>

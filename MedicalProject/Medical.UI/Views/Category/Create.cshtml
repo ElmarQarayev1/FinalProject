@@ -1,0 +1,29 @@
+﻿@model CategoryCreateRequest
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Category Create</h1>
+
+    </div>
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <form class="user" asp-action="create" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="date">Name</label>
+                    <input asp-for="Name" class="form-control" id="date" placeholder=" " style="background-color:wheat;">
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+
+                <button class="btn btn-primary" type="submit">
+                    Create Category
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Html.Partial("_ValidationScriptsPartial");
+}

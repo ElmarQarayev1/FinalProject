@@ -1,7 +1,17 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Medical.UI.Filter;
+using Medical.UI.Middlewares;
+using Medical.UI.Service;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<AuthFilter>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICrudService, CrudService>();
 
 var app = builder.Build();
 
@@ -24,5 +34,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 app.Run();
 

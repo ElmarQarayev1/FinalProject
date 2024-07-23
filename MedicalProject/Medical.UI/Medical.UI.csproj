@@ -8,4 +8,22 @@
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+  <ItemGroup>
+    <None Remove="Filter\" />
+    <None Remove="Middlewares\" />
+    <None Remove="Exception\" />
+    <None Remove="Models\" />
+    <None Remove="Service\" />
+    <None Remove="Views\Account\" />
+    <None Remove="Views\Category\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Filter\" />
+    <Folder Include="Middlewares\" />
+    <Folder Include="Exception\" />
+    <Folder Include="Models\" />
+    <Folder Include="Service\" />
+    <Folder Include="Views\Account\" />
+    <Folder Include="Views\Category\" />
+  </ItemGroup>
 </Project>

@@ -16,16 +16,28 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI
 build_property._RazorSourceGeneratorDebug = 
 
+[/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Views/Category/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2F0ZWdvcnkvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Views/Category/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2F0ZWdvcnkvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Views/Category/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2F0ZWdvcnkvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Views/Home/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9FcnJvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Views/Shared/_ValidationScriptsPartial.cshtml]

@@ -58,7 +58,7 @@ namespace Medical.Service.Implementations.Admin
 
         public PaginatedList<CategoryPaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10)
         {
-            var query = _categoryRepository.GetAll(x => x.Name.Contains(search) || search == null);
+            var query = _categoryRepository.GetAll(x => x.Name.Contains(search) || search == null, "Medicines");
 
 
             var paginated = PaginatedList<Category>.Create(query, page, size);
