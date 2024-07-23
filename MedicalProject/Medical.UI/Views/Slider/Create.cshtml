@@ -1,0 +1,82 @@
+﻿@model SliderCreateRequest
+@{
+    ViewData["Title"] = "Create";
+}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Sliders</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            Create
+        </a>
+    </div>
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <form class="user" asp-action="create" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="FullNameInput">Title</label>
+                    <input asp-for="MainTitle" class="form-control" id="FullNameInput" placeholder="" style="background-color:white;">
+                    <span class="text-danger" asp-validation-for="MainTitle"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="EmailInput">Subtitle1</label>
+                    <input asp-for="SubTitle1" class="form-control" id="EmailInput" placeholder="" style="background-color:white;">
+                    <span class="text-danger" asp-validation-for="SubTitle1"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="OrderInpu">SubTitle2</label>
+                    <input asp-for="SubTitle2" class="form-control" id="OrderInpu" style="background-color:white;">
+                    <span class="text-danger" asp-validation-for="SubTitle2"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="OrderInput">Order</label>
+                    <input asp-for="Order" class="form-control" id="OrderInput" style="background-color:white;">
+                    <span class="text-danger" asp-validation-for="Order"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="FileInput">File</label>
+                    <input type="file" asp-for="FileUrl" class="form-control" id="FileInput" style="background-color:white;">
+                    <span class="text-danger" asp-validation-for="FileUrl"></span>
+                </div>
+
+                <div class="preview-box mt-2"></div>
+
+                <button class="btn btn-primary" type="submit">
+                    Create Slider
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+
+    <script>$(document).ready(function () {
+            $("#FileInput").change(function (e) {
+                let box = $(this).closest('form').find(".preview-box");
+                $(box).empty();
+
+                if (e.target.files.length > 0) {
+                    let reader = new FileReader();
+                    reader.readAsDataURL(e.target.files[0]);
+                    reader.onload = () => {
+                        let img = document.createElement("img");
+                        img.style.width = "200px";
+                        img.classList.add("previewImg");
+                        img.setAttribute("src", reader.result);
+                        $(box).append(img);
+                    }
+                } else {
+                    $(box).empty();
+                }
+            });
+        });</script>
+}

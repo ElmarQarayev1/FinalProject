@@ -51,7 +51,6 @@ namespace Medical.Service.Profiles
                 .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/sliders/" + src.ImageName));
 
 
-
             //departments
             CreateMap<Department, DepartmentCreateDto>().ReverseMap();
             CreateMap<Department,DepartmentPaginatedGetDto>()

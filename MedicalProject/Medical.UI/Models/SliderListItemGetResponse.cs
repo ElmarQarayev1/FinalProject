@@ -1,9 +1,7 @@
 ﻿using System;
-using Microsoft.AspNetCore.Http;
-
-namespace Medical.Service.Dtos.Admin.SliderDtos
+namespace Medical.UI.Models
 {
-	public class SliderGetDto
+	public class SliderListItemGetResponse
 	{
         public int Id { get; set; }
 

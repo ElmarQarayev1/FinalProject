@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 
@@ -12,9 +13,10 @@ namespace Medical.Service.Dtos.Admin.SliderDtos
 
         public string SubTitle2 { get; set; }
 
-        public IFormFile FileUrl { get; set; }
+        public IFormFile? File { get; set; }
 
         public int Order { get; set; }
+
     }
     public class SliderUpdateDtoValidator : AbstractValidator<SliderUpdateDto>
     {
@@ -39,11 +41,11 @@ namespace Medical.Service.Dtos.Admin.SliderDtos
                 .GreaterThan(0).WithMessage("'Order' must be greater than 0.");
 
 
-            RuleFor(x => x.FileUrl)
+            RuleFor(x => x.File)
                 .Must(file => file == null || file.Length <= 2 * 1024 * 1024)
                 .WithMessage("File must be less than or equal to 2MB.")
                 .Must(file => file == null || new[] { "image/png", "image/jpeg" }.Contains(file.ContentType))
-                .When(x => x.FileUrl != null);
+                .When(x => x.File != null);
         }
     }
 }

@@ -127,6 +127,10 @@ namespace Medical.Service.Implementations.Admin
             {
                 slider.SubTitle1 = updateDto.SubTitle1;
             }
+            if (!string.IsNullOrEmpty(updateDto.SubTitle2))
+            {
+                slider.SubTitle2 = updateDto.SubTitle2;
+            }
 
             if (updateDto.Order > 0)
             {
@@ -134,9 +138,9 @@ namespace Medical.Service.Implementations.Admin
             }
 
 
-            if (updateDto.FileUrl != null)
+            if (updateDto.File != null)
             {
-                slider.ImageName = FileManager.Save(updateDto.FileUrl, _env.WebRootPath, "uploads/sliders");
+                slider.ImageName = FileManager.Save(updateDto.File, _env.WebRootPath, "uploads/sliders");
             }
 
             _sliderRepository.Save();
