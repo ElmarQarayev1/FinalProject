@@ -1,0 +1,60 @@
+﻿@model ServiceEditRequest
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Services</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <form class="user" asp-action="Edit" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title1Input">Name</label>
+                    <input asp-for="Name" class="form-control" id="title1Input" placeholder=" " style="background-color:white;" />
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+                <div class="form-group">
+                    <label for="title1Input">Desc</label>
+                    <input asp-for="Desc" class="form-control" id="title1Input" placeholder=" " style="background-color:white;" />
+                    <span class="text-danger" asp-validation-for="Desc"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="imgInput">File</label>
+                    <input asp-for="File" class="form-control imgInput" type="file" accept="image/*" style="background-color:white;" />
+                    <span class="text-danger" asp-validation-for="File"></span>
+                    <div class="preview-box">
+                        <img width="200" class="previewImg" src="@Model.FileUrl" />
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">
+                    Edit Service
+                </button>
+            </form>
+        </div>
+    </div>
+</div>f
+@section scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+
+    <script>$(document).ready(function () {
+            $(".imgInput").change(function (e) {
+                let box = $(this).parent().find(".preview-box");
+
+                if (e.target.files.length > 0) {
+                    let reader = new FileReader();
+                    reader.readAsDataURL(e.target.files[0]);
+                    reader.onload = () => {
+                        let img = $(box).find(".previewImg");
+                        if (img.length == 0) {
+                            img = $("<img>").addClass("previewImg").css("width", "200px");
+                            $(box).append(img);
+                        }
+                        img.attr("src", reader.result);
+                    }
+                }
+            });
+        });</script>
+}

@@ -43,7 +43,7 @@ namespace Medical.Service.Implementations.Admin
             {
                 Name = createDto.Name,
                 Desc=createDto.Desc,
-                ImageName = FileManager.Save(createDto.FileUrl, _env.WebRootPath, "uploads/services")
+                ImageName = FileManager.Save(createDto.File, _env.WebRootPath, "uploads/services")
 
             };
 
@@ -132,9 +132,9 @@ namespace Medical.Service.Implementations.Admin
                 service.Desc = updateDto.Desc;
             }
 
-            if (updateDto.FileUrl != null)
+            if (updateDto.File != null)
             {
-                service.ImageName = FileManager.Save(updateDto.FileUrl, _env.WebRootPath, "uploads/services");
+                service.ImageName = FileManager.Save(updateDto.File, _env.WebRootPath, "uploads/services");
             }
 
             _serviceRepository.Save();
