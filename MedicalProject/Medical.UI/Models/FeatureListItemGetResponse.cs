@@ -1,7 +1,7 @@
 ﻿using System;
-namespace Medical.Service.Dtos.Admin.FeatureDtos
+namespace Medical.UI.Models
 {
-	public class FeatureGetDto
+	public class FeatureListItemGetResponse
 	{
         public int Id { get; set; }
 
@@ -10,6 +10,9 @@ namespace Medical.Service.Dtos.Admin.FeatureDtos
         public string Desc { get; set; }
 
         public string FileUrl { get; set; }
+
+       
     }
+    
 }
 
