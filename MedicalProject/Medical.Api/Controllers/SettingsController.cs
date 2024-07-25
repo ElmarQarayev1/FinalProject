@@ -31,13 +31,13 @@ namespace Medical.Api.Controllers
         }
 
         [HttpGet("api/admin/Settings/{key}")]
-        public ActionResult<ServiceGetDto> GetByKey(string key)
+        public ActionResult<SettingGetDto> GetByKey(string key)
         {
             return StatusCode(200, _settingService.GetByKey(key));
         }
 
         [HttpPut("api/admin/Settings/{key}")]
-        public void Update(string key, [FromForm] SettingUpdateDto updateDto)
+        public void Update(string key,  SettingUpdateDto updateDto)
         {
             _settingService.Update(key, updateDto);
         }

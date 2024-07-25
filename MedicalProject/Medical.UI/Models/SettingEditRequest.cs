@@ -7,7 +7,9 @@ namespace Medical.UI.Models
     public class SettingEditRequest
     {
 
-        public string? Value { get; set; }
-       
+        [Required]
+        [MinLength(2)]
+        public string Value { get; set; }
+
     }
 }

@@ -251,8 +251,7 @@ namespace Medical.UI.Service
             _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
             _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
 
-           var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-            using (HttpResponseMessage response = await _client.PutAsync(baseUrl + path, content))
+           var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");            using (HttpResponseMessage response = await _client.PutAsync(baseUrl + path, content))
             {
                 var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
 
