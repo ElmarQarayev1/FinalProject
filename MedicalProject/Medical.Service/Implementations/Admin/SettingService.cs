@@ -78,9 +78,7 @@ namespace Medical.Service.Implementations.Admin
 
             if (entity == null)
                 throw new RestException(StatusCodes.Status404NotFound, "Setting not found");
-
             
-
             entity.Value = updateDto.Value;
 
             _settingRepository.Save();

@@ -5,7 +5,7 @@ using Medical.Service.Dtos.Admin.CategoryDtos;
 namespace Medical.Service.Dtos.Admin.SettingDtos
 {
 	public class SettingUpdateDto
-	{        
+	{              
 
         public string Value { get; set; }
 

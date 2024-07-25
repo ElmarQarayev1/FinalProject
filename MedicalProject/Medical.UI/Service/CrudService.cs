@@ -20,7 +20,6 @@ namespace Medical.UI.Service
 
 
 
-
         public async Task<CreateResponse> Create<TRequest>(TRequest request, string path)
         {
             _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
@@ -245,9 +244,6 @@ namespace Medical.UI.Service
                 }
             }
         }
-
-
-
 
 
         public async Task Update<TRequest>(TRequest request, string path)

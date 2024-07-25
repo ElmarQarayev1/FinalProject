@@ -101,7 +101,6 @@ namespace Medical.UI.Controllers
             return View(sliderEdit);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Edit( SliderEditRequest editRequest, int id)        {
 

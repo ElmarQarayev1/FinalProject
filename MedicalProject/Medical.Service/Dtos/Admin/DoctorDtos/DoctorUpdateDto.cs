@@ -20,7 +20,7 @@ namespace Medical.Service.Dtos.Admin.DoctorDtos
 
         public string Phone { get; set; }
 
-        public IFormFile FileUrl { get; set; }
+        public IFormFile? File { get; set; }
 
         public string? TwitterUrl { get; set; }
 
@@ -58,7 +58,7 @@ namespace Medical.Service.Dtos.Admin.DoctorDtos
 
             RuleFor(x => x.CompassionSkil).NotEmpty().GreaterThan(0);
 
-            RuleFor(x => x.FileUrl)
+            RuleFor(x => x.File)
                 .Must(file => file == null || file.Length <= 2 * 1024 * 1024)
                 .WithMessage("File must be less than or equal to 2MB.")
                 .Must(file => file == null || new[] { "image/png", "image/jpeg" }.Contains(file.ContentType))

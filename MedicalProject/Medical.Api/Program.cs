@@ -36,7 +36,6 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
 
 });
 
-
 builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 {
     opt.Password.RequireNonAlphanumeric = false;

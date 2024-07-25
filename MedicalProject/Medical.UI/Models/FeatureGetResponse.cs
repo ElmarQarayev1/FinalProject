@@ -10,4 +10,3 @@ namespace Medical.UI.Models
         public string? FileUrl { get; set; }
     }
 }
-

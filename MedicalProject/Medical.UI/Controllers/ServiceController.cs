@@ -1,5 +1,6 @@
 ﻿using System;
 using Medical.UI.Exception;
+using Medical.UI.Filter;
 using Medical.UI.Models;
 using Medical.UI.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,8 @@ using Microsoft.Net.Http.Headers;
 
 namespace Medical.UI.Controllers
 {
-	public class ServiceController:Controller
+   // [ServiceFilter(typeof(AuthFilter))]
+    public class ServiceController:Controller
 	{
 
         private HttpClient _client;

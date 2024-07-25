@@ -1,0 +1,134 @@
+﻿@model DoctorCreateRequest
+@{
+    ViewData["Title"] = "Create";
+}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Doctors</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            Create
+        </a>
+    </div>
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <form class="user" asp-action="create" method="post" enctype="multipart/form-data">
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label asp-for="FullName"></label>
+                        <input asp-for="FullName" class="form-control" placeholder="Enter FullName" style="background-color:white;">
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label asp-for="Desc"></label>
+                        <input asp-for="Desc" class="form-control" placeholder="Enter Description" style="background-color:white;">
+                        <span asp-validation-for="Desc" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Position"></label>
+                    <input asp-for="Position" class="form-control" placeholder="Enter Position" style="background-color:white;">
+                    <span asp-validation-for="Position" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" placeholder="Enter Email" style="background-color:white;">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Phone"></label>
+                    <input asp-for="Phone" class="form-control" placeholder="Enter Phone" style="background-color:white;">
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address"></label>
+                    <input asp-for="Address" class="form-control" placeholder="Enter Address" style="background-color:white;">
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="InstagramUrl"></label>
+                    <input asp-for="InstagramUrl" class="form-control" placeholder="Enter Instagram URL" style="background-color:white;">
+                    <span asp-validation-for="InstagramUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TwitterUrl"></label>
+                    <input asp-for="TwitterUrl" class="form-control" placeholder="Enter Twitter URL" style="background-color:white;">
+                    <span asp-validation-for="TwitterUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BehanceUrl"></label>
+                    <input asp-for="BehanceUrl" class="form-control" placeholder="Enter Behance URL" style="background-color:white;">
+                    <span asp-validation-for="BehanceUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="VimeoUrl"></label>
+                    <input asp-for="VimeoUrl" class="form-control" placeholder="Enter Vimeo URL" style="background-color:white;">
+                    <span asp-validation-for="VimeoUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CompassionSkil"></label>
+                    <input asp-for="CompassionSkil" class="form-control" placeholder="Enter Compassion Skill" style="background-color:white;">
+                    <span asp-validation-for="CompassionSkil" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EthicSkil"></label>
+                    <input asp-for="EthicSkil" class="form-control" placeholder="Enter Ethics Skill" style="background-color:white;">
+                    <span asp-validation-for="EthicSkil" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ResilienceSkil"></label>
+                    <input asp-for="ResilienceSkil" class="form-control" placeholder="Enter Resilience Skill" style="background-color:white;">
+                    <span asp-validation-for="ResilienceSkil" class="text-danger"></span>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="DepartmentId">Departments</label>
+                        <select asp-for="DepartmentId" class="form-control" asp-items="@(new SelectList(ViewBag.Departments, "Id", "Name"))" style="background-color:white;"></select>
+                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="FileInput">File</label>
+                    <input type="file" asp-for="File" class="form-control" id="FileInput" style="background-color:white;">
+                    <span class="text-danger" asp-validation-for="File"></span>
+                </div>
+
+                <div class="preview-box mt-2"></div>
+                <button class="btn btn-primary" type="submit">
+                    Create Doctor
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+
+    <script>$(document).ready(function () {
+            $("#FileInput").change(function (e) {
+                let box = $(this).closest('form').find(".preview-box");
+                $(box).empty();
+
+                if (e.target.files.length > 0) {
+                    let reader = new FileReader();
+                    reader.readAsDataURL(e.target.files[0]);
+                    reader.onload = () => {
+                        let img = document.createElement("img");
+                        img.style.width = "200px";
+                        img.classList.add("previewImg");
+                        img.setAttribute("src", reader.result);
+                        $(box).append(img);
+                    }
+                } else {
+                    $(box).empty();
+                }
+            });
+        });</script>
+}
+

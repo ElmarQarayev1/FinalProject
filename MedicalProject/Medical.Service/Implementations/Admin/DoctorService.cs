@@ -71,7 +71,7 @@ namespace Medical.Service.Implementations.Admin
             {
                 FullName = createDto.FullName,
                 Desc = createDto.Desc,
-                ImageName = FileManager.Save(createDto.FileUrl, _env.WebRootPath, "uploads/doctors"),
+                ImageName = FileManager.Save(createDto.File, _env.WebRootPath, "uploads/doctors"),
                 InstagramUrl = createDto.InstagramUrl,
                 TwitterUrl=createDto.TwitterUrl,
                 VimeoUrl=createDto.VimeoUrl,
@@ -161,19 +161,23 @@ namespace Medical.Service.Implementations.Admin
             {
                 throw new RestException(StatusCodes.Status404NotFound, "Department not found");
             }
-
-            Doctor doctorEmail = _doctorRepository.Get(x => x.Email == updateDto.Email);
-
-            if (doctorEmail != null)
+            
+            if (doctor.Email != updateDto.Email)
             {
-                throw new RestException(StatusCodes.Status404NotFound, "There cannot be a doctor with the same email");
+                var doctorEmail = _doctorRepository.Get(x => x.Email == updateDto.Email);
+                if (doctorEmail != null)
+                {
+                    throw new RestException(StatusCodes.Status400BadRequest, "There cannot be a doctor with the same email");
+                }
             }
 
-            Doctor doctorPhone = _doctorRepository.Get(x => x.Phone == updateDto.Phone);
-
-            if (doctorPhone != null)
+            if (doctor.Phone != updateDto.Phone)
             {
-                throw new RestException(StatusCodes.Status404NotFound, "There cannot be a doctor with the same phone");
+                var doctorPhone = _doctorRepository.Get(x => x.Phone == updateDto.Phone);
+                if (doctorPhone != null)
+                {
+                    throw new RestException(StatusCodes.Status400BadRequest, "There cannot be a doctor with the same phone");
+                }
             }
 
             string deletedFile = doctor.ImageName;
@@ -224,9 +228,9 @@ namespace Medical.Service.Implementations.Admin
                 doctor.Desc = updateDto.Desc;
             }
 
-            if (updateDto.FileUrl != null)
+            if (updateDto.File != null)
             {
-                doctor.ImageName = FileManager.Save(updateDto.FileUrl, _env.WebRootPath, "uploads/doctors");
+                doctor.ImageName = FileManager.Save(updateDto.File, _env.WebRootPath, "uploads/doctors");
             }
 
             doctor.DepartmentId = updateDto.DepartmentId;

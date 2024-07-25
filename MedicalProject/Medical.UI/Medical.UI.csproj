@@ -20,6 +20,8 @@
     <None Remove="Views\Department\" />
     <None Remove="Views\Feature\" />
     <None Remove="Views\Service\" />
+    <None Remove="Views\Setting\" />
+    <None Remove="Views\Doctor\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filter\" />
@@ -33,5 +35,7 @@
     <Folder Include="Views\Department\" />
     <Folder Include="Views\Feature\" />
     <Folder Include="Views\Service\" />
+    <Folder Include="Views\Setting\" />
+    <Folder Include="Views\Doctor\" />
   </ItemGroup>
 </Project>
