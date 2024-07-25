@@ -9,7 +9,7 @@ namespace Medical.Service.Dtos.Admin.MedicineDtos
 
         public string Desc { get; set; }
 
-        public int CategoryId { get; set; }
+        public int CategoryName { get; set; }
     }
 }
 

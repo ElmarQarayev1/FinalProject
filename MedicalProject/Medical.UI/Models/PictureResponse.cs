@@ -1,7 +1,7 @@
 ﻿using System;
-namespace Medical.Service.Dtos.Admin.MedicineDtos
+namespace Medical.UI.Models
 {
-	public class MedicineImageResponseDto
+	public class PictureResponse
 	{
         public int Id { get; set; }
 

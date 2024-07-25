@@ -1,0 +1,127 @@
+﻿@model MedicineEditRequest
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    .img-box {
+        margin-right: 10px;
+        margin-bottom: 10px;
+        display: inline-block;
+        position: relative;
+    }
+
+    .remove-img-icon {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+        color: red;
+        font-weight: bold;
+        font-size: 18px;
+        background-color: white;
+        border: 1px solid red;
+        padding: 5px;
+        border-radius: 50%;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Medicines</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <form class="user" asp-action="Edit" method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name" class="form-control" placeholder="Enter Name" style="background-color:white;">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label asp-for="Desc"></label>
+                        <input asp-for="Desc" class="form-control" placeholder="Enter Description" style="background-color:white;">
+                        <span asp-validation-for="Desc" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price"></label>
+                    <input asp-for="Price" class="form-control" placeholder="Enter Price" style="background-color:white;">
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label asp-for="CategoryId">Categories</label>
+                        <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))" style="background-color:white;"></select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <label for="imgInput">Image File</label>
+                <input type="file" name="Files" class="form-control imgInput" multiple style="background-color:white;">
+                <span class="text-danger" asp-validation-for="Files"></span>
+                <div class="preview-box"></div>
+
+                @if (ViewBag.Pictures != null)
+                {
+                    foreach (PictureResponse item in ViewBag.Pictures)
+                    {
+                        <div class="img-box mt-4 mr-3" style="display:inline-block;position:relative">
+                            <span style="position: absolute;
+                                  right: -3px;
+                                  top: -1px;
+                                  font-size: 22px;
+                                  color: red;
+                                  cursor: pointer" class="remove-img-icon">x</span>
+                            <input type="hidden" name="ExistPictureIds" value="@item.Id" />
+                            <img width="200" src="@item.Url" />
+                        </div>
+                    }
+                }
+
+                <button type="submit" class="btn btn-primary mt-3">Edit Medicine</button>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script>$(document).ready(function () {
+            $(".imgInput").change(function (e) {
+                let box = $(this).parent().find(".preview-box");
+                $(box).find(".img-box").remove();
+
+                for (var i = 0; i < e.target.files.length; i++) {
+                    let imgBox = document.createElement("div");
+                    imgBox.classList.add("img-box");
+
+                    let removeIcon = document.createElement("span");
+                    removeIcon.classList.add("remove-img-icon");
+                    removeIcon.textContent = "x";
+                    removeIcon.onclick = function () {
+                        $(this).parent().remove();
+                    };
+
+                    let img = document.createElement("img");
+                    img.style.width = "200px";
+                    img.classList.add("previewImg");
+
+                    let reader = new FileReader();
+                    reader.readAsDataURL(e.target.files[i]);
+                    reader.onload = () => {
+                        img.setAttribute("src", reader.result);
+                        imgBox.appendChild(img);
+                        imgBox.appendChild(removeIcon);
+                        box.append(imgBox);
+                    }
+                }
+            });
+
+            $(".remove-img-icon").click(function () {
+                $(this).parent().remove();
+            });
+        });</script>
+}

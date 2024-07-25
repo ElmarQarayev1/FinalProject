@@ -8,7 +8,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Medical.UI.Controllers
 {
-   // [ServiceFilter(typeof(AuthFilter))]
+    [ServiceFilter(typeof(AuthFilter))]
     public class ServiceController:Controller
 	{
 

@@ -15,7 +15,7 @@ namespace Medical.Service.Dtos.Admin.MedicineDtos
 
         public int CategoryId { get; set; }
 
-        public List<IFormFile> FileUrls { get; set; } = new List<IFormFile>();
+        public List<IFormFile> Files { get; set; }
 
          public List<int>? ExistPictureIds { get; set; } = new List<int>();
 
@@ -29,8 +29,8 @@ namespace Medical.Service.Dtos.Admin.MedicineDtos
             RuleFor(x => x.Desc).NotEmpty().MaximumLength(200);
 
 
-            RuleForEach(x => x.FileUrls)
-                .Must(file => file.Length <= 2 * 1024 * 1024)
+            RuleForEach(x => x.Files)
+                 .Must(file => file.Length <= 2 * 1024 * 1024)
                 .WithMessage("Each file must be less than or equal to 2MB.")
                 .Must(file => new[] { "image/png", "image/jpeg" }.Contains(file.ContentType))
                 .WithMessage("Each file type must be png, jpeg, or jpg.");

@@ -101,7 +101,7 @@ namespace Medical.Service.Profiles
             //medicines
 
             CreateMap<Medicine, MedicineCreateDto>()
-              .ForMember(dest => dest.FileUrls, opt => opt.Ignore());
+              .ForMember(dest => dest.Files, opt => opt.Ignore());
 
             CreateMap<MedicineCreateDto, Medicine>();
 
@@ -111,7 +111,7 @@ namespace Medical.Service.Profiles
                 opt => opt.MapFrom(src => src.MedicineImages.Select(rc => new MedicineImageResponseDto
                 {
                     Id = rc.Id,
-                    FileUrl = baseUrl + "/uploads/medicines/" + rc.ImageName
+                    Url = baseUrl + "/uploads/medicines/" + rc.ImageName
                 }).ToList()));
     
 
@@ -119,9 +119,7 @@ namespace Medical.Service.Profiles
 
             CreateMap<Medicine, MedicinePaginatedGetDto>();
 
-
-
-                
+        
 
         }
     }

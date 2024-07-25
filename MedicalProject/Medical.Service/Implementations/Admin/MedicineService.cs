@@ -53,7 +53,7 @@ namespace Medical.Service.Implementations.Admin
                 MedicineImages = new List<MedicineImage>()
             };
 
-            foreach (var file in createDto.FileUrls)
+            foreach (var file in createDto.Files)
             {
                 var filePath = FileManager.Save(file, _env.WebRootPath, "uploads/medicines");
                 medicine.MedicineImages.Add(new MedicineImage { ImageName = filePath });
@@ -152,7 +152,7 @@ namespace Medical.Service.Implementations.Admin
 
             medicine.MedicineImages = pictures;
 
-            foreach (var imgFile in updateDto.FileUrls)
+            foreach (var imgFile in updateDto.Files)
             {
                 MedicineImage Img = new MedicineImage
                 {
