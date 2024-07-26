@@ -270,6 +270,32 @@ namespace Medical.UI.Service
             }
         }
 
+        async Task<CreateResponseForAdmins> ICrudService.CreateForAdmins<TRequest>(TRequest request, string path)
+        {
+            _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
+            _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
+
+            var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
+            using (HttpResponseMessage response = await _client.PostAsync(baseUrl + path, content))
+            {
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return JsonSerializer.Deserialize<CreateResponseForAdmins>(await response.Content.ReadAsStringAsync(), options);
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    ErrorResponse errorResponse = JsonSerializer.Deserialize<ErrorResponse>(await response.Content.ReadAsStringAsync(), options);
+                    throw new ModelException(System.Net.HttpStatusCode.BadRequest, errorResponse);
+                }
+                else
+                {
+                    ErrorResponse errorResponse = JsonSerializer.Deserialize<ErrorResponse>(await response.Content.ReadAsStringAsync(), options);
+                    throw new HttpException(response.StatusCode, errorResponse.Message);
+                }
+            }
+        }
     }
 }
 

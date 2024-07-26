@@ -1,6 +1,8 @@
 ﻿using System;
 using Medical.Core.Entities;
+using Medical.Service;
 using Medical.Service.Dtos.Admin.AuthDtos;
+using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -66,6 +68,14 @@ namespace Medical.Api.Controllers
         //    return Ok(user1.Id);
         //}
 
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpPost("api/admin/createAdmin")]
+        public IActionResult Create(SuperAdminCreateAdminDto createDto)
+        {
+           
+            return StatusCode(201, new { Id = _authService.Create(createDto) });
+        }
+
         [HttpPost("api/admin/login")]
         public ActionResult Login(AdminLoginDto loginDto)
         {
@@ -78,6 +88,38 @@ namespace Medical.Api.Controllers
         public ActionResult Profile()
         {
             return Ok(User.Identity.Name);
+        }
+
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpGet("api/superadmin/adminAll")]
+        public ActionResult<List<AdminGetDto>> GetAll(string? search = null)
+        {
+            var admins = _authService.GetAll(search);
+            return Ok(admins);
+        }
+
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpGet("api/admin/adminAllByPage")]
+        public ActionResult<PaginatedList<AdminPaginatedGetDto>> GetAllByPage(string? search = null, int page = 1, int size = 10)
+        {
+            var paginatedAdmins = _authService.GetAllByPage(search, page, size);
+            return Ok(paginatedAdmins);
+        }
+
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpGet("api/admin/getById/{id}")]
+        public ActionResult<AdminGetDto> GetById(string id)
+        {
+            var admin = _authService.GetById(id);
+            return Ok(admin);
+        }
+
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpPut("api/admin/update/{id}")]
+        public IActionResult Update(string id, AdminUpdateDto updateDto)
+        {
+            _authService.Update(id, updateDto);
+            return NoContent();
         }
 
     }

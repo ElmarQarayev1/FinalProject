@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using Medical.Core.Entities;
+using Medical.Service.Dtos.Admin.AuthDtos;
 using Medical.Service.Dtos.Admin.CategoryDtos;
 using Medical.Service.Dtos.Admin.DepartmentDtos;
 using Medical.Service.Dtos.Admin.DoctorDtos;
@@ -105,7 +106,6 @@ namespace Medical.Service.Profiles
 
             CreateMap<MedicineCreateDto, Medicine>();
 
-
             CreateMap<Medicine, MedicineDetailsDto>()
      .ForMember(dest => dest.MedicineImages,
                 opt => opt.MapFrom(src => src.MedicineImages.Select(rc => new MedicineImageResponseDto
@@ -119,7 +119,12 @@ namespace Medical.Service.Profiles
 
             CreateMap<Medicine, MedicinePaginatedGetDto>();
 
-        
+            //Auth
+
+            CreateMap<AppUser, AdminGetDto>();
+
+            CreateMap<AppUser, AdminPaginatedGetDto>();
+              
 
         }
     }

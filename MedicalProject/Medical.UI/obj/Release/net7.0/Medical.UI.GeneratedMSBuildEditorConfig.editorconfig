@@ -16,8 +16,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI
 build_property._RazorSourceGeneratorDebug = 
 
+[/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Views/Account/AdminCreateByS.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9BZG1pbkNyZWF0ZUJ5Uy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Views/Account/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Views/Account/ShowAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9TaG93QWRtaW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Views/Category/Create.cshtml]

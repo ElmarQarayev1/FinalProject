@@ -2,15 +2,23 @@
 using Medical.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
+using Microsoft.AspNetCore.Identity;
+using Medical.UI.Exception;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Medical.UI.Service;
 
 namespace Medical.UI.Controllers
 {
     public class AccountController : Controller
     {
         private HttpClient _client;
-        public AccountController()
+        private readonly ICrudService _crudService;
+        public AccountController(ICrudService service)
         {
             _client = new HttpClient();
+            _crudService = service;
         }
         public IActionResult Login()
         {
@@ -41,6 +49,59 @@ namespace Medical.UI.Controllers
                 }
             }
 
+            return View();
+        }
+
+            
+        [HttpPost]
+        public async Task<IActionResult> AdminCreateByS(AdminCreateRequest createRequest)
+        {
+            if (!ModelState.IsValid)
+                return View(createRequest);
+
+            try
+            {
+                await _crudService.CreateForAdmins(createRequest, "createAdmin");
+                return RedirectToAction("ShowAdmin");
+            }
+            catch (ModelException e)
+            {
+                foreach (var item in e.Error.Errors)
+                    ModelState.AddModelError(item.Key, item.Message);
+                return View(createRequest);
+            }
+        }
+
+        public async Task<IActionResult> ShowAdmin(int page = 1)
+        {
+            try
+            {
+                var paginatedResponse = await _crudService.GetAllPaginated<AdminPaginatedGetResponse>("adminAllByPage", page);
+
+                return View(paginatedResponse);
+
+            }
+            catch (HttpException ex)
+            {
+
+                if (ex.Status == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    return RedirectToAction("Login", "Auth");
+                }
+
+                return RedirectToAction("Error", "Home");
+
+            }
+
+            catch (System.Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+       
+        public IActionResult AdminCreateByS()
+        {
             return View();
         }
     }

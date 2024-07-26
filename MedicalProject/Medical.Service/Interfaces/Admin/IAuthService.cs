@@ -1,11 +1,19 @@
 ﻿using System;
 using Medical.Service.Dtos.Admin.AuthDtos;
+using Medical.Service.Dtos.Admin.CategoryDtos;
 
 namespace Medical.Service.Interfaces.Admin
 {
 	public interface IAuthService
 	{
         string Login(AdminLoginDto loginDto);
+
+        string Create(SuperAdminCreateAdminDto createDto);
+        PaginatedList<AdminPaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10);
+        List<AdminGetDto> GetAll(string? search = null);
+        AdminGetDto GetById(string id);
+        void Update(string id, AdminUpdateDto updateDto);
+        void Delete(string id);
     }
 }
 
