@@ -1,39 +1,48 @@
 ﻿@model AdminCreateRequest
+
 @{
     ViewData["Title"] = "Create";
 }
-<div class="container-fluid">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Category Admin</h1>
 
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Create Admin</h1>
     </div>
+
+    <!-- Form -->
     <div class="row">
         <div class="col-md-8 mx-auto">
-
-            <form method="post" asp-action="admincreatebys">
-                <div class="form-group">
-                    <input asp-for="UserName" class="form-control form-control-user"
-                           placeholder="Enter UserName.." style="background-color:white;">
-                    <span class="text-danger" asp-validation-for="UserName" ></span>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Admin Details</h6>
                 </div>
-                <div class="form-group">
-                    <input asp-for="Password" class="form-control form-control-user"
-                           placeholder="Password..." style="background-color:white;">
-                    <span class="text-danger" asp-validation-for="Password" ></span>
-                </div>
-                <div class="button-box">
+                <div class="card-body">
+                    <form method="post" asp-action="AdminCreateByS">
+                        <div class="form-group">
+                            <label asp-for="UserName" class="form-label">User Name</label>
+                            <input asp-for="UserName" class="form-control"
+                                   placeholder="" style="background-color:white;">
+                            <span class="text-danger" asp-validation-for="UserName"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="form-label">Password</label>
+                            <input asp-for="Password" type="password" class="form-control"
+                                   placeholder="" style="background-color:white;">
+                            <span class="text-danger" asp-validation-for="Password"></span>
+                        </div>
 
-                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
-
-                    <button type="submit" class="btn btn-primary">Create Admin</button>
+                        <div class="form-group">
+                            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                            <button type="submit" class="btn btn-primary">Create Admin</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
 
-@section scripts {
-    @Html.Partial("_ValidationScriptsPartial");
+@section Scripts {
+    @Html.Partial("_ValidationScriptsPartial")
 }
-
-

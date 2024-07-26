@@ -223,8 +223,6 @@ namespace Medical.UI.Service
 
 
 
-
-
         public async Task<PaginatedResponse<TResponse>> GetAllPaginated<TResponse>(string path, int page, int size = 10)
         {
             _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);

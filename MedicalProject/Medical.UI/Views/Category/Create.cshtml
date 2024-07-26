@@ -1,29 +1,45 @@
 ﻿@model CategoryCreateRequest
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Category";
 }
-<div class="container-fluid">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Category Create</h1>
 
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Create New Category</h1>
+        <a asp-action="index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-arrow-left"></i> Back to List
+        </a>
     </div>
+
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <form class="user" asp-action="create" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="date">Name</label>
-                    <input asp-for="Name" class="form-control" id="date" placeholder=" " style="background-color:white;">
-                    <span class="text-danger" asp-validation-for="Name"></span>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Category Details</h6>
                 </div>
+                <div class="card-body">
+                    <form class="user" asp-action="create" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="NameInput">
+                                <i class="fas fa-tag"></i> Category Name
+                            </label>
+                            <input asp-for="Name" class="form-control" id="NameInput" placeholder="" style="background-color:white;">
+                            <span class="text-danger" asp-validation-for="Name"></span>
+                        </div>
 
-                <button class="btn btn-primary" type="submit">
-                    Create Category
-                </button>
-            </form>
+                        <button class="btn btn-primary btn-block mt-4" type="submit">
+                            <i class="fas fa-plus-circle"></i> Create Category
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 @section scripts {
-    @Html.Partial("_ValidationScriptsPartial");
+    @Html.Partial("_ValidationScriptsPartial")
 }

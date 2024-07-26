@@ -125,7 +125,7 @@ namespace Medical.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, DoctorEditRequest editRequest)
+        public async Task<IActionResult> Edit(int id, [FromForm] DoctorEditRequest editRequest)
         {
             if (!ModelState.IsValid)
             {
@@ -134,27 +134,8 @@ namespace Medical.UI.Controllers
             }
             try
             {
-                DoctorEditRequest updateDto = new DoctorEditRequest
-                {
-                    FullName = editRequest.FullName,
-                    FileUrl = editRequest.FileUrl,
-                    Address = editRequest.Address,
-                    CompassionSkil = editRequest.CompassionSkil,
-                    EthicSkil = editRequest.EthicSkil,
-                    ResilienceSkil = editRequest.EthicSkil,
-                    BehanceUrl = editRequest.BehanceUrl,
-                    Email = editRequest.Email,
-                    Desc = editRequest.Desc,
-                    InstagramUrl = editRequest.InstagramUrl,
-                    TwitterUrl = editRequest.TwitterUrl,
-                    VimeoUrl = editRequest.VimeoUrl,
-                    Phone = editRequest.Phone,
-                    Position = editRequest.Position,
-                    DepartmentId = editRequest.DepartmentId,
-
-                };
-
-                await _crudService.EditFromForm(updateDto, $"doctors/{id}");
+                
+                await _crudService.EditFromForm(editRequest, $"doctors/{id}");
                 return RedirectToAction("Index");
             }
             catch (ModelException ex)

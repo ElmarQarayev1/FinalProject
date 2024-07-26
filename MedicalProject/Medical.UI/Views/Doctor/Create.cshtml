@@ -3,106 +3,165 @@
     ViewData["Title"] = "Create";
 }
 
+<!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Doctors</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-            Create
+        <h1 class="h3 mb-0 text-gray-800">Create Doctor</h1>
+        <a asp-action="index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-arrow-left"></i> Back to List
         </a>
     </div>
+
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <form class="user" asp-action="create" method="post" enctype="multipart/form-data">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Doctor Creating</h6>
+                </div>
+                <div class="card-body">
+                    <form class="user" asp-action="create" method="post" enctype="multipart/form-data">
 
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label asp-for="FullName"></label>
-                        <input asp-for="FullName" class="form-control" placeholder="" style="background-color:white;">
-                        <span asp-validation-for="FullName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label asp-for="Desc"></label>
-                        <input asp-for="Desc" class="form-control" placeholder="" style="background-color:white;">
-                        <span asp-validation-for="Desc" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Position"></label>
-                    <input asp-for="Position" class="form-control" placeholder="" style="background-color:white;">
-                    <span asp-validation-for="Position" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email"></label>
-                    <input asp-for="Email" class="form-control" placeholder="" style="background-color:white;">
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Phone"></label>
-                    <input asp-for="Phone" class="form-control" placeholder="" style="background-color:white;">
-                    <span asp-validation-for="Phone" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Address"></label>
-                    <input asp-for="Address" class="form-control" placeholder="" style="background-color:white;">
-                    <span asp-validation-for="Address" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="InstagramUrl"></label>
-                    <input asp-for="InstagramUrl" class="form-control" placeholder="" style="background-color:white;">
-                    <span asp-validation-for="InstagramUrl" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="TwitterUrl"></label>
-                    <input asp-for="TwitterUrl" class="form-control" placeholder="" style="background-color:white;">
-                    <span asp-validation-for="TwitterUrl" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="BehanceUrl"></label>
-                    <input asp-for="BehanceUrl" class="form-control" placeholder="" style="background-color:white;">
-                    <span asp-validation-for="BehanceUrl" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="VimeoUrl"></label>
-                    <input asp-for="VimeoUrl" class="form-control" placeholder="" style="background-color:white;">
-                    <span asp-validation-for="VimeoUrl" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CompassionSkil"></label>
-                    <input asp-for="CompassionSkil" class="form-control" placeholder="" style="background-color:white;">
-                    <span asp-validation-for="CompassionSkil" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="EthicSkil"></label>
-                    <input asp-for="EthicSkil" class="form-control" placeholder="" style="background-color:white;">
-                    <span asp-validation-for="EthicSkil" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ResilienceSkil"></label>
-                    <input asp-for="ResilienceSkil" class="form-control" placeholder="" style="background-color:white;">
-                    <span asp-validation-for="ResilienceSkil" class="text-danger"></span>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label asp-for="DepartmentId">Departments</label>
-                        <select asp-for="DepartmentId" class="form-control" asp-items="@(new SelectList(ViewBag.Departments, "Id", "Name"))" style="background-color:white;"></select>
-                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
-                    </div>
-                </div>
+                        <div class="form-group">
+                            <label asp-for="FullName">
+                                <i class="fas fa-user"></i> Full Name
+                            </label>
+                            <input asp-for="FullName" class="form-control" placeholder="" style="background-color:white;">
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
 
-                <div class="form-group">
-                    <label for="FileInput">File</label>
-                    <input type="file" asp-for="File" class="form-control" id="FileInput" style="background-color:white;">
-                    <span class="text-danger" asp-validation-for="File"></span>
-                </div>
+                        <div class="form-group">
+                            <label asp-for="Desc">
+                                <i class="fas fa-align-left"></i> Description
+                            </label>
+                            <textarea asp-for="Desc" class="form-control" placeholder="" style="background-color:white;" rows="3"></textarea>
+                            <span asp-validation-for="Desc" class="text-danger"></span>
+                        </div>
 
-                <div class="preview-box mt-2"></div>
-                <button class="btn btn-primary" type="submit">
-                    Create Doctor
-                </button>
-            </form>
+                        <div class="form-group">
+                            <label asp-for="Position">
+                                <i class="fas fa-briefcase"></i> Position
+                            </label>
+                            <input asp-for="Position" class="form-control" placeholder="" style="background-color:white;">
+                            <span asp-validation-for="Position" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Email">
+                                <i class="fas fa-envelope"></i> Email
+                            </label>
+                            <input asp-for="Email" class="form-control" placeholder="" style="background-color:white;">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Phone">
+                                <i class="fas fa-phone"></i> Phone
+                            </label>
+                            <input asp-for="Phone" class="form-control" placeholder="" style="background-color:white;">
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Address">
+                                <i class="fas fa-map-marker-alt"></i> Address
+                            </label>
+                            <input asp-for="Address" class="form-control" placeholder="" style="background-color:white;">
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label asp-for="InstagramUrl">
+                                    <i class="fab fa-instagram"></i> Instagram URL
+                                </label>
+                                <input asp-for="InstagramUrl" class="form-control" placeholder="" style="background-color:white;">
+                                <span asp-validation-for="InstagramUrl" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label asp-for="TwitterUrl">
+                                    <i class="fab fa-twitter"></i> Twitter URL
+                                </label>
+                                <input asp-for="TwitterUrl" class="form-control" placeholder="" style="background-color:white;">
+                                <span asp-validation-for="TwitterUrl" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label asp-for="BehanceUrl">
+                                    <i class="fab fa-behance"></i> Behance URL
+                                </label>
+                                <input asp-for="BehanceUrl" class="form-control" placeholder="" style="background-color:white;">
+                                <span asp-validation-for="BehanceUrl" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label asp-for="VimeoUrl">
+                                    <i class="fab fa-vimeo"></i> Vimeo URL
+                                </label>
+                                <input asp-for="VimeoUrl" class="form-control" placeholder="" style="background-color:white;">
+                                <span asp-validation-for="VimeoUrl" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label asp-for="CompassionSkil">
+                                    <i class="fas fa-heart"></i> Compassion Skill
+                                </label>
+                                <input asp-for="CompassionSkil" class="form-control" placeholder="" style="background-color:white;">
+                                <span asp-validation-for="CompassionSkil" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label asp-for="EthicSkil">
+                                    <i class="fas fa-gavel"></i> Ethic Skill
+                                </label>
+                                <input asp-for="EthicSkil" class="form-control" placeholder="" style="background-color:white;">
+                                <span asp-validation-for="EthicSkil" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label asp-for="ResilienceSkil">
+                                    <i class="fas fa-bolt"></i> Resilience Skill
+                                </label>
+                                <input asp-for="ResilienceSkil" class="form-control" placeholder="" style="background-color:white;">
+                                <span asp-validation-for="ResilienceSkil" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="DepartmentId">
+                                <i class="fas fa-building"></i> Departments
+                            </label>
+                            <select asp-for="DepartmentId" class="form-control" asp-items="@(new SelectList(ViewBag.Departments, "Id", "Name"))" style="background-color:white;">
+                                <option value="">Select a department</option>
+                            </select>
+                            <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="FileInput">
+                                <i class="fas fa-image"></i> Profile Picture
+                            </label>
+                            <input type="file" asp-for="File" class="form-control" id="FileInput" style="background-color:white;">
+                            <span class="text-danger" asp-validation-for="File"></span>
+                        </div>
+
+                        <div class="preview-box mt-3 text-center"></div>
+
+                        <button class="btn btn-primary btn-block mt-4" type="submit">
+                            <i class="fas fa-user-plus"></i> Create Doctor
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -131,4 +190,3 @@
             });
         });</script>
 }
-

@@ -1,7 +1,8 @@
 ﻿@model MedicineCreateRequest
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Medicine";
 }
+
 <style>
     .img-box {
         margin-right: 10px;
@@ -15,55 +16,97 @@
         top: 5px;
         right: 5px;
         cursor: pointer;
-        color: red;
+        color: white;
         font-weight: bold;
-        font-size: 18px;
-        background-color: white;
-        border: 1px solid red;
-        padding: 5px;
+        font-size: 16px;
+        background-color: red;
+        border: 1px solid white;
+        padding: 3px;
         border-radius: 50%;
     }
+
+    .img-box img {
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control {
+        border-radius: 0.25rem;
+        background-color: #f8f9fa;
+    }
+
+        .form-control:focus {
+            border-color: #4e73df;
+            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+        }
 </style>
+
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Medicines</h1>
+        <h1 class="h3 mb-0 text-gray-800">Create Medicine</h1>
+        <a asp-action="Index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-arrow-left"></i> Back to List
+        </a>
     </div>
+
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <form class="user" asp-action="Create" method="post" enctype="multipart/form-data">
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="title1Input">Name</label>
-                        <input asp-for="Name" class="form-control" id="title1Input" placeholder=" " style="background-color:white;">
-                        <span class="text-danger" asp-validation-for="Name"></span>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="date">Desc</label>
-                        <input asp-for="Desc" class="form-control" id="date" placeholder=" " style="background-color:white;">
-                        <span class="text-danger" asp-validation-for="Desc"></span>
-                    </div>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Medicine Details</h6>
                 </div>
-                <div class="form-group">
-                    <label for="venue">Price</label>
-                    <input asp-for="Price" class="form-control" id="venue" placeholder=" "style="background-color:white;" />
-                    <span class="text-danger" asp-validation-for="Price"></span>
+                <div class="card-body">
+                    <form class="user" asp-action="Create" method="post" enctype="multipart/form-data">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="title1Input">
+                                    <i class="fas fa-prescription-bottle-alt"></i> Name
+                                </label>
+                                <input asp-for="Name" class="form-control" id="title1Input" placeholder="" style="background-color:white;" />
+                                <span class="text-danger" asp-validation-for="Name"></span>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="descInput">
+                                    <i class="fas fa-align-left"></i> Description
+                                </label>
+                                <textarea asp-for="Desc" class="form-control" id="descInput" placeholder="" rows="3" style="background-color:white;" ></textarea>
+                                <span class="text-danger" asp-validation-for="Desc"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="priceInput">
+                                <i class="fas fa-dollar-sign"></i> Price
+                            </label>
+                            <input asp-for="Price" class="form-control" id="priceInput" placeholder=""style="background-color:white;"  />
+                            <span class="text-danger" asp-validation-for="Price"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="CategoryId">
+                                    <i class="fas fa-tags"></i> Category
+                                </label>
+                                <select asp-for="CategoryId" class="form-control" id="CategoryId" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))"style="background-color:white;" ></select>
+                                <span class="text-danger" asp-validation-for="CategoryId"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="imgInput">
+                                <i class="fas fa-images"></i> Image Files
+                            </label>
+                            <input asp-for="Files" class="form-control imgInput" type="file" multiple accept="image/*" />
+                            <div class="preview-box mt-3"></div>
+                            <span class="text-danger" asp-validation-for="Files"></span>
+                        </div>
+
+                        <button class="btn btn-primary btn-block mt-4" type="submit">
+                            <i class="fas fa-plus-circle"></i> Create Medicine
+                        </button>
+                    </form>
                 </div>
-               
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="CategoryId">CategoryId</label>
-                        <select asp-for="CategoryId" class="form-control" id="CategoryId" style="background-color:white;" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))"></select>
-                        <span class="text-danger" asp-validation-for="CategoryId"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="imgInput">ImageFile</label>
-                    <input asp-for="Files" class="form-control imgInput" placeholder=" " multiple style="background-color:white;">
-                    <div class="preview-box mt-2"></div>
-                    <span class="text-danger" asp-validation-for="Files"></span>
-                </div>
-                <button class="btn btn-primary" type="submit">Create Medicine</button>
-            </form>
+            </div>
         </div>
     </div>
 </div>
@@ -74,55 +117,34 @@
     <script>$(document).ready(function () {
             $(".imgInput").change(function (e) {
                 let box = $(this).parent().find(".preview-box");
-                $(box).empty();
+                box.empty();
 
-                Array.from(e.target.files).forEach((file, index) => {
+                const files = Array.from(e.target.files);
+                const dt = new DataTransfer();
+
+                files.forEach((file, index) => {
                     let reader = new FileReader();
                     reader.readAsDataURL(file);
                     reader.onload = () => {
-                        let imgBox = document.createElement("div");
-                        imgBox.classList.add("img-box", "mt-3", "mr-3");
-                        imgBox.style.display = "inline-block";
-                        imgBox.style.position = "relative";
+                        let imgBox = $("<div>").addClass("img-box mt-3 mr-3");
+                        let removeIcon = $("<span>").addClass("remove-img-icon").attr("data-index", index).html("&times;");
+                        let img = $("<img>").addClass("previewImg img-thumbnail").attr("src", reader.result).css("width", "200px");
 
-                        let removeIcon = document.createElement("span");
-                        removeIcon.classList.add("remove-img-icon");
-                        removeIcon.setAttribute("data-index", index);
-                        removeIcon.textContent = "x";
-                        removeIcon.style.position = "absolute";
-                        removeIcon.style.top = "5px";
-                        removeIcon.style.right = "5px";
-                        removeIcon.style.background = "red";
-                        removeIcon.style.color = "white";
-                        removeIcon.style.cursor = "pointer";
-
-                        let img = document.createElement("img");
-                        img.style.width = "200px";
-                        img.classList.add("previewImg");
-                        img.setAttribute("src", reader.result);
-
-                        imgBox.appendChild(removeIcon);
-                        imgBox.appendChild(img);
+                        imgBox.append(removeIcon, img);
                         box.append(imgBox);
 
-
-                        removeIcon.addEventListener("click", function () {
-                            let imgBox = this.closest(".img-box");
+                        removeIcon.on("click", function () {
+                            let imgIndex = $(this).data("index");
+                            files.splice(imgIndex, 1);
                             imgBox.remove();
 
+                            files.forEach((file, i) => {
+                                dt.items.add(file);
+                            });
 
-                            let dt = new DataTransfer();
-                            let input = document.querySelector('.imgInput');
-                            let { files } = input;
-
-                            for (let i = 0; i < files.length; i++) {
-                                if (i !== index) {
-                                    dt.items.add(files[i]);
-                                }
-                            }
-                            input.files = dt.files;
+                            $(".imgInput")[0].files = dt.files;
                         });
-                    }
+                    };
                 });
             });
         });</script>

@@ -1,6 +1,6 @@
 ﻿@model DepartmentCreateRequest
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Department";
 }
 
 <!-- Begin Page Content -->
@@ -8,32 +8,46 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Departments</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-            Create
+        <h1 class="h3 mb-0 text-gray-800">Create Department</h1>
+        <a asp-action="index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-arrow-left"></i> Back to List
         </a>
     </div>
+
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <form class="user" asp-action="create" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="FullNameInput">Name</label>
-                    <input asp-for="Name" class="form-control" id="FullNameInput" placeholder="" style="background-color:white;">
-                    <span class="text-danger" asp-validation-for="Name"></span>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">New Department</h6>
                 </div>
+                <div class="card-body">
+                    <form class="user" asp-action="create" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="FullNameInput">
+                                <i class="fas fa-building"></i> Department Name
+                            </label>
+                            <input asp-for="Name" class="form-control" id="FullNameInput" placeholder="" style="background-color:white;">
+                            <span class="text-danger" asp-validation-for="Name"></span>
+                        </div>
 
-              
-                <div class="form-group">
-                    <label for="FileInput">File</label>
-                    <input type="file" asp-for="File" class="form-control" id="FileInput" style="background-color:white;">
-                    <span class="text-danger" asp-validation-for="File"></span>
+                        <div class="form-group">
+                            <label for="FileInput">
+                                <i class="fas fa-image"></i> Upload Department Image
+                            </label>
+                            <input type="file" asp-for="File" class="form-control" id="FileInput" accept="image/*" style="background-color:white;">
+                            <span class="text-danger" asp-validation-for="File"></span>
+                        </div>
+
+                        <div class="preview-box mt-3 text-center">
+                            <p class="text-muted">Image preview will be displayed here</p>
+                        </div>
+
+                        <button class="btn btn-primary btn-block mt-4" type="submit">
+                            <i class="fas fa-plus-circle"></i> Create Department
+                        </button>
+                    </form>
                 </div>
-
-                <div class="preview-box mt-2"></div>
-                <button class="btn btn-primary" type="submit">
-                    Create Department
-                </button>
-            </form>
+            </div>
         </div>
     </div>
 </div>
@@ -44,20 +58,18 @@
     <script>$(document).ready(function () {
             $("#FileInput").change(function (e) {
                 let box = $(this).closest('form').find(".preview-box");
-                $(box).empty();
+                box.empty();
 
                 if (e.target.files.length > 0) {
                     let reader = new FileReader();
                     reader.readAsDataURL(e.target.files[0]);
                     reader.onload = () => {
-                        let img = document.createElement("img");
-                        img.style.width = "200px";
-                        img.classList.add("previewImg");
-                        img.setAttribute("src", reader.result);
-                        $(box).append(img);
+                        let img = $("<img>").addClass("previewImg").css("width", "200px");
+                        img.attr("src", reader.result);
+                        box.append(img);
                     }
                 } else {
-                    $(box).empty();
+                    box.append('<p class="text-muted">Image preview will be displayed here</p>');
                 }
             });
         });</script>

@@ -47,7 +47,6 @@ namespace Medical.UI.Controllers
         {
             _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, Request.Cookies["token"]);
 
-
             return View();
         }
 

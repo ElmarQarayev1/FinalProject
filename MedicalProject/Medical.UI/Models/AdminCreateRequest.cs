@@ -10,6 +10,7 @@ namespace Medical.UI.Models
         [MinLength(3)]
         public string UserName { get; set; }
 
+
         [Required]
         [MaxLength(40)]
         [MinLength(8)]

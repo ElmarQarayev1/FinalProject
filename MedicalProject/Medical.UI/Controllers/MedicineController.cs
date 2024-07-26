@@ -139,7 +139,6 @@ namespace Medical.UI.Controllers
                     ExistPictureIds = editRequest.ExistPictureIds,
                 };
 
-              
                 await _crudService.EditFromForm(updateDto, $"medicines/{id}");
                 return RedirectToAction("Index");
             }

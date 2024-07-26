@@ -1,6 +1,6 @@
 ﻿@model ServiceCreateRequest
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Service";
 }
 
 <!-- Begin Page Content -->
@@ -8,36 +8,53 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Services</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-            Create
+        <h1 class="h3 mb-0 text-gray-800">Create Service</h1>
+        <a asp-action="Index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-arrow-left"></i> Back to List
         </a>
     </div>
+
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <form class="user" asp-action="create" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="FullNameInput">Name</label>
-                    <input asp-for="Name" class="form-control" id="FullNameInput" placeholder="" style="background-color:white;">
-                    <span class="text-danger" asp-validation-for="Name"></span>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">New Service Details</h6>
                 </div>
-                <div class="form-group">
-                    <label for="FullNameInput">Desc</label>
-                    <input asp-for="Desc" class="form-control" id="FullNameInput" placeholder="" style="background-color:white;">
-                    <span class="text-danger" asp-validation-for="Desc"></span>
-                </div>
+                <div class="card-body">
+                    <form class="user" asp-action="create" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-                <div class="form-group">
-                    <label for="FileInput">File</label>
-                    <input type="file" asp-for="File" class="form-control" id="FileInput" style="background-color:white;">
-                    <span class="text-danger" asp-validation-for="File"></span>
-                </div>
+                        <div class="form-group">
+                            <label for="NameInput">
+                                <i class="fas fa-tag"></i> Service Name
+                            </label>
+                            <input asp-for="Name" class="form-control" id="NameInput" placeholder="" style="background-color:white;">
+                            <span class="text-danger" asp-validation-for="Name"></span>
+                        </div>
 
-                <div class="preview-box mt-2"></div>
-                <button class="btn btn-primary" type="submit">
-                    Create Service
-                </button>
-            </form>
+                        <div class="form-group">
+                            <label for="DescInput">
+                                <i class="fas fa-align-left"></i> Description
+                            </label>
+                            <textarea asp-for="Desc" class="form-control" id="DescInput" placeholder="" style="background-color:white;" rows="4"></textarea>
+                            <span class="text-danger" asp-validation-for="Desc"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="FileInput">
+                                <i class="fas fa-file-upload"></i> Upload File
+                            </label>
+                            <input type="file" asp-for="File" class="form-control imgInput" id="FileInput" style="background-color:white;">
+                            <span class="text-danger" asp-validation-for="File"></span>
+                            <div class="preview-box text-center mt-3"></div>
+                        </div>
+
+                        <button class="btn btn-primary btn-block mt-4" type="submit">
+                            <i class="fas fa-plus"></i> Create Service
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -54,10 +71,8 @@
                     let reader = new FileReader();
                     reader.readAsDataURL(e.target.files[0]);
                     reader.onload = () => {
-                        let img = document.createElement("img");
-                        img.style.width = "200px";
-                        img.classList.add("previewImg");
-                        img.setAttribute("src", reader.result);
+                        let img = $("<img>").addClass("previewImg img-thumbnail").css("width", "200px");
+                        img.attr("src", reader.result);
                         $(box).append(img);
                     }
                 } else {

@@ -29,3 +29,12 @@
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/obj/Release/net7.0/Medical.UI.pdb
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/obj/Release/net7.0/Medical.UI.genruntimeconfig.cache
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/obj/Release/net7.0/ref/Medical.UI.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/bin/Release/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/bin/Release/net7.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/bin/Release/net7.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/bin/Release/net7.0/Microsoft.IdentityModel.Logging.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/bin/Release/net7.0/Microsoft.IdentityModel.Protocols.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/bin/Release/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/bin/Release/net7.0/Microsoft.IdentityModel.Tokens.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/bin/Release/net7.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/obj/Release/net7.0/Medical.UI.csproj.CopyComplete

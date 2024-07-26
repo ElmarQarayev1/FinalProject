@@ -1,47 +1,68 @@
 ﻿@model FeatureEditRequest
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Feature";
 }
 
 <div class="container-fluid">
+    <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Features</h1>
+        <h1 class="h3 mb-0 text-gray-800">Edit Feature</h1>
+        <a asp-action="index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-arrow-left"></i> Back to List
+        </a>
     </div>
-    <div class="row">
-        <div class="col-md-8 mx-auto">
-            <form class="user" asp-action="Edit" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="title1Input">Name</label>
-                    <input asp-for="Name" class="form-control" id="title1Input" placeholder=" " style="background-color:white;" />
-                    <span class="text-danger" asp-validation-for="Name"></span>
-                </div>
-                <div class="form-group">
-                    <label for="title1Input">Desc</label>
-                    <input asp-for="Desc" class="form-control" id="title1Input" placeholder=" " style="background-color:white;" />
-                    <span class="text-danger" asp-validation-for="Desc"></span>
-                </div>
 
-                <div class="form-group">
-                    <label for="imgInput">File</label>
-                    <input asp-for="File" class="form-control imgInput" type="file" accept="image/*" style="background-color:white;" />
-                    <span class="text-danger" asp-validation-for="File"></span>
-                    <div class="preview-box">
-                        <img width="200" class="previewImg" src="@Model.FileUrl" />
-                    </div>
+    <div class="row">z
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Feature Details</h6>
                 </div>
-                <button class="btn btn-primary" type="submit">
-                    Edit Feature
-                </button>
-            </form>
+                <div class="card-body">
+                    <form class="user" asp-action="Edit" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="NameInput">
+                                <i class="fas fa-tag"></i> Feature Name
+                            </label>
+                            <input asp-for="Name" class="form-control" id="NameInput" placeholder="Enter feature name" style="background-color:white;" />
+                            <span class="text-danger" asp-validation-for="Name"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="DescInput">
+                                <i class="fas fa-align-left"></i> Description
+                            </label>
+                            <textarea asp-for="Desc" class="form-control" id="DescInput" placeholder="Enter feature description" style="background-color:white;" rows="4"></textarea>
+                            <span class="text-danger" asp-validation-for="Desc"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="FileInput">
+                                <i class="fas fa-image"></i> Feature Image
+                            </label>
+                            <input asp-for="File" class="form-control imgInput" type="file" accept="image/*" id="FileInput" style="background-color:white;" />
+                            <span class="text-danger" asp-validation-for="File"></span>
+                            <div class="preview-box text-center mt-3">
+                                <img width="200" class="previewImg img-thumbnail" src="@Model.FileUrl" />
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary btn-block mt-4" type="submit">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-</div>f
+</div>
+
 @section scripts {
     @Html.Partial("_ValidationScriptsPartial")
 
     <script>$(document).ready(function () {
             $(".imgInput").change(function (e) {
-                let box = $(this).parent().find(".preview-box");
+                let box = $(this).closest('form').find(".preview-box");
 
                 if (e.target.files.length > 0) {
                     let reader = new FileReader();
@@ -49,7 +70,7 @@
                     reader.onload = () => {
                         let img = $(box).find(".previewImg");
                         if (img.length == 0) {
-                            img = $("<img>").addClass("previewImg").css("width", "200px");
+                            img = $("<img>").addClass("previewImg img-thumbnail").css("width", "200px");
                             $(box).append(img);
                         }
                         img.attr("src", reader.result);

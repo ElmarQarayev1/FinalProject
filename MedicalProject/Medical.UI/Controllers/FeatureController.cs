@@ -119,6 +119,7 @@ namespace Medical.UI.Controllers
                 return RedirectToAction("Index");
             }
 
+
             catch (ModelException e)
             {
 
