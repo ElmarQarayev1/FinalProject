@@ -20,8 +20,6 @@ namespace Medical.UI.Controllers
             _client = new HttpClient();
         }
 
-
-
         public async Task<IActionResult> Index(int page = 1, int size = 4)
         {
             try

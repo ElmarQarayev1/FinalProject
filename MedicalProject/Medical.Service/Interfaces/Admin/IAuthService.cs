@@ -14,6 +14,7 @@ namespace Medical.Service.Interfaces.Admin
         AdminGetDto GetById(string id);
         void Update(string id, AdminUpdateDto updateDto);
         void Delete(string id);
+       
     }
 }
 

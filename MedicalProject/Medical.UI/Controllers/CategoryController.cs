@@ -30,7 +30,6 @@ namespace Medical.UI.Controllers
 
 				return View(paginatedResponse);
 
-
 			}
 			catch (HttpException ex)
 			{
@@ -43,7 +42,6 @@ namespace Medical.UI.Controllers
                 return RedirectToAction("Error", "Home");
 
             }
-
             catch (System.Exception)
             {
                 return RedirectToAction("Error", "Home");

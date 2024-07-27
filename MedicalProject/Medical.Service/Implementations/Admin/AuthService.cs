@@ -220,7 +220,6 @@ namespace Medical.Service.Implementations.Admin
                     throw new RestException(StatusCodes.Status400BadRequest, $"Failed to change password: {errors}");
                 }
             }
-
            
             var updateResult = _userManager.UpdateAsync(user).Result;
 
@@ -230,7 +229,7 @@ namespace Medical.Service.Implementations.Admin
                 throw new RestException(StatusCodes.Status400BadRequest, $"Failed to update user: {errors}");
             }
         }
-
+        
 
 
     }

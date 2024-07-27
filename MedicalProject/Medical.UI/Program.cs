@@ -16,20 +16,20 @@ builder.Services.AddScoped<ICrudService, CrudService>();
 
 
 
-builder.Services.AddAuthentication(opt =>
-{
-    opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(opt =>
-{
-    opt.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidAudience = builder.Configuration.GetSection("JWT:Audience").Value,
-        ValidIssuer = builder.Configuration.GetSection("JWT:Issuer").Value,
-        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
-    };
-});
+//builder.Services.AddAuthentication(opt =>
+//{
+//    opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+//    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//}).AddJwtBearer(opt =>
+//{
+//    opt.TokenValidationParameters = new TokenValidationParameters
+//    {
+//        ValidAudience = builder.Configuration.GetSection("JWT:Audience").Value,
+//        ValidIssuer = builder.Configuration.GetSection("JWT:Issuer").Value,
+//        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+//    };
+//});
 
 
 

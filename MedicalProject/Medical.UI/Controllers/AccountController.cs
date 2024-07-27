@@ -141,6 +141,18 @@ namespace Medical.UI.Controllers
             }
         }
 
+
+        public async Task<IActionResult> Logout()
+        {
+            
+            if (Request.Cookies.ContainsKey("token"))
+            {
+                Response.Cookies.Delete("token");
+            }        
+           
+            return RedirectToAction("Login", "Account");
+        }
+
     }
 }
 
