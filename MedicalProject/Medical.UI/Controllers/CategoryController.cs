@@ -3,11 +3,13 @@ using Medical.UI.Exception;
 using Medical.UI.Filter;
 using Medical.UI.Models;
 using Medical.UI.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Medical.UI.Controllers
 {
-	[ServiceFilter(typeof(AuthFilter))]
+   // [Authorize]
+    [ServiceFilter(typeof(AuthFilter))]
 	public class CategoryController:Controller
 	{
 

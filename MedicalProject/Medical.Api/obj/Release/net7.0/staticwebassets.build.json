@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Q53T2f8zHcEK79X+Wak9MBOQ3sshfkpzdzxKQu9wIzk=",
+  "Hash": "HmKqmq3EElpo9XdxXqJgtvs5DQComZgTJGeYqi8UqPo=",
   "Source": "Medical.Api",
   "BasePath": "_content/Medical.Api",
   "Mode": "Default",
@@ -32,6 +32,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/uploads/departments/17876a36-9374-46ba-841e-fe2f484cee8bportfolio-2.jpg"
+    },
+    {
+      "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/departments/6aa3ad99-4312-4004-961c-a98710958951portfolio-2.jpg",
+      "SourceId": "Medical.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/",
+      "BasePath": "_content/Medical.Api",
+      "RelativePath": "uploads/departments/6aa3ad99-4312-4004-961c-a98710958951portfolio-2.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/departments/6aa3ad99-4312-4004-961c-a98710958951portfolio-2.jpg"
     },
     {
       "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/departments/cd82f1b0-416d-44fe-835c-2c5f1fc3ce2eteam-1.jpg",
@@ -136,12 +153,12 @@
       "OriginalItemSpec": "wwwroot/uploads/doctors/ee904ae5-d59e-4cdd-a2d2-2c20dac311e3portfolio-7.jpg"
     },
     {
-      "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/features/318961bb-3473-4934-b75d-2b9f0538da6cportfolio-3.jpg",
+      "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/features/e0a9555c-3c7f-4fe1-917e-71d5077aa403portfolio-5.jpg",
       "SourceId": "Medical.Api",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/",
       "BasePath": "_content/Medical.Api",
-      "RelativePath": "uploads/features/318961bb-3473-4934-b75d-2b9f0538da6cportfolio-3.jpg",
+      "RelativePath": "uploads/features/e0a9555c-3c7f-4fe1-917e-71d5077aa403portfolio-5.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -150,7 +167,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/uploads/features/318961bb-3473-4934-b75d-2b9f0538da6cportfolio-3.jpg"
+      "OriginalItemSpec": "wwwroot/uploads/features/e0a9555c-3c7f-4fe1-917e-71d5077aa403portfolio-5.jpg"
+    },
+    {
+      "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/1f5bbf42-c733-4fda-b40a-0ab7d69feb69portfolio-3.jpg",
+      "SourceId": "Medical.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/",
+      "BasePath": "_content/Medical.Api",
+      "RelativePath": "uploads/medicines/1f5bbf42-c733-4fda-b40a-0ab7d69feb69portfolio-3.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/medicines/1f5bbf42-c733-4fda-b40a-0ab7d69feb69portfolio-3.jpg"
     },
     {
       "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/251f2183-b92c-4de2-8107-defdecd621cbportfolio-2.jpg",
@@ -168,6 +202,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/uploads/medicines/251f2183-b92c-4de2-8107-defdecd621cbportfolio-2.jpg"
+    },
+    {
+      "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/384722d2-fa0b-4e0f-a3a9-50a54324d650portfolio-1.jpg",
+      "SourceId": "Medical.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/",
+      "BasePath": "_content/Medical.Api",
+      "RelativePath": "uploads/medicines/384722d2-fa0b-4e0f-a3a9-50a54324d650portfolio-1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/medicines/384722d2-fa0b-4e0f-a3a9-50a54324d650portfolio-1.jpg"
     },
     {
       "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/398316d7-3961-440a-bbc1-7d6c74918029portfolio-6.jpg",
@@ -238,6 +289,23 @@
       "OriginalItemSpec": "wwwroot/uploads/medicines/d7740233-6fc0-4fbd-b7a2-ad763e94ba99portfolio-1.jpg"
     },
     {
+      "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/de4a30fd-5a2a-4cb3-8618-ed1d537ba1fbportfolio-2.jpg",
+      "SourceId": "Medical.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/",
+      "BasePath": "_content/Medical.Api",
+      "RelativePath": "uploads/medicines/de4a30fd-5a2a-4cb3-8618-ed1d537ba1fbportfolio-2.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/medicines/de4a30fd-5a2a-4cb3-8618-ed1d537ba1fbportfolio-2.jpg"
+    },
+    {
       "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/services/811a0376-006d-4f03-97c5-831cd57bafeaportfolio-1.jpg",
       "SourceId": "Medical.Api",
       "SourceType": "Discovered",
@@ -306,12 +374,12 @@
       "OriginalItemSpec": "wwwroot/uploads/sliders/09228c4e-e8bd-4856-8b0d-666b77970412about.jpg"
     },
     {
-      "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/sliders/a464ab93-0612-4613-806f-b858ff61f049slider1.jpg",
+      "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/sliders/54bb636f-b630-4844-9072-cdefba1f9d7aportfolio-7.jpg",
       "SourceId": "Medical.Api",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/",
       "BasePath": "_content/Medical.Api",
-      "RelativePath": "uploads/sliders/a464ab93-0612-4613-806f-b858ff61f049slider1.jpg",
+      "RelativePath": "uploads/sliders/54bb636f-b630-4844-9072-cdefba1f9d7aportfolio-7.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -320,7 +388,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/uploads/sliders/a464ab93-0612-4613-806f-b858ff61f049slider1.jpg"
+      "OriginalItemSpec": "wwwroot/uploads/sliders/54bb636f-b630-4844-9072-cdefba1f9d7aportfolio-7.jpg"
     },
     {
       "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/sliders/da105b8b-033e-440c-8162-3f06854cab72apple-touch-icon.png",
