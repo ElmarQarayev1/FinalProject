@@ -1,15 +1,4 @@
 ﻿<Properties StartupConfiguration="Birden Çok Proje">
-  <MonoDevelop.Ide.ItemProperties.Medical.UI PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Controllers/FeatureController.cs" relfile="Medical.UI/Controllers/FeatureController.cs" line="86" column="1" />
-      <Breakpoint file="/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Controllers/FeatureController.cs" relfile="Medical.UI/Controllers/FeatureController.cs" line="107" column="1" />
-      <Breakpoint file="/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/Controllers/DoctorsController.cs" relfile="Medical.Api/Controllers/DoctorsController.cs" line="46" column="1" />
-      <Breakpoint file="/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/Implementations/Admin/DoctorService.cs" relfile="Medical.Service/Implementations/Admin/DoctorService.cs" line="140" column="1" />
-      <Breakpoint file="/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Controllers/AccountController.cs" relfile="Medical.UI/Controllers/AccountController.cs" line="111" column="1" />
-    </BreakpointStore>
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.Medical.Api PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
   <MultiItemStartupConfigurations>
     <MultiItemSolutionRunConfiguration Id="Birden Çok Proje" Name="Birden Çok Proje">
       <Items>
@@ -18,7 +7,10 @@
       </Items>
     </MultiItemSolutionRunConfiguration>
   </MultiItemStartupConfigurations>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Medical.Service/Dtos/Admin/AuthDtos/AdminLoginDto.cs">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Medical.Api PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Medical.UI/Middlewares/ExceptionHandlerMiddleware.cs">
     <Files>
       <File FileName="Medical.Api/Program.cs" />
       <File FileName="Medical.Core/Entities/BaseEntity.cs" />
@@ -43,7 +35,7 @@
       <File FileName="Medical.Core/Entities/Setting.cs" />
       <File FileName="Medical.Data/Configuration/SettingConfiguration.cs" />
       <File FileName="Medical.Api/appsettings.json" />
-      <File FileName="Medical.Api/MiddleWares/ExceptionHandlerMiddleware.cs" />
+      <File FileName="Medical.Api/MiddleWares/ExceptionHandlerMiddleware.cs" Line="36" Column="1" />
       <File FileName="Medical.Service/Exceptions/RestException.cs" />
       <File FileName="Medical.Data/Repositories/Interfaces/IRepository.cs" />
       <File FileName="Medical.Data/Repositories/Interfaces/ICategoryRepository.cs" />
@@ -64,12 +56,12 @@
       <File FileName="Medical.Data/Repositories/Implementations/SettingRepository.cs" />
       <File FileName="Medical.Data/Repositories/Implementations/SliderRepository.cs" />
       <File FileName="Medical.Service/Helpers/FileManager.cs" />
-      <File FileName="Medical.Service/Dtos/Admin/CategoryDtos/CategoryCreateDto.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/CategoryDtos/CategoryCreateDto.cs" Line="18" Column="6" />
       <File FileName="Medical.Service/Dtos/Admin/CategoryDtos/CategoryPaginatedGetDto.cs" />
-      <File FileName="Medical.Service/Dtos/Admin/CategoryDtos/CategoryUpdateDto.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/CategoryDtos/CategoryUpdateDto.cs" Line="18" Column="6" />
       <File FileName="Medical.Service/Interfaces/Admin/ICategoryService.cs" />
       <File FileName="Medical.Service/PaginatedList.cs" />
-      <File FileName="Medical.Service/Implementations/Admin/CategoryService.cs" />
+      <File FileName="Medical.Service/Implementations/Admin/CategoryService.cs" Line="35" Column="45" />
       <File FileName="Medical.Service/Profiles/MapProfile.cs" />
       <File FileName="Medical.Api/Controllers/CategoriesController.cs" />
       <File FileName="Medical.Service/Dtos/Admin/SliderDtos/SliderGetDto.cs" />
@@ -122,32 +114,32 @@
       <File FileName="Medical.Service/Dtos/Admin/MedicineDtos/MedicineGetDto.cs" />
       <File FileName="Medical.Service/Dtos/Admin/MedicineDtos/MedicineImageResponseDto.cs" />
       <File FileName="Medical.Api/Controllers/MedicinesController.cs" />
-      <File FileName="Medical.Service/Interfaces/Admin/IAuthService.cs" />
-      <File FileName="Medical.Service/Dtos/Admin/AuthDtos/AdminLoginDto.cs" Line="7" Column="1" />
-      <File FileName="Medical.Service/Implementations/Admin/AuthService.cs" />
-      <File FileName="Medical.Api/Controllers/AuthController.cs" />
+      <File FileName="Medical.Service/Interfaces/Admin/IAuthService.cs" Line="22" Column="1" />
+      <File FileName="Medical.Service/Dtos/Admin/AuthDtos/AdminLoginDto.cs" Line="12" Column="1" />
+      <File FileName="Medical.Service/Implementations/Admin/AuthService.cs" Line="205" Column="1" />
+      <File FileName="Medical.Api/Controllers/AuthController.cs" Line="92" Column="10" />
       <File FileName="Medical.UI/Views/Home/Index.cshtml" />
-      <File FileName="Medical.UI/Views/Shared/_Layout.cshtml" />
-      <File FileName="Medical.UI/Filter/AuthFilter.cs" />
-      <File FileName="Medical.UI/Middlewares/ExceptionHandlerMiddleware.cs" />
-      <File FileName="Medical.UI/Exception/HttpException.cs" />
-      <File FileName="Medical.UI/Exception/ModelException.cs" />
+      <File FileName="Medical.UI/Views/Shared/_Layout.cshtml" Line="32" Column="51" />
+      <File FileName="Medical.UI/Filter/AuthFilter.cs" Line="29" Column="1" />
+      <File FileName="Medical.UI/Middlewares/ExceptionHandlerMiddleware.cs" Line="36" Column="1" />
+      <File FileName="Medical.UI/Exception/HttpException.cs" Line="13" Column="1" />
+      <File FileName="Medical.UI/Exception/ModelException.cs" Line="14" Column="1" />
       <File FileName="Medical.UI/Models/ErrorResponse.cs" />
-      <File FileName="Medical.UI/Service/CrudService.cs" />
+      <File FileName="Medical.UI/Service/CrudService.cs" Line="259" Column="1" />
       <File FileName="Medical.UI/Service/ICrudService.cs" />
       <File FileName="Medical.UI/Models/PaginatedResponse.cs" />
       <File FileName="Medical.UI/Models/CreateResponse.cs" />
-      <File FileName="Medical.UI/Models/LoginRequest.cs" />
+      <File FileName="Medical.UI/Models/LoginRequest.cs" Line="7" Column="3" />
       <File FileName="Medical.UI/Models/LoginResponse.cs" />
       <File FileName="Medical.UI/Program.cs" />
-      <File FileName="Medical.UI/Views/Account/Login.cshtml" />
-      <File FileName="Medical.UI/Controllers/HomeController.cs" />
+      <File FileName="Medical.UI/Views/Account/Login.cshtml" Line="68" Column="27" />
+      <File FileName="Medical.UI/Controllers/HomeController.cs" Line="11" Column="4" />
       <File FileName="Medical.UI/Views/Home/Error.cshtml" />
-      <File FileName="Medical.UI/Controllers/AccountController.cs" Line="118" Column="5" />
+      <File FileName="Medical.UI/Controllers/AccountController.cs" Line="158" Column="1" />
       <File FileName="Medical.UI/Views/_ViewImports.cshtml" />
       <File FileName="Medical.UI/Views/_ViewStart.cshtml" />
       <File FileName="Medical.UI/Views/Shared/_ValidationScriptsPartial.cshtml" />
-      <File FileName="Medical.UI/Controllers/CategoryController.cs" />
+      <File FileName="Medical.UI/Controllers/CategoryController.cs" Line="118" Column="14" />
       <File FileName="Medical.UI/Models/CategoryListItemDetailedGetResponse.cs" />
       <File FileName="Medical.UI/Views/Category/Index.cshtml" />
       <File FileName="Medical.UI/Models/CategoryEditRequest.cs" />
@@ -190,7 +182,7 @@
       <File FileName="Medical.UI/Models/SettingEditRequest.cs" />
       <File FileName="Medical.UI/Models/SettingListItemDetailedGetResponse.cs" />
       <File FileName="Medical.UI/Views/Setting/Index.cshtml" />
-      <File FileName="Medical.UI/Views/Setting/Edit.cshtml" />
+      <File FileName="Medical.UI/Views/Setting/Edit.cshtml" Line="33" Column="1" />
       <File FileName="Medical.UI/Controllers/SettingController.cs" />
       <File FileName="Medical.UI/Models/DoctorGetResponse.cs" />
       <File FileName="Medical.UI/Models/DoctorCreateRequest.cs" />
@@ -203,7 +195,7 @@
       <File FileName="Medical.UI/Models/DoctorListitemGetResponse.cs" />
       <File FileName="Medical.UI/Models/PictureResponse.cs" />
       <File FileName="Medical.UI/Models/MedicineGetResponse.cs" />
-      <File FileName="Medical.UI/Controllers/MedicineController.cs" />
+      <File FileName="Medical.UI/Controllers/MedicineController.cs" Line="11" Column="40" />
       <File FileName="Medical.UI/Models/CategoryListItemGetResponse.cs" />
       <File FileName="Medical.UI/Views/Medicine/Index.cshtml" />
       <File FileName="Medical.UI/Views/Medicine/Edit.cshtml" />
@@ -211,35 +203,35 @@
       <File FileName="Medical.UI/Models/MedicineEditRequest.cs" />
       <File FileName="Medical.Core/Entities/Category.cs" />
       <File FileName="Medical.Service/Dtos/Admin/CategoryDtos/CategoryGetDto.cs" />
-      <File FileName="Medical.Service/Dtos/Admin/AuthDtos/SuperAdminCreateAdminDto.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/AuthDtos/SuperAdminCreateAdminDto.cs" Line="29" Column="1" />
       <File FileName="Medical.Service/Dtos/Admin/AuthDtos/AdminGetDto.cs" Line="13" Column="1" />
-      <File FileName="Medical.Service/Dtos/Admin/AuthDtos/AdminPaginatedGetDto.cs" />
-      <File FileName="Medical.Service/Dtos/Admin/AuthDtos/AdminUpdateDto.cs" />
+      <File FileName="Medical.Service/Dtos/Admin/AuthDtos/AdminPaginatedGetDto.cs" Line="1" Column="1" />
+      <File FileName="Medical.Service/Dtos/Admin/AuthDtos/AdminUpdateDto.cs" Line="40" Column="6" />
       <File FileName="Medical.Data/Repositories/Interfaces/IAuthRepository.cs" />
       <File FileName="Medical.Data/Repositories/Implementations/AuthRepository.cs" />
       <File FileName="Medical.UI/Models/AdminPaginatedGetResponse.cs" />
       <File FileName="Medical.UI/Models/AdminGetResponse.cs" Line="11" Column="1" />
-      <File FileName="Medical.UI/Views/Account/Edit.cshtml" />
       <File FileName="Medical.UI/Models/AdminCreateRequest.cs" />
       <File FileName="Medical.UI/Models/CreateResponseForAdmins.cs" />
       <File FileName="Medical.UI/Views/Account/ShowAdmin.cshtml" />
       <File FileName="Medical.UI/appsettings.json" />
       <File FileName="Medical.UI/Views/Account/AdminCreateByS.cshtml" />
-      <File FileName="Medical.UI/Models/AdminProfileEditRequest.cs" />
+      <File FileName="Medical.UI/Models/AdminProfileEditRequest.cs" Line="31" Column="1" />
+      <File FileName="Medical.UI/Views/Account/Profile.cshtml" Line="11" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="MedicalProject" expanded="True">
+          <Node name="MedicalProject">
             <Node name="Medical.Api" expanded="True">
               <Node name="Controllers" expanded="True" />
+              <Node name="MiddleWares" expanded="True" />
             </Node>
-            <Node name="Medical.Service">
+            <Node name="Medical.Service" expanded="True">
               <Node name="Dtos" expanded="True">
                 <Node name="Admin" expanded="True">
-                  <Node name="AuthDtos" expanded="True">
-                    <Node name="AdminLoginDto.cs" selected="True" />
-                  </Node>
+                  <Node name="AuthDtos" expanded="True" />
+                  <Node name="CategoryDtos" expanded="True" />
                 </Node>
               </Node>
               <Node name="Implementations" expanded="True">
@@ -249,16 +241,33 @@
                 <Node name="Admin" expanded="True" />
               </Node>
             </Node>
-            <Node name="Medical.UI">
+            <Node name="Medical.UI" expanded="True">
               <Node name="Controllers" expanded="True" />
+              <Node name="Exception" expanded="True" />
+              <Node name="Filter" expanded="True" />
               <Node name="Middlewares" expanded="True" />
               <Node name="Models" expanded="True" />
+              <Node name="Service" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Account" expanded="True" />
+                <Node name="Setting" expanded="True" />
+                <Node name="Shared" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Medical.UI PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Controllers/FeatureController.cs" relfile="Medical.UI/Controllers/FeatureController.cs" line="86" column="1" />
+      <Breakpoint file="/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Controllers/FeatureController.cs" relfile="Medical.UI/Controllers/FeatureController.cs" line="107" column="1" />
+      <Breakpoint file="/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/Controllers/DoctorsController.cs" relfile="Medical.Api/Controllers/DoctorsController.cs" line="46" column="1" />
+      <Breakpoint file="/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/Implementations/Admin/DoctorService.cs" relfile="Medical.Service/Implementations/Admin/DoctorService.cs" line="140" column="1" />
+      <Breakpoint file="/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Controllers/AccountController.cs" relfile="Medical.UI/Controllers/AccountController.cs" line="128" column="1" />
+      <Breakpoint file="/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Controllers/AccountController.cs" relfile="Medical.UI/Controllers/AccountController.cs" line="148" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>
