@@ -48,10 +48,10 @@ namespace Medical.UI.Controllers
                     TempData["Error"] = "Something went wrong";
                 }
             }
+           
 
             return View();
         }
-
 
         [HttpPost]
         public async Task<IActionResult> AdminCreateByS(AdminCreateRequest createRequest)
@@ -108,39 +108,54 @@ namespace Medical.UI.Controllers
         }
 
 
-        public async Task<IActionResult> Profile(string id)
+        public async Task<IActionResult> Profile()
         {
-            var user = await _crudService.Get<AdminGetResponse>("getById/" + id);
+            var user = await _crudService.Get<AdminGetResponse>("profile");
 
-            if (user == null)
+            AdminProfileEditRequest adminProfile = new AdminProfileEditRequest
+            {
+                UserName = user.UserName
+            };
+            ViewBag.Id = user.Id;
+            
+            if (adminProfile == null)
             {
                 return NotFound();
             }
-
-            return View(user);
+            return View(adminProfile);
         }
-
         [HttpPost]
-        public async Task<IActionResult> Edit(AdminProfileEditRequest editRequest, string id)
+        public async Task<IActionResult> Profile(AdminProfileEditRequest editRequest, string id)
         {
-            if (!ModelState.IsValid) return View(editRequest);
 
+            if (!ModelState.IsValid)
+            {
+                TempData["ProfileUpdateError"] = "Please correct the errors and try again.";
+                return View(editRequest);
+            }
+           
             try
             {
                 await _crudService.Update<AdminProfileEditRequest>(editRequest, "update/" + id);
-                return RedirectToAction("index");
+
+                if (Request.Cookies.ContainsKey("token"))
+
+                {
+                    Response.Cookies.Delete("token");
+                }
+                return RedirectToAction("login", "account");
             }
             catch (ModelException e)
             {
-                foreach (var item in e.Error.Errors)
+               foreach (var item in e.Error.Errors)
                 {
+                    TempData["ProfileUpdateError"] = "Please correct the errors and try again.";
                     ModelState.AddModelError(item.Key, item.Message);
                 }
 
                 return View(editRequest);
             }
         }
-
 
         public async Task<IActionResult> Logout()
         {

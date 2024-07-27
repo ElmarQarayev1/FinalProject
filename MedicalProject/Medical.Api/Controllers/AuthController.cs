@@ -87,7 +87,22 @@ namespace Medical.Api.Controllers
         [HttpGet("api/admin/profile")]
         public ActionResult Profile()
         {
-            return Ok(User.Identity.Name);
+            var userName = User.Identity.Name;
+
+         
+            var user = _userManager.FindByNameAsync(userName).Result;
+
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+            var userDto = new AdminGetDto
+            {
+                Id = user.Id,
+                UserName = user.UserName
+            };
+
+            return Ok(userDto);
         }
 
         [Authorize(Roles = "SuperAdmin")]

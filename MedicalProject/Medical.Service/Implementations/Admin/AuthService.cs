@@ -11,6 +11,7 @@ using System.Security.Claims;
 using Medical.Service.Dtos.Admin.AuthDtos;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Medical.Service.Implementations.Admin
 {
@@ -28,7 +29,13 @@ namespace Medical.Service.Implementations.Admin
         }
         public string Create(SuperAdminCreateAdminDto createDto)
         {
-            
+
+            var existingUser = _userManager.FindByNameAsync(createDto.UserName).Result;
+            if (existingUser != null)
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "UserName", "UserName already taken");
+            }
+
             var user = new AppUser
             {
                 UserName = createDto.UserName,
@@ -192,10 +199,14 @@ namespace Medical.Service.Implementations.Admin
                 throw new RestException(StatusCodes.Status404NotFound, "User not found.");
             }
 
-           
+            var existingUser = _userManager.FindByNameAsync(updateDto.UserName).Result;
+            if (existingUser != null)
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "UserName", "UserName already taken");
+            }
+
             user.UserName = updateDto.UserName;
 
-            
             if (!string.IsNullOrEmpty(updateDto.CurrentPassword) && !string.IsNullOrEmpty(updateDto.NewPassword))
             {
                
@@ -210,7 +221,6 @@ namespace Medical.Service.Implementations.Admin
                 {
                     throw new RestException(StatusCodes.Status400BadRequest, "New password and confirm password do not match.");
                 }
-
                
                 var changePasswordResult = _userManager.ChangePasswordAsync(user, updateDto.CurrentPassword, updateDto.NewPassword).Result;
 
@@ -230,7 +240,6 @@ namespace Medical.Service.Implementations.Admin
             }
         }
         
-
 
     }
 }

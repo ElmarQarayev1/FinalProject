@@ -1,0 +1,112 @@
+﻿@model AdminProfileEditRequest
+@{
+    ViewData["Title"] = "Profile";
+}
+<style>
+
+    .toast {
+        opacity: 0.9;
+        color: #fff;
+    }
+
+    .toast-success {
+        background-color: #28a745;
+    }
+
+
+    .toast-error {
+        background-color: #dc3545;
+    }
+
+
+    .toast-warning {
+        background-color: #ffc107;
+        color: #333;
+    }
+
+
+    .toast-info {
+        background-color: #17a2b8;
+    }
+</style>
+
+<div class="container mt-5">
+    <h2 class="text-center">Profile</h2>
+    <form method="post" class="mt-4" asp-action="Profile" asp-controller="Account" asp-route-Id="@ViewBag.Id">
+        <div class="card shadow-sm p-4">
+
+            <div class="form-group row">
+                <label for="display-name" class="col-sm-3 col-form-label">User Name</label>
+                <div class="col-sm-9">
+                    <input asp-for="UserName" id="display-name" class="form-control" type="text" style="background-color:white;">
+                    <span class="text-danger" asp-validation-for="UserName"></span>
+                </div>
+            </div>
+            <h4 class="mt-4">Password Change</h4>
+            <div class="form-group row">
+                <label for="current-pwd" class="col-sm-3 col-form-label">Current Password</label>
+                <div class="col-sm-9">
+                    <input asp-for="CurrentPassword" id="current-pwd" class="form-control" type="password" style="background-color:white;">
+                    <span class="text-danger" asp-validation-for="CurrentPassword"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="new-pwd" class="col-sm-3 col-form-label">New Password</label>
+                <div class="col-sm-9">
+                    <input asp-for="NewPassword" id="new-pwd" class="form-control" type="password" style="background-color:white;">
+                    <span class="text-danger" asp-validation-for="NewPassword"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="confirm-pwd" class="col-sm-3 col-form-label">Confirm Password</label>
+                <div class="col-sm-9">
+                    <input asp-for="ConfirmPassword" id="confirm-pwd" class="form-control" type="password" style="background-color:white;">
+                    <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-9 offset-sm-3">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-9 offset-sm-3">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+    $(document).ready(function () {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+      
+        var errorMessage = "@TempData["ProfileUpdateError"]";
+
+       
+
+        if (errorMessage) {
+            toastr["error"](errorMessage);
+        }
+    });
+</script>
