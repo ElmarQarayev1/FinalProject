@@ -62,14 +62,14 @@
                                 <label asp-for="Name">
                                     <i class="fas fa-prescription-bottle-alt"></i> Name
                                 </label>
-                                <input asp-for="Name" class="form-control" placeholder="Enter medicine name" />
+                                <input asp-for="Name" class="form-control" placeholder="Enter medicine name" style="background-color:white;" />
                                 <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                             <div class="form-group col-md-12">
                                 <label asp-for="Desc">
                                     <i class="fas fa-align-left"></i> Description
                                 </label>
-                                <textarea asp-for="Desc" class="form-control" placeholder="Enter description" rows="3"></textarea>
+                                <textarea asp-for="Desc" class="form-control" placeholder="Enter description" rows="3" style="background-color:white;"></textarea>
                                 <span asp-validation-for="Desc" class="text-danger"></span>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                             <label asp-for="Price">
                                 <i class="fas fa-dollar-sign"></i> Price
                             </label>
-                            <input asp-for="Price" class="form-control" placeholder="Enter price" />
+                            <input asp-for="Price" class="form-control" placeholder="Enter price" style="background-color:white;"/>
                             <span asp-validation-for="Price" class="text-danger"></span>
                         </div>
 
@@ -87,7 +87,7 @@
                                 <label asp-for="CategoryId">
                                     <i class="fas fa-tags"></i> Category
                                 </label>
-                                <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))"></select>
+                                <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))" style="background-color:white;"></select>
                                 <span asp-validation-for="CategoryId" class="text-danger"></span>
                             </div>
                         </div>

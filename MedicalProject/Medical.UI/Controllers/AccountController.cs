@@ -49,7 +49,6 @@ namespace Medical.UI.Controllers
                 }
             }
            
-
             return View();
         }
 
@@ -72,8 +71,7 @@ namespace Medical.UI.Controllers
             }
         }
 
-
-        
+  
         public async Task<IActionResult> ShowAdmin(int page = 1)
         {
             try

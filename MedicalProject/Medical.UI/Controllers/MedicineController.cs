@@ -82,7 +82,8 @@ namespace Medical.UI.Controllers
                 foreach (var item in ex.Error.Errors)
                     ModelState.AddModelError(item.Key, item.Message);
 
-                ViewBag.Categories = await _crudService.Get<List<CategoryListItemGetResponse>>("categories/all");
+
+               ViewBag.Categories = await _crudService.Get<List<CategoryListItemGetResponse>>("categories/all");
 
                 return View();
             }
@@ -116,7 +117,7 @@ namespace Medical.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, MedicineEditRequest editRequest)
+        public async Task<IActionResult> Edit(int id,[FromForm]MedicineEditRequest editRequest)
         {
             if (!ModelState.IsValid)
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 
@@ -15,9 +16,10 @@ namespace Medical.Service.Dtos.Admin.MedicineDtos
 
         public int CategoryId { get; set; }
 
-        public List<IFormFile> Files { get; set; }
+        public List<IFormFile> Files { get; set; } = new List<IFormFile>();
 
          public List<int>? ExistPictureIds { get; set; } = new List<int>();
+
 
     }
     public class MedicineUpdateDtoValidator : AbstractValidator<MedicineUpdateDto>
