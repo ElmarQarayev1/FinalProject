@@ -1,0 +1,92 @@
+﻿@model FeedCreateRequest
+@{
+    ViewData["Title"] = "Create Feature";
+}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Create Feed</h1>
+        <a asp-action="index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-arrow-left"></i> Back to List
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">New Feed Details</h6>
+                </div>
+                <div class="card-body">
+                    <form class="user" asp-action="create" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="NameInput">
+                                <i class="fas fa-tag"></i> Feed Name
+                            </label>
+                            <input asp-for="Name" class="form-control" id="NameInput" placeholder="" style="background-color:white;">
+                            <span class="text-danger" asp-validation-for="Name"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="DescInput">
+                                <i class="fas fa-align-left"></i> Description
+                            </label>
+                            <textarea asp-for="Desc" class="form-control" id="DescInput" placeholder="" style="background-color:white;" rows="4"></textarea>
+                            <span class="text-danger" asp-validation-for="Desc"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="NameInput">
+                                <i class="fas fa-tag"></i> Feed Date
+                            </label>
+                            <input asp-for="Date" class="form-control" id="NameInput" placeholder="" style="background-color:white;">
+                            <span class="text-danger" asp-validation-for="Date"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="FileInput">
+                                <i class="fas fa-image"></i> Feed Image
+                            </label>
+                            <input type="file" asp-for="File" class="form-control" id="FileInput" style="background-color:white;">
+                            <span class="text-danger" asp-validation-for="File"></span>
+                        </div>
+
+
+                        <div class="preview-box mt-3 text-center">
+
+                        </div>
+
+                        <button class="btn btn-primary btn-block mt-4" type="submit">
+                            <i class="fas fa-plus"></i> Create Feed
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+
+    <script>$(document).ready(function () {
+            $("#FileInput").change(function (e) {
+                let box = $(this).closest('form').find(".preview-box");
+                $(box).empty();
+
+                if (e.target.files.length > 0) {
+                    let reader = new FileReader();
+                    reader.readAsDataURL(e.target.files[0]);
+                    reader.onload = () => {
+                        let img = document.createElement("img");
+                        img.style.width = "200px";
+                        img.classList.add("previewImg", "img-thumbnail", "mt-2");
+                        img.setAttribute("src", reader.result);
+                        $(box).append(img);
+                    }
+                } else {
+                    $(box).empty();
+                }
+            });
+        });</script>
+}

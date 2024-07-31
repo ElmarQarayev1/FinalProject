@@ -6,10 +6,12 @@ using Medical.Service.Dtos.Admin.CategoryDtos;
 using Medical.Service.Dtos.Admin.DepartmentDtos;
 using Medical.Service.Dtos.Admin.DoctorDtos;
 using Medical.Service.Dtos.Admin.FeatureDtos;
+using Medical.Service.Dtos.Admin.FeedDtos;
 using Medical.Service.Dtos.Admin.MedicineDtos;
 using Medical.Service.Dtos.Admin.ServiceDtos;
 using Medical.Service.Dtos.Admin.SettingDtos;
 using Medical.Service.Dtos.Admin.SliderDtos;
+using Medical.Service.Dtos.User.FeatureDtos;
 using Microsoft.AspNetCore.Http;
 
 namespace Medical.Service.Profiles
@@ -83,9 +85,25 @@ namespace Medical.Service.Profiles
                  .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/features/" + src.ImageName));
 
 
+            CreateMap<Feature, FeatureGetDtoForUser>()
+                 .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/features/" + src.ImageName));
 
-            //settings
-            CreateMap<Setting, SettingGetDto>();
+
+
+            //feeds
+            CreateMap<Feed, FeedCreateDto>().ReverseMap();
+            CreateMap<Feed, FeedPaginatedGetDto>()
+                .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/feeds/" + src.ImageName))
+                .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date.ToString("MMMM dd, yyyy")));
+
+            CreateMap<Feed, FeedGetDto>()
+                 .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/feeds/" + src.ImageName))
+               .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date.ToString("MMMM dd, yyyy")));
+        
+
+
+        //settings
+        CreateMap<Setting, SettingGetDto>();
             CreateMap<Setting, SettingPaginatedGetDto>();
 
 

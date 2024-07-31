@@ -8,7 +8,8 @@ namespace Medical.UI.Models
         [Required]
         public string Name { get; set; }
 
-		public IFormFile? File { get; set; }
+        [Required]
+        public IFormFile File { get; set; }
 	}
 }
 

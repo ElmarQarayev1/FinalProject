@@ -12,7 +12,8 @@ namespace Medical.UI.Models
         [MaxLength(400)]
         public string Desc { get; set; }
 
-        public IFormFile? File { get; set; }
+        [Required]
+        public IFormFile File { get; set; }
     }
 }
 

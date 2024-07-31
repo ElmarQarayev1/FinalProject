@@ -44,6 +44,8 @@ namespace Medical.Data
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<Feed> Feeds { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());

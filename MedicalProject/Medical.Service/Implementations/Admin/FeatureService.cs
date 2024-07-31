@@ -6,6 +6,7 @@ using Medical.Data.Repositories.Implementations;
 using Medical.Data.Repositories.Interfaces;
 using Medical.Service.Dtos.Admin.FeatureDtos;
 using Medical.Service.Dtos.Admin.ServiceDtos;
+using Medical.Service.Dtos.User.FeatureDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Helpers;
 using Medical.Service.Interfaces.Admin;
@@ -87,6 +88,13 @@ namespace Medical.Service.Implementations.Admin
             return new PaginatedList<FeaturePaginatedGetDto>(featureDtos, paginated.TotalPages, page, size);
         }
 
+        public List<FeatureGetDtoForUser> GetAllUser(string? search = null)
+        {
+            var features = _featureRepository.GetAll(x => search == null || x.Name.Contains(search)).ToList();
+            return _mapper.Map<List<FeatureGetDtoForUser>>(features);
+
+        }
+
         public FeatureGetDto GetById(int id)
         {
             Feature feature = _featureRepository.Get(x => x.Id == id);
@@ -95,6 +103,18 @@ namespace Medical.Service.Implementations.Admin
                 throw new RestException(StatusCodes.Status404NotFound, "Feature not found");
 
             return _mapper.Map<FeatureGetDto>(feature);
+        }
+
+        public List<FeatureGetDtoForUser> GetForUserHome(string? search=null)
+        {      
+            var features = _featureRepository.GetAll(x => search == null || x.Name.Contains(search)).ToList();
+
+            var random = new Random();
+            features = features.OrderBy(x => random.Next()).ToList();
+          
+            var selectedFeatures = features.Take(4).ToList();
+         
+            return _mapper.Map<List<FeatureGetDtoForUser>>(selectedFeatures);
         }
 
         public void Update(int id, FeatureUpdateDto updateDto)

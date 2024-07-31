@@ -37,6 +37,15 @@
     <None Remove="Interfaces\User\" />
     <None Remove="Implementations\Admin\" />
     <None Remove="Profiles\" />
+    <None Remove="Dtos\Admin\FeedDtos\" />
+    <None Remove="Dtos\User\DepartmentDtos\" />
+    <None Remove="Dtos\User\FeatureDtos\" />
+    <None Remove="Dtos\User\FeedDtos\" />
+    <None Remove="Dtos\User\ServiceDtos\" />
+    <None Remove="Dtos\User\SliderDtos\" />
+    <None Remove="Dtos\User\DoctorDtos\" />
+    <None Remove="Dtos\User\MedicineDtos\" />
+    <None Remove="Dtos\User\CategoryDtos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exceptions\" />
@@ -59,5 +68,14 @@
     <Folder Include="Interfaces\User\" />
     <Folder Include="Implementations\Admin\" />
     <Folder Include="Profiles\" />
+    <Folder Include="Dtos\Admin\FeedDtos\" />
+    <Folder Include="Dtos\User\DepartmentDtos\" />
+    <Folder Include="Dtos\User\FeatureDtos\" />
+    <Folder Include="Dtos\User\FeedDtos\" />
+    <Folder Include="Dtos\User\ServiceDtos\" />
+    <Folder Include="Dtos\User\SliderDtos\" />
+    <Folder Include="Dtos\User\DoctorDtos\" />
+    <Folder Include="Dtos\User\MedicineDtos\" />
+    <Folder Include="Dtos\User\CategoryDtos\" />
   </ItemGroup>
 </Project>

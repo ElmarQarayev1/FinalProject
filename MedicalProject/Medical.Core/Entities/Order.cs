@@ -28,4 +28,3 @@ namespace Medical.Core.Entities
 
     }
 }
-

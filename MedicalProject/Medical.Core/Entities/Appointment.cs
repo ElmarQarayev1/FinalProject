@@ -12,8 +12,8 @@ namespace Medical.Core.Entities
         public string FullName { get; set; }
 
         public string Phone { get; set; }
-       
-        public DateTime CreatedAt { get; set; }
+
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public DateTime? ModifiedAt { get; set; }
 

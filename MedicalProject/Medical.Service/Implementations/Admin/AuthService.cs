@@ -41,11 +41,8 @@ namespace Medical.Service.Implementations.Admin
                 UserName = createDto.UserName,
                
             };
-
-           
+    
             var result = _userManager.CreateAsync(user, createDto.Password).Result;
-
-            
             if (!result.Succeeded)
             {
                 throw new RestException(StatusCodes.Status400BadRequest, "Failed to create Admin user.");
