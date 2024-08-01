@@ -2,6 +2,7 @@
 using Medical.Service;
 using Medical.Service.Dtos.Admin.DepartmentDtos;
 using Medical.Service.Dtos.Admin.MedicineDtos;
+using Medical.Service.Dtos.User.MedicineDtos;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Mvc;
@@ -52,6 +53,12 @@ namespace Medical.Api.Controllers
         {
             _medicineService.Delete(id);
             return NoContent();
+        }
+
+        [HttpPost("api/Medicines/AddToBasket")]
+        public ActionResult CreateBasket (MedicineBasketItemDto createDto)
+        {
+            return StatusCode(201, new { Id = _medicineService.BasketItem(createDto) });
         }
     }
 }

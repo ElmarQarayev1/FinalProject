@@ -5,28 +5,129 @@ using Medical.Data.Repositories.Implementations;
 using Medical.Data.Repositories.Interfaces;
 using Medical.Service.Dtos.Admin.MedicineDtos;
 using Medical.Service.Dtos.Admin.ServiceDtos;
+using Medical.Service.Dtos.User.MedicineDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Helpers;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Newtonsoft.Json;
 
 namespace Medical.Service.Implementations.Admin
 {
 	public class MedicineService:IMedicineService
 	{
         private readonly IMedicineRepository _medicineRepository;
+        private readonly Data.Repositories.Interfaces.IBasketRepository _basketRepository;
+
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _env;
         private readonly ICategoryRepository _categoryRepository;
 
-        public MedicineService(IMedicineRepository medicineRepository, IMapper mapper, ICategoryRepository categoryRepository, IWebHostEnvironment env)
+        public MedicineService(IMedicineRepository medicineRepository, IHttpContextAccessor httpContextAccessor, Data.Repositories.Interfaces.IBasketRepository basketRepository, IMapper mapper, ICategoryRepository categoryRepository, IWebHostEnvironment env)
         {
             _medicineRepository = medicineRepository;
             _mapper = mapper;
             _categoryRepository = categoryRepository;
             _env = env;
+            _basketRepository = basketRepository;
+            _httpContextAccessor = httpContextAccessor;
+        }
+        public int BasketItem(MedicineBasketItemDto createDto)
+        {
+           
+            var medicine = _medicineRepository.Get(x => x.Id == createDto.MedicineId);
+
+            if (medicine == null)
+            {
+                throw new RestException(StatusCodes.Status404NotFound, "Medicine not found");
+            }
+
+            
+            if (!string.IsNullOrEmpty(createDto.AppUserId))
+            {
+               
+                return AddBasketItemToDatabase(createDto);
+            }
+            else
+            {
+                
+                AddBasketItemToCookies(createDto);
+                return 0; 
+            }
+        }
+
+       
+        private int AddBasketItemToDatabase(MedicineBasketItemDto createDto)
+        {
+            
+            var existingBasketItem = _basketRepository.Get(x =>
+                x.AppUserId == createDto.AppUserId && x.MedicineId == createDto.MedicineId);
+
+            if (existingBasketItem != null)
+            {
+                
+                existingBasketItem.Count += createDto.Count;
+                _basketRepository.Save();
+                return existingBasketItem.Id;
+            }
+
+            
+            var basketItem = new BasketItem
+            {
+                AppUserId = createDto.AppUserId,
+                MedicineId = createDto.MedicineId,
+                Count = createDto.Count,
+            };
+
+            _basketRepository.Add(basketItem);
+            _basketRepository.Save();
+
+            return basketItem.Id;
+        }
+
+        
+        private void AddBasketItemToCookies(MedicineBasketItemDto createDto)
+        {
+           
+            var existingBasketItems = GetBasketItemsFromCookies();
+
+           
+            var existingItem = existingBasketItems.FirstOrDefault(x => x.MedicineId == createDto.MedicineId);
+            if (existingItem != null)
+            {
+                
+                existingItem.Count += createDto.Count;
+            }
+            else
+            {
+               
+                existingBasketItems.Add(createDto);
+            }
+
+          
+            var basketItemsJson = JsonConvert.SerializeObject(existingBasketItems);
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("BasketItems", basketItemsJson, new CookieOptions
+            {
+                Expires = DateTimeOffset.UtcNow.AddDays(7) 
+            });
+        }
+
+        
+        private List<MedicineBasketItemDto> GetBasketItemsFromCookies()
+        {
+            
+            var cookieValue = _httpContextAccessor.HttpContext.Request.Cookies["BasketItems"];
+            if (string.IsNullOrEmpty(cookieValue))
+            {
+                return new List<MedicineBasketItemDto>();
+            }
+
+           
+            return JsonConvert.DeserializeObject<List<MedicineBasketItemDto>>(cookieValue);
         }
 
         public int Create(MedicineCreateDto createDto)
@@ -65,6 +166,12 @@ namespace Medical.Service.Implementations.Admin
             return medicine.Id;
         }
 
+
+
+
+
+
+
         public void Delete(int id)
         {
            
@@ -89,11 +196,21 @@ namespace Medical.Service.Implementations.Admin
         }
 
 
+
+
+
+
+
+
+
         public List<MedicineGetDto> GetAll(string? search = null)
         {
             var medicines = _medicineRepository.GetAll(x => search == null || x.Name.Contains(search)).ToList();
             return _mapper.Map<List<MedicineGetDto>>(medicines);
         }
+
+
+
 
 
         public PaginatedList<MedicinePaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10)
@@ -108,6 +225,9 @@ namespace Medical.Service.Implementations.Admin
 
             return new PaginatedList<MedicinePaginatedGetDto>(medicineDtos, paginated.TotalPages, page, size);
         }
+
+
+
 
         public MedicineDetailsDto GetById(int id)
         {

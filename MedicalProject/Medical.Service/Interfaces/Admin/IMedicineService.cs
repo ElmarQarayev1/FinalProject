@@ -1,5 +1,6 @@
 ﻿using System;
 using Medical.Service.Dtos.Admin.MedicineDtos;
+using Medical.Service.Dtos.User.MedicineDtos;
 
 namespace Medical.Service.Interfaces.Admin
 {
@@ -11,6 +12,8 @@ namespace Medical.Service.Interfaces.Admin
         MedicineDetailsDto GetById(int id);
         void Update(int id, MedicineUpdateDto updateDto);
         void Delete(int id);
+
+        int BasketItem(MedicineBasketItemDto createDto);
     }
 }
 
