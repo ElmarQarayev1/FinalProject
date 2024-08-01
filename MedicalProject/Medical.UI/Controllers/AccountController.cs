@@ -8,15 +8,19 @@ using Microsoft.AspNetCore.Identity;
 using Medical.UI.Exception;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Medical.UI.Service;
+using Microsoft.Net.Http.Headers;
 
 namespace Medical.UI.Controllers
 {
     public class AccountController : Controller
     {
         private HttpClient _client;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ICrudService _crudService;
-        public AccountController(ICrudService service)
+       
+        public AccountController(ICrudService service,IHttpContextAccessor httpContextAccessor)
         {
+            _httpContextAccessor = httpContextAccessor;
             _client = new HttpClient();
             _crudService = service;
         }
@@ -35,7 +39,15 @@ namespace Medical.UI.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var loginResponse = JsonSerializer.Deserialize<LoginResponse>(await response.Content.ReadAsStringAsync(), options);
-                    Response.Cookies.Append("token", "Bearer " + loginResponse.Token);
+                    if (loginResponse.Token.PasswordResetRequired)
+                    {
+                        TempData["ResetUserName"] = loginRequest.UserName;
+                        Response.Cookies.Append("token", "Bearer " + loginResponse.Token.Token);
+                        TempData["Token"] = loginResponse.Token.Token;
+
+                        return RedirectToAction("ResetPassword");
+                    }
+                    Response.Cookies.Append("token", "Bearer " + loginResponse.Token.Token);
                     return RedirectToAction("index", "home");
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
@@ -50,6 +62,50 @@ namespace Medical.UI.Controllers
             }
            
             return View();
+        }
+
+        public IActionResult ResetPassword()
+        {
+           
+            var userName = TempData["ResetUserName"] as string;
+            var token = TempData["Token"] as string;
+            if (userName == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var model = new ResetPasswordModel
+            {
+                UserName = userName,
+                Token = token
+            };
+
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+              
+                return View(model);
+            }
+            try
+            {                 
+                await _crudService.Update<ResetPasswordModel>(model, "updatePassword");
+
+                return RedirectToAction("Login");
+            }
+            catch (ModelException e)
+            {
+                foreach (var item in e.Error.Errors)
+                {
+                    
+                    ModelState.AddModelError(item.Key, item.Message);
+                }
+
+                return View(model);
+            }
         }
 
         [HttpPost]
@@ -97,9 +153,7 @@ namespace Medical.UI.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
-
-
-        
+      
         public IActionResult AdminCreateByS()
         {
             return View();
@@ -165,6 +219,8 @@ namespace Medical.UI.Controllers
            
             return RedirectToAction("Login", "Account");
         }
+
+
 
     }
 }

@@ -14,5 +14,4 @@
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/obj/Debug/net7.0/refint/Medical.Service.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/obj/Debug/net7.0/Medical.Service.pdb
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/obj/Debug/net7.0/ref/Medical.Service.dll
-/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/obj/Debug/net7.0/Medical.Service.sourcelink.json
-/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/obj/Debug/net7.0/Medical..7C38C579.Up2Date
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/obj/Debug/net7.0/Medical.Service.csproj.CopyComplete

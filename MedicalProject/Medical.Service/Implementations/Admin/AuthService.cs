@@ -39,22 +39,23 @@ namespace Medical.Service.Implementations.Admin
             var user = new AppUser
             {
                 UserName = createDto.UserName,
-               
+                IsPasswordResetRequired = true
+
             };
     
             var result = _userManager.CreateAsync(user, createDto.Password).Result;
             if (!result.Succeeded)
             {
-                throw new RestException(StatusCodes.Status400BadRequest, "Failed to create Admin user.");
+                throw new RestException(StatusCodes.Status400BadRequest, "Password" ,"Failed to create Admin user.");
             }
 
-           
+            
             var roleResult = _userManager.AddToRoleAsync(user, "Admin").Result;
 
            
             if (!roleResult.Succeeded)
             {
-                throw new RestException(StatusCodes.Status400BadRequest, "Failed to assign role to Admin user.");
+                throw new RestException(StatusCodes.Status400BadRequest,"UserName", "Failed to assign role to Admin user.");
             }
 
             
@@ -153,11 +154,23 @@ namespace Medical.Service.Implementations.Admin
             return userDto;
         }
 
-        public string Login(AdminLoginDto loginDto)
+
+
+        public SendingLoginDto Login(AdminLoginDto loginDto)
         {
             AppUser? user = _userManager.FindByNameAsync(loginDto.UserName).Result;
 
-            if (user == null || !_userManager.CheckPasswordAsync(user, loginDto.Password).Result) throw new RestException(StatusCodes.Status401Unauthorized, "UserName or Password incorrect!");
+            if (user == null || !_userManager.CheckPasswordAsync(user, loginDto.Password).Result)
+            {
+                throw new RestException(StatusCodes.Status401Unauthorized, "UserName or Password incorrect!");
+            }
+
+            if (user.IsPasswordResetRequired)
+            {
+               
+                string resetToken = _userManager.GeneratePasswordResetTokenAsync(user).Result;
+                return new SendingLoginDto { Token = resetToken, PasswordResetRequired = true };
+            }
 
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
@@ -179,13 +192,12 @@ namespace Medical.Service.Implementations.Admin
                 issuer: _configuration.GetSection("JWT:Issuer").Value,
                 audience: _configuration.GetSection("JWT:Audience").Value,
                 expires: DateTime.Now.AddDays(2)
-                );
+            );
 
             string tokenStr = new JwtSecurityTokenHandler().WriteToken(token);
 
-            return tokenStr;
+            return new SendingLoginDto { Token = tokenStr, PasswordResetRequired = false };
         }
-
         public void Update(string id, AdminUpdateDto updateDto)
         {
             
@@ -197,7 +209,7 @@ namespace Medical.Service.Implementations.Admin
             }
 
             var existingUser = _userManager.FindByNameAsync(updateDto.UserName).Result;
-            if (existingUser != null)
+           if (existingUser != null)
             {
                 throw new RestException(StatusCodes.Status400BadRequest, "UserName", "UserName already taken");
             }
@@ -226,6 +238,7 @@ namespace Medical.Service.Implementations.Admin
                     var errors = string.Join(", ", changePasswordResult.Errors.Select(e => e.Description));
                     throw new RestException(StatusCodes.Status400BadRequest, $"Failed to change password: {errors}");
                 }
+                user.IsPasswordResetRequired = false;
             }
            
             var updateResult = _userManager.UpdateAsync(user).Result;
@@ -236,7 +249,42 @@ namespace Medical.Service.Implementations.Admin
                 throw new RestException(StatusCodes.Status400BadRequest, $"Failed to update user: {errors}");
             }
         }
-        
+
+        public async Task UpdatePasswordAsync(AdminUpdateDto updatePasswordDto)
+        {
+            var user = await _userManager.FindByNameAsync(updatePasswordDto.UserName);
+            if (user == null)
+            {
+                throw new RestException(StatusCodes.Status404NotFound, "User not found.");
+            }
+
+            var passwordCheck = await _userManager.CheckPasswordAsync(user, updatePasswordDto.CurrentPassword);
+            if (!passwordCheck)
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "Current password is incorrect.");
+            }
+
+            if (updatePasswordDto.NewPassword != updatePasswordDto.ConfirmPassword)
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "New password and confirm password do not match.");
+            }
+
+            var changePasswordResult = await _userManager.ChangePasswordAsync(user, updatePasswordDto.CurrentPassword, updatePasswordDto.NewPassword);
+            if (!changePasswordResult.Succeeded)
+            {
+                var errors = string.Join(", ", changePasswordResult.Errors.Select(e => e.Description));
+                throw new RestException(StatusCodes.Status400BadRequest, $"Failed to change password: {errors}");
+            }
+
+            user.IsPasswordResetRequired = false;
+            var updateResult = await _userManager.UpdateAsync(user);
+            if (!updateResult.Succeeded)
+            {
+                var errors = string.Join(", ", updateResult.Errors.Select(e => e.Description));
+                throw new RestException(StatusCodes.Status400BadRequest, $"Failed to update user: {errors}");
+            }
+        }
+       
 
     }
 }

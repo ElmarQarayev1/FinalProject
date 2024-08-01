@@ -2,6 +2,7 @@
 using Medical.Core.Entities;
 using Medical.Service;
 using Medical.Service.Dtos.Admin.AuthDtos;
+using Medical.Service.Exceptions;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Medical.Api.Controllers
 {
-	[ApiController]
+    [ApiController]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
@@ -72,7 +73,7 @@ namespace Medical.Api.Controllers
         [HttpPost("api/admin/createAdmin")]
         public IActionResult Create(SuperAdminCreateAdminDto createDto)
         {
-           
+
             return StatusCode(201, new { Id = _authService.Create(createDto) });
         }
 
@@ -89,7 +90,7 @@ namespace Medical.Api.Controllers
         {
             var userName = User.Identity.Name;
 
-         
+
             var user = _userManager.FindByNameAsync(userName).Result;
 
             if (user == null)
@@ -137,6 +138,14 @@ namespace Medical.Api.Controllers
             return NoContent();
         }
 
+        [HttpPut("api/admin/updatePassword")]
+        public async Task<IActionResult> UpdatePassword(AdminUpdateDto updatePasswordDto)
+        {
+
+            await _authService.UpdatePasswordAsync(updatePasswordDto);
+            return NoContent();
+
+        }
     }
 }
 

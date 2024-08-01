@@ -40,11 +40,13 @@ namespace Medical.Api.Controllers
         {
             return StatusCode(200, _featureService.GetForUserHome());
         }
+
         [HttpGet("api/Features/all")]
         public ActionResult<List<FeatureGetDtoForUser>> GetAllUser()
         {
             return StatusCode(200, _featureService.GetAll());
         }
+
         [HttpGet("api/admin/Features/{id}")]
         public ActionResult<FeatureGetDto> GetById(int id)
         {

@@ -7,7 +7,7 @@
 
 <style>
     body {
-        background-color: #f8f9fa; 
+        background-color: #f8f9fa;
     }
 
     h2 {
@@ -25,10 +25,10 @@
         margin-bottom: 1.5rem;
     }
 
-    .form-group label {
-        font-weight: 600;
-        color: #555;
-    }
+        .form-group label {
+            font-weight: 600;
+            color: #555;
+        }
 
     .form-control {
         border-radius: 5px;
@@ -36,10 +36,10 @@
         border: 1px solid #ccc;
     }
 
-    .form-control:focus {
-        border-color: #80bdff;
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    }
+        .form-control:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
 
     .btn-primary {
         background-color: red;
@@ -75,8 +75,9 @@
     .toast-info {
         background-color: #17a2b8;
     }
-    .text-center{
-        color:white;
+
+    .text-center {
+        color: white;
     }
     /* Responsive design */
     @@media (max-width: 576px) {
@@ -174,3 +175,7 @@
         }
     });
 </script>
+
+@section Scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+}

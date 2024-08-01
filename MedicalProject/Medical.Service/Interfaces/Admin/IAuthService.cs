@@ -6,7 +6,7 @@ namespace Medical.Service.Interfaces.Admin
 {
 	public interface IAuthService
 	{
-        string Login(AdminLoginDto loginDto);
+        SendingLoginDto Login(AdminLoginDto loginDto);
 
         string Create(SuperAdminCreateAdminDto createDto);
         PaginatedList<AdminPaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10);
@@ -14,7 +14,7 @@ namespace Medical.Service.Interfaces.Admin
         AdminGetDto GetById(string id);
         void Update(string id, AdminUpdateDto updateDto);
         void Delete(string id);
-       
+        Task UpdatePasswordAsync(AdminUpdateDto updatePasswordDto);
 
     }
 }

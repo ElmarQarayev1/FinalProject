@@ -10,4 +10,3 @@
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Core/obj/Debug/net7.0/refint/Medical.Core.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Core/obj/Debug/net7.0/Medical.Core.pdb
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Core/obj/Debug/net7.0/ref/Medical.Core.dll
-/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Core/obj/Debug/net7.0/Medical.Core.sourcelink.json
