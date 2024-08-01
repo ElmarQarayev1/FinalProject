@@ -11,11 +11,13 @@ using Medical.Service.Dtos.Admin.MedicineDtos;
 using Medical.Service.Dtos.Admin.ServiceDtos;
 using Medical.Service.Dtos.Admin.SettingDtos;
 using Medical.Service.Dtos.Admin.SliderDtos;
+using Medical.Service.Dtos.User.CategoryDtos;
 using Medical.Service.Dtos.User.DepartmentDtos;
 using Medical.Service.Dtos.User.DoctorDtos;
 using Medical.Service.Dtos.User.FeatureDtos;
 using Medical.Service.Dtos.User.FeedDtos;
 using Medical.Service.Dtos.User.ServiceDtos;
+using Medical.Service.Dtos.User.SliderDtos;
 using Microsoft.AspNetCore.Http;
 
 namespace Medical.Service.Profiles
@@ -46,6 +48,9 @@ namespace Medical.Service.Profiles
 
 
 
+            CreateMap<Category, CategoryGetDtoForUser>();
+
+
 
 
 
@@ -56,6 +61,11 @@ namespace Medical.Service.Profiles
 
             CreateMap<Slider, SliderGetDto>()
                 .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/sliders/" + src.ImageName));
+
+            CreateMap<Slider, SliderGetDtoForUser>()
+             .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/sliders/" + src.ImageName));
+
+
 
 
             //departments
@@ -69,6 +79,9 @@ namespace Medical.Service.Profiles
 
             CreateMap<Department, DepartmentGetDtoForUser>()
                 .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/departments/" + src.ImageName));
+
+
+
 
 
 
@@ -87,6 +100,8 @@ namespace Medical.Service.Profiles
 
 
 
+
+
             //features
             CreateMap<Feature, FeatureCreateDto>().ReverseMap();
             CreateMap<Feature, FeaturePaginatedGetDto>()
@@ -98,6 +113,9 @@ namespace Medical.Service.Profiles
 
             CreateMap<Feature, FeatureGetDtoForUser>()
                  .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/features/" + src.ImageName));
+
+
+
 
 
 
@@ -119,9 +137,15 @@ namespace Medical.Service.Profiles
 
 
 
+
+
+
             //settings
             CreateMap<Setting, SettingGetDto>();
             CreateMap<Setting, SettingPaginatedGetDto>();
+
+
+
 
 
             //doctors
@@ -140,6 +164,10 @@ namespace Medical.Service.Profiles
 
             CreateMap<Doctor, DoctorGetDetailDto>()
                 .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/doctors/" + src.ImageName));
+
+
+
+
 
 
             //medicines
@@ -161,6 +189,11 @@ namespace Medical.Service.Profiles
             CreateMap<Medicine, MedicineGetDto>().ReverseMap();
 
             CreateMap<Medicine, MedicinePaginatedGetDto>();
+
+
+
+
+
 
             //Auth
 

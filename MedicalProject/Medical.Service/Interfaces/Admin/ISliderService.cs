@@ -1,5 +1,7 @@
 ﻿using System;
 using Medical.Service.Dtos.Admin.SliderDtos;
+using Medical.Service.Dtos.User.FeatureDtos;
+using Medical.Service.Dtos.User.SliderDtos;
 
 namespace Medical.Service.Interfaces.Admin
 {
@@ -11,6 +13,7 @@ namespace Medical.Service.Interfaces.Admin
         SliderGetDto GetById(int id);
         void Update(int id, SliderUpdateDto updateDto);
         void Delete(int id);
+        List<SliderGetDtoForUser> GetAllUser(string? search = null);
     }
 }
 

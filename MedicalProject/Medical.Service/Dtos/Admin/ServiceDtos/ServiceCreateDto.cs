@@ -31,4 +31,3 @@ namespace Medical.Service.Dtos.Admin.ServiceDtos
         }
     }
 }
-

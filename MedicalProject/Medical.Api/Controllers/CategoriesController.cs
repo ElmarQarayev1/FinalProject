@@ -1,6 +1,9 @@
 ﻿using System;
 using Medical.Service;
 using Medical.Service.Dtos.Admin.CategoryDtos;
+using Medical.Service.Dtos.User.CategoryDtos;
+using Medical.Service.Dtos.User.FeatureDtos;
+using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +33,13 @@ namespace Medical.Api.Controllers
 
         [HttpGet("api/admin/categories/all")]
         public ActionResult<List<CategoryGetDto>> GetAll()
+        {
+            return StatusCode(200, _categoryService.GetAll());
+        }
+
+
+        [HttpGet("api/Categories/all")]
+        public ActionResult<List<CategoryGetDtoForUser>> GetAllUser()
         {
             return StatusCode(200, _categoryService.GetAll());
         }

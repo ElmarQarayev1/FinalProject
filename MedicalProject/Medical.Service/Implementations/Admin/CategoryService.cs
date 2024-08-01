@@ -1,8 +1,11 @@
 ﻿using System;
 using AutoMapper;
 using Medical.Core.Entities;
+using Medical.Data.Repositories.Implementations;
 using Medical.Data.Repositories.Interfaces;
 using Medical.Service.Dtos.Admin.CategoryDtos;
+using Medical.Service.Dtos.User.CategoryDtos;
+using Medical.Service.Dtos.User.FeatureDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Http;
@@ -66,6 +69,13 @@ namespace Medical.Service.Implementations.Admin
             var categoryDtos = _mapper.Map<List<CategoryPaginatedGetDto>>(paginated.Items);
 
             return new PaginatedList<CategoryPaginatedGetDto>(categoryDtos, paginated.TotalPages, page, size);
+        }
+
+        public List<CategoryGetDtoForUser> GetAllUser(string? search = null)
+        {
+            var categories = _categoryRepository.GetAll(x => search == null || x.Name.Contains(search)).ToList();
+            return _mapper.Map<List<CategoryGetDtoForUser>>(categories);
+
         }
 
         public CategoryGetDto GetById(int id)

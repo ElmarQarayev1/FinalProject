@@ -1,6 +1,9 @@
 ﻿using System;
 using Medical.Service;
 using Medical.Service.Dtos.Admin.SliderDtos;
+using Medical.Service.Dtos.User.FeatureDtos;
+using Medical.Service.Dtos.User.SliderDtos;
+using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +36,11 @@ namespace Medical.Api.Controllers
         public ActionResult<List<SliderGetDto>> GetAll()
         {
             return StatusCode(200, _sliderService.GetAll());
+        }
+        [HttpGet("api/Sliders")]
+        public ActionResult<List<SliderGetDtoForUser>> GetAllForUserHome()
+        {
+            return StatusCode(200, _sliderService.GetAllUser());
         }
 
         [HttpGet("api/admin/Sliders/{id}")]

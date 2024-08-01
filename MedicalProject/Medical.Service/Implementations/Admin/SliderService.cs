@@ -2,8 +2,11 @@
 using AutoMapper;
 using FluentValidation;
 using Medical.Core.Entities;
+using Medical.Data.Repositories.Implementations;
 using Medical.Data.Repositories.Interfaces;
 using Medical.Service.Dtos.Admin.SliderDtos;
+using Medical.Service.Dtos.User.FeatureDtos;
+using Medical.Service.Dtos.User.SliderDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Helpers;
 using Medical.Service.Interfaces.Admin;
@@ -97,6 +100,16 @@ namespace Medical.Service.Implementations.Admin
                 throw new RestException(StatusCodes.Status404NotFound, "Slider not found");
 
             return _mapper.Map<SliderGetDto>(slider);
+        }
+
+        public List<SliderGetDtoForUser> GetAllUser(string? search = null)
+        {
+            var sliders = _sliderRepository.GetAll(x => search == null || x.MainTitle.Contains(search)).ToList();
+
+            sliders = sliders.OrderBy(x => x.Order).ToList();
+
+            return _mapper.Map<List<SliderGetDtoForUser>>(sliders);
+
         }
 
         public void Update(int id, SliderUpdateDto updateDto)

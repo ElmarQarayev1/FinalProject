@@ -34,7 +34,6 @@
     <None Remove="Dtos\Admin\SliderDtos\" />
     <None Remove="Dtos\Admin\AuthDtos\" />
     <None Remove="Interfaces\Admin\" />
-    <None Remove="Interfaces\User\" />
     <None Remove="Implementations\Admin\" />
     <None Remove="Profiles\" />
     <None Remove="Dtos\Admin\FeedDtos\" />
@@ -65,7 +64,6 @@
     <Folder Include="Dtos\Admin\SliderDtos\" />
     <Folder Include="Dtos\Admin\AuthDtos\" />
     <Folder Include="Interfaces\Admin\" />
-    <Folder Include="Interfaces\User\" />
     <Folder Include="Implementations\Admin\" />
     <Folder Include="Profiles\" />
     <Folder Include="Dtos\Admin\FeedDtos\" />
