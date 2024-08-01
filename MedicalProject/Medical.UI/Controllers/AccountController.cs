@@ -66,7 +66,11 @@ namespace Medical.UI.Controllers
 
         public IActionResult ResetPassword()
         {
-           
+            if (Request.Cookies.ContainsKey("token"))
+            {
+                Response.Cookies.Delete("token");
+            }
+
             var userName = TempData["ResetUserName"] as string;
             var token = TempData["Token"] as string;
             if (userName == null)

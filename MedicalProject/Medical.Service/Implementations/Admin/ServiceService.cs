@@ -6,6 +6,8 @@ using Medical.Data.Repositories.Implementations;
 using Medical.Data.Repositories.Interfaces;
 
 using Medical.Service.Dtos.Admin.ServiceDtos;
+using Medical.Service.Dtos.User.DepartmentDtos;
+using Medical.Service.Dtos.User.ServiceDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Helpers;
 using Medical.Service.Interfaces.Admin;
@@ -88,6 +90,24 @@ namespace Medical.Service.Implementations.Admin
             var serviceDtos = _mapper.Map<List<ServicePaginatedGetDto>>(paginated.Items);
 
             return new PaginatedList<ServicePaginatedGetDto>(serviceDtos, paginated.TotalPages, page, size);
+        }
+
+        public List<ServiceGetDtoForUser> GetForUserHome(string? search = null)
+        {
+            var services = _serviceRepository.GetAll(x => search == null || x.Name.Contains(search)).ToList();
+
+            var random = new Random();
+            services = services.OrderBy(x => random.Next()).ToList();
+
+            var selectedServices = services.Take(6).ToList();
+
+            return _mapper.Map<List<ServiceGetDtoForUser>>(selectedServices);
+        }
+        public List<ServiceGetDtoForUser> GetAllUser(string? search = null)
+        {
+            var services = _serviceRepository.GetAll(x => search == null || x.Name.Contains(search)).ToList();
+            return _mapper.Map<List<ServiceGetDtoForUser>>(services);
+
         }
 
 

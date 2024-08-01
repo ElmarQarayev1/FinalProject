@@ -5,6 +5,8 @@ using Medical.Core.Entities;
 using Medical.Data.Repositories.Implementations;
 using Medical.Data.Repositories.Interfaces;
 using Medical.Service.Dtos.Admin.DepartmentDtos;
+using Medical.Service.Dtos.User.DepartmentDtos;
+using Medical.Service.Dtos.User.FeatureDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Helpers;
 using Medical.Service.Interfaces.Admin;
@@ -85,6 +87,25 @@ namespace Medical.Service.Implementations.Admin
             var departmentDtos = _mapper.Map<List<DepartmentPaginatedGetDto>>(paginated.Items);
 
             return new PaginatedList<DepartmentPaginatedGetDto>(departmentDtos, paginated.TotalPages, page, size);
+        }
+
+
+        public List<DepartmentGetDtoForUser> GetForUserHome(string? search = null)
+        {
+            var departments = _departmentRepository.GetAll(x => search == null || x.Name.Contains(search)).ToList();
+
+            var random = new Random();
+            departments = departments.OrderBy(x => random.Next()).ToList();
+
+            var selectedDepartments = departments.Take(9).ToList();
+
+            return _mapper.Map<List<DepartmentGetDtoForUser>>(selectedDepartments);
+        }
+        public List<DepartmentGetDtoForUser> GetAllUser(string? search = null)
+        {
+            var departments = _departmentRepository.GetAll(x => search == null || x.Name.Contains(search)).ToList();
+            return _mapper.Map<List<DepartmentGetDtoForUser>>(departments);
+
         }
 
         public DepartmentGetDto GetById(int id)

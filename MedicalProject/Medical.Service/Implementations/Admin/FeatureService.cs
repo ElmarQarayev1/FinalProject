@@ -105,8 +105,9 @@ namespace Medical.Service.Implementations.Admin
             return _mapper.Map<FeatureGetDto>(feature);
         }
 
+
         public List<FeatureGetDtoForUser> GetForUserHome(string? search=null)
-        {      
+        {
             var features = _featureRepository.GetAll(x => search == null || x.Name.Contains(search)).ToList();
 
             var random = new Random();
@@ -116,6 +117,8 @@ namespace Medical.Service.Implementations.Admin
          
             return _mapper.Map<List<FeatureGetDtoForUser>>(selectedFeatures);
         }
+
+
 
         public void Update(int id, FeatureUpdateDto updateDto)
         {

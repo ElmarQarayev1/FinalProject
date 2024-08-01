@@ -1,6 +1,8 @@
 ﻿using System;
 using Medical.Service.Dtos.Admin.FeatureDtos;
 using Medical.Service.Dtos.Admin.FeedDtos;
+using Medical.Service.Dtos.User.FeatureDtos;
+using Medical.Service.Dtos.User.FeedDtos;
 
 namespace Medical.Service.Interfaces.Admin
 {
@@ -11,6 +13,7 @@ namespace Medical.Service.Interfaces.Admin
         List<FeedGetDto> GetAll(string? search = null);
         FeedGetDto GetById(int id);
         void Update(int id, FeedUpdateDto updateDto);
+        List<FeedGetDtoForUser> GetAllUser(string? search = null);
         void Delete(int id);
     }
 }

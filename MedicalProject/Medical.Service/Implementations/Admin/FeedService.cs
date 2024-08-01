@@ -6,6 +6,8 @@ using Medical.Data.Repositories.Implementations;
 using Medical.Data.Repositories.Interfaces;
 using Medical.Service.Dtos.Admin.FeatureDtos;
 using Medical.Service.Dtos.Admin.FeedDtos;
+using Medical.Service.Dtos.User.FeatureDtos;
+using Medical.Service.Dtos.User.FeedDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Helpers;
 using Medical.Service.Interfaces.Admin;
@@ -80,6 +82,18 @@ namespace Medical.Service.Implementations.Admin
         {
             var feeds = _feedRepository.GetAll(x => search == null || x.Name.Contains(search)).ToList();
             return _mapper.Map<List<FeedGetDto>>(feeds);
+        }
+
+        public List<FeedGetDtoForUser> GetAllUser(string? search = null)
+        {
+            var feeds = _feedRepository.GetAll(x => search == null || x.Name.Contains(search)).ToList();
+
+            var random = new Random();
+            feeds = feeds.OrderBy(x => random.Next()).ToList();
+
+            var selectedFeatures = feeds.Take(3).ToList();
+
+            return _mapper.Map<List<FeedGetDtoForUser>>(selectedFeatures);
         }
 
         public PaginatedList<FeedPaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10)

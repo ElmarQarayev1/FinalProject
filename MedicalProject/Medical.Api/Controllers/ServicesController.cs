@@ -1,6 +1,8 @@
 ﻿using System;
 using Medical.Service;
 using Medical.Service.Dtos.Admin.ServiceDtos;
+using Medical.Service.Dtos.User.FeatureDtos;
+using Medical.Service.Dtos.User.ServiceDtos;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +32,18 @@ namespace Medical.Api.Controllers
 
         [HttpGet("api/admin/Services/all")]
         public ActionResult<List<ServiceGetDto>> GetAll()
+        {
+            return StatusCode(200, _serviceService.GetAll());
+        }
+
+        [HttpGet("api/Services")]
+        public ActionResult<List<ServiceGetDtoForUser>> GetAllForUserHome()
+        {
+            return StatusCode(200, _serviceService.GetForUserHome());
+        }
+
+        [HttpGet("api/Services/all")]
+        public ActionResult<List<ServiceGetDtoForUser>> GetAllUser()
         {
             return StatusCode(200, _serviceService.GetAll());
         }

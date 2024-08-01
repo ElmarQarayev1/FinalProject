@@ -1,6 +1,8 @@
 ﻿using System;
 using Medical.Service;
 using Medical.Service.Dtos.Admin.DoctorDtos;
+using Medical.Service.Dtos.User.DoctorDtos;
+using Medical.Service.Dtos.User.FeatureDtos;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Mvc;
@@ -35,17 +37,22 @@ namespace Medical.Api.Controllers
         {
             return StatusCode(200, _doctorService.GetAll());
         }
+        [HttpGet("api/Doctors")]
+        public ActionResult<List<DoctorGetDtoForUser>> GetAllForUserHome()
+        {
+            return StatusCode(200, _doctorService.GetForUserHome());
+        }
+
+        [HttpGet("api/Doctors/all")]
+        public ActionResult<List<DoctorGetDtoForUser>> GetAllUser()
+        {
+            return StatusCode(200, _doctorService.GetAll());
+        }
 
         [HttpGet("api/admin/Doctors/{id}")]
         public ActionResult<DoctorGetDto> GetById(int id)
         {
             return StatusCode(200, _doctorService.GetById(id));
-        }
-
-        [HttpPut("api/admin/Doctors/{id}")]
-        public void Update(int id, [FromForm] DoctorUpdateDto updateDto)
-        {
-            _doctorService.Update(id, updateDto);
         }
 
         [HttpDelete("api/admin/Doctors/{id}")]
@@ -54,6 +61,19 @@ namespace Medical.Api.Controllers
             _doctorService.Delete(id);
             return NoContent();
         }
+        [HttpGet("api/Doctors/{id}")]
+        public ActionResult<DoctorGetDetailDto> GetByIdForUser(int id)
+        {
+            return StatusCode(200, _doctorService.GetByIdForUser(id));
+        }
+
+        [HttpPut("api/admin/Doctors/{id}")]
+        public void Update(int id, [FromForm] DoctorUpdateDto updateDto)
+        {
+            _doctorService.Update(id, updateDto);
+        }
+
+      
 
     }
 }

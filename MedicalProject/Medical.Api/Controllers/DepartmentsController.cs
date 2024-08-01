@@ -1,6 +1,8 @@
 ﻿using System;
 using Medical.Service;
 using Medical.Service.Dtos.Admin.DepartmentDtos;
+using Medical.Service.Dtos.User.DepartmentDtos;
+using Medical.Service.Dtos.User.FeatureDtos;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +37,18 @@ namespace Medical.Api.Controllers
             return StatusCode(200, _departmentService.GetAll());
         }
 
+        [HttpGet("api/Departments")]
+        public ActionResult<List<DepartmentGetDtoForUser>> GetAllForUserHome()
+        {
+            return StatusCode(200, _departmentService.GetForUserHome());
+        }
+
+        [HttpGet("api/Departments/all")]
+        public ActionResult<List<DepartmentGetDtoForUser>> GetAllUser()
+        {
+            return StatusCode(200, _departmentService.GetAll());
+        }
+
         [HttpGet("api/admin/Departments/{id}")]
         public ActionResult<DepartmentGetDto> GetById(int id)
         {
@@ -53,6 +67,7 @@ namespace Medical.Api.Controllers
             _departmentService.Delete(id);
             return NoContent();
         }
+
     }
 }
 

@@ -6,6 +6,8 @@ using Medical.Data.Repositories.Implementations;
 using Medical.Data.Repositories.Interfaces;
 using Medical.Service.Dtos.Admin.DoctorDtos;
 using Medical.Service.Dtos.Admin.ServiceDtos;
+using Medical.Service.Dtos.User.DoctorDtos;
+using Medical.Service.Dtos.User.FeatureDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Helpers;
 using Medical.Service.Interfaces.Admin;
@@ -115,6 +117,36 @@ namespace Medical.Service.Implementations.Admin
             return _mapper.Map<List<DoctorGetDto>>(doctors);
         }
 
+        public List<DoctorGetDtoForUser> GetForUserHome(string? search = null)
+        {
+           
+            var doctors = _doctorRepository.GetAll(x =>
+                search == null || (x.FullName != null && x.FullName.Contains(search)))
+                .ToList(); 
+
+           
+            doctors = doctors.OrderByDescending(x => x.CreateAt).ToList();
+
+            
+            var random = new Random();
+            doctors = doctors.OrderBy(x => random.Next()).ToList();
+
+           
+            var selectedDoctors = doctors.Take(4).ToList();
+
+            
+            return _mapper.Map<List<DoctorGetDtoForUser>>(selectedDoctors);
+        }
+
+
+
+        public List<DoctorGetDtoForUser> GetAllUser(string? search = null)
+        {
+            var doctors = _doctorRepository.GetAll(x => search == null || x.FullName.Contains(search)).ToList();
+            return _mapper.Map<List<DoctorGetDtoForUser>>(doctors);
+
+        }
+
         public PaginatedList<DoctorPaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10)
         {
             var query = _doctorRepository.GetAll(x => x.FullName.Contains(search) || search == null);
@@ -136,7 +168,15 @@ namespace Medical.Service.Implementations.Admin
 
             return _mapper.Map<DoctorGetDto>(doctor);
         }
+        public DoctorGetDetailDto GetByIdForUser(int id)
+        {
+            Doctor doctor = _doctorRepository.Get(x => x.Id == id);
 
+            if (doctor == null)
+                throw new RestException(StatusCodes.Status404NotFound, "Doctor not found");
+
+            return _mapper.Map<DoctorGetDetailDto>(doctor);
+        }
         public void Update(int id, DoctorUpdateDto updateDto)
         {
             var doctor = _doctorRepository.Get(x => x.Id == id);

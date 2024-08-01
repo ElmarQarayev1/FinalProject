@@ -1,5 +1,7 @@
 ﻿using System;
 using Medical.Service.Dtos.Admin.ServiceDtos;
+using Medical.Service.Dtos.User.FeatureDtos;
+using Medical.Service.Dtos.User.ServiceDtos;
 
 namespace Medical.Service.Interfaces.Admin
 {
@@ -11,6 +13,10 @@ namespace Medical.Service.Interfaces.Admin
         ServiceGetDto GetById(int id);
         void Update(int id, ServiceUpdateDto updateDto);
         void Delete(int id);
+
+        List<ServiceGetDtoForUser> GetForUserHome(string? search = null);
+
+        List<ServiceGetDtoForUser> GetAllUser(string? search = null);
     }
 }
 

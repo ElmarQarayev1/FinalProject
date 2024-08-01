@@ -2,6 +2,7 @@
 using Medical.Service;
 using Medical.Service.Dtos.Admin.FeatureDtos;
 using Medical.Service.Dtos.Admin.FeedDtos;
+using Medical.Service.Dtos.User.FeedDtos;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +34,12 @@ namespace Medical.Api.Controllers
         public ActionResult<List<FeedGetDto>> GetAll()
         {
             return StatusCode(200, _feedService.GetAll());
+        }
+
+        [HttpGet("api/Feeds")]
+        public ActionResult<List<FeedGetDtoForUser>> GetAllUser()
+        {
+            return StatusCode(200, _feedService.GetAllUser());
         }
 
         [HttpGet("api/admin/Feeds/{id}")]
