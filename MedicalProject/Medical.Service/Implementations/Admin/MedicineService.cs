@@ -9,6 +9,7 @@ using Medical.Service.Dtos.User.MedicineDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Helpers;
 using Medical.Service.Interfaces.Admin;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -36,6 +37,7 @@ namespace Medical.Service.Implementations.Admin
             _basketRepository = basketRepository;
             _httpContextAccessor = httpContextAccessor;
         }
+       
         public int BasketItem(MedicineBasketItemDto createDto)
         {
            
@@ -45,8 +47,7 @@ namespace Medical.Service.Implementations.Admin
             {
                 throw new RestException(StatusCodes.Status404NotFound, "Medicine not found");
             }
-
-            
+        
             if (!string.IsNullOrEmpty(createDto.AppUserId))
             {
                
@@ -54,10 +55,9 @@ namespace Medical.Service.Implementations.Admin
             }
             else
             {
-                
-                AddBasketItemToCookies(createDto);
-                return 0; 
+                throw new RestException(StatusCodes.Status400BadRequest, "User not found");
             }
+          
         }
 
        
@@ -90,45 +90,70 @@ namespace Medical.Service.Implementations.Admin
         }
 
         
-        private void AddBasketItemToCookies(MedicineBasketItemDto createDto)
+      
+       
+
+
+        public void RemoveItemFromBasket(MedicineBasketItemDto removeDto)
         {
            
-            var existingBasketItems = GetBasketItemsFromCookies();
-
-           
-            var existingItem = existingBasketItems.FirstOrDefault(x => x.MedicineId == createDto.MedicineId);
-            if (existingItem != null)
-            {
-                
-                existingItem.Count += createDto.Count;
-            }
-            else
+            if (!string.IsNullOrEmpty(removeDto.AppUserId))
             {
                
-                existingBasketItems.Add(createDto);
+                RemoveBasketItemFromDatabase(removeDto);
             }
-
           
-            var basketItemsJson = JsonConvert.SerializeObject(existingBasketItems);
-            _httpContextAccessor.HttpContext.Response.Cookies.Append("BasketItems", basketItemsJson, new CookieOptions
-            {
-                Expires = DateTimeOffset.UtcNow.AddDays(7) 
-            });
         }
 
-        
-        private List<MedicineBasketItemDto> GetBasketItemsFromCookies()
+       
+        private void RemoveBasketItemFromDatabase(MedicineBasketItemDto removeDto)
         {
-            
-            var cookieValue = _httpContextAccessor.HttpContext.Request.Cookies["BasketItems"];
-            if (string.IsNullOrEmpty(cookieValue))
-            {
-                return new List<MedicineBasketItemDto>();
-            }
+          
+            var basketItem = _basketRepository.Get(x =>
+                x.AppUserId == removeDto.AppUserId && x.MedicineId == removeDto.MedicineId);
 
-           
-            return JsonConvert.DeserializeObject<List<MedicineBasketItemDto>>(cookieValue);
+            if (basketItem != null)
+            {
+               
+                _basketRepository.Delete(basketItem);
+                _basketRepository.Save();
+            }
         }
+
+
+       
+
+        public void UpdateItemCountInBasket(MedicineBasketItemDto updateDto)
+        {
+           
+            if (!string.IsNullOrEmpty(updateDto.AppUserId))
+            {
+               
+                UpdateBasketItemCountInDatabase(updateDto);
+            }
+            
+        }
+
+      
+        private void UpdateBasketItemCountInDatabase(MedicineBasketItemDto updateDto)
+        {
+           
+            var basketItem = _basketRepository.Get(x =>
+                x.AppUserId == updateDto.AppUserId && x.MedicineId == updateDto.MedicineId);
+
+            if (basketItem != null)
+            {
+               
+                basketItem.Count = updateDto.Count;
+                _basketRepository.Save();
+            }
+        }
+
+       
+
+
+
+
 
         public int Create(MedicineCreateDto createDto)
         {
@@ -165,8 +190,6 @@ namespace Medical.Service.Implementations.Admin
 
             return medicine.Id;
         }
-
-
 
 
 

@@ -2,6 +2,7 @@
 using Medical.Core.Entities;
 using Medical.Service;
 using Medical.Service.Dtos.Admin.AuthDtos;
+using Medical.Service.Dtos.User.AuthDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
@@ -82,6 +83,92 @@ namespace Medical.Api.Controllers
         {
             var token = _authService.Login(loginDto);
             return Ok(new { token });
+        }
+
+
+
+        [HttpPost("api/login")]
+        public async Task<IActionResult> LoginForUser([FromBody] MemberLoginDto loginDto)
+        {
+            try
+            {
+                
+                var token = await _authService.LoginForUser(loginDto);
+
+                
+                return Ok(new { Token = token });
+            }
+            catch (RestException ex)
+            {
+                
+                return StatusCode(ex.Code, ex.Message);
+            }
+            catch (Exception ex)
+            {
+               
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+
+
+
+        [HttpPost("api/register")]
+        public ActionResult RegisterForUser(MemberRegisterDto registerDto)
+        {
+            var Id = _authService.Register(registerDto);
+            return Ok(new { Id });
+        }
+
+        [Authorize(Roles ="Member")]
+        [HttpPost("api/CheckEmailConfirmationStatus")]
+        public async Task<IActionResult> CheckConfirmation(string userId)
+        {
+            try
+            {
+                bool isConfirmed = await _authService.IsEmailConfirmedAsync(userId);
+                if (isConfirmed)
+                {
+                    return Ok("Email confirmed successfully!");
+                }
+                else
+                {
+                    return BadRequest("Email is not confirmed.");
+                }
+            }
+            catch (RestException ex)
+            {
+                return StatusCode(ex.Code, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+        [HttpGet("account/verifyemail")]
+        public async Task<IActionResult> VerifyEmail(string userId, string token)
+        {
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
+            {
+                return BadRequest("Invalid email verification request.");
+            }
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                return Ok("Email confirmed successfully!");
+            }
+
+            return BadRequest("Failed to confirm email.");
         }
 
         [Authorize]

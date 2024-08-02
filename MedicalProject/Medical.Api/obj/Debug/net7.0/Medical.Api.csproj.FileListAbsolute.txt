@@ -94,3 +94,9 @@
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/Medical.Api.staticwebassets.runtime.json
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/obj/Debug/net7.0/Medical.Api.csproj.CopyComplete
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/BouncyCastle.Cryptography.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/MailKit.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/MimeKit.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/System.Formats.Asn1.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/System.Security.Cryptography.Pkcs.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Security.Cryptography.Pkcs.dll

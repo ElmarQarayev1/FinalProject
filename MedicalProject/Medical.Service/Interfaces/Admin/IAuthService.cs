@@ -1,6 +1,8 @@
 ﻿using System;
 using Medical.Service.Dtos.Admin.AuthDtos;
 using Medical.Service.Dtos.Admin.CategoryDtos;
+using Medical.Service.Dtos.User.AuthDtos;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Medical.Service.Interfaces.Admin
 {
@@ -15,6 +17,12 @@ namespace Medical.Service.Interfaces.Admin
         void Update(string id, AdminUpdateDto updateDto);
         void Delete(string id);
         Task UpdatePasswordAsync(AdminUpdateDto updatePasswordDto);
+
+        Task<bool> IsEmailConfirmedAsync(string userId);
+
+        Task<string> Register(MemberRegisterDto registerDto);
+
+        Task<string> LoginForUser(MemberLoginDto loginDto);
 
     }
 }

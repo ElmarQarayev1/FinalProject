@@ -12,21 +12,101 @@ using Medical.Service.Dtos.Admin.AuthDtos;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using AutoMapper;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using Medical.Service.Dtos.User.AuthDtos;
 
 namespace Medical.Service.Implementations.Admin
 {
     public class AuthService : IAuthService
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly EmailService _emailService;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
 
-        public AuthService(UserManager<AppUser> userManager, IConfiguration configuration,IMapper mapper)
+        public AuthService(UserManager<AppUser> userManager, IConfiguration configuration,IMapper mapper,EmailService emailService)
         {
             _userManager = userManager;
             _configuration = configuration;
             _mapper = mapper;
+            _emailService = emailService;
         }
+
+        public async Task<string> Register(MemberRegisterDto registerDto)
+        {
+            
+            if (registerDto.Password != registerDto.ConfirmPassword)
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "Passwords do not match.");
+            }
+
+           
+            if (_userManager.Users.Any(u => u.Email.ToLower() == registerDto.Email.ToLower()))
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "Email", "Email is already taken.");
+            }
+
+          
+            if (_userManager.Users.Any(u => u.UserName.ToLower() == registerDto.UserName.ToLower()))
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "UserName", "UserName is already taken.");
+            }
+
+           
+            var appUser = new AppUser
+            {
+                UserName = registerDto.UserName,
+                Email = registerDto.Email,
+                FullName = registerDto.FullName,
+                IsPasswordResetRequired = false
+            };
+
+            
+            var result = await _userManager.CreateAsync(appUser, registerDto.Password);
+            if (!result.Succeeded)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                throw new RestException(StatusCodes.Status400BadRequest, $"Failed to register user: {errors}");
+            }
+
+            
+            var roleResult = await _userManager.AddToRoleAsync(appUser, "member");
+            if (!roleResult.Succeeded)
+            {
+                var errors = string.Join(", ", roleResult.Errors.Select(e => e.Description));
+                throw new RestException(StatusCodes.Status400BadRequest, $"Failed to assign role: {errors}");
+            }
+
+          
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
+
+
+            var confirmationUrl = $"{_configuration["AppSettings:AppBaseUrl"]}/account/verifyemail?userId={appUser.Id}&token={Uri.EscapeDataString(token)}";
+
+
+            var subject = "Email Verification";
+            var body = $"Please confirm your email by clicking <a href=\"{confirmationUrl}\">here</a>.";
+            _emailService.Send(appUser.Email, subject, body);
+
+           
+            return appUser.Id;
+        }
+
+       
+
+        public async Task<bool> IsEmailConfirmedAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                throw new RestException(StatusCodes.Status404NotFound, "User not found.");
+            }
+
+            return user.EmailConfirmed;
+        }
+
+       
+
         public string Create(SuperAdminCreateAdminDto createDto)
         {
 
@@ -156,6 +236,10 @@ namespace Medical.Service.Implementations.Admin
 
 
 
+
+
+
+
         public SendingLoginDto Login(AdminLoginDto loginDto)
         {
             AppUser? user = _userManager.FindByNameAsync(loginDto.UserName).Result;
@@ -198,6 +282,75 @@ namespace Medical.Service.Implementations.Admin
 
             return new SendingLoginDto { Token = tokenStr, PasswordResetRequired = false };
         }
+
+
+
+
+
+
+        public async Task<string> LoginForUser(MemberLoginDto loginDto)
+        {
+           
+            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+            if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
+            {
+                throw new RestException(StatusCodes.Status401Unauthorized, "Invalid email or password.");
+            }
+
+          
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                throw new RestException(StatusCodes.Status401Unauthorized, "Email not confirmed.");
+            }
+
+           
+            var token = await GenerateJwtToken(user);
+
+            return token;
+        }
+
+        private async Task<string> GenerateJwtToken(AppUser user)
+        {
+            var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.NameIdentifier, user.Id),
+        new Claim(ClaimTypes.Name, user.UserName),
+        new Claim("FullName", user.FullName)
+    };
+
+            
+            var roles = await _userManager.GetRolesAsync(user);
+            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
+
+            
+            var secret = _configuration.GetSection("JWT:Secret").Value;
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(secret));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+          
+            var token = new JwtSecurityToken(
+                issuer: _configuration.GetSection("JWT:Issuer").Value,
+                audience: _configuration.GetSection("JWT:Audience").Value,
+                claims: claims,
+                expires: DateTime.Now.AddDays(1),  
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
         public void Update(string id, AdminUpdateDto updateDto)
         {
             
@@ -249,6 +402,18 @@ namespace Medical.Service.Implementations.Admin
                 throw new RestException(StatusCodes.Status400BadRequest, $"Failed to update user: {errors}");
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
 
         public async Task UpdatePasswordAsync(AdminUpdateDto updatePasswordDto)
         {

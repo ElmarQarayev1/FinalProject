@@ -50,6 +50,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 
 
+builder.Services.AddScoped<EmailService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISliderService, SliderService>();

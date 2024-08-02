@@ -15,6 +15,7 @@
     <PackageReference Include="JWT" Version="10.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.16" />
+    <PackageReference Include="MailKit" Version="4.7.1.1" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Exceptions\" />
@@ -45,6 +46,7 @@
     <None Remove="Dtos\User\DoctorDtos\" />
     <None Remove="Dtos\User\MedicineDtos\" />
     <None Remove="Dtos\User\CategoryDtos\" />
+    <None Remove="Dtos\User\AuthDtos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exceptions\" />
@@ -75,5 +77,6 @@
     <Folder Include="Dtos\User\DoctorDtos\" />
     <Folder Include="Dtos\User\MedicineDtos\" />
     <Folder Include="Dtos\User\CategoryDtos\" />
+    <Folder Include="Dtos\User\AuthDtos\" />
   </ItemGroup>
 </Project>
