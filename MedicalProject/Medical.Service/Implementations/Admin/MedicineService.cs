@@ -90,23 +90,32 @@ namespace Medical.Service.Implementations.Admin
         }
 
         
-      
-       
 
 
-        public void RemoveItemFromBasket(MedicineBasketItemDto removeDto)
+        public void RemoveItemFromBasket(MedicineBasketDeleteDto removeDto)
         {
-           
+
+            var medicine = _medicineRepository.Get(x => x.Id == removeDto.MedicineId);
+
+            if (medicine == null)
+            {
+                throw new RestException(StatusCodes.Status404NotFound, "Medicine not found");
+            }
+
             if (!string.IsNullOrEmpty(removeDto.AppUserId))
             {
                
                 RemoveBasketItemFromDatabase(removeDto);
             }
-          
+            else
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "User not found");
+            }
+
         }
 
        
-        private void RemoveBasketItemFromDatabase(MedicineBasketItemDto removeDto)
+        private void RemoveBasketItemFromDatabase(MedicineBasketDeleteDto removeDto)
         {
           
             var basketItem = _basketRepository.Get(x =>
@@ -125,16 +134,26 @@ namespace Medical.Service.Implementations.Admin
 
         public void UpdateItemCountInBasket(MedicineBasketItemDto updateDto)
         {
-           
+            var medicine = _medicineRepository.Get(x => x.Id == updateDto.MedicineId);
+
+            if (medicine == null)
+            {
+                throw new RestException(StatusCodes.Status404NotFound, "Medicine not found");
+            }
             if (!string.IsNullOrEmpty(updateDto.AppUserId))
             {
                
                 UpdateBasketItemCountInDatabase(updateDto);
             }
-            
+            else
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "User not found");
+            }
+
+
         }
 
-      
+
         private void UpdateBasketItemCountInDatabase(MedicineBasketItemDto updateDto)
         {
            

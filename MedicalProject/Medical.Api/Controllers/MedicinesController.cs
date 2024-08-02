@@ -5,6 +5,7 @@ using Medical.Service.Dtos.Admin.MedicineDtos;
 using Medical.Service.Dtos.User.MedicineDtos;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Medical.Api.Controllers
@@ -55,11 +56,26 @@ namespace Medical.Api.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles ="Member")]
         [HttpPost("api/Medicines/AddToBasket")]
         public ActionResult CreateBasket (MedicineBasketItemDto createDto)
         {
             return StatusCode(201, new { Id = _medicineService.BasketItem(createDto) });
         }
+        [Authorize(Roles = "Member")]
+        [HttpDelete("api/Medicines/RemoveFromBasket")]
+        public IActionResult RemoveFromBasket(MedicineBasketDeleteDto deleteDto)
+        {
+            _medicineService.RemoveItemFromBasket(deleteDto);
+            return NoContent();
+        }
+        [Authorize(Roles = "Member")]
+        [HttpPut("api/Medicines/EditBasketItem")]
+        public void Update( MedicineBasketItemDto updateDto)
+        {
+            _medicineService.UpdateItemCountInBasket(updateDto);
+        }
+
     }
 }
 

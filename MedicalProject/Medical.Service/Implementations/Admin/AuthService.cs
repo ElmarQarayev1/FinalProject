@@ -37,19 +37,19 @@ namespace Medical.Service.Implementations.Admin
             
             if (registerDto.Password != registerDto.ConfirmPassword)
             {
-                throw new RestException(StatusCodes.Status400BadRequest, "Passwords do not match.");
+                throw new RestException(StatusCodes.Status400BadRequest, "Password and ConfirmPassword do not match.");
             }
 
            
             if (_userManager.Users.Any(u => u.Email.ToLower() == registerDto.Email.ToLower()))
             {
-                throw new RestException(StatusCodes.Status400BadRequest, "Email", "Email is already taken.");
+                throw new RestException(StatusCodes.Status400BadRequest, "Email is already taken.");
             }
 
           
             if (_userManager.Users.Any(u => u.UserName.ToLower() == registerDto.UserName.ToLower()))
             {
-                throw new RestException(StatusCodes.Status400BadRequest, "UserName", "UserName is already taken.");
+                throw new RestException(StatusCodes.Status400BadRequest, "UserName is already taken.");
             }
 
            
@@ -105,7 +105,10 @@ namespace Medical.Service.Implementations.Admin
             return user.EmailConfirmed;
         }
 
-       
+
+
+
+
 
         public string Create(SuperAdminCreateAdminDto createDto)
         {
@@ -225,7 +228,7 @@ namespace Medical.Service.Implementations.Admin
 
             if (user == null)
             {
-                throw new RestException(StatusCodes.Status404NotFound, "User not found.");
+                throw new RestException(StatusCodes.Status404NotFound,"UserName", "User not found.");
             }
 
            
@@ -235,9 +238,7 @@ namespace Medical.Service.Implementations.Admin
         }
 
 
-
-
-
+       
 
 
         public SendingLoginDto Login(AdminLoginDto loginDto)
@@ -286,21 +287,18 @@ namespace Medical.Service.Implementations.Admin
 
 
 
-
-
         public async Task<string> LoginForUser(MemberLoginDto loginDto)
         {
            
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
             if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
             {
-                throw new RestException(StatusCodes.Status401Unauthorized, "Invalid email or password.");
+                throw new RestException(StatusCodes.Status401Unauthorized, "UserName or Email incorrect!");
             }
 
-          
             if (!await _userManager.IsEmailConfirmedAsync(user))
             {
-                throw new RestException(StatusCodes.Status401Unauthorized, "Email not confirmed.");
+                throw new RestException(StatusCodes.Status401Unauthorized, "Email","Email not confirmed.");
             }
 
            
@@ -309,14 +307,27 @@ namespace Medical.Service.Implementations.Admin
             return token;
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
         private async Task<string> GenerateJwtToken(AppUser user)
         {
             var claims = new List<Claim>
-    {
+        {
         new Claim(ClaimTypes.NameIdentifier, user.Id),
         new Claim(ClaimTypes.Name, user.UserName),
         new Claim("FullName", user.FullName)
-    };
+         };
 
             
             var roles = await _userManager.GetRolesAsync(user);

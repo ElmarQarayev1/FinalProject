@@ -14,6 +14,10 @@ namespace Medical.Service.Interfaces.Admin
         void Delete(int id);
 
         int BasketItem(MedicineBasketItemDto createDto);
+
+        void RemoveItemFromBasket(MedicineBasketDeleteDto removeDto);
+
+        void UpdateItemCountInBasket(MedicineBasketItemDto updateDto);
     }
 }
 

@@ -6,6 +6,8 @@ using Medical.Service.Dtos.User.AuthDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -87,39 +89,29 @@ namespace Medical.Api.Controllers
 
 
 
+
         [HttpPost("api/login")]
         public async Task<IActionResult> LoginForUser([FromBody] MemberLoginDto loginDto)
         {
-            try
-            {
-                
+                     
                 var token = await _authService.LoginForUser(loginDto);
 
                 
-                return Ok(new { Token = token });
-            }
-            catch (RestException ex)
-            {
-                
-                return StatusCode(ex.Code, ex.Message);
-            }
-            catch (Exception ex)
-            {
-               
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
+                return Ok(new {  Result =token});
+                     
         }
-
-
-
 
 
         [HttpPost("api/register")]
-        public ActionResult RegisterForUser(MemberRegisterDto registerDto)
+        public ActionResult RegisterForUser([FromBody] MemberRegisterDto registerDto)
         {
-            var Id = _authService.Register(registerDto);
-            return Ok(new { Id });
+                      
+              var Id= _authService.Register(registerDto);
+                return Ok(new { Result =Id});       
+           
         }
+
+
 
         [Authorize(Roles ="Member")]
         [HttpPost("api/CheckEmailConfirmationStatus")]
@@ -171,7 +163,9 @@ namespace Medical.Api.Controllers
             return BadRequest("Failed to confirm email.");
         }
 
-        [Authorize]
+
+
+        [Authorize(Roles ="Admin,SuperAdmin")]
         [HttpGet("api/admin/profile")]
         public ActionResult Profile()
         {
@@ -225,6 +219,7 @@ namespace Medical.Api.Controllers
             return NoContent();
         }
 
+       
         [HttpPut("api/admin/updatePassword")]
         public async Task<IActionResult> UpdatePassword(AdminUpdateDto updatePasswordDto)
         {
