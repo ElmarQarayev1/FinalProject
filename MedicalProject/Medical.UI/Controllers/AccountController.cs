@@ -45,6 +45,7 @@ namespace Medical.UI.Controllers
                         Response.Cookies.Append("token", "Bearer " + loginResponse.Token.Token);
                         TempData["Token"] = loginResponse.Token.Token;
 
+
                         return RedirectToAction("ResetPassword");
                     }
                     Response.Cookies.Append("token", "Bearer " + loginResponse.Token.Token);
@@ -66,13 +67,10 @@ namespace Medical.UI.Controllers
 
         public IActionResult ResetPassword()
         {
-            if (Request.Cookies.ContainsKey("token"))
-            {
-                Response.Cookies.Delete("token");
-            }
-
+           
             var userName = TempData["ResetUserName"] as string;
-            var token = TempData["Token"] as string;
+
+           
             if (userName == null)
             {
                 return RedirectToAction("Login");
@@ -81,19 +79,20 @@ namespace Medical.UI.Controllers
             var model = new ResetPasswordModel
             {
                 UserName = userName,
-                Token = token
+                
             };
 
+                  
             return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> ResetPassword(ResetPasswordModel model)
         {
             if (!ModelState.IsValid)
-            {
-              
+            {   
                 return View(model);
             }
+                 
             try
             {                 
                 await _crudService.Update<ResetPasswordModel>(model, "updatePassword");
@@ -104,7 +103,7 @@ namespace Medical.UI.Controllers
             {
                 foreach (var item in e.Error.Errors)
                 {
-                    
+                   
                     ModelState.AddModelError(item.Key, item.Message);
                 }
 
@@ -172,7 +171,7 @@ namespace Medical.UI.Controllers
             {
                 UserName = user.UserName
             };
-            ViewBag.Id = user.Id;
+             TempData["UserId"] = user.Id;
             
             if (adminProfile == null)
             {
@@ -187,18 +186,16 @@ namespace Medical.UI.Controllers
             if (!ModelState.IsValid)
             {
                 TempData["ProfileUpdateError"] = "Please correct the errors and try again.";
+
+                TempData["UserId"] = id;
                 return View(editRequest);
             }
-           
+
             try
             {
                 await _crudService.Update<AdminProfileEditRequest>(editRequest, "update/" + id);
 
-                if (Request.Cookies.ContainsKey("token"))
-
-                {
-                    Response.Cookies.Delete("token");
-                }
+               
                 return RedirectToAction("login", "account");
             }
             catch (ModelException e)
@@ -208,7 +205,7 @@ namespace Medical.UI.Controllers
                     TempData["ProfileUpdateError"] = "Please correct the errors and try again.";
                     ModelState.AddModelError(item.Key, item.Message);
                 }
-
+                TempData["UserId"] = id;
                 return View(editRequest);
             }
         }
@@ -223,7 +220,6 @@ namespace Medical.UI.Controllers
            
             return RedirectToAction("Login", "Account");
         }
-
 
 
     }

@@ -211,7 +211,7 @@ namespace Medical.Api.Controllers
             return Ok(admin);
         }
 
-        [Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         [HttpPut("api/admin/update/{id}")]
         public IActionResult Update(string id, AdminUpdateDto updateDto)
         {

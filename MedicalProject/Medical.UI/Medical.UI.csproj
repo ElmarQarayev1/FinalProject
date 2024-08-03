@@ -24,6 +24,7 @@
     <None Remove="Views\Doctor\" />
     <None Remove="Views\Medicine\" />
     <None Remove="Views\Feed\" />
+    <None Remove="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filter\" />
@@ -41,6 +42,7 @@
     <Folder Include="Views\Doctor\" />
     <Folder Include="Views\Medicine\" />
     <Folder Include="Views\Feed\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.16" />

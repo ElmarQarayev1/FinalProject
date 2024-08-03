@@ -116,6 +116,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWVkaWNpbmUvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Views/Order/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Views/Order/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Views/Service/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2VydmljZS9DcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

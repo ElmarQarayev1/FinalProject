@@ -397,8 +397,14 @@ namespace Medical.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<double>("CostPrice")
+                        .HasColumnType("float");
+
                     b.Property<int>("Count")
                         .HasColumnType("int");
+
+                    b.Property<double>("DiscountPercent")
+                        .HasColumnType("float");
 
                     b.Property<int>("MedicineId")
                         .HasColumnType("int");
@@ -406,7 +412,7 @@ namespace Medical.Data.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Price")
+                    b.Property<double>("SalePrice")
                         .HasColumnType("float");
 
                     b.HasKey("Id");

@@ -247,7 +247,8 @@ namespace Medical.UI.Service
             _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
             _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
 
-           var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");            using (HttpResponseMessage response = await _client.PutAsync(baseUrl + path, content))
+           var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
+            using (HttpResponseMessage response = await _client.PutAsync(baseUrl + path, content))
             {
                 var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
 
@@ -289,6 +290,22 @@ namespace Medical.UI.Service
                 {
                     ErrorResponse errorResponse = JsonSerializer.Deserialize<ErrorResponse>(await response.Content.ReadAsStringAsync(), options);
                     throw new HttpException(response.StatusCode, errorResponse.Message);
+                }
+            }
+        }
+
+
+        public async Task OrderStatus(string path)
+        {
+            _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
+            _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
+
+            using (HttpResponseMessage response = await _client.PutAsync(baseUrl + path, null))
+            {
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorResponse = JsonSerializer.Deserialize<ErrorResponse>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    throw new HttpException(response.StatusCode, errorResponse?.Message);
                 }
             }
         }

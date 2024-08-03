@@ -122,7 +122,8 @@ namespace Medical.Service.Implementations.Admin
             var user = new AppUser
             {
                 UserName = createDto.UserName,
-                IsPasswordResetRequired = true
+                IsPasswordResetRequired = true,
+                FullName=createDto.UserName,
 
             };
     
@@ -373,7 +374,7 @@ namespace Medical.Service.Implementations.Admin
             }
 
             var existingUser = _userManager.FindByNameAsync(updateDto.UserName).Result;
-           if (existingUser != null)
+            if (existingUser != null && existingUser.Id != user.Id)
             {
                 throw new RestException(StatusCodes.Status400BadRequest, "UserName", "UserName already taken");
             }
@@ -386,7 +387,7 @@ namespace Medical.Service.Implementations.Admin
                 var passwordCheck = _userManager.CheckPasswordAsync(user, updateDto.CurrentPassword).Result;
                 if (!passwordCheck)
                 {
-                    throw new RestException(StatusCodes.Status400BadRequest, "Current password is incorrect.");
+                    throw new RestException(StatusCodes.Status400BadRequest,"CurrentPassword", "Current password is incorrect.");
                 }
 
               

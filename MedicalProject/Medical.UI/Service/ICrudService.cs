@@ -13,6 +13,8 @@ namespace Medical.UI.Service
         Task Delete(string path);
         Task<CreateResponse> CreateFromForm<TRequest>(TRequest request, string path);
         Task EditFromForm<TRequest>(TRequest request, string path);
+
+        Task OrderStatus(string path);
     }
 }
 

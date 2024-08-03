@@ -94,7 +94,7 @@
 
 <div class="container mt-5">
     <h2 class="text-center"><i class="fas fa-user"></i>Profile</h2>
-    <form method="post" class="mt-4" asp-action="Profile" asp-controller="Account" asp-route-Id="@ViewBag.Id">
+    <form method="post" class="mt-4" asp-action="Profile" asp-controller="Account" asp-route-Id="@TempData["UserId"]">
         <div class="card shadow-sm p-4">
 
             <div class="form-group row">

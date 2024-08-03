@@ -57,6 +57,11 @@ namespace Medical.Data.Repositories.Implementations
         {
             return _context.SaveChanges();
         }
+
+        public void DeleteRange(IEnumerable<TEntity> entities)
+        {
+            _context.Set<TEntity>().RemoveRange(entities);
+        }
     }
 }
 

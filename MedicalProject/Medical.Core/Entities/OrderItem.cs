@@ -12,7 +12,11 @@ namespace Medical.Core.Entities
 
         public int MedicineId { get; set; }
 
-          public double Price { get; set; }
+        public double CostPrice { get; set; }
+      
+        public double SalePrice { get; set; }
+     
+        public double DiscountPercent { get; set; }
 
         public Order? Order { get; set; }
 

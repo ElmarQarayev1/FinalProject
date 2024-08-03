@@ -47,6 +47,7 @@
     <None Remove="Dtos\User\MedicineDtos\" />
     <None Remove="Dtos\User\CategoryDtos\" />
     <None Remove="Dtos\User\AuthDtos\" />
+    <None Remove="Dtos\User\OrderDtos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exceptions\" />
@@ -78,5 +79,6 @@
     <Folder Include="Dtos\User\MedicineDtos\" />
     <Folder Include="Dtos\User\CategoryDtos\" />
     <Folder Include="Dtos\User\AuthDtos\" />
+    <Folder Include="Dtos\User\OrderDtos\" />
   </ItemGroup>
 </Project>

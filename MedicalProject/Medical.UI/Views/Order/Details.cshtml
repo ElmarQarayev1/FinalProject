@@ -1,0 +1,76 @@
+﻿@model OrderGetResponse
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Order Details</h1>
+        <a asp-action="index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-arrow-left"></i> Back to List
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Order Details</h6>
+                </div>
+                <div class="card-body">
+                    <form class="user" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="FullNameInput">
+                                <i class="fas fa-tag"></i> Full Name
+                            </label>
+                            <input asp-for="FullName" class="form-control" id="FullNameInput" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="EmailInput">
+                                <i class="fas fa-align-left"></i> Email
+                            </label>
+                            <input asp-for="Email" class="form-control" id="EmailInput" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="PhoneInput">
+                                <i class="fas fa-align-left"></i> Phone
+                            </label>
+                            <input asp-for="Phone" class="form-control" id="PhoneInput" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="CreatedAtInput">
+                                <i class="fas fa-calendar-day"></i> Created At
+                            </label>
+                            <input asp-for="CreatedAtFormatted" class="form-control" id="CreatedAtInput" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="TotalPriceInput">
+                                <i class="fas fa-dollar-sign"></i> Total Price
+                            </label>
+                            <input asp-for="TotalPrice" class="form-control" id="TotalPriceInput" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Order Items</label>
+                            <ul class="list-group">
+                                @foreach (var item in Model.OrderItems)
+                                {
+                                    <li class="list-group-item">
+                                        <strong>Medicine ID:</strong> @item.MedicineId <br />
+                                        <strong>Count:</strong> @item.Count <br />
+                                        <strong>Price:</strong> @item.Price
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

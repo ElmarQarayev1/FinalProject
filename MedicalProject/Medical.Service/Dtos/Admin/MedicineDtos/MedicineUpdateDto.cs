@@ -20,7 +20,6 @@ namespace Medical.Service.Dtos.Admin.MedicineDtos
 
          public List<int>? ExistPictureIds { get; set; } = new List<int>();
 
-
     }
     public class MedicineUpdateDtoValidator : AbstractValidator<MedicineUpdateDto>
     {

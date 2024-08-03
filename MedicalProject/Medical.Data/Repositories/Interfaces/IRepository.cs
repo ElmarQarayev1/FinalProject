@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Medical.Data.Repositories.Interfaces
 {
@@ -11,6 +12,10 @@ namespace Medical.Data.Repositories.Interfaces
         IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate, params string[] includes);
         bool Exists(Expression<Func<TEntity, bool>> predicate, params string[] includes);
         int Save();
+        void DeleteRange(IEnumerable<TEntity> entities);
+       
+        
+
     }
 }
 
