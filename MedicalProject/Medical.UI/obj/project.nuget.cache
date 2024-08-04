@@ -1,23 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "q4Res4icL8qnYaOGa36TZtQnLwYYeF94bwYjmuT+5m2Te/Fj273nGHkvaUKfV8TMVv4zrEns2DedxIzqb15Nbg==",
+  "dgSpecHash": "ENZ7VTqrA0kusP4yOuJvcU/EEMAqB5/UZXsdioAYvh2KbialPKpzFaQM8f1NADhwZqXDnc8TbnYLtyjgkaTgcg==",
   "success": true,
   "projectFilePath": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Medical.UI.csproj",
   "expectedPackageFiles": [
     "/Users/elmar/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/7.0.16/microsoft.aspnetcore.authentication.jwtbearer.7.0.16.nupkg.sha512",
     "/Users/elmar/.nuget/packages/microsoft.identitymodel.abstractions/8.0.1/microsoft.identitymodel.abstractions.8.0.1.nupkg.sha512",
-    "/Users/elmar/.nuget/packages/microsoft.identitymodel.jsonwebtokens/6.35.0/microsoft.identitymodel.jsonwebtokens.6.35.0.nupkg.sha512",
+    "/Users/elmar/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.0.1/microsoft.identitymodel.jsonwebtokens.8.0.1.nupkg.sha512",
     "/Users/elmar/.nuget/packages/microsoft.identitymodel.logging/8.0.1/microsoft.identitymodel.logging.8.0.1.nupkg.sha512",
     "/Users/elmar/.nuget/packages/microsoft.identitymodel.protocols/6.35.0/microsoft.identitymodel.protocols.6.35.0.nupkg.sha512",
     "/Users/elmar/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/6.35.0/microsoft.identitymodel.protocols.openidconnect.6.35.0.nupkg.sha512",
     "/Users/elmar/.nuget/packages/microsoft.identitymodel.tokens/8.0.1/microsoft.identitymodel.tokens.8.0.1.nupkg.sha512",
-    "/Users/elmar/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "/Users/elmar/.nuget/packages/microsoft.netcore.targets/1.1.0/microsoft.netcore.targets.1.1.0.nupkg.sha512",
-    "/Users/elmar/.nuget/packages/system.identitymodel.tokens.jwt/6.35.0/system.identitymodel.tokens.jwt.6.35.0.nupkg.sha512",
-    "/Users/elmar/.nuget/packages/system.runtime/4.3.0/system.runtime.4.3.0.nupkg.sha512",
-    "/Users/elmar/.nuget/packages/system.text.encoding/4.3.0/system.text.encoding.4.3.0.nupkg.sha512",
-    "/Users/elmar/.nuget/packages/system.text.encodings.web/4.7.2/system.text.encodings.web.4.7.2.nupkg.sha512",
-    "/Users/elmar/.nuget/packages/system.text.json/4.7.2/system.text.json.4.7.2.nupkg.sha512"
+    "/Users/elmar/.nuget/packages/system.identitymodel.tokens.jwt/8.0.1/system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512"
   ],
   "logs": []
 }

@@ -19,8 +19,10 @@ namespace Medical.UI.Models
         [Required(ErrorMessage = "Confirm password is required")]
         [DataType(DataType.Password)]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
-        public string? ConfirmPassword { get; set; }      
-       
+        public string? ConfirmPassword { get; set; }
+
+       // [JsonIgnore]
+      //  public string? Token { get; set; }
     }
 }
 

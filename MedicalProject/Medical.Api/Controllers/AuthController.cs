@@ -111,6 +111,54 @@ namespace Medical.Api.Controllers
            
         }
 
+        [HttpPost("api/forgetpassword")]
+        public async Task<IActionResult> ForgetPassword([FromBody] MemberForgetPasswordDto forgetPasswordDto)
+        {
+            try
+            {
+                var resetUrl = await _authService.ForgetPassword(forgetPasswordDto);
+                return Ok(new { Message = "Password reset link has been sent to your email.", ResetUrl = resetUrl });
+            }
+            catch (RestException ex)
+            {
+                return StatusCode(ex.Code, ex.Message);
+            }
+        }
+
+        [HttpPost("api/resetpassword")]
+        public async Task<IActionResult> ResetPassword([FromBody] MemberResetPasswordDto resetPasswordDto)
+        {
+            try
+            {
+                await _authService.ResetPassword(resetPasswordDto);
+                return Ok("Password has been reset successfully. Please log in with your new password.");
+            }
+            catch (RestException ex)
+            {
+                return StatusCode(ex.Code, ex.Message);
+            }
+        }
+
+        [HttpPost("api/verify")]
+        public async Task<IActionResult> Verify([FromBody] MemberVerifyDto verifyDto)
+        {
+            try
+            {
+                bool isValid = await _authService.VerifyEmailAndToken(verifyDto.Email, verifyDto.Token);
+                if (isValid)
+                {
+                    return Ok("Email and token are valid. You can now reset your password.");
+                }
+                else
+                {
+                    return BadRequest("Invalid email or token.");
+                }
+            }
+            catch (RestException ex)
+            {
+                return StatusCode(ex.Code, ex.Message);
+            }
+        }
 
 
         [Authorize(Roles ="Member")]
@@ -140,7 +188,7 @@ namespace Medical.Api.Controllers
         }
 
 
-        [HttpGet("account/verifyemail")]
+        [HttpGet("api/account/verifyemail")]
         public async Task<IActionResult> VerifyEmail(string userId, string token)
         {
             if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))

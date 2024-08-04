@@ -1,14 +1,8 @@
-﻿using System;
-using Medical.UI.Models;
+﻿using Medical.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
-using Microsoft.AspNetCore.Authorization;
-using System.Data;
-using Microsoft.AspNetCore.Identity;
 using Medical.UI.Exception;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Medical.UI.Service;
-using Microsoft.Net.Http.Headers;
 
 namespace Medical.UI.Controllers
 {
@@ -17,13 +11,20 @@ namespace Medical.UI.Controllers
         private HttpClient _client;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ICrudService _crudService;
-       
-        public AccountController(ICrudService service,IHttpContextAccessor httpContextAccessor)
+        private readonly IConfiguration _configuration;
+
+        public AccountController(
+            ICrudService service,
+            IHttpContextAccessor httpContextAccessor,
+            IConfiguration configuration)
         {
             _httpContextAccessor = httpContextAccessor;
             _client = new HttpClient();
             _crudService = service;
+            _configuration = configuration;
         }
+
+
         public IActionResult Login()
         {
             return View();
@@ -67,10 +68,13 @@ namespace Medical.UI.Controllers
 
         public IActionResult ResetPassword()
         {
-           
+
+
             var userName = TempData["ResetUserName"] as string;
 
-           
+            //var token = TempData["Token"] as string;
+
+
             if (userName == null)
             {
                 return RedirectToAction("Login");
@@ -79,6 +83,9 @@ namespace Medical.UI.Controllers
             var model = new ResetPasswordModel
             {
                 UserName = userName,
+               // Token = token
+               
+          
                 
             };
 
@@ -94,8 +101,12 @@ namespace Medical.UI.Controllers
             }
                  
             try
-            {                 
+            {
+
+               
                 await _crudService.Update<ResetPasswordModel>(model, "updatePassword");
+
+               
 
                 return RedirectToAction("Login");
             }
@@ -110,6 +121,29 @@ namespace Medical.UI.Controllers
                 return View(model);
             }
         }
+
+
+        //private async Task<string> GenerateNewToken(string userName)
+        //{
+        //    var claims = new List<Claim>
+        //    {
+        //        new Claim(ClaimTypes.NameIdentifier, userName),
+        //        new Claim(ClaimTypes.Name, userName)
+        //    };           
+        //    var secret = _configuration.GetSection("JWT:Secret").Value;
+        //    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
+        //    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        //    var token = new JwtSecurityToken(
+        //        issuer: _configuration.GetSection("JWT:Issuer").Value,
+        //        audience: _configuration.GetSection("JWT:Audience").Value,
+        //        claims: claims,
+        //        expires: DateTime.Now.AddDays(1),
+        //        signingCredentials: creds
+        //    );
+
+        //    return new JwtSecurityTokenHandler().WriteToken(token);
+        //}
 
         [HttpPost]
         public async Task<IActionResult> AdminCreateByS(AdminCreateRequest createRequest)
@@ -221,6 +255,7 @@ namespace Medical.UI.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+       
 
     }
 }

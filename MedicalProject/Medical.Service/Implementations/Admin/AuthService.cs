@@ -32,6 +32,86 @@ namespace Medical.Service.Implementations.Admin
             _emailService = emailService;
         }
 
+        public async Task<string> ForgetPassword(MemberForgetPasswordDto forgetPasswordDto)
+        {
+            var user = await _userManager.FindByEmailAsync(forgetPasswordDto.Email);
+            if (user == null)
+            {
+                throw new RestException(StatusCodes.Status404NotFound, "User not found.");
+            }
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "Email is not confirmed.");
+            }
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var resetUrl = $"{_configuration["AppSettings:AppBaseUrl"]}/api/resetpassword?userId={user.Id}&token={Uri.EscapeDataString(token)}";
+            var subject = "Password Reset";
+            var body = $"Please reset your password by clicking <a href=\"{resetUrl}\">here</a>.";
+            _emailService.Send(user.Email, subject, body);
+            return resetUrl;
+        }
+
+        public async Task ResetPassword(MemberResetPasswordDto resetPasswordDto)
+        {
+            var user = await _userManager.FindByEmailAsync(resetPasswordDto.Email);
+            if (user == null)
+            {
+                throw new RestException(StatusCodes.Status404NotFound, "User not found.");
+            }
+
+            if (resetPasswordDto.NewPassword != resetPasswordDto.ConfirmNewPassword)
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "New password and confirm password do not match.");
+            }
+
+            var decodedToken = Uri.UnescapeDataString(resetPasswordDto.Token);
+            var result = await _userManager.ResetPasswordAsync(user, decodedToken, resetPasswordDto.NewPassword);
+            if (!result.Succeeded)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                throw new RestException(StatusCodes.Status400BadRequest, $"Failed to reset password: {errors}");
+            }
+        }
+
+        public async Task<bool> VerifyEmailAndToken(string email, string token)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null || !await _userManager.IsEmailConfirmedAsync(user))
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "Email is not confirmed.");
+            }
+            var decodedToken = Uri.UnescapeDataString(token);
+            var result = await _userManager.VerifyUserTokenAsync(user, TokenOptions.DefaultProvider, "ResetPassword", decodedToken);
+            if (!result)
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "Invalid token.");
+            }
+
+            return true;
+        }
+    
+    public async Task<string> LoginForUser(MemberLoginDto loginDto)
+        {
+
+            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+            if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
+            {
+                throw new RestException(StatusCodes.Status401Unauthorized, "UserName or Email incorrect!");
+            }
+
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                throw new RestException(StatusCodes.Status401Unauthorized, "Email", "Email not confirmed.");
+            }
+
+
+            var token = await GenerateJwtToken(user);
+
+            return token;
+        }
+
+
         public async Task<string> Register(MemberRegisterDto registerDto)
         {
             
@@ -81,7 +161,7 @@ namespace Medical.Service.Implementations.Admin
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
 
 
-            var confirmationUrl = $"{_configuration["AppSettings:AppBaseUrl"]}/account/verifyemail?userId={appUser.Id}&token={Uri.EscapeDataString(token)}";
+            var confirmationUrl = $"{_configuration["AppSettings:AppBaseUrl"]}/api//account/verifyemail?userId={appUser.Id}&token={Uri.EscapeDataString(token)}";
 
 
             var subject = "Email Verification";
@@ -288,26 +368,7 @@ namespace Medical.Service.Implementations.Admin
 
 
 
-        public async Task<string> LoginForUser(MemberLoginDto loginDto)
-        {
-           
-            var user = await _userManager.FindByEmailAsync(loginDto.Email);
-            if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
-            {
-                throw new RestException(StatusCodes.Status401Unauthorized, "UserName or Email incorrect!");
-            }
-
-            if (!await _userManager.IsEmailConfirmedAsync(user))
-            {
-                throw new RestException(StatusCodes.Status401Unauthorized, "Email","Email not confirmed.");
-            }
-
-           
-            var token = await GenerateJwtToken(user);
-
-            return token;
-        }
-
+     
 
 
 
