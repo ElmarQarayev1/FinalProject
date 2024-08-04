@@ -22,7 +22,6 @@ namespace Medical.Core.Entities
 
         public Medicine? Medicine { get; set; }
 
-
     }
 }
 

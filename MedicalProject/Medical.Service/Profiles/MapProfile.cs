@@ -16,6 +16,7 @@ using Medical.Service.Dtos.User.DepartmentDtos;
 using Medical.Service.Dtos.User.DoctorDtos;
 using Medical.Service.Dtos.User.FeatureDtos;
 using Medical.Service.Dtos.User.FeedDtos;
+using Medical.Service.Dtos.User.MedicineDtos;
 using Medical.Service.Dtos.User.ServiceDtos;
 using Medical.Service.Dtos.User.SliderDtos;
 using Microsoft.AspNetCore.Http;
@@ -66,6 +67,8 @@ namespace Medical.Service.Profiles
              .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/sliders/" + src.ImageName));
 
 
+
+           
 
 
             //departments
@@ -192,6 +195,60 @@ namespace Medical.Service.Profiles
 
 
 
+
+            CreateMap<Medicine, MedicinePaginatedGetDtoForUser>()
+                         .ForMember(dest => dest.ImagaUrl, opt => opt.MapFrom(src =>
+                             src.MedicineImages != null && src.MedicineImages.Any()
+                                 ? $"{baseUrl}/uploads/medicines/{src.MedicineImages.First().ImageName}"
+                                 : $"{baseUrl}/uploads/medicines/default.jpg"))
+                         .ForMember(dest => dest.TotalReviewsCount, opt => opt.MapFrom(src =>
+                             src.MedicineReviews != null
+                                 ? src.MedicineReviews.Count
+                                 : 0))
+                         .ForMember(dest => dest.AvgRate, opt => opt.MapFrom(src =>
+                             src.MedicineReviews != null && src.MedicineReviews.Any()
+                                 ? (int)src.MedicineReviews.Average(r => r.Rate)
+                                 : 0));
+
+
+            CreateMap<Medicine, MedicineGetDtoLatest>()
+                        .ForMember(dest => dest.ImagaUrl, opt => opt.MapFrom(src =>
+                            src.MedicineImages != null && src.MedicineImages.Any()
+                                ? $"{baseUrl}/uploads/medicines/{src.MedicineImages.First().ImageName}"
+                                : $"{baseUrl}/uploads/medicines/default.jpg"))
+                        .ForMember(dest => dest.TotalReviewsCount, opt => opt.MapFrom(src =>
+                            src.MedicineReviews != null
+                                ? src.MedicineReviews.Count
+                                : 0))
+                        .ForMember(dest => dest.AvgRate, opt => opt.MapFrom(src =>
+                            src.MedicineReviews != null && src.MedicineReviews.Any()
+                                ? (int)src.MedicineReviews.Average(r => r.Rate)
+                                : 0));
+
+
+
+            CreateMap<Medicine, MedicineGetDtoForUser>()
+    .ForMember(dest => dest.MedicineImages, opt => opt.MapFrom(src =>
+        src.MedicineImages.Select(img => new MedicineImageResponseDto
+        {
+            Id = img.Id,
+            Url = baseUrl + "/uploads/medicines/" + img.ImageName
+        }).ToList()))
+    .ForMember(dest => dest.Reviews, opt => opt.MapFrom(src =>
+        src.MedicineReviews.Select(review => new MedicineReviewForDetails
+        {
+            AppUserName = review.AppUser.UserName,
+            MedicineId = review.MedicineId,
+            Text = review.Text,
+            Date = review.CreatedAt.ToString("MMMM-dd-yyyy HH:mm"),
+            Rate = review.Rate
+        }).ToList()))
+    .ForMember(dest => dest.TotalReviewsCount, opt => opt.MapFrom(src =>
+        src.MedicineReviews != null ? src.MedicineReviews.Count : 0))
+    .ForMember(dest => dest.AvgRate, opt => opt.MapFrom(src =>
+        src.MedicineReviews != null && src.MedicineReviews.Any()
+            ? (int)src.MedicineReviews.Average(r => r.Rate)
+            : 0));
 
 
 

@@ -13,7 +13,6 @@ namespace Medical.Service.Interfaces.Admin
         CategoryGetDto GetById(int id);
         void Update(int id, CategoryUpdateDto updateDto);
         void Delete(int id);
-
         List<CategoryGetDtoForUser> GetAllUser(string? search = null);
     }
 }

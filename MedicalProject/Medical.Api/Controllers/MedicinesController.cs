@@ -15,6 +15,7 @@ namespace Medical.Api.Controllers
 	{
 		public IMedicineService _medicineService;
 
+
 		public MedicinesController(IMedicineService medicineService)
 		{
 			_medicineService = medicineService;
@@ -25,11 +26,28 @@ namespace Medical.Api.Controllers
             return StatusCode(201, new { Id = _medicineService.Create(createDto) });
         }
 
+
         [HttpGet("api/admin/Medicines")]
         public ActionResult<PaginatedList<MedicinePaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
         {
             return StatusCode(200, _medicineService.GetAllByPage(search, page, size));
         }
+
+
+        [HttpGet("api/Medicines/Filter")]
+        public ActionResult<PaginatedList<MedicinePaginatedGetDtoForUser>> GetAllForUser(string? search = null, int page = 1, int size =9, int? categoryId = null)
+        {
+            return StatusCode(200, _medicineService.GetAllByPageForUser(search, page, size,categoryId));
+        }
+
+
+        [HttpGet("api/Medicines/LatestMedicines")]
+        public ActionResult<List<MedicineGetDtoLatest>> GetLatestMedicines()
+        {
+            return StatusCode(200, _medicineService.GetAllLatest());
+        }
+
+
 
         [HttpGet("api/admin/Medicines/all")]
         public ActionResult<List<MedicineGetDto>> GetAll()
@@ -42,6 +60,14 @@ namespace Medical.Api.Controllers
         {
             return StatusCode(200, _medicineService.GetById(id));
         }
+
+        [HttpGet("api/Medicines/{id}")]
+        public ActionResult<MedicineGetDtoForUser> GetByIdForUser(int id)
+        {
+            return StatusCode(200, _medicineService.GetByIdForUser(id));
+        }
+
+
 
         [HttpPut("api/admin/Medicines/{id}")]
         public void Update(int id, [FromForm] MedicineUpdateDto updateDto)
@@ -75,6 +101,7 @@ namespace Medical.Api.Controllers
         {
             _medicineService.UpdateItemCountInBasket(updateDto);
         }
+       
 
     }
 }

@@ -18,6 +18,16 @@ namespace Medical.Service.Interfaces.Admin
         void RemoveItemFromBasket(MedicineBasketDeleteDto removeDto);
 
         void UpdateItemCountInBasket(MedicineBasketItemDto updateDto);
+
+
+        PaginatedList<MedicinePaginatedGetDtoForUser> GetAllByPageForUser(string? search = null, int page = 1, int size = 9, int? categoryId = null);
+
+        List<MedicineGetDtoLatest> GetAllLatest(string? search = null);
+
+        MedicineGetDtoForUser GetByIdForUser(int id);
+
+
+
     }
 }
 

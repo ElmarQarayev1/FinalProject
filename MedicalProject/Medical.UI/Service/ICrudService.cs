@@ -14,7 +14,7 @@ namespace Medical.UI.Service
         Task<CreateResponse> CreateFromForm<TRequest>(TRequest request, string path);
         Task EditFromForm<TRequest>(TRequest request, string path);
 
-        Task OrderStatus(string path);
+        Task Status(string path);
     }
 }
 

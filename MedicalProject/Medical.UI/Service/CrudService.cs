@@ -295,7 +295,7 @@ namespace Medical.UI.Service
         }
 
 
-        public async Task OrderStatus(string path)
+        public async Task Status(string path)
         {
             _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
             _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);

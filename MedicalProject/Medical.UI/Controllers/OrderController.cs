@@ -79,7 +79,7 @@ namespace Medical.UI.Controllers
         {
             try
             {
-                await _crudService.OrderStatus($"ordersAccepted/{id}");
+                await _crudService.Status($"ordersAccepted/{id}");
                 return RedirectToAction("Index");
             }
             catch (HttpException e)
@@ -93,7 +93,7 @@ namespace Medical.UI.Controllers
         {
             try
             {
-                await _crudService.OrderStatus($"ordersRejected/{id}");
+                await _crudService.Status($"ordersRejected/{id}");
                 return RedirectToAction("Index");
             }
             catch (HttpException e)

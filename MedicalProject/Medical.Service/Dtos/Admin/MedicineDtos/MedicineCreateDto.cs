@@ -26,8 +26,7 @@ namespace Medical.Service.Dtos.Admin.MedicineDtos
             RuleFor(x => x.Price).NotEmpty().GreaterThan(0);
             RuleFor(x => x.Desc).NotEmpty().MaximumLength(200);
 
-         
-
+      
             RuleForEach(x => x.Files)
                 .Must(file => file.Length <= 2 * 1024 * 1024)
                 .WithMessage("Each file must be less than or equal to 2MB.")

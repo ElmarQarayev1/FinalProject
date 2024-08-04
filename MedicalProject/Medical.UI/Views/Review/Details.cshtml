@@ -1,0 +1,60 @@
+﻿@model ReviewDetailsDto
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Review Details</h1>
+        <a asp-action="index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-arrow-left"></i> Back to List
+        </a>
+    </div>
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Review Details</h6>
+                </div>
+                <div class="card-body">
+                    <form class="user" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="FullNameInput">
+                                <i class="fas fa-tag"></i> Full Name
+                            </label>
+                            <input asp-for="FullName" class="form-control" id="FullNameInput" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="EmailInput">
+                                <i class="fas fa-align-left"></i> Medicine Name
+                            </label>
+                            <input asp-for="MedicineName" class="form-control" id="EmailInput" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="TextInput">
+                                <i class="fas fa-align-left"></i> Text
+                            </label>
+                            <textarea asp-for="Text" class="form-control" id="TextInput" readonly></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="CreatedAtInput">
+                                <i class="fas fa-calendar-day"></i> Created At
+                            </label>
+                            <input asp-for="CreatedAtFormatted" class="form-control" id="CreatedAtInput" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label for="TotalPriceInput">
+                                <i class="fas fa-dollar-sign"></i> Status
+                            </label>
+                            <input asp-for="Status" class="form-control" id="TotalPriceInput" readonly />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

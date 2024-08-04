@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using Medical.Core.Entities;
+using Medical.Core.Enum;
 using Medical.Data.Repositories.Implementations;
 using Medical.Data.Repositories.Interfaces;
 using Medical.Service.Dtos.Admin.MedicineDtos;
@@ -22,13 +23,15 @@ namespace Medical.Service.Implementations.Admin
         private readonly IMedicineRepository _medicineRepository;
         private readonly Data.Repositories.Interfaces.IBasketRepository _basketRepository;
 
+        private readonly IReviewRepository _reviewRepository;
+
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _env;
         private readonly ICategoryRepository _categoryRepository;
 
-        public MedicineService(IMedicineRepository medicineRepository, IHttpContextAccessor httpContextAccessor, Data.Repositories.Interfaces.IBasketRepository basketRepository, IMapper mapper, ICategoryRepository categoryRepository, IWebHostEnvironment env)
+        public MedicineService(IMedicineRepository medicineRepository, IHttpContextAccessor httpContextAccessor, Data.Repositories.Interfaces.IBasketRepository basketRepository, IMapper mapper, ICategoryRepository categoryRepository, IWebHostEnvironment env,IReviewRepository reviewRepository)
         {
             _medicineRepository = medicineRepository;
             _mapper = mapper;
@@ -36,8 +39,10 @@ namespace Medical.Service.Implementations.Admin
             _env = env;
             _basketRepository = basketRepository;
             _httpContextAccessor = httpContextAccessor;
+            _reviewRepository = reviewRepository;
         }
-       
+
+
         public int BasketItem(MedicineBasketItemDto createDto)
         {
            
@@ -88,8 +93,6 @@ namespace Medical.Service.Implementations.Admin
 
             return basketItem.Id;
         }
-
-        
 
 
         public void RemoveItemFromBasket(MedicineBasketDeleteDto removeDto)
@@ -252,6 +255,18 @@ namespace Medical.Service.Implementations.Admin
         }
 
 
+        public List<MedicineGetDtoLatest> GetAllLatest(string? search = null)
+        {
+           
+            var medicines = _medicineRepository
+                .GetAll(x => search == null || x.Name.Contains(search),"MedicineReviews","MedicineImages")
+                .OrderByDescending(x => x.CreateAt)
+                .Take(4) 
+                .ToList();
+
+            return _mapper.Map<List<MedicineGetDtoLatest>>(medicines);
+        }
+
 
 
 
@@ -268,6 +283,38 @@ namespace Medical.Service.Implementations.Admin
             return new PaginatedList<MedicinePaginatedGetDto>(medicineDtos, paginated.TotalPages, page, size);
         }
 
+        public PaginatedList<MedicinePaginatedGetDtoForUser> GetAllByPageForUser(string? search = null, int page = 1, int size = 9, int? categoryId = null)
+        {
+
+            if (categoryId != null)
+            {
+                Category category = _categoryRepository.Get(x => x.Id == categoryId);
+
+                if (category == null)
+                {
+                    throw new RestException(StatusCodes.Status404NotFound, "CategoryId", "Category not found");
+                }
+            }
+
+            var query = _medicineRepository.GetAll(
+                x =>
+                    (string.IsNullOrEmpty(search) || x.Name.Contains(search)) &&
+                    (categoryId == null || x.CategoryId == categoryId),
+                "MedicineImages",
+                "MedicineReviews"
+            );
+
+           
+            var paginated = PaginatedList<Medicine>.Create(query, page, size);
+
+          
+            var medicineDtos = _mapper.Map<List<MedicinePaginatedGetDtoForUser>>(paginated.Items);
+
+          
+            return new PaginatedList<MedicinePaginatedGetDtoForUser>(medicineDtos, paginated.TotalPages, page, size);
+        }
+
+
 
 
 
@@ -279,6 +326,16 @@ namespace Medical.Service.Implementations.Admin
                 throw new RestException(StatusCodes.Status404NotFound, "Medicine not found");
 
             return _mapper.Map<MedicineDetailsDto>(medicine);
+        }
+
+        public MedicineGetDtoForUser GetByIdForUser(int id)
+        {
+            Medicine medicine = _medicineRepository.Get(x => x.Id == id, "MedicineImages","MedicineReviews", "MedicineReviews.AppUser");
+
+            if (medicine == null)
+                throw new RestException(StatusCodes.Status404NotFound, "Medicine not found");
+
+            return _mapper.Map<MedicineGetDtoForUser>(medicine);
         }
 
         public void Update(int id, MedicineUpdateDto updateDto)

@@ -48,6 +48,7 @@
     <None Remove="Dtos\User\CategoryDtos\" />
     <None Remove="Dtos\User\AuthDtos\" />
     <None Remove="Dtos\User\OrderDtos\" />
+    <None Remove="Dtos\User\ReviewDtos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exceptions\" />
@@ -80,5 +81,6 @@
     <Folder Include="Dtos\User\CategoryDtos\" />
     <Folder Include="Dtos\User\AuthDtos\" />
     <Folder Include="Dtos\User\OrderDtos\" />
+    <Folder Include="Dtos\User\ReviewDtos\" />
   </ItemGroup>
 </Project>
