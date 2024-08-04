@@ -28,7 +28,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">CategoryId</th>
+                                <th scope="col">CategoryName</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -39,7 +39,7 @@
                                 <tr>
                                     <th scope="row">@(++order)</th>
                                     <td>@item.Name</td>
-                                    <td>@item.CategoryId</td>
+                                    <td>@item.CategoryName</td>
                                     <td>@item.Price azn</td>
                                     <td>
                                         <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">

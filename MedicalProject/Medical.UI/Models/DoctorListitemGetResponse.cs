@@ -7,7 +7,7 @@ namespace Medical.UI.Models
 
         public string FullName { get; set; }
 
-        public int DepartmentId { get; set; }
+        public string DepartmentName { get; set; }
 
         public string Phone { get; set; }
 

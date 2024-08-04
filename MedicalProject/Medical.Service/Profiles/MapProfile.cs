@@ -155,7 +155,8 @@ namespace Medical.Service.Profiles
 
             CreateMap<Doctor, DoctorCreateDto>().ReverseMap();
             CreateMap<Doctor, DoctorPaginatedGetDto>()
-                .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/doctors/" + src.ImageName));
+           .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/doctors/" + src.ImageName))
+            .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department.Name));
 
             CreateMap<Doctor, DoctorGetDto>()
                  .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/doctors/" + src.ImageName));
@@ -191,7 +192,8 @@ namespace Medical.Service.Profiles
 
             CreateMap<Medicine, MedicineGetDto>().ReverseMap();
 
-            CreateMap<Medicine, MedicinePaginatedGetDto>();
+            CreateMap<Medicine, MedicinePaginatedGetDto>()
+               .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name));
 
 
 

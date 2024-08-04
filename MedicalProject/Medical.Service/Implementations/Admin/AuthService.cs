@@ -45,12 +45,69 @@ namespace Medical.Service.Implementations.Admin
             }
 
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var resetUrl = $"{_configuration["AppSettings:AppBaseUrl"]}/api/resetpassword?userId={user.Id}&token={Uri.EscapeDataString(token)}";
+            var resetUrl = $"{_configuration["AppSettings:AppBaseUrl"]}/api/resetpassword?email={user.Email}&token={Uri.EscapeDataString(token)}";
+
+          
+            var emailTemplate = @"
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset='UTF-8'>
+            <title>Password Reset Request</title>
+            <style>
+                .email-container {
+                    font-family: Arial, sans-serif;
+                    color: #333;
+                    max-width: 600px;
+                    margin: auto;
+                    padding: 20px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    background-color: #f9f9f9;
+                }
+                .email-header {
+                    text-align: center;
+                    padding-bottom: 20px;
+                }
+                .email-body {
+                    text-align: left;
+                    line-height: 1.6;
+                }
+                .email-footer {
+                    text-align: center;
+                    padding-top: 20px;
+                    font-size: 12px;
+                    color: #999;
+                }
+            </style>
+        </head>
+        <body>
+            <div class='email-container'>
+                <div class='email-header'>
+                    <h2>Password Reset Request</h2>
+                </div>
+                <div class='email-body'>
+                    <p>Hello,</p>
+                    <p>We received a request to reset your password. Please click the link below to reset your password:</p>
+                    <p><a href='{{resetUrl}}'>Reset Your Password</a></p>
+                    <p>If you did not request this, please ignore this email.</p>
+                </div>
+                <div class='email-footer'>
+                    <p>&copy; 2024 Hospital. All rights reserved.</p>
+                </div>
+            </div>
+        </body>
+        </html>";
+
+            
+            var emailBody = emailTemplate.Replace("{{resetUrl}}", resetUrl);
+
             var subject = "Password Reset";
-            var body = $"Please reset your password by clicking <a href=\"{resetUrl}\">here</a>.";
-            _emailService.Send(user.Email, subject, body);
+            _emailService.Send(user.Email, subject, emailBody);
+
             return resetUrl;
         }
+
 
         public async Task ResetPassword(MemberResetPasswordDto resetPasswordDto)
         {
@@ -164,11 +221,63 @@ namespace Medical.Service.Implementations.Admin
             var confirmationUrl = $"{_configuration["AppSettings:AppBaseUrl"]}/api//account/verifyemail?userId={appUser.Id}&token={Uri.EscapeDataString(token)}";
 
 
-            var subject = "Email Verification";
-            var body = $"Please confirm your email by clicking <a href=\"{confirmationUrl}\">here</a>.";
-            _emailService.Send(appUser.Email, subject, body);
+            var emailTemplate = @"
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset='UTF-8'>
+            <title>Email Verification</title>
+            <style>
+                .email-container {
+                    font-family: Arial, sans-serif;
+                    color: #333;
+                    max-width: 600px;
+                    margin: auto;
+                    padding: 20px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    background-color: #f9f9f9;
+                }
+                .email-header {
+                    text-align: center;
+                    padding-bottom: 20px;
+                }
+                .email-body {
+                    text-align: left;
+                    line-height: 1.6;
+                }
+                .email-footer {
+                    text-align: center;
+                    padding-top: 20px;
+                    font-size: 12px;
+                    color: #999;
+                }
+            </style>
+        </head>
+        <body>
+            <div class='email-container'>
+                <div class='email-header'>
+                    <h2>Email Verification</h2>
+                </div>
+                <div class='email-body'>
+                    <p>Hello,</p>
+                    <p>Please confirm your email by clicking the link below:</p>
+                    <p><a href='{{confirmationUrl}}'>Verify Your Email</a></p>
+                    <p>If you did not request this, please ignore this email.</p>
+                </div>
+                <div class='email-footer'>
+                    <p>&copy; 2024 Hospital. All rights reserved.</p>
+                </div>
+            </div>
+        </body>
+        </html>";
 
-           
+          
+            var emailBody = emailTemplate.Replace("{{confirmationUrl}}", confirmationUrl);
+
+            var subject = "Email Verification";
+            _emailService.Send(appUser.Email, subject, emailBody);
+
             return appUser.Id;
         }
 

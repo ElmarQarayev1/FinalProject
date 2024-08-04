@@ -244,10 +244,6 @@ namespace Medical.Service.Implementations.Admin
 
 
 
-
-
-
-
         public List<MedicineGetDto> GetAll(string? search = null)
         {
             var medicines = _medicineRepository.GetAll(x => search == null || x.Name.Contains(search)).ToList();
@@ -273,7 +269,7 @@ namespace Medical.Service.Implementations.Admin
         public PaginatedList<MedicinePaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10)
         {
 
-            var query = _medicineRepository.GetAll(x => x.Name.Contains(search) || search == null);
+            var query = _medicineRepository.GetAll(x => x.Name.Contains(search) || search == null,"Category");
 
 
             var paginated = PaginatedList<Medicine>.Create(query, page, size);
