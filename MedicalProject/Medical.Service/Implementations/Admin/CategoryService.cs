@@ -16,6 +16,7 @@ namespace Medical.Service.Implementations.Admin
     {
 
         private readonly ICategoryRepository _categoryRepository;
+
         private readonly IMapper _mapper;
 
 

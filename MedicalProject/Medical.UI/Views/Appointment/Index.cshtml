@@ -1,0 +1,148 @@
+﻿@model PaginatedResponse<AppointmentListItemGetDto>
+
+@{
+    var order = 0;
+    ViewData["Title"] = "Appointments";
+}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Appointments</h1>
+    </div>
+
+    <!-- Form to Filter by Doctor -->
+    <div class="row mb-4">
+        <div class="col-md-12 mx-auto">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Filter by Doctor</h6>
+                </div>
+                <div class="card-body">
+                    <form asp-action="FilterByDoctor" method="post">
+                        <div class="form-group">
+                            <label for="doctorId"></label>
+                            <select class="form-control" id="doctorId" name="doctorId">
+                                <option value="">Select Doctor</option>
+                                @foreach (var doctor in ViewBag.Doctors)
+                                {
+                                    <option value="@doctor.Id">@doctor.FullName</option>
+                                }
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Appointment List -->
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Appointment List</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">FullName</th>
+                                <th scope="col">DoctorFullName</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Items)
+                            {
+                                <tr>
+                                    <th scope="row">@(++order)</th>
+                                    <td>@item.FullName</td>
+                                    <td>@item.DoctorFullName</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Date</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <!-- Pagination -->
+                    <nav aria-label="Page navigation" class="d-flex justify-content-center">
+                        <ul class="pagination">
+                            @if (Model.PageIndex > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-route-page="@(Model.PageIndex - 1)">Previous</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item disabled">
+                                    <span class="page-link">Previous</span>
+                                </li>
+                            }
+
+                            @if (Model.TotalPages <= 5)
+                            {
+                                @for (int i = 1; i <= Model.TotalPages; i++)
+                                {
+                                    <li class="page-item @(Model.PageIndex == i ? "active" : "")">
+                                        <a class="page-link" asp-route-page="@i">@i</a>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                @if (Model.PageIndex <= 3)
+                                {
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        <li class="page-item @(Model.PageIndex == i ? "active" : "")">
+                                            <a class="page-link" asp-route-page="@i">@i</a>
+                                        </li>
+                                    }
+                                }
+                                else if (Model.PageIndex >= Model.TotalPages - 2)
+                                {
+                                    @for (int i = Model.TotalPages - 4; i <= Model.TotalPages; i++)
+                                    {
+                                        <li class="page-item @(Model.PageIndex == i ? "active" : "")">
+                                            <a class="page-link" asp-route-page="@i">@i</a>
+                                        </li>
+                                    }
+                                }
+                                else
+                                {
+                                    @for (int i = Model.PageIndex - 2; i <= Model.PageIndex + 2; i++)
+                                    {
+                                        <li class="page-item @(Model.PageIndex == i ? "active" : "")">
+                                            <a class="page-link" asp-route-page="@i">@i</a>
+                                        </li>
+                                    }
+                                }
+                            }
+
+                            @if (Model.PageIndex < Model.TotalPages)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-route-page="@(Model.PageIndex + 1)">Next</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item disabled">
+                                    <span class="page-link">Next</span>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

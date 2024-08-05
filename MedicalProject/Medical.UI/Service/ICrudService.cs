@@ -13,6 +13,7 @@ namespace Medical.UI.Service
         Task Delete(string path);
         Task<CreateResponse> CreateFromForm<TRequest>(TRequest request, string path);
         Task EditFromForm<TRequest>(TRequest request, string path);
+        Task<PaginatedResponse<TResponse>> GetAllPaginatedForAppointment<TResponse>(string path, int page, int size = 10, int? doctorId = null);
 
         Task Status(string path);
     }

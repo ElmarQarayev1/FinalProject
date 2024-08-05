@@ -255,8 +255,8 @@ namespace Medical.Service.Implementations.Admin
         }
         
     
-    public async Task<string> LoginForUser(MemberLoginDto loginDto)
-        {
+         public async Task<string> LoginForUser(MemberLoginDto loginDto)
+          {
 
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
             if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
@@ -325,7 +325,7 @@ namespace Medical.Service.Implementations.Admin
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
 
 
-            var confirmationUrl = $"{_configuration["AppSettings:AppBaseUrl"]}/api//account/verifyemail?userId={appUser.Id}&token={Uri.EscapeDataString(token)}";
+            var confirmationUrl = $"{_configuration["AppSettings:AppBaseUrl"]}/api/account/verifyemail?userId={appUser.Id}&token={Uri.EscapeDataString(token)}";
 
 
             var emailTemplate = @"

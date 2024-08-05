@@ -26,8 +26,7 @@ namespace Medical.UI.Models
 
         [Required]
         public string Phone { get; set; }
-
-     
+    
         public IFormFile? File { get; set; }
 
         [JsonIgnore]

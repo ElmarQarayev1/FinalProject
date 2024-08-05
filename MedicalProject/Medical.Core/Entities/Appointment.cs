@@ -13,7 +13,7 @@ namespace Medical.Core.Entities
 
         public string Phone { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } 
 
         public DateTime? ModifiedAt { get; set; }
 

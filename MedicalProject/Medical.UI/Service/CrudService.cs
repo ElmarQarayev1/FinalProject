@@ -240,6 +240,31 @@ namespace Medical.UI.Service
                 }
             }
         }
+        public async Task<PaginatedResponse<TResponse>> GetAllPaginatedForAppointment<TResponse>(string path, int page, int size = 10, int? doctorId = null)
+        {
+            _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
+            _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
+
+            var uri = $"{baseUrl}{path}?page={page}&size={size}";
+            if (doctorId.HasValue)
+            {
+                uri += $"&doctorId={doctorId.Value}";
+            }
+
+            using (var response = await _client.GetAsync(uri))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+                    return JsonSerializer.Deserialize<PaginatedResponse<TResponse>>(await response.Content.ReadAsStringAsync(), options);
+                }
+                else
+                {
+                    var errorResponse = JsonSerializer.Deserialize<ErrorResponse>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    throw new HttpException(response.StatusCode, errorResponse?.Message);
+                }
+            }
+        }
 
 
         public async Task Update<TRequest>(TRequest request, string path)

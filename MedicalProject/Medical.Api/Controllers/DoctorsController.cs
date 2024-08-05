@@ -3,6 +3,7 @@ using Medical.Service;
 using Medical.Service.Dtos.Admin.DoctorDtos;
 using Medical.Service.Dtos.User.DoctorDtos;
 using Medical.Service.Dtos.User.FeatureDtos;
+using Medical.Service.Exceptions;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Mvc;
@@ -53,6 +54,16 @@ namespace Medical.Api.Controllers
         public ActionResult<DoctorGetDto> GetById(int id)
         {
             return StatusCode(200, _doctorService.GetById(id));
+        }
+
+        [HttpGet("api/ForAppointment/{departmentId}")]
+        public IActionResult GetByIdForAppointment(int departmentId)
+        {
+            
+           
+                var doctors = _doctorService.GetByIdForAppointment(departmentId);
+                return Ok(doctors);
+               
         }
 
         [HttpDelete("api/admin/Doctors/{id}")]

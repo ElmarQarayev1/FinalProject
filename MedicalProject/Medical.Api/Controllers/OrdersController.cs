@@ -61,7 +61,7 @@ namespace Medical.Api.Controllers
             return StatusCode(200, _orderService.GetById(id));
         }
 
-       // [Authorize(Roles ="Member")]
+        [Authorize(Roles ="Member")]
         [HttpGet("api/orders/{AppUserId}")]
         public IActionResult GetOrderByIdForUserProfile(string AppUserId)
         {

@@ -11,6 +11,7 @@ using Medical.Service.Dtos.Admin.MedicineDtos;
 using Medical.Service.Dtos.Admin.ServiceDtos;
 using Medical.Service.Dtos.Admin.SettingDtos;
 using Medical.Service.Dtos.Admin.SliderDtos;
+using Medical.Service.Dtos.User.AppointmentDtos;
 using Medical.Service.Dtos.User.CategoryDtos;
 using Medical.Service.Dtos.User.DepartmentDtos;
 using Medical.Service.Dtos.User.DoctorDtos;
@@ -39,6 +40,13 @@ namespace Medical.Service.Profiles
             }
             string baseUrl = uriBuilder.Uri.AbsoluteUri;
 
+
+
+            //appointments
+
+            CreateMap<Appointment, AppointmentPaginatedGetDto>()
+                  .ForMember(dest => dest.DoctorFullName, opt => opt.MapFrom(src => src.Doctor.FullName))
+                    .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date.ToString("dd-MMM-yyyy HH:mm")));
 
 
             //categories

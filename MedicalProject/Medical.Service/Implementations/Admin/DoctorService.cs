@@ -8,12 +8,14 @@ using Medical.Service.Dtos.Admin.DoctorDtos;
 using Medical.Service.Dtos.Admin.ServiceDtos;
 using Medical.Service.Dtos.User.DoctorDtos;
 using Medical.Service.Dtos.User.FeatureDtos;
+using Medical.Service.Dtos.User.OrderDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Helpers;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 
 namespace Medical.Service.Implementations.Admin
 {
@@ -167,6 +169,26 @@ namespace Medical.Service.Implementations.Admin
 
             return _mapper.Map<DoctorGetDto>(doctor);
         }
+
+        public List<DoctorGetDtoForAppointment> GetByIdForAppointment(int departmentId)
+        {
+            var department = _departmentRepository.Get(x => x.Id == departmentId);
+
+            if (department == null)
+            {
+                throw new RestException(StatusCodes.Status404NotFound, "departmentId", "Department not found");
+            }
+
+            var query = _doctorRepository.GetAll(o => o.DepartmentId == departmentId, "Department")
+                .Select(doctor => new DoctorGetDtoForAppointment
+                {
+                    Id = doctor.Id,
+                    FullName = doctor.FullName
+                }).ToList();
+
+            return query;
+        }
+
         public DoctorGetDetailDto GetByIdForUser(int id)
         {
             Doctor doctor = _doctorRepository.Get(x => x.Id == id);

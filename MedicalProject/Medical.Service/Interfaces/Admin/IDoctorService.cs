@@ -19,6 +19,8 @@ namespace Medical.Service.Interfaces.Admin
         List<DoctorGetDtoForUser> GetAllUser(string? search = null);
 
         DoctorGetDetailDto GetByIdForUser(int id);
+
+        List<DoctorGetDtoForAppointment> GetByIdForAppointment(int departmentId);
     }
 }
 

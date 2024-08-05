@@ -30,47 +30,7 @@ namespace Medical.Api.Controllers
 
         }
 
-        //[HttpGet("api/admin/createUser")]
-        //public async Task<IActionResult> CreateUser()
-        //{
-
-        //    await _roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
-        //    await _roleManager.CreateAsync(new IdentityRole("Admin"));
-        //    await _roleManager.CreateAsync(new IdentityRole("Member"));
-
-
-        //    AppUser user1 = new AppUser
-        //    {
-        //        FullName = "Admin",
-        //        UserName = "admin",
-        //    };
-
-        //    await _userManager.CreateAsync(user1, "Admin123");
-
-        //    AppUser user2 = new AppUser
-        //    {
-        //        FullName = "Member",
-        //        UserName = "member",
-        //    };
-
-        //    await _userManager.CreateAsync(user2, "Member123");
-
-
-        //    AppUser user3 = new AppUser
-        //    {
-        //        FullName = "SuperAdmin",
-        //        UserName = "superadmin",
-        //    };
-
-        //    await _userManager.CreateAsync(user3, "SuperAdmin123");
-
-
-        //    await _userManager.AddToRoleAsync(user3, "SuperAdmin");
-        //    await _userManager.AddToRoleAsync(user1, "Admin");
-        //    await _userManager.AddToRoleAsync(user2, "Member");
-
-        //    return Ok(user1.Id);
-        //}
+    
 
         [Authorize(Roles = "SuperAdmin")]
         [HttpPost("api/admin/createAdmin")]
@@ -182,7 +142,7 @@ namespace Medical.Api.Controllers
             return Ok(new { message = "Profile updated successfully!" });
         }
 
-        [Authorize(Roles ="Member")]
+       // [Authorize(Roles ="Member")]
         [HttpPost("api/CheckEmailConfirmationStatus")]
         public async Task<IActionResult> CheckConfirmation(string userId)
         {
@@ -297,6 +257,49 @@ namespace Medical.Api.Controllers
             return NoContent();
 
         }
+
+
+        //[HttpGet("api/admin/createUser")]
+        //public async Task<IActionResult> CreateUser()
+        //{
+
+        //    await _roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
+        //    await _roleManager.CreateAsync(new IdentityRole("Admin"));
+        //    await _roleManager.CreateAsync(new IdentityRole("Member"));
+
+
+        //    AppUser user1 = new AppUser
+        //    {
+        //        FullName = "Admin",
+        //        UserName = "admin",
+        //    };
+
+        //    await _userManager.CreateAsync(user1, "Admin123");
+
+        //    AppUser user2 = new AppUser
+        //    {
+        //        FullName = "Member",
+        //        UserName = "member",
+        //    };
+
+        //    await _userManager.CreateAsync(user2, "Member123");
+
+
+        //    AppUser user3 = new AppUser
+        //    {
+        //        FullName = "SuperAdmin",
+        //        UserName = "superadmin",
+        //    };
+
+        //    await _userManager.CreateAsync(user3, "SuperAdmin123");
+
+
+        //    await _userManager.AddToRoleAsync(user3, "SuperAdmin");
+        //    await _userManager.AddToRoleAsync(user1, "Admin");
+        //    await _userManager.AddToRoleAsync(user2, "Member");
+
+        //    return Ok(user1.Id);
+        //}
     }
 }
 
