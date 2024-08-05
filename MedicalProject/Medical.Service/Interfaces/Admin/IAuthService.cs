@@ -27,7 +27,13 @@ namespace Medical.Service.Interfaces.Admin
         Task<string> ForgetPassword(MemberForgetPasswordDto forgetPasswordDto);
 
         Task ResetPassword(MemberResetPasswordDto resetPasswordDto);
+
         Task<bool> VerifyEmailAndToken(string email, string token);
+
+        Task UpdateProfile(MemberProfileEditDto profileEditDto);
+
+        MemberProfileGetDto GetByIdForUserProfile(string appUserId);
+
 
 
 

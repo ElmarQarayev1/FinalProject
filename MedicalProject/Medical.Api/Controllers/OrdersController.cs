@@ -53,13 +53,21 @@ namespace Medical.Api.Controllers
                 return StatusCode(500, "Internal server error.");
             }
         }
-       
+
+
         [HttpGet("api/admin/orders/{id}")]
         public IActionResult GetOrderById(int id)
         {
             return StatusCode(200, _orderService.GetById(id));
         }
-   
+
+       // [Authorize(Roles ="Member")]
+        [HttpGet("api/orders/{AppUserId}")]
+        public IActionResult GetOrderByIdForUserProfile(string AppUserId)
+        {
+            var orders = _orderService.GetByIdForUserProfile(AppUserId);
+            return Ok(orders);
+        }
         [HttpGet("api/admin/orders")]
         public IActionResult GetAllOrders(string? search = null, int page = 1, int size = 10)
         {

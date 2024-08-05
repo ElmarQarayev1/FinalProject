@@ -160,6 +160,27 @@ namespace Medical.Api.Controllers
             }
         }
 
+        [Authorize(Roles ="Member")]
+        [HttpGet("api/GetUserProfile/{appUserId}")]
+        public ActionResult<MemberProfileGetDto> GetUserProfile(string appUserId)
+        {
+            try
+            {
+                var userProfile = _authService.GetByIdForUserProfile(appUserId);
+                return Ok(userProfile);
+            }
+            catch (RestException ex)
+            {
+                return StatusCode(ex.Code, new { message = ex.Message });
+            }
+        }
+
+        [HttpPost("api/profile/update")]
+        public async Task<IActionResult> UpdateProfile([FromBody] MemberProfileEditDto profileEditDto)
+        {
+            await _authService.UpdateProfile(profileEditDto);
+            return Ok(new { message = "Profile updated successfully!" });
+        }
 
         [Authorize(Roles ="Member")]
         [HttpPost("api/CheckEmailConfirmationStatus")]

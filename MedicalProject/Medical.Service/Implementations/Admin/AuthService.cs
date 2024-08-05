@@ -14,6 +14,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Medical.Service.Dtos.User.AuthDtos;
+using Medical.Service.Dtos.User.OrderDtos;
+using Microsoft.EntityFrameworkCore;
+using Medical.Data;
+using Medical.Data.Repositories.Interfaces;
+using Medical.Core.Enum;
 
 namespace Medical.Service.Implementations.Admin
 {
@@ -23,14 +28,115 @@ namespace Medical.Service.Implementations.Admin
         private readonly EmailService _emailService;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
+        private readonly AppDbContext _context;
+        private readonly IOrderRepository _orderRepository;
 
-        public AuthService(UserManager<AppUser> userManager, IConfiguration configuration,IMapper mapper,EmailService emailService)
+
+        public AuthService(UserManager<AppUser> userManager, IConfiguration configuration,IMapper mapper,EmailService emailService,AppDbContext appDbContext,IOrderRepository orderRepository)
         {
             _userManager = userManager;
             _configuration = configuration;
             _mapper = mapper;
             _emailService = emailService;
+            _context = appDbContext;
+            _orderRepository = orderRepository;
         }
+
+
+        public MemberProfileGetDto GetByIdForUserProfile(string appUserId)
+        {
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == appUserId);
+            if (user == null)
+            {
+                throw new RestException(StatusCodes.Status404NotFound,"AppUserId", "User not found.");
+            }
+
+            var orders = _orderRepository.GetAll(o => o.AppUser.Id == appUserId && o.Status != OrderStatus.Canceled, "AppUser")
+               .Select(order => new OrderGetDtoForUserProfile
+               {
+                   CreatedAt = order.CreatedAt,
+                   TotalPrice = order.OrderItems.Sum(oi => oi.SalePrice * oi.Count),
+                   TotalItemCount = order.OrderItems.Sum(oi => oi.Count),
+                   OrderItems = order.OrderItems.Select(oi => new OrderItemDto
+                   {
+                       MedicineId = oi.MedicineId,
+                       Count = oi.Count,
+                       Price = oi.SalePrice
+                   }).ToList(),
+                   Status = order.Status.ToString()
+               }).ToList();
+
+            var userProfile = new MemberProfileGetDto
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                FullName = user.FullName,
+                HasPassword = _userManager.HasPasswordAsync(user).Result,
+                IsGoogleUser = _userManager.GetLoginsAsync(user).Result.Any(login => login.LoginProvider == "Google"),
+                Orders = orders
+            };
+
+            return userProfile;
+        }
+
+        public async Task UpdateProfile(MemberProfileEditDto profileEditDto)
+        {
+            var user = await _userManager.FindByEmailAsync(profileEditDto.Email);
+            if (user == null)
+            {
+                throw new RestException(StatusCodes.Status404NotFound,"UserName", "User not found.");
+            }
+
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                throw new RestException(StatusCodes.Status400BadRequest,"Email", "Email is not confirmed.");
+            }
+
+            user.UserName = profileEditDto.UserName;
+            user.FullName = profileEditDto.FullName;
+
+            if (_userManager.Users.Any(x => x.Id != user.Id && x.NormalizedEmail == profileEditDto.Email.ToUpper()))
+            {
+                throw new RestException(StatusCodes.Status400BadRequest,"Email", "Email is already taken.");
+            }
+
+            if (!string.IsNullOrEmpty(profileEditDto.NewPassword))
+            {
+                if (profileEditDto.IsGoogleUser || !profileEditDto.HasPassword)
+                {
+                    var addPasswordResult = await _userManager.AddPasswordAsync(user, profileEditDto.NewPassword);
+                    if (!addPasswordResult.Succeeded)
+                    {
+                        var errors = string.Join(", ", addPasswordResult.Errors.Select(e => e.Description));
+                        throw new RestException(StatusCodes.Status400BadRequest, $"Failed to add new password: {errors}");
+                    }
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(profileEditDto.CurrentPassword))
+                    {
+                        throw new RestException(StatusCodes.Status400BadRequest, "CurrentPassword","Current password is required.");
+                    }
+
+                    var changePasswordResult = await _userManager.ChangePasswordAsync(user, profileEditDto.CurrentPassword, profileEditDto.NewPassword);
+                    if (!changePasswordResult.Succeeded)
+                    {
+                        var errors = string.Join(", ", changePasswordResult.Errors.Select(e => e.Description));
+                        throw new RestException(StatusCodes.Status400BadRequest, $"Failed to change password: {errors}");
+                    }
+                }
+            }
+
+            var updateResult = await _userManager.UpdateAsync(user);
+            if (!updateResult.Succeeded)
+            {
+                var errors = string.Join(", ", updateResult.Errors.Select(e => e.Description));
+                throw new RestException(StatusCodes.Status400BadRequest, $"Failed to update profile: {errors}");
+            }
+        }
+
+
+
 
         public async Task<string> ForgetPassword(MemberForgetPasswordDto forgetPasswordDto)
         {
@@ -147,6 +253,7 @@ namespace Medical.Service.Implementations.Admin
 
             return true;
         }
+        
     
     public async Task<string> LoginForUser(MemberLoginDto loginDto)
         {

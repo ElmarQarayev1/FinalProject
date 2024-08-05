@@ -14,6 +14,7 @@ namespace Medical.Service.Interfaces.Admin
         OrderGetDto GetById(int id);
         List<OrderDetailDto> GetDetailsOrder(string? search = null);
         void UpdateOrderStatus(int id, OrderStatus newStatus);
+        List<OrderGetDtoForUserProfile> GetByIdForUserProfile(string AppUserId);
 
     }
 }

@@ -10,6 +10,7 @@ using Medical.Service.Dtos.User.OrderDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace Medical.Service.Implementations.Admin
@@ -161,6 +162,32 @@ namespace Medical.Service.Implementations.Admin
                 }).ToList()
             };
         }
+        public List<OrderGetDtoForUserProfile> GetByIdForUserProfile(string AppUserId)
+        {
+            var user = _context.AppUsers.FirstOrDefault(u => u.Id == AppUserId);
+            if (user == null)
+            {
+                throw new RestException(StatusCodes.Status404NotFound,"AppUserId","User not found");
+            }
+
+            var query = _orderRepository.GetAll(o=>o.AppUser.Id==AppUserId && o.Status!=OrderStatus.Canceled,"AppUser")
+               .Select(order => new OrderGetDtoForUserProfile
+               {
+                   CreatedAt = order.CreatedAt,
+                   TotalPrice = order.OrderItems.Sum(oi => oi.SalePrice * oi.Count),
+                   TotalItemCount = order.OrderItems.Sum(oi => oi.Count),
+                   OrderItems = order.OrderItems.Select(oi => new OrderItemDto
+                   {
+                       MedicineId = oi.MedicineId,
+                       Count = oi.Count,
+                       Price = oi.SalePrice
+                   }).ToList(),
+                   Status = order.Status.ToString()
+               }).ToList();
+
+            return query;
+        }
+
         public List<OrderDetailDto> GetDetailsOrder(string? search = null)
         {
             var query = _orderRepository.GetAll(o => search == null || o.FullName.Contains(search) || o.Email.Contains(search))

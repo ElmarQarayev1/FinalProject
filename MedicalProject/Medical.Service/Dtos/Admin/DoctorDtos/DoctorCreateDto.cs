@@ -39,7 +39,8 @@ namespace Medical.Service.Dtos.Admin.DoctorDtos
     }
     public class DoctorCreateDtoValidator : AbstractValidator<DoctorCreateDto>
     {
-        private static readonly string UrlPattern = @"^(https?:\/\/)?([a-z0-9\-]+\.)+[a-z0-9]{2,}(\/[a-z0-9\-\.\/]*)?$";
+        private static readonly string UrlPattern = @"^(https?:\/\/)?(www\.)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/\S*)?$";
+
         public DoctorCreateDtoValidator()
         {
             RuleFor(x => x.FullName).NotEmpty().MaximumLength(40).MinimumLength(2);
