@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.16" />
     <PackageReference Include="MailKit" Version="4.7.1.1" />
+    <PackageReference Include="EPPlus" Version="7.2.2" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Exceptions\" />
@@ -50,6 +51,7 @@
     <None Remove="Dtos\User\OrderDtos\" />
     <None Remove="Dtos\User\ReviewDtos\" />
     <None Remove="Dtos\User\AppointmentDtos\" />
+    <None Remove="Excel\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exceptions\" />
@@ -84,5 +86,6 @@
     <Folder Include="Dtos\User\OrderDtos\" />
     <Folder Include="Dtos\User\ReviewDtos\" />
     <Folder Include="Dtos\User\AppointmentDtos\" />
+    <Folder Include="Excel\" />
   </ItemGroup>
 </Project>

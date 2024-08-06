@@ -47,6 +47,31 @@ namespace Medical.UI.Controllers
 
 
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> ExportToExcel()
+        {
+            try
+            {
+                var fileContent = await _crudService.ExportOrdersAsync();
+                return File(fileContent, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Orders.xlsx");
+            }
+            catch (HttpException ex)
+            {
+                if (ex.Status == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    return RedirectToAction("Login", "Auth");
+                }
+
+                return RedirectToAction("Error", "Home");
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {

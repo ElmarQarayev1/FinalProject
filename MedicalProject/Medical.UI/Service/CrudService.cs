@@ -19,6 +19,24 @@ namespace Medical.UI.Service
         }
 
 
+        public async Task<byte[]> ExportOrdersAsync()
+        {
+            _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
+            _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
+
+            using (HttpResponseMessage response = await _client.GetAsync(baseUrl + "excel/DownloadExcel"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsByteArrayAsync();
+                }
+                else
+                {
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    throw new HttpException(response.StatusCode, errorMessage);
+                }
+            }
+        }
 
         public async Task<CreateResponse> Create<TRequest>(TRequest request, string path)
         {

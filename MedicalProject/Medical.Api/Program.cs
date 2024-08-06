@@ -8,6 +8,7 @@ using Medical.Data;
 using Medical.Data.Repositories.Implementations;
 using Medical.Data.Repositories.Interfaces;
 using Medical.Service.Dtos.Admin.CategoryDtos;
+using Medical.Service.Excel;
 using Medical.Service.Exceptions;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
@@ -38,6 +39,25 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
 
 });
 
+
+
+
+var serviceProvider = new ServiceCollection()
+               .AddDbContext<AppDbContext>(options => options.UseSqlServer("Server=localhost;Database=MedicalProject;User ID=sa; Password=reallyStrongPwd123;TrustServerCertificate=true"))
+               .AddTransient<ExcelExportService>()
+               .BuildServiceProvider();
+
+
+using (var scope = serviceProvider.CreateScope())
+{
+    var excelExportService = scope.ServiceProvider.GetRequiredService<ExcelExportService>();
+    var filePath = "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/file.xlsx";
+
+    var fileContent = await excelExportService.ExportOrdersAsync();
+    await File.WriteAllBytesAsync(filePath, fileContent);
+
+    Console.WriteLine($"Orders exported successfully to {filePath}");
+}
 
 
 //0 * * * * ?
@@ -99,6 +119,9 @@ builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<IAppointmentRepository,AppointmentRepository>();
 builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+builder.Services.AddScoped<ExcelExportService>();
+
+
 
 
 builder.Services.AddHttpContextAccessor();
