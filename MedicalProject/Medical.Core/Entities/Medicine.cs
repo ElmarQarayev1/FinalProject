@@ -10,9 +10,9 @@ namespace Medical.Core.Entities
 		public string Desc { get; set; }
 
 		public int CategoryId { get; set; }
-
+	
 		public Category? Category { get; set; }
-
+		
 		public List<MedicineImage> MedicineImages { get; set; }
 
 		public List<MedicineReview>? MedicineReviews { get; set; }

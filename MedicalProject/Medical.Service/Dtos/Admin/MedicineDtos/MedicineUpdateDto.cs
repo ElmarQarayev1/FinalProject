@@ -26,7 +26,7 @@ namespace Medical.Service.Dtos.Admin.MedicineDtos
         public MedicineUpdateDtoValidator()
         {
             RuleFor(x => x.Name).NotEmpty().MaximumLength(35).MinimumLength(2);
-            RuleFor(x => x.Price).NotEmpty().GreaterThan(0);
+           RuleFor(x => x.Price).NotEmpty().GreaterThan(0);
             RuleFor(x => x.Desc).NotEmpty().MaximumLength(200);
 
 

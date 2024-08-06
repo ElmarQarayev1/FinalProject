@@ -2,6 +2,7 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Medical.Api.MiddleWares;
+using Medical.Api.Quartz;
 using Medical.Core.Entities;
 using Medical.Data;
 using Medical.Data.Repositories.Implementations;
@@ -17,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Quartz;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +37,25 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
     };
 
 });
+
+
+
+//0 * * * * ?
+
+builder.Services.AddQuartz(options =>
+{
+    var key = JobKey.Create(nameof(PrintJob));
+    options.AddJob(typeof(PrintJob), key).AddTrigger(x => x.ForJob(key).WithCronSchedule("0 0 * * * ?").StartNow());
+});
+
+
+builder.Services.AddQuartzHostedService(options =>
+{
+    options.WaitForJobsToComplete = true;
+    options.AwaitApplicationStarted = true;
+});
+
+
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 {

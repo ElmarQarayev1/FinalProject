@@ -19,6 +19,8 @@ using Microsoft.EntityFrameworkCore;
 using Medical.Data;
 using Medical.Data.Repositories.Interfaces;
 using Medical.Core.Enum;
+using Medical.Data.Repositories.Implementations;
+using Medical.Service.Dtos.User.AppointmentDtos;
 
 namespace Medical.Service.Implementations.Admin
 {
@@ -30,9 +32,10 @@ namespace Medical.Service.Implementations.Admin
         private readonly IMapper _mapper;
         private readonly AppDbContext _context;
         private readonly IOrderRepository _orderRepository;
+        private readonly IAppointmentRepository _appointmentRepository;
 
 
-        public AuthService(UserManager<AppUser> userManager, IConfiguration configuration,IMapper mapper,EmailService emailService,AppDbContext appDbContext,IOrderRepository orderRepository)
+        public AuthService(UserManager<AppUser> userManager, IConfiguration configuration,IMapper mapper,EmailService emailService,AppDbContext appDbContext,IOrderRepository orderRepository,IAppointmentRepository appointmentRepository)
         {
             _userManager = userManager;
             _configuration = configuration;
@@ -40,7 +43,44 @@ namespace Medical.Service.Implementations.Admin
             _emailService = emailService;
             _context = appDbContext;
             _orderRepository = orderRepository;
+            _appointmentRepository = appointmentRepository;
         }
+
+        //public MemberProfileGetDto GetByIdForUserProfile(string appUserId)
+        //{
+        //    var user = _userManager.Users.FirstOrDefault(u => u.Id == appUserId);
+        //    if (user == null)
+        //    {
+        //        throw new RestException(StatusCodes.Status404NotFound, "AppUserId", "User not found.");
+        //    }
+
+        //    var orders = _orderRepository.GetAll(o => o.AppUser.Id == appUserId && o.Status != OrderStatus.Canceled, "AppUser")
+        //       .Select(order => new OrderGetDtoForUserProfile
+        //       {
+        //           CreatedAt = order.CreatedAt,
+        //           TotalPrice = order.OrderItems.Sum(oi => oi.SalePrice * oi.Count),
+        //           TotalItemCount = order.OrderItems.Sum(oi => oi.Count),
+        //           OrderItems = order.OrderItems.Select(oi => new OrderItemDto
+        //           {
+        //               MedicineId = oi.MedicineId,
+        //               Count = oi.Count,
+        //               Price = oi.SalePrice
+        //           }).ToList(),
+        //           Status = order.Status.ToString()
+        //       }).ToList();
+
+        //    var userProfile = new MemberProfileGetDto
+        //    {
+        //        UserName = user.UserName,
+        //        Email = user.Email,
+        //        FullName = user.FullName,
+        //        HasPassword = _userManager.HasPasswordAsync(user).Result,
+        //        IsGoogleUser = _userManager.GetLoginsAsync(user).Result.Any(login => login.LoginProvider == "Google"),
+        //        Orders = orders
+        //    };
+
+        //    return userProfile;
+        //}
 
 
         public MemberProfileGetDto GetByIdForUserProfile(string appUserId)
@@ -48,23 +88,31 @@ namespace Medical.Service.Implementations.Admin
             var user = _userManager.Users.FirstOrDefault(u => u.Id == appUserId);
             if (user == null)
             {
-                throw new RestException(StatusCodes.Status404NotFound,"AppUserId", "User not found.");
+                throw new RestException(StatusCodes.Status404NotFound, "AppUserId", "User not found.");
             }
 
             var orders = _orderRepository.GetAll(o => o.AppUser.Id == appUserId && o.Status != OrderStatus.Canceled, "AppUser")
-               .Select(order => new OrderGetDtoForUserProfile
-               {
-                   CreatedAt = order.CreatedAt,
+                .Select(order => new OrderGetDtoForUserProfile
+                {
+                    CreatedAt = order.CreatedAt,
                    TotalPrice = order.OrderItems.Sum(oi => oi.SalePrice * oi.Count),
-                   TotalItemCount = order.OrderItems.Sum(oi => oi.Count),
-                   OrderItems = order.OrderItems.Select(oi => new OrderItemDto
-                   {
-                       MedicineId = oi.MedicineId,
-                       Count = oi.Count,
-                       Price = oi.SalePrice
-                   }).ToList(),
-                   Status = order.Status.ToString()
-               }).ToList();
+                    TotalItemCount = order.OrderItems.Sum(oi => oi.Count),
+                    OrderItems = order.OrderItems.Select(oi => new OrderItemDto
+                    {
+                        MedicineId = oi.MedicineId,
+                        Count = oi.Count,
+                        Price = oi.SalePrice
+                    }).ToList(),
+                    Status = order.Status.ToString()
+                }).ToList();
+
+            var appointments = _appointmentRepository.GetAll(a => a.AppUserId == appUserId, "Doctor")
+                .Select(appointment => new AppointmentGetDtoForUserProfile
+                {
+                    DoctorFullName = appointment.Doctor.FullName,
+                    Phone = appointment.Phone,
+                    Date = appointment.Date.ToString("dd-MM-yyyy HH:mm")
+                }).ToList();
 
             var userProfile = new MemberProfileGetDto
             {
@@ -73,11 +121,13 @@ namespace Medical.Service.Implementations.Admin
                 FullName = user.FullName,
                 HasPassword = _userManager.HasPasswordAsync(user).Result,
                 IsGoogleUser = _userManager.GetLoginsAsync(user).Result.Any(login => login.LoginProvider == "Google"),
-                Orders = orders
+                Orders = orders??new List<OrderGetDtoForUserProfile>(),
+                Appointments = appointments??new List<AppointmentGetDtoForUserProfile>()
             };
 
             return userProfile;
         }
+
 
         public async Task UpdateProfile(MemberProfileEditDto profileEditDto)
         {

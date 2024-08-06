@@ -1,4 +1,5 @@
 ﻿using System;
+using Medical.Service.Dtos.User.AppointmentDtos;
 using Medical.Service.Dtos.User.OrderDtos;
 
 namespace Medical.Service.Dtos.User.AuthDtos
@@ -15,7 +16,9 @@ namespace Medical.Service.Dtos.User.AuthDtos
 
         public bool IsGoogleUser { get; set; }
 
-        public List<OrderGetDtoForUserProfile> Orders = new List<OrderGetDtoForUserProfile>();
+        public List<OrderGetDtoForUserProfile> Orders { get; set; }
+
+        public List<AppointmentGetDtoForUserProfile> Appointments { get; set; }
 
     }
 }

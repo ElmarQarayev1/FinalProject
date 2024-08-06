@@ -5,7 +5,7 @@ namespace Medical.Service.Dtos.User.AppointmentDtos
 	{
         public int Id { get; set; }
 
-        public int DoctorName { get; set; }
+        public string DoctorFullName { get; set; }
 
         public string FullName { get; set; }
 

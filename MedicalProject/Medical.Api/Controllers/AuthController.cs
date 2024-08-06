@@ -131,21 +131,7 @@ namespace Medical.Api.Controllers
             }
         }
 
-        [Authorize(Roles ="Member")]
-        [HttpGet("api/GetUserProfile/{appUserId}")]
-        public ActionResult<MemberProfileGetDto> GetUserProfile(string appUserId)
-        {
-            try
-            {
-                var userProfile = _authService.GetByIdForUserProfile(appUserId);
-                return Ok(userProfile);
-            }
-            catch (RestException ex)
-            {
-                return StatusCode(ex.Code, new { message = ex.Message });
-            }
-        }
-
+      
         [HttpPost("api/profile/update")]
         public async Task<IActionResult> UpdateProfile([FromBody] MemberProfileEditDto profileEditDto)
         {
@@ -153,7 +139,7 @@ namespace Medical.Api.Controllers
             return Ok(new { message = "Profile updated successfully!" });
         }
 
-       // [Authorize(Roles ="Member")]
+       [Authorize(Roles ="Member")]
         [HttpPost("api/CheckEmailConfirmationStatus")]
         public async Task<IActionResult> CheckConfirmation(string userId)
         {
@@ -268,6 +254,21 @@ namespace Medical.Api.Controllers
             return NoContent();
 
         }
+        [Authorize(Roles = "Member")]
+        [HttpGet("api/GetUserProfile/{appUserId}")]
+        public ActionResult<MemberProfileGetDto> GetUserProfile(string appUserId)
+        {
+            try
+            {
+                var userProfile = _authService.GetByIdForUserProfile(appUserId);
+                return Ok(userProfile);
+            }
+            catch (RestException ex)
+            {
+                return StatusCode(ex.Code, new { message = ex.Message });
+            }
+        }
+
 
 
         //[HttpGet("api/admin/createUser")]

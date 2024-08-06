@@ -40,12 +40,13 @@ namespace Medical.UI.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var loginResponse = JsonSerializer.Deserialize<LoginResponse>(await response.Content.ReadAsStringAsync(), options);
+                   
+
                     if (loginResponse.Token.PasswordResetRequired)
                     {
                         TempData["ResetUserName"] = loginRequest.UserName;
                         Response.Cookies.Append("token", "Bearer " + loginResponse.Token.Token);
                         TempData["Token"] = loginResponse.Token.Token;
-
 
                         return RedirectToAction("ResetPassword");
                     }
@@ -68,7 +69,7 @@ namespace Medical.UI.Controllers
 
         public IActionResult ResetPassword()
         {
-
+           
 
             var userName = TempData["ResetUserName"] as string;
 
@@ -79,6 +80,7 @@ namespace Medical.UI.Controllers
             {
                 return RedirectToAction("Login");
             }
+
 
             var model = new ResetPasswordModel
             {
@@ -123,27 +125,6 @@ namespace Medical.UI.Controllers
         }
 
 
-        //private async Task<string> GenerateNewToken(string userName)
-        //{
-        //    var claims = new List<Claim>
-        //    {
-        //        new Claim(ClaimTypes.NameIdentifier, userName),
-        //        new Claim(ClaimTypes.Name, userName)
-        //    };           
-        //    var secret = _configuration.GetSection("JWT:Secret").Value;
-        //    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
-        //    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-        //    var token = new JwtSecurityToken(
-        //        issuer: _configuration.GetSection("JWT:Issuer").Value,
-        //        audience: _configuration.GetSection("JWT:Audience").Value,
-        //        claims: claims,
-        //        expires: DateTime.Now.AddDays(1),
-        //        signingCredentials: creds
-        //    );
-
-        //    return new JwtSecurityTokenHandler().WriteToken(token);
-        //}
 
         [HttpPost]
         public async Task<IActionResult> AdminCreateByS(AdminCreateRequest createRequest)

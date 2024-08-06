@@ -8,6 +8,7 @@ using Medical.Service.Dtos.User.AppointmentDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +26,7 @@ namespace Medical.Api.Controllers
             _mapper = mapper;
         }
 
+       // [Authorize(Roles ="Member")]
         [HttpPost("api/appointments")]
         public async Task<IActionResult> Create([FromBody] AppointmentCreateDto createDto)
         {
@@ -32,18 +34,20 @@ namespace Medical.Api.Controllers
             return StatusCode(201, new { Id = id });
         }
 
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/appointments")]
         public ActionResult<PaginatedList<CategoryPaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10,int? doctorId=null)
         {
             return StatusCode(200, _appointmentService.GetAllByPage(search, page, size,doctorId));
         }
 
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/Appointments/{doctorId}")]
         public IActionResult GetByIdForAppointment(int doctorId)
         {
             var appointmentGetDtos = _appointmentService.GetByIdForFilter(doctorId);
             return Ok(appointmentGetDtos);
 
-        }
+         }
     }
 }

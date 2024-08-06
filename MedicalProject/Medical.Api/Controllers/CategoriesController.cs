@@ -37,7 +37,6 @@ namespace Medical.Api.Controllers
             return StatusCode(200, _categoryService.GetAll());
         }
 
-
         [HttpGet("api/Categories/all")]
         public ActionResult<List<CategoryGetDtoForUser>> GetAllUser()
         {

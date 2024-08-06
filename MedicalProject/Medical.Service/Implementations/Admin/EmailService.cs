@@ -31,4 +31,4 @@ namespace Medical.Service.Implementations.Admin
         }
     }
 }
-//itig szsp vizn iwpi
+

@@ -16,6 +16,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.16" />
+    <PackageReference Include="Quartz.Extensions.Hosting" Version="3.12.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,9 +47,11 @@
     <Folder Include="wwwroot\uploads\doctors\" />
     <Folder Include="wwwroot\uploads\medicines\" />
     <Folder Include="wwwroot\uploads\feeds\" />
+    <Folder Include="Quartz\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="MiddleWares\" />
     <None Remove="Controllers\" />
+    <None Remove="Quartz\" />
   </ItemGroup>
 </Project>

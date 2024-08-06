@@ -100,3 +100,6 @@
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/System.Security.Cryptography.Pkcs.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Security.Cryptography.Pkcs.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/obj/Debug/net7.0/Medical.Api.csproj.CopyComplete
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/Quartz.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/Quartz.Extensions.DependencyInjection.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/Quartz.Extensions.Hosting.dll

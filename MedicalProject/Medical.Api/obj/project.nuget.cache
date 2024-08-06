@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "utaSMl6AbyrML8BZeuP3o7gk8DvVDMq2v5jjerTUn2PQzu2E5xYqIizWMWFXgO1kE6ibcHAVfDHotxVHZxYy9A==",
+  "dgSpecHash": "1oqXGfmgEbD3Lv9EIw8iwge1l0b/je/XQpK7dpW5Aji8Q+jSKobpFHw0V+6bJ5lOQOXyjVC7Ko5Ol1I6yHnBuw==",
   "success": true,
   "projectFilePath": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/Medical.Api.csproj",
   "expectedPackageFiles": [
@@ -50,8 +50,8 @@
     "/Users/elmar/.nuget/packages/microsoft.extensions.dependencyinjection/7.0.0/microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
     "/Users/elmar/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/7.0.0/microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
     "/Users/elmar/.nuget/packages/microsoft.extensions.dependencymodel/7.0.0/microsoft.extensions.dependencymodel.7.0.0.nupkg.sha512",
-    "/Users/elmar/.nuget/packages/microsoft.extensions.fileproviders.abstractions/2.2.0/microsoft.extensions.fileproviders.abstractions.2.2.0.nupkg.sha512",
-    "/Users/elmar/.nuget/packages/microsoft.extensions.hosting.abstractions/2.2.0/microsoft.extensions.hosting.abstractions.2.2.0.nupkg.sha512",
+    "/Users/elmar/.nuget/packages/microsoft.extensions.fileproviders.abstractions/6.0.0/microsoft.extensions.fileproviders.abstractions.6.0.0.nupkg.sha512",
+    "/Users/elmar/.nuget/packages/microsoft.extensions.hosting.abstractions/6.0.0/microsoft.extensions.hosting.abstractions.6.0.0.nupkg.sha512",
     "/Users/elmar/.nuget/packages/microsoft.extensions.identity.core/7.0.16/microsoft.extensions.identity.core.7.0.16.nupkg.sha512",
     "/Users/elmar/.nuget/packages/microsoft.extensions.identity.stores/7.0.16/microsoft.extensions.identity.stores.7.0.16.nupkg.sha512",
     "/Users/elmar/.nuget/packages/microsoft.extensions.logging/7.0.0/microsoft.extensions.logging.7.0.0.nupkg.sha512",
@@ -78,6 +78,9 @@
     "/Users/elmar/.nuget/packages/mimekit/4.7.1/mimekit.4.7.1.nupkg.sha512",
     "/Users/elmar/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
     "/Users/elmar/.nuget/packages/newtonsoft.json/13.0.2/newtonsoft.json.13.0.2.nupkg.sha512",
+    "/Users/elmar/.nuget/packages/quartz/3.12.0/quartz.3.12.0.nupkg.sha512",
+    "/Users/elmar/.nuget/packages/quartz.extensions.dependencyinjection/3.12.0/quartz.extensions.dependencyinjection.3.12.0.nupkg.sha512",
+    "/Users/elmar/.nuget/packages/quartz.extensions.hosting/3.12.0/quartz.extensions.hosting.3.12.0.nupkg.sha512",
     "/Users/elmar/.nuget/packages/swashbuckle.aspnetcore/6.5.0/swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
     "/Users/elmar/.nuget/packages/swashbuckle.aspnetcore.swagger/6.5.0/swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "/Users/elmar/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.5.0/swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
