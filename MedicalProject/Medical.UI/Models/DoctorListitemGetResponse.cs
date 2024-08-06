@@ -9,7 +9,9 @@ namespace Medical.UI.Models
 
         public string DepartmentName { get; set; }
 
-        public string Phone { get; set; }
+        public int AppointmentCount { get; set; }
+
+        public int TodayAppointmentCount { get; set; }
 
         public string FileUrl { get; set; }
     }

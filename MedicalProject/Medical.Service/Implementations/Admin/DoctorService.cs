@@ -151,7 +151,7 @@ namespace Medical.Service.Implementations.Admin
 
         public PaginatedList<DoctorPaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10)
         {
-            var query = _doctorRepository.GetAll(x => x.FullName.Contains(search) || search == null,"Department");
+            var query = _doctorRepository.GetAll(x => x.FullName.Contains(search) || search == null,"Department","Appointments");
 
             var paginated = PaginatedList<Doctor>.Create(query, page, size);
 

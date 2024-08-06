@@ -27,8 +27,12 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Full Name</th>
-                                <th scope="col">Phone</th>
                                 <th scope="col">DepartmentName</th>
+                                <th scope="col">AppointmentCount</th>
+                                <th scope="col">TodayAppCount</th>
+
+
+
                                 <th scope="col">Image</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -39,8 +43,10 @@
                                 <tr>
                                     <th scope="row">@(++order)</th>
                                     <td>@item.FullName</td>
-                                    <td>@item.Phone</td>
                                     <td>@item.DepartmentName</td>
+                                    <td>@item.AppointmentCount</td>
+                                    <td>@item.TodayAppointmentCount</td>
+
                                     <td>
                                         <img width="200" src="@item.FileUrl" alt="@item.FullName" />
                                     </td>

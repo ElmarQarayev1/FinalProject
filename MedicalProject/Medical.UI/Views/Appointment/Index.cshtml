@@ -21,10 +21,10 @@
                     <h6 class="m-0 font-weight-bold text-primary">Filter by Doctor</h6>
                 </div>
                 <div class="card-body">
-                    <form asp-action="FilterByDoctor" method="post">
+                    <form asp-action="FilterByDoctor" method="post" id="filterForm">
                         <div class="form-group">
                             <label for="doctorId"></label>
-                            <select class="form-control" id="doctorId" name="doctorId">
+                            <select class="form-control" id="doctorId" name="doctorId" onchange="toggleSubmitButton()">
                                 <option value="">Select Doctor</option>
                                 @foreach (var doctor in ViewBag.Doctors)
                                 {
@@ -32,7 +32,7 @@
                                 }
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Filter</button>
+                        <button type="submit" class="btn btn-primary" id="filterButton" style="display:none;">Filter</button>
                     </form>
                 </div>
             </div>
@@ -146,3 +146,21 @@
         </div>
     </div>
 </div>
+<script>function toggleSubmitButton() {
+        var select = document.getElementById("doctorId");
+        var button = document.getElementById("filterButton");
+
+        if (select.value) {
+            button.style.display = "block";
+        } else {
+            button.style.display = "none";
+        }
+    }
+
+    document.getElementById("filterForm").addEventListener("submit", function (event) {
+        var select = document.getElementById("doctorId");
+        if (!select.value) {
+            event.preventDefault();
+            alert("Please select a doctor before filtering.");
+        }
+    });</script>

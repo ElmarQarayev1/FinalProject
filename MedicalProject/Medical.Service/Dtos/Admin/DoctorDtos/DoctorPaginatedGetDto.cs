@@ -12,6 +12,10 @@ namespace Medical.Service.Dtos.Admin.DoctorDtos
         public string Phone { get; set; }
 
         public string FileUrl { get; set; }
+
+        public int AppointmentCount { get; set; }
+
+        public int TodayAppointmentCount { get; set; }
     }
 }
 

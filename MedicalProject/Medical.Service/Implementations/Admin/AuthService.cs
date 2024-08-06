@@ -281,19 +281,19 @@ namespace Medical.Service.Implementations.Admin
             
             if (registerDto.Password != registerDto.ConfirmPassword)
             {
-                throw new RestException(StatusCodes.Status400BadRequest, "Password and ConfirmPassword do not match.");
+                throw new RestException(StatusCodes.Status400BadRequest,"ConfirmPassword", "Password and ConfirmPassword do not match.");
             }
 
            
             if (_userManager.Users.Any(u => u.Email.ToLower() == registerDto.Email.ToLower()))
             {
-                throw new RestException(StatusCodes.Status400BadRequest, "Email is already taken.");
+                throw new RestException(StatusCodes.Status400BadRequest,"Email", "Email is already taken.");
             }
 
           
             if (_userManager.Users.Any(u => u.UserName.ToLower() == registerDto.UserName.ToLower()))
             {
-                throw new RestException(StatusCodes.Status400BadRequest, "UserName is already taken.");
+                throw new RestException(StatusCodes.Status400BadRequest, "UserName","UserName is already taken.");
             }
 
            

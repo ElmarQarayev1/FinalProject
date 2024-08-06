@@ -63,13 +63,24 @@ namespace Medical.Api.Controllers
 
 
         [HttpPost("api/register")]
-        public ActionResult RegisterForUser([FromBody] MemberRegisterDto registerDto)
+        public async Task<ActionResult> RegisterForUser([FromBody] MemberRegisterDto registerDto)
         {
-                      
-              var Id= _authService.Register(registerDto);
-                return Ok(new { Result =Id});       
-           
+            try
+            {
+                var Id = await _authService.Register(registerDto);
+                return Ok(new { Result = Id });
+            }
+            catch (RestException ex)
+            {
+                var errorResponse = new
+                {
+                    message = ex.Message,
+                    errors = ex.Errors
+                };
+                return StatusCode(ex.Code, errorResponse);
+            }
         }
+
 
         [HttpPost("api/forgetpassword")]
         public async Task<IActionResult> ForgetPassword([FromBody] MemberForgetPasswordDto forgetPasswordDto)

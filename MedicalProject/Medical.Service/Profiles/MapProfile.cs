@@ -164,7 +164,10 @@ namespace Medical.Service.Profiles
             CreateMap<Doctor, DoctorCreateDto>().ReverseMap();
             CreateMap<Doctor, DoctorPaginatedGetDto>()
            .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/doctors/" + src.ImageName))
-            .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department.Name));
+            .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department.Name))
+             .ForMember(dest => dest.AppointmentCount, opt => opt.MapFrom(src => src.Appointments.Count))
+               .ForMember(dest => dest.TodayAppointmentCount, opt => opt.MapFrom(src => src.Appointments.Count(a => a.Date.Date == DateTime.Now.Date)));
+
 
             CreateMap<Doctor, DoctorGetDto>()
                  .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/doctors/" + src.ImageName));

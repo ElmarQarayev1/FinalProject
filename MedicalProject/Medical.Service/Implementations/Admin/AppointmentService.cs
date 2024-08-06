@@ -84,12 +84,15 @@ namespace Medical.Service.Implementations.Admin
 
         public PaginatedList<AppointmentPaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10, int? doctorId = null)
         {
-            var doctor = _doctorRepository.Get(x => x.Id == doctorId);
-
-            if (doctor == null)
+            if (doctorId!=null)
             {
-                throw new RestException(StatusCodes.Status404NotFound, "doctorId", "Doctor Not Found");
+                var doctor = _doctorRepository.Get(x => x.Id == doctorId.Value);
+                if (doctor == null)
+                {
+                    throw new RestException(StatusCodes.Status404NotFound, "doctorId", "Doctor Not Found");
+                }
             }
+
             var query = _appointmentRepository.GetAll(
                 x => (x.FullName.Contains(search) || search == null) &&
                      (doctorId == null || x.DoctorId == doctorId),
