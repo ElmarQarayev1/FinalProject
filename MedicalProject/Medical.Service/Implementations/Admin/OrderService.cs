@@ -31,8 +31,56 @@ namespace Medical.Service.Implementations.Admin
             _medicineRepository = medicineRepository;
             _emailService = emailService;
         }
-        public int CheckOut(CheckOutDto createDto)
+        public async Task<int> GetTodayOrdersCountAsync()
         {
+            var today = DateTime.Today;
+            return await _context.Orders.CountAsync(o => o.CreatedAt >= today
+                && o.CreatedAt < today.AddDays(1)
+                && o.Status!=OrderStatus.Canceled);
+        }
+
+        public async Task<int> GetMonthlyOrdersCountAsync()
+        {
+            var firstDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+            var firstDayOfNextMonth = firstDayOfMonth.AddMonths(1);
+
+            return await _context.Orders.CountAsync(o => o.CreatedAt >= firstDayOfMonth
+                && o.CreatedAt < firstDayOfNextMonth
+                && o.Status != OrderStatus.Canceled);
+        }
+
+        public async Task<double> GetTodayOrdersTotalPriceAsync()
+        {
+            var today = DateTime.Today;
+
+            var totalPrice = await _context.Orders
+                .Where(o => o.CreatedAt >= today
+                    && o.CreatedAt < today.AddDays(1)
+                    && o.Status != OrderStatus.Accepted)
+                .SelectMany(o => o.OrderItems)
+                .SumAsync(oi => oi.SalePrice * oi.Count);
+
+            return totalPrice;
+        }
+
+        public async Task<double> GetMonthlyOrdersTotalPriceAsync()
+        {
+            var firstDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+            var firstDayOfNextMonth = firstDayOfMonth.AddMonths(1);
+
+            var totalPrice = await _context.Orders
+                .Where(o => o.CreatedAt >= firstDayOfMonth
+                    && o.CreatedAt < firstDayOfNextMonth
+                    && o.Status != OrderStatus.Accepted)
+                .SelectMany(o => o.OrderItems)
+                .SumAsync(oi => oi.SalePrice * oi.Count);
+
+            return totalPrice;
+        }
+
+
+        public int CheckOut(CheckOutDto createDto)
+           {
             var user = _context.AppUsers.FirstOrDefault(u => u.Id == createDto.AppUserId);
             if (user == null)
             {

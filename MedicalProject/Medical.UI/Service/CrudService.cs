@@ -18,6 +18,104 @@ namespace Medical.UI.Service
             _httpContextAccessor = httpContextAccessor;
         }
 
+        public async Task<int> GetTodayOrdersCountAsync()
+        {
+            _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
+            _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
+
+            using (HttpResponseMessage response = await _client.GetAsync(baseUrl + "today/orders/count"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var count = await response.Content.ReadAsStringAsync();
+                    return int.Parse(count);
+                }
+                else
+                {
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    throw new HttpException(response.StatusCode, errorMessage);
+                }
+            }
+        }
+
+        public async Task<double> GetTodayOrdersTotalPriceAsync()
+        {
+            _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
+            _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
+
+            using (HttpResponseMessage response = await _client.GetAsync(baseUrl + "today/orders/total-price"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var totalPrice = await response.Content.ReadAsStringAsync();
+                    return double.Parse(totalPrice);
+                }
+                else
+                {
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    throw new HttpException(response.StatusCode, errorMessage);
+                }
+            }
+        }
+
+        public async Task<int> GetMonthlyOrdersCountAsync()
+        {
+            _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
+            _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
+
+            using (HttpResponseMessage response = await _client.GetAsync(baseUrl + "monthly/orders/count"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var count = await response.Content.ReadAsStringAsync();
+                    return int.Parse(count);
+                }
+                else
+                {
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    throw new HttpException(response.StatusCode, errorMessage);
+                }
+            }
+        }
+
+        public async Task<double> GetMonthlyOrdersTotalPriceAsync()
+        {
+            _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
+            _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
+
+            using (HttpResponseMessage response = await _client.GetAsync(baseUrl + "monthly/orders/total-price"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var totalPrice = await response.Content.ReadAsStringAsync();
+                    return double.Parse(totalPrice);
+                }
+                else
+                {
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    throw new HttpException(response.StatusCode, errorMessage);
+                }
+            }
+        }
+
+        public async Task<byte[]> ExportAllTablesAsync()
+        {
+            _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
+            _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
+
+            using (HttpResponseMessage response = await _client.GetAsync(baseUrl + "excel/DownloadAllTables"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsByteArrayAsync();
+                }
+                else
+                {
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    throw new HttpException(response.StatusCode, errorMessage);
+                }
+            }
+        }
 
         public async Task<byte[]> ExportOrdersAsync()
         {

@@ -45,43 +45,7 @@ namespace Medical.Service.Implementations.Admin
             _orderRepository = orderRepository;
             _appointmentRepository = appointmentRepository;
         }
-
-        //public MemberProfileGetDto GetByIdForUserProfile(string appUserId)
-        //{
-        //    var user = _userManager.Users.FirstOrDefault(u => u.Id == appUserId);
-        //    if (user == null)
-        //    {
-        //        throw new RestException(StatusCodes.Status404NotFound, "AppUserId", "User not found.");
-        //    }
-
-        //    var orders = _orderRepository.GetAll(o => o.AppUser.Id == appUserId && o.Status != OrderStatus.Canceled, "AppUser")
-        //       .Select(order => new OrderGetDtoForUserProfile
-        //       {
-        //           CreatedAt = order.CreatedAt,
-        //           TotalPrice = order.OrderItems.Sum(oi => oi.SalePrice * oi.Count),
-        //           TotalItemCount = order.OrderItems.Sum(oi => oi.Count),
-        //           OrderItems = order.OrderItems.Select(oi => new OrderItemDto
-        //           {
-        //               MedicineId = oi.MedicineId,
-        //               Count = oi.Count,
-        //               Price = oi.SalePrice
-        //           }).ToList(),
-        //           Status = order.Status.ToString()
-        //       }).ToList();
-
-        //    var userProfile = new MemberProfileGetDto
-        //    {
-        //        UserName = user.UserName,
-        //        Email = user.Email,
-        //        FullName = user.FullName,
-        //        HasPassword = _userManager.HasPasswordAsync(user).Result,
-        //        IsGoogleUser = _userManager.GetLoginsAsync(user).Result.Any(login => login.LoginProvider == "Google"),
-        //        Orders = orders
-        //    };
-
-        //    return userProfile;
-        //}
-
+   
 
         public MemberProfileGetDto GetByIdForUserProfile(string appUserId)
         {

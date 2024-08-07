@@ -48,5 +48,36 @@ namespace Medical.Service.Excel
                 return package.GetAsByteArray();
             }
         }
+        public async Task<byte[]> ExportAllTablesAsync()
+        {
+            using (var package = new ExcelPackage())
+            {
+                await AddWorksheetForTableAsync(package, "Sliders", await _context.Sliders.ToListAsync());
+                await AddWorksheetForTableAsync(package, "Features", await _context.Features.ToListAsync());
+                await AddWorksheetForTableAsync(package, "Appointments", await _context.Appointments.ToListAsync());
+                await AddWorksheetForTableAsync(package, "AppUsers", await _context.AppUsers.ToListAsync());
+                await AddWorksheetForTableAsync(package, "Categories", await _context.Categories.ToListAsync());
+                await AddWorksheetForTableAsync(package, "Feeds", await _context.Feeds.ToListAsync());
+                await AddWorksheetForTableAsync(package, "Doctors", await _context.Doctors.ToListAsync());
+                await AddWorksheetForTableAsync(package, "MedicineImages", await _context.MedicineImages.ToListAsync());
+                await AddWorksheetForTableAsync(package, "MedicineReviews", await _context.MedicineReviews.ToListAsync());
+                await AddWorksheetForTableAsync(package, "Medicines", await _context.Medicines.ToListAsync());
+                await AddWorksheetForTableAsync(package, "BasketItems", await _context.BasketItems.ToListAsync());
+                await AddWorksheetForTableAsync(package, "Departments", await _context.Departments.ToListAsync());
+                await AddWorksheetForTableAsync(package, "Settings", await _context.Settings.ToListAsync());
+                await AddWorksheetForTableAsync(package, "OrderItems", await _context.OrderItems.ToListAsync());
+                await AddWorksheetForTableAsync(package, "Orders", await _context.Orders.ToListAsync());
+                await AddWorksheetForTableAsync(package, "Services", await _context.Services.ToListAsync());
+
+                return package.GetAsByteArray();
+            }
+        }
+
+        private async Task AddWorksheetForTableAsync<T>(ExcelPackage package, string sheetName, List<T> data) where T : class
+        {
+            var worksheet = package.Workbook.Worksheets.Add(sheetName);
+            worksheet.Cells["A1"].LoadFromCollection(data, true);
+        }
     }
+
 }

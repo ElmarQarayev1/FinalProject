@@ -131,7 +131,7 @@ namespace Medical.Api.Controllers
             }
         }
 
-      
+        
         [HttpPost("api/profile/update")]
         public async Task<IActionResult> UpdateProfile([FromBody] MemberProfileEditDto profileEditDto)
         {

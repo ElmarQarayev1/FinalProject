@@ -16,6 +16,11 @@ namespace Medical.Service.Interfaces.Admin
         void UpdateOrderStatus(int id, OrderStatus newStatus);
         List<OrderGetDtoForUserProfile> GetByIdForUserProfile(string AppUserId);
 
+        Task<int> GetTodayOrdersCountAsync();
+        Task<double> GetTodayOrdersTotalPriceAsync();
+        Task<int> GetMonthlyOrdersCountAsync();
+        Task<double> GetMonthlyOrdersTotalPriceAsync();
+
     }
 }
 

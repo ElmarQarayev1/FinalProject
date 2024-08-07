@@ -126,12 +126,37 @@ namespace Medical.Api.Controllers
            
                 _orderService.UpdateOrderStatus(id, OrderStatus.Rejected);
                 return NoContent(); 
-            
-                     
+                        
             
         }
 
+        [HttpGet("api/admin/today/orders/count")]
+        public async Task<IActionResult> GetTodayOrdersCount()
+        {
+            var count = await _orderService.GetTodayOrdersCountAsync();
+            return Ok(count);
+        }
 
+        [HttpGet("api/admin/today/orders/total-price")]
+        public async Task<IActionResult> GetTodayOrdersTotalPrice()
+        {
+            var totalPrice = await _orderService.GetTodayOrdersTotalPriceAsync();
+            return Ok(totalPrice);
+        }
+
+        [HttpGet("api/admin/monthly/orders/count")]
+        public async Task<IActionResult> GetMonthlyOrdersCount()
+        {
+            var count = await _orderService.GetMonthlyOrdersCountAsync();
+            return Ok(count);
+        }
+
+        [HttpGet("api/admin/monthly/orders/total-price")]
+        public async Task<IActionResult> GetMonthlyOrdersTotalPrice()
+        {
+            var totalPrice = await _orderService.GetMonthlyOrdersTotalPriceAsync();
+            return Ok(totalPrice);
+        }
 
     }
 

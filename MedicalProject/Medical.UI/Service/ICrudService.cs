@@ -15,7 +15,13 @@ namespace Medical.UI.Service
         Task EditFromForm<TRequest>(TRequest request, string path);
         Task<PaginatedResponse<TResponse>> GetAllPaginatedForAppointment<TResponse>(string path, int page, int size = 10, int? doctorId = null);
         Task<byte[]> ExportOrdersAsync();
+        Task<byte[]> ExportAllTablesAsync();
         Task Status(string path);
+        Task<int> GetTodayOrdersCountAsync();
+        Task<double> GetTodayOrdersTotalPriceAsync();
+        Task<int> GetMonthlyOrdersCountAsync();
+        Task<double> GetMonthlyOrdersTotalPriceAsync();
+
     }
 }
 
