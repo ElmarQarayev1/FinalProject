@@ -50,7 +50,7 @@
             <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-calendar-alt fa-3x text-primary"></i>
                 <div class="ms-3">
-                    <p class="mb-2">Monthly Appointments Count: <span id="monthly-appointments"></span></p>
+                    <p class="mb-2">Yearly Appointments Count: <span id="monthly-appointments"></span></p>
                 </div>
             </div>
         </div>
@@ -73,12 +73,16 @@
     <div class="row g-4">
         <div class="col-sm-12 col-xl-6">
             <div class="card-body">
-                <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
-                </div>
+
             </div>
         </div>
+        <div class="col-12">
+            <div class="bg-secondary text-center rounded p-4">
+                <h5 class="mb-4">Monthly Appointments Chart</h5>
+                <canvas id="monthlyAppointmentsChart" width="500" height="200"></canvas>
 
+            </div>
+        </div>
         <div class="col-sm-12 col-xl-6">
             <div class="bg-secondary text-center rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
@@ -284,11 +288,10 @@
 </div>
 <!-- Widgets End -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>document.addEventListener("DOMContentLoaded", function () {
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
         async function fetchData() {
             try {
-              
                 let response = await fetch('/Home/GetTodayOrdersTotalPrice');
                 let dailySale = await response.json();
                 document.getElementById('daily-sale').textContent = dailySale;
@@ -309,114 +312,58 @@
                 let dailyAppointments = await response.json();
                 document.getElementById('daily-appointments').textContent = dailyAppointments;
 
-                response = await fetch('/api/admin/monthly-count');
-                let monthlyAppointments = await response.json();
-                document.getElementById('monthly-appointments').textContent = monthlyAppointments;
-
-               
                 response = await fetch('/api/admin/yearly-count');
-                let data = await response.json();
+                let yearlyAppointments = await response.json();
+                document.getElementById('monthly-appointments').textContent = yearlyAppointments;
 
-              
-                updateChart(data);
+                response = await fetch('/api/admin/monthly-count');
+                let monthlyData = await response.json();
 
+                console.log('Yearly Data:', monthlyData);
+
+                if (monthlyData.months && monthlyData.appointments) {
+                    var ctx = document.getElementById('monthlyAppointmentsChart').getContext('2d');
+
+                    var monthlyAppointmentsChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: monthlyData.months,
+                            datasets: [{
+                                label: 'monthly appointments',
+                                data: monthlyData.appointments,
+                                backgroundColor: 'rgba(255, 0, 0, 0.2)',
+                                borderColor: 'red',
+                                borderWidth: 2,
+                                fill: true
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    suggestedMax: Math.max(...monthlyData.appointments) + 10, 
+                                    ticks: {
+                                        stepSize: 5 
+                                    }
+                                },
+                                x: {
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }
+                            },
+                            responsive: true
+                        }
+                    });
+                } else {
+                    console.error('Data is null or not in expected format:', monthlyData);
+                }
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         }
 
-        function updateChart(data) {
-            var ctx = document.getElementById("myAreaChart").getContext("2d");
-
-           
-            if (window.myLineChart) {
-                window.myLineChart.destroy();
-            }
-
-            window.myLineChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: data.months, 
-                   datasets: [{
-                        label: "Yearly Appointments",
-                        lineTension: 0.3,
-                        backgroundColor: "rgba(78, 115, 223, 0.05)",
-                        borderColor: "rgba(78, 115, 223, 1)",
-                        pointRadius: 3,
-                        pointBackgroundColor: "rgba(78, 115, 223, 1)",
-                        pointBorderColor: "rgba(78, 115, 223, 1)",
-                        pointHoverRadius: 3,
-                        pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-                        pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-                        pointHitRadius: 10,
-                        pointBorderWidth: 2,
-                        data: data.appointments, 
-                    }],
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    layout: {
-                        padding: {
-                            left: 10,
-                            right: 25,
-                            top: 25,
-                            bottom: 0
-                        }
-                    },
-                    scales: {
-                        x: {
-                            type: 'category',
-                            gridLines: {
-                                display: false,
-                                drawBorder: false
-                            },
-                            ticks: {
-                                maxTicksLimit: 7
-                            }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            gridLines: {
-                                color: "rgb(234, 236, 244)",
-                                zeroLineColor: "rgb(234, 236, 244)",
-                                drawBorder: false,
-                                borderDash: [2],
-                                zeroLineBorderDash: [2]
-                            },
-                            ticks: {
-                                callback: function (value) {
-                                    return value.toFixed(0);
-                                }
-                            }
-                        }
-                    },
-                    legend: {
-                        display: false
-                    },
-                    tooltips: {
-                        backgroundColor: "rgb(255,255,255)",
-                        bodyFontColor: "#858796",
-                        titleMarginBottom: 10,
-                        titleFontColor: '#6e707e',
-                        titleFontSize: 14,
-                        borderColor: '#dddfeb',
-                        borderWidth: 1,
-                        xPadding: 15,
-                        yPadding: 15,
-                        displayColors: false,
-                        intersect: false,
-                        mode: 'index',
-                        caretPadding: 10,
-                        callbacks: {
-                            label: function (tooltipItem, chart) {
-                                var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                                return datasetLabel + ': ' + tooltipItem.yLabel.toFixed(0);
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
         fetchData();
-    });</script>
+    });
+
+    </script>

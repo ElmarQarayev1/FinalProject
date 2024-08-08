@@ -49,12 +49,12 @@ namespace Medical.Api.Controllers
             }
         }
 
-        [HttpGet("api/admin/monthly-count")]
-        public async Task<IActionResult> GetMonthlyAppointmentsCount()
+        [HttpGet("api/admin/yearly-count")]
+        public async Task<IActionResult> GetYearlyAppointmentsCount()
         {
             try
             {
-                var count = await _appointmentService.GetMonthlyAppointmentsCountAsync();
+                var count = await _appointmentService.GetYearlyAppointmentsCountAsync();
                 return Ok(count);
             }
             catch (Exception ex)
@@ -63,21 +63,21 @@ namespace Medical.Api.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-        [HttpGet("api/admin/yearly-count")]
-        public async Task<IActionResult> GetYearlyAppointmentsCount()
+        [HttpGet("api/admin/monthly-count")]
+        public async Task<IActionResult> GetMonthlyAppointmentsCount()
         {
             try
             {
-                var counts = await _appointmentService.GetYearlyAppointmentsCountAsync();
+                var counts = await _appointmentService.GetMonthlyAppointmentsCountAsync();
 
-                // Transform dictionary into format suitable for charting
+               
                 var response = new
                 {
                     months = counts.Keys.ToArray(),
                     appointments = counts.Values.ToArray()
                 };
 
-                return Ok(response);
+               return Ok(response);
             }
             catch (Exception ex)
             {

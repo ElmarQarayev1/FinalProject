@@ -17,41 +17,26 @@ namespace Medical.UI.Service
             _client = new HttpClient();
             _httpContextAccessor = httpContextAccessor;
         }
-        public async Task<Dictionary<string, int>> GetYearlyAppointmentsCountAsync()
-        {
-            _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
-            _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
 
-            using (HttpResponseMessage response = await _client.GetAsync(baseUrl + "api/admin/yearly-count"))
+        public async Task<YearlyAppointmentsResponse> GetMonthlyAppointmentsCountAsync()
+        {
+            using (HttpResponseMessage response = await _client.GetAsync(baseUrl + "monthly-count"))
             {
+                var json = await response.Content.ReadAsStringAsync();
+                Console.WriteLine("API Response JSON: " + json); 
+
                 if (response.IsSuccessStatusCode)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
-
-                  
-                    var data = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(content);
-
-               
-                    var months = JsonSerializer.Deserialize<string[]>(data["months"].ToString());
-                    var earnings = JsonSerializer.Deserialize<int[]>(data["earnings"].ToString());
-
-                 
-                    var result = new Dictionary<string, int>();
-                    for (int i = 0; i < months.Length; i++)
-                    {
-                        result[months[i]] = earnings[i];
-                    }
-
-                    return result;
+                    var data = JsonSerializer.Deserialize<YearlyAppointmentsResponse>(json);
+                    return data;
                 }
                 else
                 {
-                    var errorMessage = await response.Content.ReadAsStringAsync();
-                    throw new HttpException(response.StatusCode, errorMessage);
+                    //Console.WriteLine("Error: " + json); 
+                    throw new HttpException(response.StatusCode, json);
                 }
             }
         }
-
 
         public async Task<int> GetDailyAppointmentsCountAsync()
         {
@@ -73,12 +58,12 @@ namespace Medical.UI.Service
             }
         }
 
-        public async Task<int> GetMonthlyAppointmentsCountAsync()
+        public async Task<int> GetYearlyAppointmentsCountAsync()
         {
             _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
             _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
 
-            using (HttpResponseMessage response = await _client.GetAsync(baseUrl + "monthly-count"))
+            using (HttpResponseMessage response = await _client.GetAsync(baseUrl + "yearly-count"))
             {
                 if (response.IsSuccessStatusCode)
                 {

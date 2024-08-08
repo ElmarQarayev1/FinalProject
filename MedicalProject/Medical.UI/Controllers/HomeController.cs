@@ -29,43 +29,35 @@ public class HomeController : Controller
         return View();
     }
 
-
-    [HttpGet("api/admin/yearly-count")]
-    public async Task<IActionResult> GetYearlyAppointmentsCount()
+    [HttpGet("api/admin/monthly-count")]
+    public async Task<IActionResult> GetMonthlyAppointmentsCount()
     {
         try
         {
-           
-            var appointments = await _crudService.GetYearlyAppointmentsCountAsync();
+            var counts = await _crudService.GetMonthlyAppointmentsCountAsync();
 
-           
-            var labels = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
-            var counts = new int[12]; 
-
-               
-            int totalAppointments = appointments.Count(); 
-            int appointmentsPerMonth = totalAppointments / 12; 
-
-            for (int i = 0; i < counts.Length; i++)
+            if (counts == null || counts.Months == null || counts.Appointments == null)
             {
-                counts[i] = appointmentsPerMonth; 
+               
+                return BadRequest("Data is missing or in an unexpected format.");
             }
 
-            var response = new
-            {
-                labels = labels,
-                counts = counts
-            };
-
-            return Ok(response);
+            return Ok(counts);
         }
-        catch (System.Exception ex)
+        catch (HttpException ex)
         {
-            
-            return StatusCode(500, "Internal server error");
+            if (ex.Status == System.Net.HttpStatusCode.Unauthorized)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            return RedirectToAction("Error", "Home");
+        }
+        catch (System.Exception)
+        {
+            return RedirectToAction("Error", "Home");
         }
     }
-
 
     [HttpGet("api/admin/daily-count")]
     public async Task<IActionResult> GetDailyAppointmentsCount()
@@ -90,12 +82,12 @@ public class HomeController : Controller
         }
     }
 
-    [HttpGet("api/admin/monthly-count")]
-    public async Task<IActionResult> GetMonthlyAppointmentsCount()
+    [HttpGet("api/admin/yearly-count")]
+    public async Task<IActionResult> GetYearlyAppointmentsCount()
     {
         try
         {
-            var count = await _crudService.GetMonthlyAppointmentsCountAsync();
+            var count = await _crudService.GetYearlyAppointmentsCountAsync();
             return Ok(count);
         }
         catch (HttpException ex)

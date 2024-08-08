@@ -39,19 +39,24 @@ namespace Medical.Service.Implementations.Admin
             return await _context.Appointments.CountAsync(a => a.Date >= today && a.Date < today.AddDays(1));
         }
 
-        public async Task<int> GetMonthlyAppointmentsCountAsync()
+        public async Task<int> GetYearlyAppointmentsCountAsync()
         {
-            var firstDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-            var firstDayOfNextMonth = firstDayOfMonth.AddMonths(1);
+          
+            var firstDayOfYear = new DateTime(DateTime.Today.Year, 1, 1);
+           
+            var firstDayOfNextYear = firstDayOfYear.AddYears(1);
 
-            return await _context.Appointments.CountAsync(a => a.Date >= firstDayOfMonth && a.Date < firstDayOfNextMonth);
+           
+            return await _context.Appointments.CountAsync(a => a.Date >= firstDayOfYear && a.Date < firstDayOfNextYear);
         }
-        public async Task<Dictionary<string, int>> GetYearlyAppointmentsCountAsync()
+
+
+        public async Task<Dictionary<string, int>> GetMonthlyAppointmentsCountAsync()
         {
             var firstDayOfYear = new DateTime(DateTime.Today.Year, 1, 1);
             var firstDayOfNextYear = firstDayOfYear.AddYears(1);
 
-            // Fetch the count of appointments per month
+           
             var monthlyCounts = await _context.Appointments
                 .Where(a => a.CreatedAt >= firstDayOfYear && a.CreatedAt < firstDayOfNextYear)
                 .GroupBy(a => a.CreatedAt.Month)
@@ -62,7 +67,7 @@ namespace Medical.Service.Implementations.Admin
                 })
                 .ToListAsync();
 
-            // Create a dictionary to hold month names and their respective counts
+            
             var result = new Dictionary<string, int>();
             var months = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 

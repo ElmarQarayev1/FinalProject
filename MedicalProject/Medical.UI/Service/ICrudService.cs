@@ -22,8 +22,8 @@ namespace Medical.UI.Service
         Task<int> GetMonthlyOrdersCountAsync();
         Task<double> GetMonthlyOrdersTotalPriceAsync();
         Task<int> GetDailyAppointmentsCountAsync();
-        Task<int> GetMonthlyAppointmentsCountAsync();
-        Task<Dictionary<string, int>> GetYearlyAppointmentsCountAsync();
+        Task<int> GetYearlyAppointmentsCountAsync();
+        Task<YearlyAppointmentsResponse> GetMonthlyAppointmentsCountAsync();
 
     }
 }

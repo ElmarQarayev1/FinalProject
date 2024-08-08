@@ -47,7 +47,6 @@ namespace Medical.Api.Controllers
 
 
 
-
         [HttpPost("api/login")]
         public async Task<IActionResult> LoginForUser([FromBody] MemberLoginDto loginDto)
         {
