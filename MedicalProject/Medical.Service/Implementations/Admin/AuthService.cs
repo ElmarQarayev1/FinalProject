@@ -650,10 +650,6 @@ namespace Medical.Service.Implementations.Admin
 
 
 
-
-
-
-
         public void Update(string id, AdminUpdateDto updateDto)
         {
             
@@ -711,13 +707,6 @@ namespace Medical.Service.Implementations.Admin
 
 
 
-
-
-
-
-
-
-
         public async Task UpdatePasswordAsync(AdminUpdateDto updatePasswordDto)
         {
             var user = await _userManager.FindByNameAsync(updatePasswordDto.UserName);
@@ -729,7 +718,7 @@ namespace Medical.Service.Implementations.Admin
             var passwordCheck = await _userManager.CheckPasswordAsync(user, updatePasswordDto.CurrentPassword);
             if (!passwordCheck)
             {
-                throw new RestException(StatusCodes.Status400BadRequest, "Current password is incorrect.");
+                throw new RestException(StatusCodes.Status400BadRequest, "CurrentPassword","Current password is incorrect.");
             }
 
             if (updatePasswordDto.NewPassword != updatePasswordDto.ConfirmPassword)

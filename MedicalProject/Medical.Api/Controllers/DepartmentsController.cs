@@ -18,7 +18,6 @@ namespace Medical.Api.Controllers
 			_departmentService = departmentService;
 		}
 
-
         [HttpPost("api/admin/Departments")]
         public ActionResult Create([FromForm] DepartmentCreateDto createDto)
         {

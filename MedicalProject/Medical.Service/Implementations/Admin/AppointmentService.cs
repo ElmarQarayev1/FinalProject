@@ -33,6 +33,50 @@ namespace Medical.Service.Implementations.Admin
             _mapper = mapper;
         }
 
+        public async Task<int> GetDailyAppointmentsCountAsync()
+        {
+            var today = DateTime.Today;
+            return await _context.Appointments.CountAsync(a => a.Date >= today && a.Date < today.AddDays(1));
+        }
+
+        public async Task<int> GetMonthlyAppointmentsCountAsync()
+        {
+            var firstDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+            var firstDayOfNextMonth = firstDayOfMonth.AddMonths(1);
+
+            return await _context.Appointments.CountAsync(a => a.Date >= firstDayOfMonth && a.Date < firstDayOfNextMonth);
+        }
+        public async Task<Dictionary<string, int>> GetYearlyAppointmentsCountAsync()
+        {
+            var firstDayOfYear = new DateTime(DateTime.Today.Year, 1, 1);
+            var firstDayOfNextYear = firstDayOfYear.AddYears(1);
+
+            // Fetch the count of appointments per month
+            var monthlyCounts = await _context.Appointments
+                .Where(a => a.CreatedAt >= firstDayOfYear && a.CreatedAt < firstDayOfNextYear)
+                .GroupBy(a => a.CreatedAt.Month)
+                .Select(g => new
+                {
+                    Month = g.Key,
+                    Count = g.Count()
+                })
+                .ToListAsync();
+
+            // Create a dictionary to hold month names and their respective counts
+            var result = new Dictionary<string, int>();
+            var months = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+
+            foreach (var month in months.Select((name, index) => new { name, index }))
+            {
+                var count = monthlyCounts.FirstOrDefault(m => m.Month == month.index + 1)?.Count ?? 0;
+                result[month.name] = count;
+            }
+
+            return result;
+        }
+
+
+
 
         public async Task<int> Create(AppointmentCreateDto createDto)
         {

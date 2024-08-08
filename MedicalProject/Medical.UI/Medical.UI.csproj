@@ -27,6 +27,7 @@
     <None Remove="Views\Order\" />
     <None Remove="Views\Review\" />
     <None Remove="Views\Appointment\" />
+    <None Remove="Extentions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filter\" />
@@ -47,6 +48,7 @@
     <Folder Include="Views\Order\" />
     <Folder Include="Views\Review\" />
     <Folder Include="Views\Appointment\" />
+    <Folder Include="Extentions\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.16" />

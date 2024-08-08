@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using Medical.UI.Exception;
 using Medical.UI.Service;
+using Medical.UI.Extentions;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace Medical.UI.Controllers
 {
@@ -46,11 +49,13 @@ namespace Medical.UI.Controllers
                     {
                         TempData["ResetUserName"] = loginRequest.UserName;
                         Response.Cookies.Append("token", "Bearer " + loginResponse.Token.Token);
-                        TempData["Token"] = loginResponse.Token.Token;
+                       
+                        _httpContextAccessor.HttpContext.Session.SetBool("PasswordResetRequired", true);
 
                         return RedirectToAction("ResetPassword");
                     }
                     Response.Cookies.Append("token", "Bearer " + loginResponse.Token.Token);
+                    _httpContextAccessor.HttpContext.Session.SetBool("PasswordResetRequired", false);
                     return RedirectToAction("index", "home");
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
@@ -72,8 +77,14 @@ namespace Medical.UI.Controllers
            
 
             var userName = TempData["ResetUserName"] as string;
+           
 
-            //var token = TempData["Token"] as string;
+            if (userName == null || !_httpContextAccessor.HttpContext.Session.GetBool("PasswordResetRequired"))
+            {
+                return RedirectToAction("Login");
+            }
+
+         
 
 
             if (userName == null)
@@ -85,9 +96,8 @@ namespace Medical.UI.Controllers
             var model = new ResetPasswordModel
             {
                 UserName = userName,
-               // Token = token
-               
-          
+              
+                  
                 
             };
 
@@ -180,6 +190,12 @@ namespace Medical.UI.Controllers
 
         public async Task<IActionResult> Profile()
         {
+            var token = HttpContext.Request.Cookies["token"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login"); 
+            }
+
             var user = await _crudService.Get<AdminGetResponse>("profile");
 
             AdminProfileEditRequest adminProfile = new AdminProfileEditRequest

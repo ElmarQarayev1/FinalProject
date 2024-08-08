@@ -26,12 +26,63 @@ namespace Medical.Api.Controllers
             _mapper = mapper;
         }
 
-       // [Authorize(Roles ="Member")]
+        [Authorize(Roles ="Member")]
         [HttpPost("api/appointments")]
         public async Task<IActionResult> Create([FromBody] AppointmentCreateDto createDto)
         {
             var id = await _appointmentService.Create(createDto);
             return StatusCode(201, new { Id = id });
+        }
+
+        [HttpGet("api/admin/daily-count")]
+        public async Task<IActionResult> GetDailyAppointmentsCount()
+        {
+            try
+            {
+                var count = await _appointmentService.GetDailyAppointmentsCountAsync();
+                return Ok(count);
+            }
+            catch (Exception ex)
+            {
+               
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpGet("api/admin/monthly-count")]
+        public async Task<IActionResult> GetMonthlyAppointmentsCount()
+        {
+            try
+            {
+                var count = await _appointmentService.GetMonthlyAppointmentsCountAsync();
+                return Ok(count);
+            }
+            catch (Exception ex)
+            {
+               
+                return StatusCode(500, "Internal server error");
+            }
+        }
+        [HttpGet("api/admin/yearly-count")]
+        public async Task<IActionResult> GetYearlyAppointmentsCount()
+        {
+            try
+            {
+                var counts = await _appointmentService.GetYearlyAppointmentsCountAsync();
+
+                // Transform dictionary into format suitable for charting
+                var response = new
+                {
+                    months = counts.Keys.ToArray(),
+                    appointments = counts.Values.ToArray()
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [Authorize(Roles = "SuperAdmin,Admin")]

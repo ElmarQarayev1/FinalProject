@@ -30,8 +30,6 @@ namespace Medical.Api.Controllers
 
         }
 
-    
-
         [Authorize(Roles = "SuperAdmin")]
         [HttpPost("api/admin/createAdmin")]
         public IActionResult Create(SuperAdminCreateAdminDto createDto)
@@ -191,7 +189,7 @@ namespace Medical.Api.Controllers
 
 
 
-        [Authorize(Roles ="Admin,SuperAdmin")]
+       [Authorize(Roles ="Admin,SuperAdmin")]
         [HttpGet("api/admin/profile")]
         public ActionResult Profile()
         {
@@ -237,7 +235,7 @@ namespace Medical.Api.Controllers
             return Ok(admin);
         }
 
-        [Authorize(Roles = "Admin,SuperAdmin")]
+       [Authorize(Roles = "Admin,SuperAdmin")]
         [HttpPut("api/admin/update/{id}")]
         public IActionResult Update(string id, AdminUpdateDto updateDto)
         {

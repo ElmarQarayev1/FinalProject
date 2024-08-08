@@ -11,6 +11,9 @@ namespace Medical.Service.Interfaces.Admin
         Task<int> Create(AppointmentCreateDto createDto);
         PaginatedList<AppointmentPaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10, int? doctorId = null);
         List<AppointmentGetDtoForFilter> GetByIdForFilter(int doctorId);
+        Task<int> GetDailyAppointmentsCountAsync();
+        Task<int> GetMonthlyAppointmentsCountAsync();
+        Task<Dictionary<string, int>> GetYearlyAppointmentsCountAsync();
     }
 }
 

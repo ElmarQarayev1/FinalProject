@@ -17,6 +17,81 @@ namespace Medical.UI.Service
             _client = new HttpClient();
             _httpContextAccessor = httpContextAccessor;
         }
+        public async Task<Dictionary<string, int>> GetYearlyAppointmentsCountAsync()
+        {
+            _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
+            _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
+
+            using (HttpResponseMessage response = await _client.GetAsync(baseUrl + "api/admin/yearly-count"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+
+                  
+                    var data = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(content);
+
+               
+                    var months = JsonSerializer.Deserialize<string[]>(data["months"].ToString());
+                    var earnings = JsonSerializer.Deserialize<int[]>(data["earnings"].ToString());
+
+                 
+                    var result = new Dictionary<string, int>();
+                    for (int i = 0; i < months.Length; i++)
+                    {
+                        result[months[i]] = earnings[i];
+                    }
+
+                    return result;
+                }
+                else
+                {
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    throw new HttpException(response.StatusCode, errorMessage);
+                }
+            }
+        }
+
+
+        public async Task<int> GetDailyAppointmentsCountAsync()
+        {
+            _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
+            _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
+
+            using (HttpResponseMessage response = await _client.GetAsync(baseUrl + "daily-count"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var count = await response.Content.ReadAsStringAsync();
+                    return int.Parse(count);
+                }
+                else
+                {
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    throw new HttpException(response.StatusCode, errorMessage);
+                }
+            }
+        }
+
+        public async Task<int> GetMonthlyAppointmentsCountAsync()
+        {
+            _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
+            _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
+
+            using (HttpResponseMessage response = await _client.GetAsync(baseUrl + "monthly-count"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var count = await response.Content.ReadAsStringAsync();
+                    return int.Parse(count);
+                }
+                else
+                {
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    throw new HttpException(response.StatusCode, errorMessage);
+                }
+            }
+        }
 
         public async Task<int> GetTodayOrdersCountAsync()
         {
