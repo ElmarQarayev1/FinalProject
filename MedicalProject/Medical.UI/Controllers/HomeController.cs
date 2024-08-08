@@ -58,6 +58,29 @@ public class HomeController : Controller
             return RedirectToAction("Error", "Home");
         }
     }
+    [HttpGet("api/admin/order-status-counts")]
+    public async Task<IActionResult> OrderStatusCounts()
+    {
+        try
+        {
+            var statusCounts = await _crudService.GetOrderStatusCountsAsync();
+            return Ok(statusCounts); 
+        }
+        catch (HttpException ex)
+        {
+            if (ex.Status == System.Net.HttpStatusCode.Unauthorized)
+            {
+                return Unauthorized("You are not authorized to access this resource.");
+            }
+
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+        }
+        catch (System.Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+        }
+    }
+
 
     [HttpGet("api/admin/daily-count")]
     public async Task<IActionResult> GetDailyAppointmentsCount()

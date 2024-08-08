@@ -6,6 +6,7 @@ using Medical.Core.Entities;
 using Medical.Core.Enum;
 using Medical.Data;
 using Medical.Data.Repositories.Interfaces;
+using Medical.Service.Dtos.Admin.OrderDtos;
 using Medical.Service.Dtos.User.OrderDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Interfaces.Admin;
@@ -31,6 +32,28 @@ namespace Medical.Service.Implementations.Admin
             _medicineRepository = medicineRepository;
             _emailService = emailService;
         }
+        public async Task<OrderStatusCountsDto> GetOrderStatusCountsAsync()
+        {
+            var counts = await _context.Orders
+                .Where(o => o.Status == OrderStatus.Accepted ||
+                            o.Status == OrderStatus.Rejected ||
+                            o.Status == OrderStatus.Pending)
+                .GroupBy(o => o.Status)
+                .Select(group => new
+                {
+                    Status = group.Key,
+                    Count = group.Count()
+                })
+                .ToListAsync();
+
+            return new OrderStatusCountsDto
+            {
+                AcceptedCount = counts.FirstOrDefault(c => c.Status == OrderStatus.Accepted)?.Count ?? 0,
+                RejectedCount = counts.FirstOrDefault(c => c.Status == OrderStatus.Rejected)?.Count ?? 0,
+                PendingCount = counts.FirstOrDefault(c => c.Status == OrderStatus.Pending)?.Count ?? 0
+            };
+        }
+
         public async Task<int> GetTodayOrdersCountAsync()
         {
             var today = DateTime.Today;

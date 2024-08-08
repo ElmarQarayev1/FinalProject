@@ -2,6 +2,7 @@
 using Medical.Core.Entities;
 using Medical.Core.Enum;
 using Medical.Service.Dtos.Admin.DoctorDtos;
+using Medical.Service.Dtos.Admin.OrderDtos;
 using Medical.Service.Dtos.User.OrderDtos;
 
 namespace Medical.Service.Interfaces.Admin
@@ -20,6 +21,7 @@ namespace Medical.Service.Interfaces.Admin
         Task<double> GetTodayOrdersTotalPriceAsync();
         Task<int> GetMonthlyOrdersCountAsync();
         Task<double> GetMonthlyOrdersTotalPriceAsync();
+        Task<OrderStatusCountsDto> GetOrderStatusCountsAsync();
 
     }
 }

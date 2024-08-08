@@ -7,6 +7,7 @@ using System.Security.Claims;
 using Medical.Service.Exceptions;
 using System.Collections.Generic;
 using Medical.Core.Enum;
+using Medical.Service.Dtos.Admin.OrderDtos;
 
 namespace Medical.Api.Controllers
 {
@@ -156,6 +157,20 @@ namespace Medical.Api.Controllers
         {
             var totalPrice = await _orderService.GetMonthlyOrdersTotalPriceAsync();
             return Ok(totalPrice);
+        }
+        [HttpGet("api/admin/order-status-counts")]
+        public async Task<ActionResult<OrderStatusCountsDto>> GetOrderStatusCounts()
+        {
+            try
+            {
+                var result = await _orderService.GetOrderStatusCountsAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+               
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+            }
         }
 
     }

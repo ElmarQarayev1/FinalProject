@@ -1,4 +1,7 @@
 ﻿   <!-- Sale & Revenue Start -->
+
+
+
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
 
@@ -83,17 +86,20 @@
 
             </div>
         </div>
-        <div class="col-sm-12 col-xl-6">
-            <div class="bg-secondary text-center rounded p-4">
-                <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h6 class="mb-0">Salse & Revenue</h6>
-                    <a href="">Show All</a>
-                </div>
-                <canvas id="salse-revenue"></canvas>
+
+
+        <div class="col-12">
+            <div class="bg-secondary text-center rounded p-4" style="width: 600px; margin:auto;">
+                <h5 class="mb-4">Order Status Distribution</h5>
+
+               
+                <canvas id="orderStatusChart" class="chart-canvas" style="width:50px; height:50px;"></canvas>
             </div>
         </div>
+
     </div>
 </div>
+
 <!-- Sales Chart End -->
 <!-- Recent Sales Start -->
 <div class="container-fluid pt-4 px-4">
@@ -288,8 +294,7 @@
 </div>
 <!-- Widgets End -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
+<script>document.addEventListener("DOMContentLoaded", function () {
         async function fetchData() {
             try {
                 let response = await fetch('/Home/GetTodayOrdersTotalPrice');
@@ -329,7 +334,7 @@
                         data: {
                             labels: monthlyData.months,
                             datasets: [{
-                                label: 'monthly appointments',
+                                label: 'Monthly Appointments',
                                 data: monthlyData.appointments,
                                 backgroundColor: 'rgba(255, 0, 0, 0.2)',
                                 borderColor: 'red',
@@ -341,9 +346,9 @@
                             scales: {
                                 y: {
                                     beginAtZero: true,
-                                    suggestedMax: Math.max(...monthlyData.appointments) + 10, 
+                                    suggestedMax: Math.max(...monthlyData.appointments) + 10,
                                     ticks: {
-                                        stepSize: 5 
+                                        stepSize: 5
                                     }
                                 },
                                 x: {
@@ -358,12 +363,79 @@
                 } else {
                     console.error('Data is null or not in expected format:', monthlyData);
                 }
+
+
+
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+
+        fetchData();
+    });</script>
+
+<script>document.addEventListener("DOMContentLoaded", function () {
+        async function fetchData() {
+            try {
+                let response = await fetch('/api/admin/order-status-counts');
+
+                if (response.ok) {
+                    let orderStatusCounts = await response.json();
+                    console.log('Order Status Counts:', orderStatusCounts);
+
+                    if (orderStatusCounts) {
+                        var pieCtx = document.getElementById('orderStatusChart').getContext('2d');
+
+                        var orderStatusChart = new Chart(pieCtx, {
+                            type: 'pie',
+                            data: {
+                                labels: ['Accepted', 'Rejected', 'Pending'],
+                                datasets: [{
+                                    data: [
+                                        orderStatusCounts.acceptedCount,
+                                        orderStatusCounts.rejectedCount,
+                                        orderStatusCounts.pendingCount
+                                    ],
+                                    backgroundColor: [
+                                        'rgba(75, 192, 192, 0.2)',
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(255, 206, 86, 0.2)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(255, 206, 86, 1)'
+                                    ],
+                                    borderWidth: 2
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                               
+                                plugins: {
+                                    legend: {
+                                        position: 'top',
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: 'Order Status Distribution'
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        console.error('Order status data is undefined:', orderStatusCounts);
+                    }
+                } else {
+                    console.error('Failed to fetch data:', response.statusText);
+                }
+
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         }
 
         fetchData();
-    });
-
-    </script>
+    });</script>

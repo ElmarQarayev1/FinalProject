@@ -23,7 +23,7 @@ namespace Medical.UI.Service
             using (HttpResponseMessage response = await _client.GetAsync(baseUrl + "monthly-count"))
             {
                 var json = await response.Content.ReadAsStringAsync();
-                Console.WriteLine("API Response JSON: " + json); 
+                //Console.WriteLine("API Response JSON: " + json); 
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -37,6 +37,30 @@ namespace Medical.UI.Service
                 }
             }
         }
+        public async Task<OrderStatusCountsResponse> GetOrderStatusCountsAsync()
+        {
+            using (HttpResponseMessage response = await _client.GetAsync(baseUrl + "order-status-counts"))
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                //Console.WriteLine("API Response JSON: " + json); 
+
+                if (response.IsSuccessStatusCode)
+                {
+                    
+                    var data = JsonSerializer.Deserialize<OrderStatusCountsResponse>(json);
+                    if (data == null)
+                    {
+                        throw new HttpException(response.StatusCode);
+                    }
+                    return data;
+                }
+                else
+                {
+                    throw new HttpException(response.StatusCode, json);
+                }
+            }
+        }
+
 
         public async Task<int> GetDailyAppointmentsCountAsync()
         {
