@@ -137,7 +137,7 @@ namespace Medical.Api.Controllers
             
         }
 
-        [Authorize(Roles = "Admin,SuperAdmin")]
+      
         [HttpGet("api/admin/today/orders/count")]
         public async Task<IActionResult> GetTodayOrdersCount()
         {
@@ -145,7 +145,7 @@ namespace Medical.Api.Controllers
             return Ok(count);
         }
 
-        [Authorize(Roles = "Admin,SuperAdmin")]
+      
         [HttpGet("api/admin/today/orders/total-price")]
         public async Task<IActionResult> GetTodayOrdersTotalPrice()
         {
@@ -153,7 +153,7 @@ namespace Medical.Api.Controllers
             return Ok(totalPrice);
         }
 
-        [Authorize(Roles = "Admin,SuperAdmin")]
+       
         [HttpGet("api/admin/monthly/orders/count")]
         public async Task<IActionResult> GetMonthlyOrdersCount()
         {
@@ -161,14 +161,14 @@ namespace Medical.Api.Controllers
             return Ok(count);
         }
 
-        [Authorize(Roles = "Admin,SuperAdmin")]
+       
         [HttpGet("api/admin/monthly/orders/total-price")]
         public async Task<IActionResult> GetMonthlyOrdersTotalPrice()
         {
             var totalPrice = await _orderService.GetMonthlyOrdersTotalPriceAsync();
             return Ok(totalPrice);
         }
-        [Authorize(Roles = "Admin,SuperAdmin")]
+     
         [HttpGet("api/admin/order-status-counts")]
         public async Task<ActionResult<OrderStatusCountsDto>> GetOrderStatusCounts()
         {
