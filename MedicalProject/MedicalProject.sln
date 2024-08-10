@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medical.Service", "Medical.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medical.UI", "Medical.UI\Medical.UI.csproj", "{13434F5E-1E8C-4C53-86C5-259788FB8D0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medical.Api.Test", "Medical.Api.Test\Medical.Api.Test.csproj", "{33E52E01-F83A-4AA8-8190-07CB3685842D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{13434F5E-1E8C-4C53-86C5-259788FB8D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13434F5E-1E8C-4C53-86C5-259788FB8D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13434F5E-1E8C-4C53-86C5-259788FB8D0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33E52E01-F83A-4AA8-8190-07CB3685842D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33E52E01-F83A-4AA8-8190-07CB3685842D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33E52E01-F83A-4AA8-8190-07CB3685842D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33E52E01-F83A-4AA8-8190-07CB3685842D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

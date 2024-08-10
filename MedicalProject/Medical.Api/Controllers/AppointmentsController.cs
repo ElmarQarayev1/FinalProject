@@ -26,9 +26,9 @@ namespace Medical.Api.Controllers
             _mapper = mapper;
         }
 
-        [Authorize(Roles ="Member")]
+       [Authorize(Roles ="Member")]
         [HttpPost("api/appointments")]
-        public async Task<IActionResult> Create([FromBody] AppointmentCreateDto createDto)
+        public async Task<IActionResult> Create( AppointmentCreateDto createDto)
         {
             var id = await _appointmentService.Create(createDto);
             return StatusCode(201, new { Id = id });
