@@ -158,14 +158,11 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" src="~/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">John Doe</span>
+                            <span class="d-none d-lg-inline-flex" id="usernameDisplay">John Doe</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-
-                           
-                                <a asp-action="profile" asp-controller="account" class="dropdown-item">Profile</a>
-
-                                <a asp-action="logout" asp-controller="account" class="dropdown-item">Log Out</a>
+                            <a asp-action="profile" asp-controller="account" class="dropdown-item">Profile</a>
+                            <a asp-action="logout" asp-controller="account" class="dropdown-item">Log Out</a>
                         </div>
                     </div>
                 </div>
@@ -197,3 +194,37 @@
 </body>
 
 </html>
+@*<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const token = localStorage.getItem('token');
+        console.log('Token:', token); 
+
+        fetch('https://localhost:7061/api/admin/current-username', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then(response => {
+                console.log('Response status:', response.status);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('API data:', data); 
+                const usernameElement = document.getElementById('usernameDisplay');
+                if (usernameElement && data.username) {
+                    usernameElement.textContent = data.username;
+                } else {
+                    console.error('Username is null or usernameDisplay element not found');
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    });
+
+</script>*@

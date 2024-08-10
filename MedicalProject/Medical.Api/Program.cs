@@ -23,7 +23,6 @@ using Quartz;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 
 builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
@@ -40,6 +39,7 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
 });
 
 
+builder.Services.AddMemoryCache();
 
 
 var serviceProvider = new ServiceCollection()
@@ -76,6 +76,22 @@ builder.Services.AddQuartzHostedService(options =>
 });
 
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.WithOrigins("https://localhost:7101")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowCredentials());
+});
+
+
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("SuperAdmin", policy => policy.RequireRole("SuperAdmin"));
+    options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+});
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 {
@@ -202,6 +218,7 @@ builder.Services.AddValidatorsFromAssemblyContaining<CategoryCreateDtoValidator>
 
 
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -216,6 +233,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 
+app.UseCors("AllowSpecificOrigin");
 
 app.UseStaticFiles();
 

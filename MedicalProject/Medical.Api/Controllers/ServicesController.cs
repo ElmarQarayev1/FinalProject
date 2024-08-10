@@ -1,6 +1,7 @@
 ﻿using System;
 using Medical.Service;
 using Medical.Service.Dtos.Admin.ServiceDtos;
+using Medical.Service.Dtos.User.DoctorDtos;
 using Medical.Service.Dtos.User.FeatureDtos;
 using Medical.Service.Dtos.User.ServiceDtos;
 using Medical.Service.Implementations.Admin;
@@ -47,6 +48,13 @@ namespace Medical.Api.Controllers
         {
             return StatusCode(200, _serviceService.GetAll());
         }
+
+        [HttpGet("api/Services/ForDownSide")]
+        public ActionResult<List<ServiceForDownSideDto>> GetAllUserForDownSide()
+        {
+            return StatusCode(200, _serviceService.GetAllUserForDownSide());
+        }
+
 
         [HttpGet("api/admin/Services/{id}")]
         public ActionResult<ServiceGetDto> GetById(int id)

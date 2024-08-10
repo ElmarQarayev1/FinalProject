@@ -57,9 +57,17 @@
               "target": "Package",
               "version": "[7.0.16, )"
             },
+            "Microsoft.Extensions.Caching.StackExchangeRedis": {
+              "target": "Package",
+              "version": "[7.0.16, )"
+            },
             "Quartz.Extensions.Hosting": {
               "target": "Package",
               "version": "[3.12.0, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.8.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

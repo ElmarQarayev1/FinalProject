@@ -110,6 +110,8 @@ namespace Medical.Service.Profiles
 
 
 
+            CreateMap<Medical.Core.Entities.Service, ServiceForDownSideDto>();
+             
 
 
 
@@ -180,6 +182,8 @@ namespace Medical.Service.Profiles
             CreateMap<Doctor, DoctorGetDetailDto>()
                 .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/doctors/" + src.ImageName));
 
+            CreateMap<Doctor, DoctorForDownSideDto>();
+              
 
 
 

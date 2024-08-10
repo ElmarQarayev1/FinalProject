@@ -28,6 +28,19 @@
     <None Remove="Views\Review\" />
     <None Remove="Views\Appointment\" />
     <None Remove="Extentions\" />
+    <None Remove="Models\AdminModels\" />
+    <None Remove="Models\AppointmentModels\" />
+    <None Remove="Models\CategoryModels\" />
+    <None Remove="Models\DepartmentModels\" />
+    <None Remove="Models\DoctorModels\" />
+    <None Remove="Models\FeatureModels\" />
+    <None Remove="Models\FeedModels\" />
+    <None Remove="Models\MedicineModels\" />
+    <None Remove="Models\OrderModels\" />
+    <None Remove="Models\ReviewModels\" />
+    <None Remove="Models\ServiceModels\" />
+    <None Remove="Models\SettingModels\" />
+    <None Remove="Models\SliderModels\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filter\" />
@@ -49,6 +62,19 @@
     <Folder Include="Views\Review\" />
     <Folder Include="Views\Appointment\" />
     <Folder Include="Extentions\" />
+    <Folder Include="Models\AdminModels\" />
+    <Folder Include="Models\AppointmentModels\" />
+    <Folder Include="Models\CategoryModels\" />
+    <Folder Include="Models\DepartmentModels\" />
+    <Folder Include="Models\DoctorModels\" />
+    <Folder Include="Models\FeatureModels\" />
+    <Folder Include="Models\FeedModels\" />
+    <Folder Include="Models\MedicineModels\" />
+    <Folder Include="Models\OrderModels\" />
+    <Folder Include="Models\ReviewModels\" />
+    <Folder Include="Models\ServiceModels\" />
+    <Folder Include="Models\SettingModels\" />
+    <Folder Include="Models\SliderModels\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.16" />

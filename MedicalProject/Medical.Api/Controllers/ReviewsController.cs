@@ -69,13 +69,26 @@ namespace Medical.Api.Controllers
         public IActionResult RejectOrder(int id)
         {
 
-
             _reviewService.UpdateOrderStatus(id, ReviewStatus.Rejected);
             return NoContent();
 
         }
 
-       
+        [HttpGet("api/admin/Reviews/PendingCount")]
+        public IActionResult GetPendingReviewCount()
+        {
+            try
+            {
+                var pendingCount = _reviewService.GetPendingReviewCount();
+                return Ok(pendingCount);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error.");
+            }
+        }
+
+
     }
 }
 

@@ -7,6 +7,7 @@ using Medical.Data.Repositories.Interfaces;
 
 using Medical.Service.Dtos.Admin.ServiceDtos;
 using Medical.Service.Dtos.User.DepartmentDtos;
+using Medical.Service.Dtos.User.DoctorDtos;
 using Medical.Service.Dtos.User.ServiceDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Helpers;
@@ -39,6 +40,11 @@ namespace Medical.Service.Implementations.Admin
             if (!validationResult.IsValid)
             {
                 throw new ValidationException(validationResult.Errors);
+            }
+
+            if (_serviceRepository.Exists(x => x.Name == createDto.Name))
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "Name", "Service already exists");
             }
 
             Medical.Core.Entities.Service service = new Medical.Core.Entities.Service()
@@ -109,7 +115,15 @@ namespace Medical.Service.Implementations.Admin
             return _mapper.Map<List<ServiceGetDtoForUser>>(services);
 
         }
+        public List<ServiceForDownSideDto> GetAllUserForDownSide(string? search = null)
+        {
+            var services = _serviceRepository
+                .GetAll(x => search == null || x.Name.Contains(search))
+                .Take(6)
+                .ToList();
 
+            return _mapper.Map<List<ServiceForDownSideDto>>(services);
+        }
 
         public ServiceGetDto GetById(int id)
         {
@@ -130,6 +144,9 @@ namespace Medical.Service.Implementations.Admin
                 throw new RestException(StatusCodes.Status404NotFound, "Id", "Service not found by given Id");
             }
 
+            if (service.Name != updateDto.Name && _serviceRepository.Exists(x => x.Name == updateDto.Name))
+                throw new RestException(StatusCodes.Status400BadRequest, "Name", "Service already taken");
+
             var validator = new ServiceUpdateDtoValidator();
 
             var validationResult = validator.Validate(updateDto);
@@ -138,7 +155,6 @@ namespace Medical.Service.Implementations.Admin
             {
                 throw new ValidationException(validationResult.Errors);
             }
-
 
             string deletedFile = service.ImageName;
 

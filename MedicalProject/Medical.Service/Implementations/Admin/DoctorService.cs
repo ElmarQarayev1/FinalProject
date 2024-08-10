@@ -38,6 +38,25 @@ namespace Medical.Service.Implementations.Admin
 
 		}
 
+        public List<DoctorGetDtoForUser> GetAllUser(string? search = null)
+        {
+            var doctors = _doctorRepository.GetAll(x => search == null || x.FullName.Contains(search)).ToList();
+            return _mapper.Map<List<DoctorGetDtoForUser>>(doctors);
+
+        }
+
+        public List<DoctorForDownSideDto> GetAllUserForDownSide(string? search = null)
+        {
+            var doctors = _doctorRepository
+                .GetAll(x => search == null || x.FullName.Contains(search))
+                .OrderByDescending(x => x.CreateAt) 
+                .Take(6) 
+                .ToList();
+
+            return _mapper.Map<List<DoctorForDownSideDto>>(doctors);
+        }
+
+
         public int Create(DoctorCreateDto createDto)
         {
             var validator = new DoctorCreateDtoValidator();
@@ -142,12 +161,7 @@ namespace Medical.Service.Implementations.Admin
 
 
 
-        public List<DoctorGetDtoForUser> GetAllUser(string? search = null)
-        {
-            var doctors = _doctorRepository.GetAll(x => search == null || x.FullName.Contains(search)).ToList();
-            return _mapper.Map<List<DoctorGetDtoForUser>>(doctors);
-
-        }
+     
 
         public PaginatedList<DoctorPaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10)
         {

@@ -7,85 +7,232 @@ using Medical.Service.Exceptions;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Medical.Api.Controllers
 {
     [ApiController]
-	public class DoctorsController:ControllerBase
-	{
-		public IDoctorService _doctorService;
+    public class DoctorsController : ControllerBase
+    {
+        public IDoctorService _doctorService;
 
-		public DoctorsController(IDoctorService doctorService)
-		{
-			_doctorService = doctorService;
+        private readonly IMemoryCache _cache;
+        private readonly TimeSpan _cacheExpiration = TimeSpan.FromSeconds(30);
 
-		}
+        public DoctorsController(IDoctorService doctorService, IMemoryCache cache)
+        {
+            _doctorService = doctorService;
+            _cache = cache;
+
+        }
 
         [HttpPost("api/admin/Doctors")]
         public ActionResult Create([FromForm] DoctorCreateDto createDto)
         {
-            return StatusCode(201, new { Id = _doctorService.Create(createDto) });
+          
+            var newDoctorId = _doctorService.Create(createDto);
+
+           
+            _cache.Remove("Doctors_GetAll_Admin"); 
+            _cache.Remove("Doctors_GetAllForUserHome"); 
+            _cache.Remove("Doctors_GetAllUser"); 
+            _cache.Remove("Doctors_GetAllUserForDownSide"); 
+
+          
+            _cache.Remove($"Doctor_GetById_{newDoctorId}");
+
+            return StatusCode(201, new { Id = newDoctorId });
         }
+
 
         [HttpGet("api/admin/Doctors")]
         public ActionResult<PaginatedList<DoctorPaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
         {
-            return StatusCode(200, _doctorService.GetAllByPage(search, page, size));
+            var cacheKey = $"Doctors_GetAll_{search}_{page}_{size}";
+            if (_cache.TryGetValue(cacheKey, out PaginatedList<DoctorPaginatedGetDto> cachedResult))
+            {
+                return Ok(cachedResult);
+            }
+
+            var result = _doctorService.GetAllByPage(search, page, size);
+
+            var cacheEntryOptions = new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = _cacheExpiration
+            };
+
+            _cache.Set(cacheKey, result, cacheEntryOptions);
+
+            return Ok(result);
         }
 
         [HttpGet("api/admin/Doctors/all")]
         public ActionResult<List<DoctorGetDto>> GetAll()
         {
-            return StatusCode(200, _doctorService.GetAll());
+            var cacheKey = "Doctors_GetAll_Admin";
+            if (_cache.TryGetValue(cacheKey, out List<DoctorGetDto> cachedResult))
+            {
+                return Ok(cachedResult);
+            }
+
+            var result = _doctorService.GetAll();
+            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = _cacheExpiration
+            });
+
+            return Ok(result);
         }
+
         [HttpGet("api/Doctors")]
         public ActionResult<List<DoctorGetDtoForUser>> GetAllForUserHome()
         {
-            return StatusCode(200, _doctorService.GetForUserHome());
+            var cacheKey = "Doctors_GetAllForUserHome";
+            if (_cache.TryGetValue(cacheKey, out List<DoctorGetDtoForUser> cachedResult))
+            {
+                return Ok(cachedResult);
+            }
+
+            var result = _doctorService.GetForUserHome();
+            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = _cacheExpiration
+            });
+
+            return Ok(result);
         }
 
         [HttpGet("api/Doctors/all")]
         public ActionResult<List<DoctorGetDtoForUser>> GetAllUser()
         {
-            return StatusCode(200, _doctorService.GetAll());
+            var cacheKey = "Doctors_GetAllUser";
+            if (_cache.TryGetValue(cacheKey, out List<DoctorGetDtoForUser> cachedResult))
+            {
+                return Ok(cachedResult);
+            }
+
+            var result = _doctorService.GetAll();
+            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = _cacheExpiration
+            });
+
+            return Ok(result);
         }
 
-        [HttpGet("api/admin/Doctors/{id}")]
-        public ActionResult<DoctorGetDto> GetById(int id)
+
+        [HttpGet("api/Doctors/ForDownSide")]
+        public ActionResult<List<DoctorForDownSideDto>> GetAllUserForDownSide()
         {
-            return StatusCode(200, _doctorService.GetById(id));
+            var cacheKey = "Doctors_GetAllUserForDownSide";
+            if (_cache.TryGetValue(cacheKey, out List<DoctorForDownSideDto> cachedResult))
+            {
+                return Ok(cachedResult);
+            }
+
+            var result = _doctorService.GetAllUserForDownSide();
+            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = _cacheExpiration
+            });
+
+            return Ok(result);
         }
+
 
         [HttpGet("api/ForAppointment/{departmentId}")]
         public IActionResult GetByIdForAppointment(int departmentId)
         {
-            
-           
-                var doctors = _doctorService.GetByIdForAppointment(departmentId);
-                return Ok(doctors);
-               
+            var cacheKey = $"Doctors_GetByIdForAppointment_{departmentId}";
+            if (_cache.TryGetValue(cacheKey, out List<DoctorGetDtoForUser> cachedResult))
+            {
+                return Ok(cachedResult);
+            }
+
+            var doctors = _doctorService.GetByIdForAppointment(departmentId);
+            _cache.Set(cacheKey, doctors, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = _cacheExpiration
+            });
+
+            return Ok(doctors);
         }
+
+        [HttpGet("api/Doctors/{id}")]
+        public ActionResult<DoctorGetDetailDto> GetByIdForUser(int id)
+        {
+            var cacheKey = $"Doctors_GetByIdForUser_{id}";
+            if (_cache.TryGetValue(cacheKey, out DoctorGetDetailDto cachedResult))
+            {
+                return Ok(cachedResult);
+            }
+
+            var result = _doctorService.GetByIdForUser(id);
+            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = _cacheExpiration
+            });
+
+            return Ok(result);
+        }
+
+
+        [HttpGet("api/admin/Doctors/{id}")]
+        public ActionResult<DoctorGetDto> GetById(int id)
+        {
+            var cacheKey = $"Doctor_GetById_{id}";
+            if (_cache.TryGetValue(cacheKey, out DoctorGetDto cachedResult))
+            {
+                return Ok(cachedResult);
+            }
+
+            var result = _doctorService.GetById(id);
+
+            var cacheEntryOptions = new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = _cacheExpiration
+            };
+
+            _cache.Set(cacheKey, result, cacheEntryOptions);
+
+            return Ok(result);
+        }
+
+
+
 
         [HttpDelete("api/admin/Doctors/{id}")]
         public IActionResult Delete(int id)
         {
             _doctorService.Delete(id);
+
+
+            _cache.Remove($"Doctor_GetById_{id}");
+
+
+            _cache.Remove("Doctors_GetAll");
+
             return NoContent();
         }
-        [HttpGet("api/Doctors/{id}")]
-        public ActionResult<DoctorGetDetailDto> GetByIdForUser(int id)
-        {
-            return StatusCode(200, _doctorService.GetByIdForUser(id));
-        }
+
+
 
         [HttpPut("api/admin/Doctors/{id}")]
         public void Update(int id, [FromForm] DoctorUpdateDto updateDto)
         {
             _doctorService.Update(id, updateDto);
+
+           
+            _cache.Remove($"Doctor_GetById_{id}");
+            _cache.Remove($"Doctors_GetByIdForUser_{id}");
+            _cache.Remove("Doctors_GetAll_Admin");
+            _cache.Remove("Doctors_GetAllForUserHome");
+            _cache.Remove("Doctors_GetAllUser");
+            _cache.Remove("Doctors_GetAllUserForDownSide");
         }
 
-      
 
     }
-}
 
+
+}

@@ -41,6 +41,11 @@ namespace Medical.Service.Implementations.Admin
                 throw new ValidationException(validationResult.Errors);
             }
 
+            if (_departmentRepository.Exists(x => x.Name == createDto.Name))
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "Name", "Department already exists");
+            }
+
             Department department = new Department()
             {
                 Name = createDto.Name,
@@ -125,6 +130,9 @@ namespace Medical.Service.Implementations.Admin
             {
                 throw new RestException(StatusCodes.Status404NotFound, "Id", "Department not found by given Id");
             }
+            if (department.Name != updateDto.Name && _departmentRepository.Exists(x => x.Name == updateDto.Name))
+                throw new RestException(StatusCodes.Status400BadRequest, "Name", "Department already taken");
+
 
             var validator = new DepartmentUpdateDtoValidator();
 

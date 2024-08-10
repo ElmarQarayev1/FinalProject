@@ -18,6 +18,24 @@ namespace Medical.UI.Service
             _httpContextAccessor = httpContextAccessor;
         }
 
+        public async Task<int> GetPendingReviewCountAsync()
+        {
+            using (HttpResponseMessage response = await _client.GetAsync(baseUrl + "Reviews/PendingCount"))
+            {
+                var json = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var pendingCount = JsonSerializer.Deserialize<int>(json);
+                    return pendingCount;
+                }
+                else
+                {
+                    throw new HttpException(response.StatusCode, json);
+                }
+            }
+        }
+
         public async Task<YearlyAppointmentsResponse> GetMonthlyAppointmentsCountAsync()
         {
             using (HttpResponseMessage response = await _client.GetAsync(baseUrl + "monthly-count"))

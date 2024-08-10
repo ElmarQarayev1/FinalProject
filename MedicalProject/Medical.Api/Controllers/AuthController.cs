@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Claims;
 using Medical.Core.Entities;
 using Medical.Service;
 using Medical.Service.Dtos.Admin.AuthDtos;
@@ -30,6 +31,7 @@ namespace Medical.Api.Controllers
 
         }
 
+       
         [Authorize(Roles = "SuperAdmin")]
         [HttpPost("api/admin/createAdmin")]
         public IActionResult Create(SuperAdminCreateAdminDto createDto)

@@ -17,6 +17,8 @@ namespace Medical.Service.Interfaces.Admin
         List<ServiceGetDtoForUser> GetForUserHome(string? search = null);
 
         List<ServiceGetDtoForUser> GetAllUser(string? search = null);
+
+        List<ServiceForDownSideDto> GetAllUserForDownSide(string? search = null);
     }
 }
 

@@ -40,6 +40,11 @@ namespace Medical.Service.Implementations.Admin
                 throw new ValidationException(validationResult.Errors);
             }
 
+            if (_featureRepository.Exists(x => x.Name == createDto.Name))
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "Name", "Feature already exists");
+            }
+
             Feature feature = new Feature()
             {
                 Name = createDto.Name,
@@ -127,6 +132,10 @@ namespace Medical.Service.Implementations.Admin
             {
                 throw new RestException(StatusCodes.Status404NotFound, "Id", "Feature not found by given Id");
             }
+
+            if (feature.Name != updateDto.Name && _featureRepository.Exists(x => x.Name == updateDto.Name))
+                throw new RestException(StatusCodes.Status400BadRequest, "Name", "Feature already taken");
+
 
             var validator = new FeatureUpdateDtoValidator();
 

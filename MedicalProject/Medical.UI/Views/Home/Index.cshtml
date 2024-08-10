@@ -57,7 +57,14 @@
                 </div>
             </div>
         </div>
-
+        <div class="col-sm-6 col-xl-3">
+            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                <i class="fa fa-hourglass-half fa-3x text-primary"></i>
+                <div class="ms-3">
+                    <p class="mb-2">Pending Reviews: <span id="pending-reviews"></span></p>
+                </div>
+            </div>
+        </div>
 
         <div class="col-sm-6 col-xl-3">
             <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
@@ -316,6 +323,10 @@
                 response = await fetch('/api/admin/daily-count');
                 let dailyAppointments = await response.json();
                 document.getElementById('daily-appointments').textContent = dailyAppointments;
+
+                response = await fetch('/api/admin/Reviews/PendingCount');
+                let pendingReviews = await response.json();
+                document.getElementById('pending-reviews').textContent = pendingReviews;
 
                 response = await fetch('/api/admin/yearly-count');
                 let yearlyAppointments = await response.json();

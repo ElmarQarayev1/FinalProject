@@ -82,9 +82,7 @@ namespace Medical.UI.Controllers
             if (userName == null || !_httpContextAccessor.HttpContext.Session.GetBool("PasswordResetRequired"))
             {
                 return RedirectToAction("Login");
-            }
-
-         
+            }    
 
 
             if (userName == null)

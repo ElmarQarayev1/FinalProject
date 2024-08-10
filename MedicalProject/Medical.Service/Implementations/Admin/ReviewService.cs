@@ -41,6 +41,10 @@ namespace Medical.Service.Implementations.Admin
             _reviewRepository = reviewRepository;
             _context = appDbContext;
         }
+        public int GetPendingReviewCount()
+        {
+            return _reviewRepository.GetAll(x => x.Status == ReviewStatus.Pending).Count();
+        }
 
         public int CreateReview(MedicineReviewItemDto reviewDto)
         {

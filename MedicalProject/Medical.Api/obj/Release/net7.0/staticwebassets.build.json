@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+baAGrefPPLrNkPHebPNCrGfiD/Rtnruxzi51UCIC48=",
+  "Hash": "s8/Ob8XWRqD6TipXvUVNDRcJ4ero1k/qN2qg8TJTOlc=",
   "Source": "Medical.Api",
   "BasePath": "_content/Medical.Api",
   "Mode": "Default",
@@ -187,6 +187,23 @@
       "OriginalItemSpec": "wwwroot/uploads/feeds/3b977b36-bda9-48d9-be35-2550208b4191portfolio-6.jpg"
     },
     {
+      "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/03e2daca-11b0-4522-aa01-188c4bd0a65eportfolio-1.jpg",
+      "SourceId": "Medical.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/",
+      "BasePath": "_content/Medical.Api",
+      "RelativePath": "uploads/medicines/03e2daca-11b0-4522-aa01-188c4bd0a65eportfolio-1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/medicines/03e2daca-11b0-4522-aa01-188c4bd0a65eportfolio-1.jpg"
+    },
+    {
       "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/14b9d9df-8945-4492-b222-f22860f4497dportfolio-3.jpg",
       "SourceId": "Medical.Api",
       "SourceType": "Discovered",
@@ -338,23 +355,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/uploads/medicines/bcc538fb-9ce6-4b88-8713-5b89cb74a8caportfolio-3.jpg"
-    },
-    {
-      "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/ce13b4b6-0bd5-443f-ad31-2c2133d21b9eportfolio-8.jpg",
-      "SourceId": "Medical.Api",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/",
-      "BasePath": "_content/Medical.Api",
-      "RelativePath": "uploads/medicines/ce13b4b6-0bd5-443f-ad31-2c2133d21b9eportfolio-8.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/uploads/medicines/ce13b4b6-0bd5-443f-ad31-2c2133d21b9eportfolio-8.jpg"
     },
     {
       "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/d7740233-6fc0-4fbd-b7a2-ad763e94ba99portfolio-1.jpg",

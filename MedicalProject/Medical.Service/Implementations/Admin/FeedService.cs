@@ -47,6 +47,10 @@ namespace Medical.Service.Implementations.Admin
                 throw new ValidationException(validationResult.Errors);
             }
 
+            if (_feedRepository.Exists(x => x.Name == createDto.Name))
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "Name", "Feed already exists");
+            }
             Feed feed = new Feed()
             {
                 Name = createDto.Name,
@@ -125,6 +129,10 @@ namespace Medical.Service.Implementations.Admin
             {
                 throw new RestException(StatusCodes.Status404NotFound, "Id", "Feed not found by given Id");
             }
+
+            if (feed.Name != updateDto.Name && _feedRepository.Exists(x => x.Name == updateDto.Name))
+                throw new RestException(StatusCodes.Status400BadRequest, "Name", "Feed already taken");
+
 
             if (updateDto.Date < DateTime.Today)
             {

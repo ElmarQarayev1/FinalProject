@@ -87,7 +87,7 @@ namespace Medical.Api.Controllers
 
         [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/appointments")]
-        public ActionResult<PaginatedList<CategoryPaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10,int? doctorId=null)
+        public ActionResult<PaginatedList<AppointmentPaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10,int? doctorId=null)
         {
             return StatusCode(200, _appointmentService.GetAllByPage(search, page, size,doctorId));
         }

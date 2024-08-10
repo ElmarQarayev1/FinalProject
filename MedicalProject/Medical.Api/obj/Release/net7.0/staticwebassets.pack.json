@@ -41,6 +41,10 @@
       "PackagePath": "staticwebassets/uploads/feeds/3b977b36-bda9-48d9-be35-2550208b4191portfolio-6.jpg"
     },
     {
+      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/03e2daca-11b0-4522-aa01-188c4bd0a65eportfolio-1.jpg",
+      "PackagePath": "staticwebassets/uploads/medicines/03e2daca-11b0-4522-aa01-188c4bd0a65eportfolio-1.jpg"
+    },
+    {
       "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/14b9d9df-8945-4492-b222-f22860f4497dportfolio-3.jpg",
       "PackagePath": "staticwebassets/uploads/medicines/14b9d9df-8945-4492-b222-f22860f4497dportfolio-3.jpg"
     },
@@ -75,10 +79,6 @@
     {
       "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/bcc538fb-9ce6-4b88-8713-5b89cb74a8caportfolio-3.jpg",
       "PackagePath": "staticwebassets/uploads/medicines/bcc538fb-9ce6-4b88-8713-5b89cb74a8caportfolio-3.jpg"
-    },
-    {
-      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/ce13b4b6-0bd5-443f-ad31-2c2133d21b9eportfolio-8.jpg",
-      "PackagePath": "staticwebassets/uploads/medicines/ce13b4b6-0bd5-443f-ad31-2c2133d21b9eportfolio-8.jpg"
     },
     {
       "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/medicines/d7740233-6fc0-4fbd-b7a2-ad763e94ba99portfolio-1.jpg",
