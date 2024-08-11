@@ -9,13 +9,13 @@ namespace Medical.Service.Interfaces.Admin
 {
 	public interface IOrderService
 	{
-        int CheckOut(CheckOutDto createDto);
+        int CheckOut(CheckOutDto createDto,string userId);
         PaginatedList<OrderPaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10);
         List<OrderGetDto> GetAll(string? search = null);
         OrderGetDto GetById(int id);
         List<OrderDetailDto> GetDetailsOrder(string? search = null);
         void UpdateOrderStatus(int id, OrderStatus newStatus);
-        List<OrderGetDtoForUserProfile> GetByIdForUserProfile(string AppUserId);
+        List<OrderGetDtoForUserProfile> GetByIdForUserProfile(string userId);
 
         Task<int> GetTodayOrdersCountAsync();
         Task<double> GetTodayOrdersTotalPriceAsync();

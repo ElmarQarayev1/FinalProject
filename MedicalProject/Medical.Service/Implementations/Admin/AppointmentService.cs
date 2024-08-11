@@ -83,7 +83,7 @@ namespace Medical.Service.Implementations.Admin
 
 
 
-        public async Task<int> Create(AppointmentCreateDto createDto)
+        public async Task<int> Create(AppointmentCreateDto createDto,string userId)
         {
             var doctor = _doctorRepository.Get(x => x.Id == createDto.DoctorId);
 
@@ -91,10 +91,10 @@ namespace Medical.Service.Implementations.Admin
             {
                 throw new RestException(StatusCodes.Status404NotFound, "doctorId", "Doctor Not Found");
             }
-            var user = await _userManager.FindByIdAsync(createDto.AppUserId);
+            var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
-                throw new RestException(StatusCodes.Status404NotFound, "AppUserId", "User not found.");
+                throw new RestException(StatusCodes.Status404NotFound, "User not found.");
             }
 
             if (!await _userManager.IsEmailConfirmedAsync(user))

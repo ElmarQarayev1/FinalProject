@@ -8,7 +8,7 @@ namespace Medical.Service.Interfaces.Admin
 {
 	public interface IAppointmentService
 	{
-        Task<int> Create(AppointmentCreateDto createDto);
+        Task<int> Create(AppointmentCreateDto createDto,string userId);
         PaginatedList<AppointmentPaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10, int? doctorId = null);
         List<AppointmentGetDtoForFilter> GetByIdForFilter(int doctorId);
         Task<int> GetDailyAppointmentsCountAsync();

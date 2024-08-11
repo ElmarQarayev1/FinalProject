@@ -255,11 +255,16 @@ namespace Medical.Api.Controllers
         }
         [Authorize(Roles = "Member")]
         [HttpGet("api/GetUserProfile/{appUserId}")]
-        public ActionResult<MemberProfileGetDto> GetUserProfile(string appUserId)
+        public ActionResult<MemberProfileGetDto> GetUserProfile()
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
             try
             {
-                var userProfile = _authService.GetByIdForUserProfile(appUserId);
+                var userProfile = _authService.GetByIdForUserProfile(userId);
                 return Ok(userProfile);
             }
             catch (RestException ex)

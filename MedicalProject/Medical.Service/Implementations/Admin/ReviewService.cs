@@ -46,23 +46,23 @@ namespace Medical.Service.Implementations.Admin
             return _reviewRepository.GetAll(x => x.Status == ReviewStatus.Pending).Count();
         }
 
-        public int CreateReview(MedicineReviewItemDto reviewDto)
+        public async Task<int> CreateReviewAsync(MedicineReviewItemDto reviewDto, string userId)
         {
-            var medicine = _medicineRepository.Get(x => x.Id == reviewDto.MedicineId);
+            var medicine =  _medicineRepository.Get(x => x.Id == reviewDto.MedicineId);
 
             if (medicine == null)
             {
                 throw new RestException(StatusCodes.Status404NotFound, "Medicine not found");
             }
 
-            if (string.IsNullOrEmpty(reviewDto.AppUserId))
+            if (string.IsNullOrEmpty(userId))
             {
                 throw new RestException(StatusCodes.Status400BadRequest, "User not found");
             }
 
             var review = new MedicineReview
             {
-                AppUserId = reviewDto.AppUserId,
+                AppUserId = userId,
                 MedicineId = reviewDto.MedicineId,
                 CreatedAt = DateTime.Now,
                 Status = ReviewStatus.Pending,
@@ -71,12 +71,12 @@ namespace Medical.Service.Implementations.Admin
             };
 
             _reviewRepository.Add(review);
-            _reviewRepository.Save();
+             _reviewRepository.Save();
 
             return review.Id;
         }
 
-        public void DeleteReview(MedicineReviewDeleteDto deleteDto)
+        public void DeleteReview(MedicineReviewDeleteDto deleteDto,string userId)
         {
 
             var medicine = _medicineRepository.Get(x => x.Id == deleteDto.MedicineId);
@@ -94,7 +94,7 @@ namespace Medical.Service.Implementations.Admin
 
             var review = _reviewRepository.Get(x =>
                 x.Id == deleteDto.MedicineReviewId &&
-                x.AppUserId == deleteDto.AppUserId &&
+                x.AppUserId == userId &&
                 x.MedicineId == deleteDto.MedicineId);
 
             if (review == null)
@@ -106,7 +106,7 @@ namespace Medical.Service.Implementations.Admin
             _reviewRepository.Save();
         }
 
-        public void UpdateOrderStatus(int id, ReviewStatus newStatus)
+        public void UpdateReviewStatus(int id, ReviewStatus newStatus)
         {
             var review = _reviewRepository.Get(o => o.Id == id);
 

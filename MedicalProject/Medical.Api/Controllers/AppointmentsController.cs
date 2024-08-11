@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Medical.Service;
 using Medical.Service.Dtos.Admin.CategoryDtos;
 using Medical.Service.Dtos.User.AppointmentDtos;
+using Medical.Service.Dtos.User.MedicineDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
@@ -26,12 +28,20 @@ namespace Medical.Api.Controllers
             _mapper = mapper;
         }
 
-       [Authorize(Roles ="Member")]
+       
+
+        [Authorize(Roles = "Member")]
         [HttpPost("api/appointments")]
-        public async Task<IActionResult> Create( AppointmentCreateDto createDto)
+        public async Task<IActionResult> Create([FromBody] AppointmentCreateDto createDto)
         {
-            var id = await _appointmentService.Create(createDto);
-            return StatusCode(201, new { Id = id });
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+            var appointmentId = await _appointmentService.Create(createDto, userId);
+
+            return StatusCode(201, new { Id = appointmentId });
         }
 
         [HttpGet("api/admin/daily-count")]

@@ -13,11 +13,11 @@ namespace Medical.Service.Interfaces.Admin
         void Update(int id, MedicineUpdateDto updateDto);
         void Delete(int id);
 
-        int BasketItem(MedicineBasketItemDto createDto);
+        int BasketItem(MedicineBasketItemDto createDto,string userId);
 
-        void RemoveItemFromBasket(MedicineBasketDeleteDto removeDto);
+        void RemoveItemFromBasket(MedicineBasketDeleteDto removeDto,string userId);
 
-        void UpdateItemCountInBasket(MedicineBasketItemDto updateDto);
+        void UpdateItemCountInBasket(MedicineBasketItemDto updateDto,string userId);
 
 
         PaginatedList<MedicinePaginatedGetDtoForUser> GetAllByPageForUser(string? search = null, int page = 1, int size = 9, int? categoryId = null);

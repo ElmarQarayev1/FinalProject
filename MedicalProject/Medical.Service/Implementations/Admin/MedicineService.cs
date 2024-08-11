@@ -43,7 +43,7 @@ namespace Medical.Service.Implementations.Admin
         }
 
 
-        public int BasketItem(MedicineBasketItemDto createDto)
+        public int BasketItem(MedicineBasketItemDto createDto,string userId)
         {
            
             var medicine = _medicineRepository.Get(x => x.Id == createDto.MedicineId);
@@ -53,10 +53,10 @@ namespace Medical.Service.Implementations.Admin
                 throw new RestException(StatusCodes.Status404NotFound, "Medicine not found");
             }
         
-            if (!string.IsNullOrEmpty(createDto.AppUserId))
+            if (!string.IsNullOrEmpty(userId))
             {
                
-                return AddBasketItemToDatabase(createDto);
+                return AddBasketItemToDatabase(createDto,userId);
             }
             else
             {
@@ -66,11 +66,11 @@ namespace Medical.Service.Implementations.Admin
         }
 
        
-        private int AddBasketItemToDatabase(MedicineBasketItemDto createDto)
+        private int AddBasketItemToDatabase(MedicineBasketItemDto createDto,string userId)
         {
             
             var existingBasketItem = _basketRepository.Get(x =>
-                x.AppUserId == createDto.AppUserId && x.MedicineId == createDto.MedicineId);
+                x.AppUserId == userId && x.MedicineId == createDto.MedicineId);
 
             if (existingBasketItem != null)
             {
@@ -83,7 +83,7 @@ namespace Medical.Service.Implementations.Admin
             
             var basketItem = new BasketItem
             {
-                AppUserId = createDto.AppUserId,
+                AppUserId = userId,
                 MedicineId = createDto.MedicineId,
                 Count = createDto.Count,
             };
@@ -95,7 +95,7 @@ namespace Medical.Service.Implementations.Admin
         }
 
 
-        public void RemoveItemFromBasket(MedicineBasketDeleteDto removeDto)
+        public void RemoveItemFromBasket(MedicineBasketDeleteDto removeDto,string userId)
         {
 
             var medicine = _medicineRepository.Get(x => x.Id == removeDto.MedicineId);
@@ -105,10 +105,10 @@ namespace Medical.Service.Implementations.Admin
                 throw new RestException(StatusCodes.Status404NotFound, "Medicine not found");
             }
 
-            if (!string.IsNullOrEmpty(removeDto.AppUserId))
+            if (!string.IsNullOrEmpty(userId))
             {
                
-                RemoveBasketItemFromDatabase(removeDto);
+                RemoveBasketItemFromDatabase(removeDto,userId);
             }
             else
             {
@@ -118,11 +118,11 @@ namespace Medical.Service.Implementations.Admin
         }
 
        
-        private void RemoveBasketItemFromDatabase(MedicineBasketDeleteDto removeDto)
+        private void RemoveBasketItemFromDatabase(MedicineBasketDeleteDto removeDto,string userId)
         {
           
             var basketItem = _basketRepository.Get(x =>
-                x.AppUserId == removeDto.AppUserId && x.MedicineId == removeDto.MedicineId);
+                x.AppUserId == userId && x.MedicineId == removeDto.MedicineId);
 
             if (basketItem != null)
             {
@@ -135,7 +135,7 @@ namespace Medical.Service.Implementations.Admin
 
        
 
-        public void UpdateItemCountInBasket(MedicineBasketItemDto updateDto)
+        public void UpdateItemCountInBasket(MedicineBasketItemDto updateDto,string userId)
         {
             var medicine = _medicineRepository.Get(x => x.Id == updateDto.MedicineId);
 
@@ -143,10 +143,10 @@ namespace Medical.Service.Implementations.Admin
             {
                 throw new RestException(StatusCodes.Status404NotFound, "Medicine not found");
             }
-            if (!string.IsNullOrEmpty(updateDto.AppUserId))
+            if (!string.IsNullOrEmpty(userId))
             {
                
-                UpdateBasketItemCountInDatabase(updateDto);
+                UpdateBasketItemCountInDatabase(updateDto,userId);
             }
             else
             {
@@ -157,11 +157,11 @@ namespace Medical.Service.Implementations.Admin
         }
 
 
-        private void UpdateBasketItemCountInDatabase(MedicineBasketItemDto updateDto)
+        private void UpdateBasketItemCountInDatabase(MedicineBasketItemDto updateDto,string userId)
         {
            
             var basketItem = _basketRepository.Get(x =>
-                x.AppUserId == updateDto.AppUserId && x.MedicineId == updateDto.MedicineId);
+                x.AppUserId == userId && x.MedicineId == updateDto.MedicineId);
 
             if (basketItem != null)
             {

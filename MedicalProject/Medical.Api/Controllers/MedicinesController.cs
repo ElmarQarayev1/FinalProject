@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Security.Claims;
 using Medical.Service;
 using Medical.Service.Dtos.Admin.DepartmentDtos;
 using Medical.Service.Dtos.Admin.MedicineDtos;
 using Medical.Service.Dtos.User.MedicineDtos;
+using Medical.Service.Exceptions;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Authorization;
@@ -86,20 +88,38 @@ namespace Medical.Api.Controllers
         [HttpPost("api/Medicines/AddToBasket")]
         public ActionResult CreateBasket (MedicineBasketItemDto createDto)
         {
-            return StatusCode(201, new { Id = _medicineService.BasketItem(createDto) });
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+            var basketId =  _medicineService.BasketItem(createDto, userId);
+
+            return StatusCode(201, new { Id = basketId });
+           
         }
         [Authorize(Roles = "Member")]
         [HttpDelete("api/Medicines/RemoveFromBasket")]
         public IActionResult RemoveFromBasket(MedicineBasketDeleteDto deleteDto)
         {
-            _medicineService.RemoveItemFromBasket(deleteDto);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+            _medicineService.RemoveItemFromBasket(deleteDto,userId);
             return NoContent();
         }
         [Authorize(Roles = "Member")]
         [HttpPut("api/Medicines/EditBasketItem")]
         public void Update( MedicineBasketItemDto updateDto)
         {
-            _medicineService.UpdateItemCountInBasket(updateDto);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                throw new RestException(StatusCodes.Status401Unauthorized, "user doesn't login");
+            }
+            _medicineService.UpdateItemCountInBasket(updateDto,userId);
         }
        
 

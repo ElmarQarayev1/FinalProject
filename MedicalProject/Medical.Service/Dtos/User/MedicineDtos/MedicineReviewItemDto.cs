@@ -5,7 +5,7 @@ namespace Medical.Service.Dtos.User.MedicineDtos
 {
 	public class MedicineReviewItemDto
 	{
-        public string AppUserId { get; set; }
+       
 
         public int? MedicineId { get; set; }
 

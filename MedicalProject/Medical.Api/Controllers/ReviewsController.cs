@@ -6,6 +6,7 @@ using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Medical.Core.Enum;
+using System.Security.Claims;
 
 namespace Medical.Api.Controllers
 {
@@ -22,7 +23,7 @@ namespace Medical.Api.Controllers
         }
 
         [HttpGet("api/admin/Reviews")]
-        public IActionResult GetAllOrders(string? search = null, int page = 1, int size = 10)
+        public IActionResult GetAllRewiews(string? search = null, int page = 1, int size = 10)
         {
             try
             {
@@ -36,18 +37,31 @@ namespace Medical.Api.Controllers
             }
         }
 
+       
         [Authorize(Roles = "Member")]
         [HttpPost("api/Reviews/CreateReview")]
-        public ActionResult CreateReview(MedicineReviewItemDto createDto)
+        public async Task<IActionResult> CreateReview([FromBody] MedicineReviewItemDto createDto)
         {
-            return StatusCode(201, new { Id = _reviewService.CreateReview(createDto) });
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+            var reviewId = await _reviewService.CreateReviewAsync(createDto, userId);
+
+            return StatusCode(201, new { Id = reviewId });
         }
 
         [Authorize(Roles = "Member")]
         [HttpDelete("api/Reviews/DeleteReview")]
         public IActionResult DeleteReview(MedicineReviewDeleteDto deleteDto)
         {
-            _reviewService.DeleteReview(deleteDto);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+            _reviewService.DeleteReview(deleteDto,userId);
             return NoContent();
         }
 
@@ -62,14 +76,14 @@ namespace Medical.Api.Controllers
         public IActionResult AcceptReview(int id)
         {
 
-            _reviewService.UpdateOrderStatus(id, ReviewStatus.Accepted);
+            _reviewService.UpdateReviewStatus(id, ReviewStatus.Accepted);
             return NoContent();
         }      
         [HttpPut("api/admin/reviewsRejected/{id}")]
         public IActionResult RejectOrder(int id)
         {
 
-            _reviewService.UpdateOrderStatus(id, ReviewStatus.Rejected);
+            _reviewService.UpdateReviewStatus(id, ReviewStatus.Rejected);
             return NoContent();
 
         }

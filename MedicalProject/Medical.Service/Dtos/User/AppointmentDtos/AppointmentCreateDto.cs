@@ -6,7 +6,7 @@ namespace Medical.Service.Dtos.User.AppointmentDtos
 {
 	public class AppointmentCreateDto
 	{
-        public string? AppUserId { get; set; }
+        
 
         public int DoctorId { get; set; }
 

@@ -7,7 +7,7 @@ namespace Medical.Service.Dtos.User.OrderDtos
 	public class CheckOutDto
 	{
 
-        public string AppUserId { get; set; }
+      
         public List<BasketItemDto> BasketItems { get; set; } 
         public string Address { get; set; }
         public string Phone { get; set; }
@@ -17,8 +17,7 @@ namespace Medical.Service.Dtos.User.OrderDtos
     {
         public CheckOutDtoValidator()
         {
-            RuleFor(x => x.AppUserId)
-                .NotEmpty().WithMessage("AppUserId cannot be empty");
+           
 
             RuleFor(x => x.BasketItems)
                 .NotNull().WithMessage("BasketItems cannot be null")

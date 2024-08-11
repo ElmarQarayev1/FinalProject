@@ -30,18 +30,15 @@ namespace Medical.Api.Controllers
         {
             try
             {
-               
-                var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 if (userId == null)
                 {
-                    return Unauthorized("User not authenticated.");
+                    return Unauthorized();
                 }
 
-                
-                checkoutDto.AppUserId = userId;
 
-               
-                var orderId = _orderService.CheckOut(checkoutDto);
+                var orderId = _orderService.CheckOut(checkoutDto,userId);
 
                
                 return Ok(new { OrderId = orderId });
@@ -65,9 +62,14 @@ namespace Medical.Api.Controllers
 
         [Authorize(Roles ="Member")]
         [HttpGet("api/orders/{AppUserId}")]
-        public IActionResult GetOrderByIdForUserProfile(string AppUserId)
+        public IActionResult GetOrderByIdForUserProfile()
         {
-            var orders = _orderService.GetByIdForUserProfile(AppUserId);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+            var orders = _orderService.GetByIdForUserProfile(userId);
             return Ok(orders);
         }
         [Authorize(Roles ="Admin,SuperAdmin")]
@@ -133,8 +135,7 @@ namespace Medical.Api.Controllers
            
                 _orderService.UpdateOrderStatus(id, OrderStatus.Rejected);
                 return NoContent(); 
-                        
-            
+                               
         }
 
       

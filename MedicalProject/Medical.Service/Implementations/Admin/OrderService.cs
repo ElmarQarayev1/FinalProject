@@ -102,15 +102,15 @@ namespace Medical.Service.Implementations.Admin
         }
 
 
-        public int CheckOut(CheckOutDto createDto)
+        public int CheckOut(CheckOutDto createDto,string userId)
            {
-            var user = _context.AppUsers.FirstOrDefault(u => u.Id == createDto.AppUserId);
+            var user = _context.AppUsers.FirstOrDefault(u => u.Id == userId);
             if (user == null)
             {
                 throw new RestException(StatusCodes.Status404NotFound, "User not found");
             }
 
-            var basketItems = _basketRepository.GetAll(b => b.AppUserId == createDto.AppUserId)
+            var basketItems = _basketRepository.GetAll(b => b.AppUserId == userId)
                 .Include(b => b.Medicine).Include(x => x.AppUser)
                 .ToList();
 
@@ -135,7 +135,7 @@ namespace Medical.Service.Implementations.Admin
 
             var order = new Order
             {
-                AppUserId = createDto.AppUserId,
+                AppUserId = userId,
                 FullName = user.FullName,
                 Email = user.Email,
                 Address = createDto.Address,
@@ -224,15 +224,15 @@ namespace Medical.Service.Implementations.Admin
                 }).ToList()
             };
         }
-        public List<OrderGetDtoForUserProfile> GetByIdForUserProfile(string AppUserId)
+        public List<OrderGetDtoForUserProfile> GetByIdForUserProfile(string userId)
         {
-            var user = _context.AppUsers.FirstOrDefault(u => u.Id == AppUserId);
+            var user = _context.AppUsers.FirstOrDefault(u => u.Id == userId);
             if (user == null)
             {
                 throw new RestException(StatusCodes.Status404NotFound,"AppUserId","User not found");
             }
 
-            var query = _orderRepository.GetAll(o=>o.AppUser.Id==AppUserId && o.Status!=OrderStatus.Canceled,"AppUser")
+            var query = _orderRepository.GetAll(o=>o.AppUser.Id==userId && o.Status!=OrderStatus.Canceled,"AppUser")
                .Select(order => new OrderGetDtoForUserProfile
                {
                    CreatedAt = order.CreatedAt,

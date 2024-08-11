@@ -8,11 +8,11 @@ namespace Medical.Service.Interfaces.Admin
 {
 	public interface IReviewService
 	{
-        int CreateReview(MedicineReviewItemDto reviewDto);
+        Task<int> CreateReviewAsync(MedicineReviewItemDto reviewDto, string userId);
 
-        void DeleteReview(MedicineReviewDeleteDto deleteDto);
+        void DeleteReview(MedicineReviewDeleteDto deleteDto,string userId);
 
-        void UpdateOrderStatus(int id, ReviewStatus newStatus);
+        void UpdateReviewStatus(int id, ReviewStatus newStatus);
 
         PaginatedList<ReviewPaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10);
         ReviewDetailDto GetById(int id);

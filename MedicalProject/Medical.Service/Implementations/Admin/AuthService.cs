@@ -47,15 +47,15 @@ namespace Medical.Service.Implementations.Admin
         }
    
 
-        public MemberProfileGetDto GetByIdForUserProfile(string appUserId)
+        public MemberProfileGetDto GetByIdForUserProfile(string userId)
         {
-            var user = _userManager.Users.FirstOrDefault(u => u.Id == appUserId);
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
             if (user == null)
             {
-                throw new RestException(StatusCodes.Status404NotFound, "AppUserId", "User not found.");
+                throw new RestException(StatusCodes.Status404NotFound, "User not found.");
             }
 
-            var orders = _orderRepository.GetAll(o => o.AppUser.Id == appUserId && o.Status != OrderStatus.Canceled, "AppUser")
+            var orders = _orderRepository.GetAll(o => o.AppUser.Id == userId && o.Status != OrderStatus.Canceled, "AppUser")
                 .Select(order => new OrderGetDtoForUserProfile
                 {
                     CreatedAt = order.CreatedAt,
@@ -70,7 +70,7 @@ namespace Medical.Service.Implementations.Admin
                     Status = order.Status.ToString()
                 }).ToList();
 
-            var appointments = _appointmentRepository.GetAll(a => a.AppUserId == appUserId, "Doctor")
+            var appointments = _appointmentRepository.GetAll(a => a.AppUserId == userId, "Doctor")
                 .Select(appointment => new AppointmentGetDtoForUserProfile
                 {
                     DoctorFullName = appointment.Doctor.FullName,
