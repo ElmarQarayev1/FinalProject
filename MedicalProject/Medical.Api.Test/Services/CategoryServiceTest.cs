@@ -138,7 +138,7 @@ namespace Medical.Api.Test.Services
             };
 
             _categoryRepository.Setup(x => x.GetAll(It.IsAny<Expression<Func<Category, bool>>>(), It.IsAny<string[]>()))
-                .Returns(categories); // IQueryable<Category> döndürülmeli
+                .Returns(categories); 
 
             _mapper.Setup(x => x.Map<List<CategoryGetDto>>(categories)).Returns(categoryDtos);
 

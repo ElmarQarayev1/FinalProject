@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
+      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/img/elmar1.jpeg",
+      "PackagePath": "staticwebassets/img/elmar1.jpeg"
+    },
+    {
       "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/img/testimonial-1.jpg",
       "PackagePath": "staticwebassets/img/testimonial-1.jpg"
     },
