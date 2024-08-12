@@ -138,31 +138,7 @@ namespace Medical.Api.Controllers
             return Ok(new { message = "Profile updated successfully!" });
         }
 
-       [Authorize(Roles ="Member")]
-        [HttpPost("api/CheckEmailConfirmationStatus")]
-        public async Task<IActionResult> CheckConfirmation(string userId)
-        {
-            try
-            {
-                bool isConfirmed = await _authService.IsEmailConfirmedAsync(userId);
-                if (isConfirmed)
-                {
-                    return Ok("Email confirmed successfully!");
-                }
-                else
-                {
-                    return BadRequest("Email is not confirmed.");
-                }
-            }
-            catch (RestException ex)
-            {
-                return StatusCode(ex.Code, ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
-        }
+      
 
 
         [HttpGet("api/account/verifyemail")]
@@ -254,7 +230,7 @@ namespace Medical.Api.Controllers
 
         }
         [Authorize(Roles = "Member")]
-        [HttpGet("api/GetUserProfile/{appUserId}")]
+        [HttpGet("api/GetUserProfile")]
         public ActionResult<MemberProfileGetDto> GetUserProfile()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

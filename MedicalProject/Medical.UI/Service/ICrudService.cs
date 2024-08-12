@@ -1,5 +1,6 @@
 ﻿using System;
 using Medical.UI.Models;
+using Medical.UI.Models.OrderModels;
 
 namespace Medical.UI.Service
 {
@@ -26,6 +27,7 @@ namespace Medical.UI.Service
         Task<YearlyAppointmentsResponse> GetMonthlyAppointmentsCountAsync();
         Task<OrderStatusCountsResponse> GetOrderStatusCountsAsync();
         Task<int> GetPendingReviewCountAsync();
+        Task<OrdersPricePerYearDto> GetOrdersPricePerYearAsync();
 
     }
 }

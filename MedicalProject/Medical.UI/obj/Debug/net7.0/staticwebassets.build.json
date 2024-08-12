@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8IZbdsZi8XLNtP5um4mT6CBF9YeH5YAliwPkKwWWqEo=",
+  "Hash": "w2dq9ZxXOZGX05hBEMs6KdzFu81lBECCpF6Au3GzFsw=",
   "Source": "Medical.UI",
   "BasePath": "_content/Medical.UI",
   "Mode": "Default",
@@ -100,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.ico"
+    },
+    {
+      "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/img/elmar1.jpeg",
+      "SourceId": "Medical.UI",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/",
+      "BasePath": "_content/Medical.UI",
+      "RelativePath": "img/elmar1.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/img/elmar1.jpeg"
     },
     {
       "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/img/testimonial-1.jpg",

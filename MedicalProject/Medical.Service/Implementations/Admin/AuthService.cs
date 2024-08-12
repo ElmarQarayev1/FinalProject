@@ -402,23 +402,6 @@ namespace Medical.Service.Implementations.Admin
             return appUser.Id;
         }
 
-       
-
-        public async Task<bool> IsEmailConfirmedAsync(string userId)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                throw new RestException(StatusCodes.Status404NotFound, "User not found.");
-            }
-
-            return user.EmailConfirmed;
-        }
-
-
-
-
-
 
         public string Create(SuperAdminCreateAdminDto createDto)
         {

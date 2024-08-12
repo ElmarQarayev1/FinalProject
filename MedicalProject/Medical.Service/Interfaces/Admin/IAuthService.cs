@@ -18,7 +18,6 @@ namespace Medical.Service.Interfaces.Admin
         void Delete(string id);
         Task UpdatePasswordAsync(AdminUpdateDto updatePasswordDto);
 
-        Task<bool> IsEmailConfirmedAsync(string userId);
 
         Task<string> Register(MemberRegisterDto registerDto);
 

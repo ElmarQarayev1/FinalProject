@@ -61,7 +61,7 @@
             <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-hourglass-half fa-3x text-primary"></i>
                 <div class="ms-3">
-                    <p class="mb-2">Pending Reviews: <span id="pending-reviews"></span></p>
+                    <p class="mb-2">Pending Reviews Count: <span id="pending-reviews"></span></p>
                 </div>
             </div>
         </div>
@@ -88,9 +88,15 @@
         </div>
         <div class="col-12">
             <div class="bg-secondary text-center rounded p-4">
-                <h5 class="mb-4">Monthly Appointments Chart</h5>
+                <h5 class="mb-4">Monthly Appointments Count</h5>
                 <canvas id="monthlyAppointmentsChart" width="500" height="200"></canvas>
 
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="bg-secondary text-center rounded p-4">
+                <h5 class="mb-4">Yearly Orders Price</h5>
+                <canvas id="yearlyOrdersChart" width="500" height="200"></canvas>
             </div>
         </div>
 
@@ -99,7 +105,7 @@
             <div class="bg-secondary text-center rounded p-4" style="width: 600px; margin:auto;">
                 <h5 class="mb-4">Order Status Distribution</h5>
 
-               
+
                 <canvas id="orderStatusChart" class="chart-canvas" style="width:50px; height:50px;"></canvas>
             </div>
         </div>
@@ -107,26 +113,22 @@
     </div>
 </div>
 
-<!-- Sales Chart End -->
-<!-- Recent Sales Start -->
-
-<!-- Recent Sales End -->
-<!-- Widgets Start -->
+<!-- Sale & Revenue Start -->
 <div class="container-fluid pt-4 px-4">
-    <div class="row g-4">
-      
-       
-        <div class="col-sm-12 col-md-6 col-xl-4">
-            <div class="h-100 bg-secondary rounded p-4">
-                <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h6 class="mb-0">Calender</h6>
-                    <a href="">Show All</a>
+    <div class="row g-4 justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-6 col-xl-4 d-flex justify-content-center">
+            <div class="h-100 bg-secondary rounded p-4 text-center">
+                <div class="d-flex justify-content-between mb-4">
+                    <h6 class="mb-0">Calendar</h6>
+                    <a href="#">Show All</a>
                 </div>
                 <div id="calender"></div>
             </div>
         </div>
     </div>
 </div>
+<!-- Sale & Revenue End -->
+<!-- Widgets Start -->
 <!-- Widgets End -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>document.addEventListener("DOMContentLoaded", function () {
@@ -252,7 +254,7 @@
                             },
                             options: {
                                 responsive: true,
-                               
+
                                 plugins: {
                                     legend: {
                                         position: 'top',
@@ -269,6 +271,60 @@
                     }
                 } else {
                     console.error('Failed to fetch data:', response.statusText);
+                }
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        fetchData();
+    });</script>
+
+<script>document.addEventListener("DOMContentLoaded", function () {
+        async function fetchData() {
+            try {
+                let response = await fetch('/api/admin/orders-price-per-year');
+                let yearlyData = await response.json();
+
+                console.log('Yearly Data:', yearlyData);
+
+                if (yearlyData.years && yearlyData.ordersPrice) {
+
+                    var ctx = document.getElementById('yearlyOrdersChart').getContext('2d');
+
+                    var yearlyOrdersChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: yearlyData.years,
+                            datasets: [{
+                                label: 'Yearly Orders Price',
+                                data: yearlyData.ordersPrice,
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    suggestedMax: Math.max(...yearlyData.ordersPrice) + 2000,
+                                    ticks: {
+                                        stepSize: Math.ceil((Math.max(...yearlyData.ordersPrice) + 2000) / 10)
+                                    }
+                                },
+                                x: {
+                                    ticks: {
+                                        autoSkip: false
+                                    }
+                                }
+                            },
+                            responsive: true
+                        }
+                    });
+                } else {
+                    console.error('Data is null or not in expected format:', yearlyData);
                 }
 
             } catch (error) {

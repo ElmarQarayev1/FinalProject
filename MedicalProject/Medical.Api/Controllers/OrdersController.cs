@@ -24,6 +24,7 @@ namespace Medical.Api.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
+
         [Authorize(Roles ="Member")]
         [HttpPost("api/orders/checkout")]
         public IActionResult Checkout([FromBody] CheckOutDto checkoutDto)
@@ -60,18 +61,6 @@ namespace Medical.Api.Controllers
             return StatusCode(200, _orderService.GetById(id));
         }
 
-        [Authorize(Roles ="Member")]
-        [HttpGet("api/orders/{AppUserId}")]
-        public IActionResult GetOrderByIdForUserProfile()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null)
-            {
-                return Unauthorized();
-            }
-            var orders = _orderService.GetByIdForUserProfile(userId);
-            return Ok(orders);
-        }
         [Authorize(Roles ="Admin,SuperAdmin")]
         [HttpGet("api/admin/orders")]
         public IActionResult GetAllOrders(string? search = null, int page = 1, int size = 10)
@@ -184,6 +173,14 @@ namespace Medical.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
             }
         }
+
+        [HttpGet("api/admin/orders-price-per-year")]
+        public async Task<ActionResult<OrdersPricePerYearDto>> GetOrdersPricePerYear()
+        {
+            var result = await _orderService.GetOrdersPricePerYearAsync();
+            return Ok(result);
+        }
+
 
     }
 

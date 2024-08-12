@@ -29,6 +29,29 @@ public class HomeController : Controller
         return View();
     }
 
+    [HttpGet("api/admin/orders-price-per-year")]
+    public async Task<IActionResult> GetOrdersPricePerYear()
+    {
+        try
+        {
+            var ordersPricePerYear = await _crudService.GetOrdersPricePerYearAsync();
+            return Ok(ordersPricePerYear);
+        }
+        catch (HttpException ex)
+        {
+            if (ex.Status == System.Net.HttpStatusCode.Unauthorized)
+            {
+                return Unauthorized("You are not authorized to access this resource.");
+            }
+
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+        }
+        catch (System.Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+        }
+    }
+
     [HttpGet("api/admin/Reviews/PendingCount")]
     public async Task<IActionResult> GetPendingReviewCount()
     {

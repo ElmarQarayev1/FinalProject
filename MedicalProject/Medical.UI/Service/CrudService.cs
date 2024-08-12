@@ -4,6 +4,7 @@ using Medical.UI.Models;
 using Microsoft.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using Medical.UI.Models.OrderModels;
 
 namespace Medical.UI.Service
 {
@@ -17,6 +18,22 @@ namespace Medical.UI.Service
             _client = new HttpClient();
             _httpContextAccessor = httpContextAccessor;
         }
+
+        public async Task<OrdersPricePerYearDto> GetOrdersPricePerYearAsync()
+        {
+            using var response = await _client.GetAsync(baseUrl + "orders-price-per-year");
+            var json = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonSerializer.Deserialize<OrdersPricePerYearDto>(json);
+            }
+            else
+            {
+                throw new HttpException(response.StatusCode, json);
+            }
+        }
+
 
         public async Task<int> GetPendingReviewCountAsync()
         {

@@ -334,6 +334,8 @@ namespace Medical.Service.Implementations.Admin
             return _mapper.Map<MedicineGetDtoForUser>(medicine);
         }
 
+
+
         public void Update(int id, MedicineUpdateDto updateDto)
         {
             Category category = _categoryRepository.Get(x => x.Id == updateDto.CategoryId);

@@ -32,6 +32,36 @@ namespace Medical.Service.Implementations.Admin
             _medicineRepository = medicineRepository;
             _emailService = emailService;
         }
+
+
+        public async Task<OrdersPricePerYearDto> GetOrdersPricePerYearAsync()
+        {
+            var startYear = 2021;
+            var currentYear = DateTime.Now.Year;
+            var years = Enumerable.Range(startYear, currentYear - startYear + 1).Select(y => y.ToString()).ToList();
+
+            var ordersPrice = new List<double>();
+
+            foreach (var year in years)
+            {
+                var yearInt = int.Parse(year);
+
+                var totalSales = await _context.Orders
+                    .Where(o => o.CreatedAt.HasValue && o.CreatedAt.Value.Year == yearInt)
+                    .SelectMany(o => o.OrderItems)
+                    .SumAsync(oi => oi.SalePrice * oi.Count);
+
+                ordersPrice.Add(totalSales);
+            }
+
+            return new OrdersPricePerYearDto
+            {
+                Years = years,
+                OrdersPrice = ordersPrice
+            };
+        }
+
+
         public async Task<OrderStatusCountsDto> GetOrderStatusCountsAsync()
         {
             var counts = await _context.Orders
@@ -224,31 +254,7 @@ namespace Medical.Service.Implementations.Admin
                 }).ToList()
             };
         }
-        public List<OrderGetDtoForUserProfile> GetByIdForUserProfile(string userId)
-        {
-            var user = _context.AppUsers.FirstOrDefault(u => u.Id == userId);
-            if (user == null)
-            {
-                throw new RestException(StatusCodes.Status404NotFound,"AppUserId","User not found");
-            }
-
-            var query = _orderRepository.GetAll(o=>o.AppUser.Id==userId && o.Status!=OrderStatus.Canceled,"AppUser")
-               .Select(order => new OrderGetDtoForUserProfile
-               {
-                   CreatedAt = order.CreatedAt,
-                   TotalPrice = order.OrderItems.Sum(oi => oi.SalePrice * oi.Count),
-                   TotalItemCount = order.OrderItems.Sum(oi => oi.Count),
-                   OrderItems = order.OrderItems.Select(oi => new OrderItemDto
-                   {
-                       MedicineId = oi.MedicineId,
-                       Count = oi.Count,
-                       Price = oi.SalePrice
-                   }).ToList(),
-                   Status = order.Status.ToString()
-               }).ToList();
-
-            return query;
-        }
+       
 
         public List<OrderDetailDto> GetDetailsOrder(string? search = null)
         {
