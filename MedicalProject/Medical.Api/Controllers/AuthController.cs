@@ -95,6 +95,8 @@ namespace Medical.Api.Controllers
             }
         }
 
+
+     
         [HttpPost("api/resetpassword")]
         public async Task<IActionResult> ResetPassword([FromBody] MemberResetPasswordDto resetPasswordDto)
         {

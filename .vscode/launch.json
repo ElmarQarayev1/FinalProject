@@ -1,0 +1,54 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch API",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/MedicalProject/Medical.Api/bin/Debug/net7.0/Medical.Api.dll",
+            "args": [],
+            "cwd": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.API",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+                "uriFormat": "%s/swagger/index.html"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        
+        {
+            "name": "Launch UI",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/MedicalProject/Medical.UI/bin/Debug/net7.0/Medical.UI.dll",
+            "args": [],
+            "cwd": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI",
+
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Launch API and UI",
+            "configurations": ["Launch API", "Launch UI"]
+        }
+    ]
+}
