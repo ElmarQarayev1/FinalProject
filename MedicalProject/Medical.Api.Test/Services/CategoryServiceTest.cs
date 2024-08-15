@@ -19,13 +19,15 @@ namespace Medical.Api.Test.Services
 		public Mock<ICategoryRepository> _categoryRepository;
 
 		public Mock<IMapper> _mapper;
+        private readonly CategoryService _categoryService;
 
-		public CategoryServiceTest()
+        public CategoryServiceTest()
 		{
 			_categoryRepository = new Mock<ICategoryRepository>();
 			_mapper = new Mock<IMapper>();
+            _categoryService = new CategoryService(_categoryRepository.Object, _mapper.Object);
 
-		}
+        }
 
 		[Fact]
 		public void Create_NoExists_ThrowRestException()
@@ -53,6 +55,33 @@ namespace Medical.Api.Test.Services
             Assert.NotNull(r);
 			Assert.Equal(r.Code, 400);
 		}
+
+        [Fact]
+        public void Create_CategoryNameAlreadyExists_ThrowsRestException()
+        {
+            // Arrange
+            var createDto = new CategoryCreateDto
+            {
+                Name = "ExistingCategoryName",
+            };
+
+            
+            _categoryRepository.Setup(repo => repo.Exists(It.IsAny<Expression<Func<Category, bool>>>()))
+                                   .Returns(true);
+
+            // Act & Assert
+            var exception = Assert.Throws<RestException>(() => _categoryService.Create(createDto));
+
+          
+            Assert.Equal(StatusCodes.Status400BadRequest, exception.Code);
+
+          
+            Assert.NotEmpty(exception.Errors); 
+            var error = exception.Errors.First();
+            Assert.Equal("Name", error.Key); 
+            Assert.Equal("CategoryName already taken", error.Message); 
+        }
+
 
         [Fact]
         public void Create_Success_ReturnId()
@@ -281,7 +310,6 @@ namespace Medical.Api.Test.Services
             Assert.Equal("NewName", category.Name);
             _categoryRepository.Verify(x => x.Save(), Times.Once);
         }
-
         [Fact]
         public void Update_CategoryNameAlreadyExists_ThrowRestException()
         {
@@ -300,8 +328,15 @@ namespace Medical.Api.Test.Services
 
             // Assert
             Assert.Equal(StatusCodes.Status400BadRequest, exception.Code);
-            Assert.Equal("CategoryName already taken", exception.Message);
+            Assert.NotEmpty(exception.Errors);
+            var error = exception.Errors.First();
+            Assert.Equal("Name", error.Key);
+            Assert.Equal("CategoryName already taken", error.Message);
+           
+
+            
         }
+
 
         [Fact]
         public void Update_CategoryDoesNotExist_ThrowRestException()

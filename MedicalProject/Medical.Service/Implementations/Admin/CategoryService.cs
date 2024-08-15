@@ -29,7 +29,7 @@ namespace Medical.Service.Implementations.Admin
         public int Create(CategoryCreateDto createDto)
         {
             if (_categoryRepository.Exists(x => x.Name == createDto.Name))
-                throw new RestException(StatusCodes.Status400BadRequest, "Name", "CategoryName already taken");
+                throw new RestException(StatusCodes.Status400BadRequest,"Name", "CategoryName already taken");
      
             var entity = new Category
             {
@@ -97,7 +97,7 @@ namespace Medical.Service.Implementations.Admin
                 throw new RestException(StatusCodes.Status404NotFound, "Category not found");
 
             if (entity.Name != updateDto.Name && _categoryRepository.Exists(x => x.Name == updateDto.Name))
-                throw new RestException(StatusCodes.Status400BadRequest, "Name", "CategoryName already taken");
+                throw new RestException(StatusCodes.Status400BadRequest,"Name", "CategoryName already taken");
 
             entity.Name = updateDto.Name;
 
