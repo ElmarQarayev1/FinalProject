@@ -51,7 +51,6 @@ namespace Medical.Api.Test.Services
             //Assert
 
 
-
             Assert.NotNull(r);
 			Assert.Equal(r.Code, 400);
 		}

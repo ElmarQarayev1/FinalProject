@@ -29,7 +29,8 @@ namespace Medical.Service.Implementations.Admin
 
 		private readonly IMapper _mapper;
 
-		public DoctorService(IDoctorRepository doctorRepository,IWebHostEnvironment env,IMapper mapper,IDepartmentRepository departmentRepository)
+
+        public DoctorService(IDoctorRepository doctorRepository,IWebHostEnvironment env,IMapper mapper,IDepartmentRepository departmentRepository)
 		{
 			_doctorRepository = doctorRepository;
 			_env = env;
@@ -37,6 +38,8 @@ namespace Medical.Service.Implementations.Admin
             _departmentRepository = departmentRepository;
 
 		}
+
+       
 
         public List<DoctorGetDtoForUser> GetAllUser(string? search = null)
         {
@@ -80,14 +83,16 @@ namespace Medical.Service.Implementations.Admin
 
             if (doctorEmail != null)
             {
-                throw new RestException(StatusCodes.Status404NotFound,"Email", "Doctor already exists by given Email");
+                throw new RestException(StatusCodes.Status400BadRequest, "Email", "Doctor already exists by given Email");
             }
+
+
 
             Doctor doctorPhone = _doctorRepository.Get(x => x.Phone == createDto.Phone);
 
             if (doctorPhone != null)
             {
-                throw new RestException(StatusCodes.Status404NotFound, "Phone", "Doctor already exists by given Phone");
+                throw new RestException(StatusCodes.Status400BadRequest, "Phone", "Doctor already exists by given Phone");
             }
 
             Doctor doctor = new Doctor()
@@ -96,17 +101,17 @@ namespace Medical.Service.Implementations.Admin
                 Desc = createDto.Desc,
                 ImageName = FileManager.Save(createDto.File, _env.WebRootPath, "uploads/doctors"),
                 InstagramUrl = createDto.InstagramUrl,
-                TwitterUrl=createDto.TwitterUrl,
-                VimeoUrl=createDto.VimeoUrl,
-                BehanceUrl=createDto.BehanceUrl,
-                Position=createDto.Position,
-                Address=createDto.Address,
-                Phone=createDto.Phone,
-                DepartmentId=createDto.DepartmentId,
-                Email=createDto.Email,
-                EthicSkil=createDto.EthicSkil,
-                CompassionSkil=createDto.CompassionSkil,
-                ResilienceSkil=createDto.ResilienceSkil
+                TwitterUrl = createDto.TwitterUrl,
+                VimeoUrl = createDto.VimeoUrl,
+                BehanceUrl = createDto.BehanceUrl,
+                Position = createDto.Position,
+                Address = createDto.Address,
+                Phone = createDto.Phone,
+                DepartmentId = createDto.DepartmentId,
+                Email = createDto.Email,
+                EthicSkil = createDto.EthicSkil,
+                CompassionSkil = createDto.CompassionSkil,
+                ResilienceSkil = createDto.ResilienceSkil
 
             };
 
@@ -115,6 +120,7 @@ namespace Medical.Service.Implementations.Admin
 
             return doctor.Id;
         }
+
 
         public void Delete(int id)
         {
