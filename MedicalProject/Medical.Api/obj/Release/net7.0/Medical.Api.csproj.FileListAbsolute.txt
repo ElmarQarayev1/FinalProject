@@ -123,3 +123,4 @@
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/obj/Release/net7.0/Medical.Api.pdb
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/obj/Release/net7.0/Medical.Api.genruntimeconfig.cache
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/obj/Release/net7.0/ref/Medical.Api.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Release/net7.0/Microsoft.AspNetCore.Authentication.Google.dll

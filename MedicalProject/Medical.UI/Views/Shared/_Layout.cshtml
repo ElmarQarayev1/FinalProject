@@ -1,5 +1,9 @@
 ﻿@using System.Security.Claims
-
+@using Medical.UI.Service
+@inject ILayoutService layoutService
+@{
+    var profile = await layoutService.GetProfile();
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,7 +48,7 @@
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-secondary navbar-dark">
-                <a  class="navbar-brand mx-4 mb-3">
+                <a class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Hospital</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
@@ -55,7 +59,7 @@
                     <div class="ms-3">
                         <h6 class="mb-0">Garayev</h6>
                         <span>Hospital's owner</span>
-                       
+
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
@@ -73,7 +77,13 @@
                     <a asp-controller="order" asp-action="index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Orders</a>
                     <a asp-controller="appointment" asp-action="index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Appointments</a>
                     <a asp-controller="review" asp-action="index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Reviews</a>
-                    <a asp-controller="account" asp-action="ShowAdmin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Admins</a>
+
+                    @if (profile.Role == "SuperAdmin")
+                    {
+                        <a asp-controller="account" asp-action="ShowAdmin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Admins</a>
+
+                    }
+
 
                 </div>
             </nav>
@@ -89,20 +99,20 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-              
+
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
-                      
-                      
+
+
                     </div>
-                 
+
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                          
-                            <span class="d-none d-lg-inline-flex" id="usernameDisplay">Profile</span>
+
+                            <span class="nav-link-text ms-1">@profile.UserName</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <a asp-action="profile" asp-controller="account" class="dropdown-item">Go To Setting</a>
+                            <a asp-action="profile" asp-controller="account" class="dropdown-item">Profile</a>
                             <a asp-action="logout" asp-controller="account" class="dropdown-item">Log Out</a>
                         </div>
                     </div>

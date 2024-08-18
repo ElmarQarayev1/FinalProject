@@ -22,27 +22,28 @@ namespace Medical.Api.Controllers
 		{
 			_medicineService = medicineService;
 		}
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPost("api/admin/Medicines")]
         public ActionResult Create([FromForm] MedicineCreateDto createDto)
         {
             return StatusCode(201, new { Id = _medicineService.Create(createDto) });
         }
 
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Medicines")]
         public ActionResult<PaginatedList<MedicinePaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
         {
             return StatusCode(200, _medicineService.GetAllByPage(search, page, size));
         }
 
-
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Medicines/Filter")]
         public ActionResult<PaginatedList<MedicinePaginatedGetDtoForUser>> GetAllForUser(string? search = null, int page = 1, int size =9, int? categoryId = null)
         {
             return StatusCode(200, _medicineService.GetAllByPageForUser(search, page, size,categoryId));
         }
 
-
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Medicines/LatestMedicines")]
         public ActionResult<List<MedicineGetDtoLatest>> GetLatestMedicines()
         {
@@ -50,19 +51,21 @@ namespace Medical.Api.Controllers
         }
 
 
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Medicines/all")]
         public ActionResult<List<MedicineGetDto>> GetAll()
         {
             return StatusCode(200, _medicineService.GetAll());
         }
 
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Medicines/{id}")]
         public ActionResult<MedicineDetailsDto> GetById(int id)
         {
             return StatusCode(200, _medicineService.GetById(id));
         }
 
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Medicines/{id}")]
         public ActionResult<MedicineGetDtoForUser> GetByIdForUser(int id)
         {
@@ -70,13 +73,13 @@ namespace Medical.Api.Controllers
         }
 
 
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPut("api/admin/Medicines/{id}")]
         public void Update(int id, [FromForm] MedicineUpdateDto updateDto)
         {
             _medicineService.Update(id, updateDto);
         }
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpDelete("api/admin/Medicines/{id}")]
         public IActionResult Delete(int id)
         {
@@ -84,6 +87,7 @@ namespace Medical.Api.Controllers
             return NoContent();
         }
 
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles ="Member")]
         [HttpPost("api/Medicines/AddToBasket")]
         public ActionResult CreateBasket (MedicineBasketItemDto createDto)
@@ -98,6 +102,7 @@ namespace Medical.Api.Controllers
             return StatusCode(201, new { Id = basketId });
            
         }
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles = "Member")]
         [HttpDelete("api/Medicines/RemoveFromBasket")]
         public IActionResult RemoveFromBasket(MedicineBasketDeleteDto deleteDto)
@@ -110,6 +115,8 @@ namespace Medical.Api.Controllers
             _medicineService.RemoveItemFromBasket(deleteDto,userId);
             return NoContent();
         }
+
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles = "Member")]
         [HttpPut("api/Medicines/EditBasketItem")]
         public void Update( MedicineBasketItemDto updateDto)

@@ -29,6 +29,9 @@ namespace Medical.UI.Service
         Task<int> GetPendingReviewCountAsync();
         Task<OrdersPricePerYearDto> GetOrdersPricePerYearAsync();
 
+       
+        Task<string> ProcessGoogleResponseAsync(string returnUrl);
+
     }
 }
 

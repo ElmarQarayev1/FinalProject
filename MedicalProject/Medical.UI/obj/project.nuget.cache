@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "F1AwUcjctmwHHdyCubwLX6FrU0iBY7VZj74GHII7RvZdJnzyiKiL4+fyXOYAvxxnuMQzz/nwyhGm7NQDgSzajg==",
+  "dgSpecHash": "r4lPVDVbYu8DEK7OLWl1DNa9REycB7FsoZeTR6l4UjxU2hevZImw/cU/N1BHAXpHQHY467qEEtgJJipPVjvcTg==",
   "success": true,
   "projectFilePath": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Medical.UI.csproj",
   "expectedPackageFiles": [
     "/Users/elmar/.nuget/packages/epplus/7.2.2/epplus.7.2.2.nupkg.sha512",
     "/Users/elmar/.nuget/packages/epplus.interfaces/6.1.1/epplus.interfaces.6.1.1.nupkg.sha512",
     "/Users/elmar/.nuget/packages/epplus.system.drawing/6.1.1/epplus.system.drawing.6.1.1.nupkg.sha512",
+    "/Users/elmar/.nuget/packages/microsoft.aspnetcore.authentication.google/7.0.16/microsoft.aspnetcore.authentication.google.7.0.16.nupkg.sha512",
     "/Users/elmar/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/7.0.16/microsoft.aspnetcore.authentication.jwtbearer.7.0.16.nupkg.sha512",
     "/Users/elmar/.nuget/packages/microsoft.extensions.configuration/8.0.0/microsoft.extensions.configuration.8.0.0.nupkg.sha512",
     "/Users/elmar/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0/microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",

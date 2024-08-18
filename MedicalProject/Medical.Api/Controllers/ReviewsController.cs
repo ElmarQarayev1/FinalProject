@@ -22,6 +22,7 @@ namespace Medical.Api.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Reviews")]
         public IActionResult GetAllRewiews(string? search = null, int page = 1, int size = 10)
         {
@@ -37,7 +38,7 @@ namespace Medical.Api.Controllers
             }
         }
 
-       
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles = "Member")]
         [HttpPost("api/Reviews/CreateReview")]
         public async Task<IActionResult> CreateReview([FromBody] MedicineReviewItemDto createDto)
@@ -51,7 +52,7 @@ namespace Medical.Api.Controllers
 
             return StatusCode(201, new { Id = reviewId });
         }
-
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles = "Member")]
         [HttpDelete("api/Reviews/DeleteReview")]
         public IActionResult DeleteReview(MedicineReviewDeleteDto deleteDto)
@@ -64,21 +65,22 @@ namespace Medical.Api.Controllers
             _reviewService.DeleteReview(deleteDto,userId);
             return NoContent();
         }
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/reviews/{id}")]
         public IActionResult GetReviewById(int id)
         {
             return StatusCode(200, _reviewService.GetById(id));
         }
 
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPut("api/admin/reviewsAccepted/{id}")]
         public IActionResult AcceptReview(int id)
         {
 
             _reviewService.UpdateReviewStatus(id, ReviewStatus.Accepted);
             return NoContent();
-        }      
+        }
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPut("api/admin/reviewsRejected/{id}")]
         public IActionResult RejectOrder(int id)
         {
@@ -88,6 +90,7 @@ namespace Medical.Api.Controllers
 
         }
 
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Reviews/PendingCount")]
         public IActionResult GetPendingReviewCount()
         {

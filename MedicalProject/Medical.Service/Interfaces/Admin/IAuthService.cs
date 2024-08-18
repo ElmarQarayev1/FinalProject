@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Claims;
 using Medical.Service.Dtos.Admin.AuthDtos;
 using Medical.Service.Dtos.Admin.CategoryDtos;
 using Medical.Service.Dtos.User.AuthDtos;
@@ -32,6 +33,8 @@ namespace Medical.Service.Interfaces.Admin
         Task UpdateProfile(MemberProfileEditDto profileEditDto);
 
         MemberProfileGetDto GetByIdForUserProfile(string appUserId);
+
+       Task<string> LoginWithGoogleAsync(ClaimsPrincipal principal);
 
 
 

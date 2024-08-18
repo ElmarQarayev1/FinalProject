@@ -13,6 +13,8 @@ using Medical.Service.Exceptions;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
 using Medical.Service.Profiles;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -97,9 +99,28 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 {
     opt.Password.RequireNonAlphanumeric = false;
     opt.Password.RequiredLength = 8;
+    opt.Password.RequireUppercase = false;
 
 }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
 
+
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+})
+.AddCookie()
+.AddGoogle(googleOptions =>
+{
+    googleOptions.ClientId = builder.Configuration["GoogleKeys:ClientId"];
+    googleOptions.ClientSecret = builder.Configuration["GoogleKeys:ClientSecret"];
+    googleOptions.Scope.Add("openid");
+    googleOptions.Scope.Add("profile");
+    googleOptions.Scope.Add("email");
+
+
+});
 
 
 builder.Services.AddControllers();
@@ -158,14 +179,20 @@ builder.Services.AddAuthentication(opt =>
     };
 });
 
-
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo
+    c.SwaggerDoc("admin_v1", new OpenApiInfo
     {
-        Title = "My API",
+        Title = "Admin API",
         Version = "v1"
     });
+
+    c.SwaggerDoc("user_v1", new OpenApiInfo
+    {
+        Title = "User API",
+        Version = "v1"
+    });
+
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -173,19 +200,22 @@ builder.Services.AddSwaggerGen(c =>
         Name = "Authorization",
         Type = SecuritySchemeType.ApiKey
     });
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-   {
-     new OpenApiSecurityScheme
-     {
-       Reference = new OpenApiReference
-       {
-         Type = ReferenceType.SecurityScheme,
-         Id = "Bearer"
-       }
-      },
-      new string[] { }
-    }
-  });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] { }
+        }
+    });
+
 });
 
 
@@ -225,7 +255,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/admin_v1/swagger.json", "Admin API v1");
+        options.SwaggerEndpoint("/swagger/user_v1/swagger.json", "User API v1");
+    });
 }
 
 app.UseHttpsRedirection();

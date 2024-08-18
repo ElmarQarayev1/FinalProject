@@ -9,6 +9,7 @@ using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,39 @@ namespace Medical.Api.Controllers
 
         }
 
-       
+
+        [ApiExplorerSettings(GroupName = "admin_v1")]
+        [HttpGet("api/admin/google-response")]
+        public async Task<IActionResult> GoogleResponse(string returnUrl = null)
+        {
+            if (string.IsNullOrEmpty(returnUrl))
+            {
+                return BadRequest(new { message = "Return URL is required." });
+            }
+
+            var result = await HttpContext.AuthenticateAsync("Google");
+
+            if (result?.Principal == null)
+            {
+                return BadRequest(new { message = "Authentication failed. Please try again." });
+            }
+
+            try
+            {
+                var token = await _authService.LoginWithGoogleAsync(result.Principal);
+                return Ok(new { token, returnUrl = returnUrl ?? Url.Content("~/") });
+            }
+            catch (RestException ex)
+            {
+                return StatusCode(ex.Code, new { message = ex.Message });
+            }
+        }
+
+
+
+
+
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "SuperAdmin")]
         [HttpPost("api/admin/createAdmin")]
         public IActionResult Create(SuperAdminCreateAdminDto createDto)
@@ -40,6 +73,10 @@ namespace Medical.Api.Controllers
             return StatusCode(201, new { Id = _authService.Create(createDto) });
         }
 
+
+
+
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPost("api/admin/login")]
         public ActionResult Login(AdminLoginDto loginDto)
         {
@@ -48,7 +85,7 @@ namespace Medical.Api.Controllers
         }
 
 
-
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpPost("api/login")]
         public async Task<IActionResult> LoginForUser([FromBody] MemberLoginDto loginDto)
         {
@@ -60,7 +97,7 @@ namespace Medical.Api.Controllers
                      
         }
 
-
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpPost("api/register")]
         public async Task<ActionResult> RegisterForUser([FromBody] MemberRegisterDto registerDto)
         {
@@ -80,7 +117,7 @@ namespace Medical.Api.Controllers
             }
         }
 
-
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpPost("api/forgetpassword")]
         public async Task<IActionResult> ForgetPassword([FromBody] MemberForgetPasswordDto forgetPasswordDto)
         {
@@ -95,8 +132,7 @@ namespace Medical.Api.Controllers
             }
         }
 
-
-     
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpPost("api/resetpassword")]
         public async Task<IActionResult> ResetPassword([FromBody] MemberResetPasswordDto resetPasswordDto)
         {
@@ -110,7 +146,7 @@ namespace Medical.Api.Controllers
                 return StatusCode(ex.Code, ex.Message);
             }
         }
-
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpPost("api/verify")]
         public async Task<IActionResult> Verify([FromBody] MemberVerifyDto verifyDto)
         {
@@ -132,7 +168,7 @@ namespace Medical.Api.Controllers
             }
         }
 
-        
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpPost("api/profile/update")]
         public async Task<IActionResult> UpdateProfile([FromBody] MemberProfileEditDto profileEditDto)
         {
@@ -140,9 +176,9 @@ namespace Medical.Api.Controllers
             return Ok(new { message = "Profile updated successfully!" });
         }
 
-      
 
 
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/account/verifyemail")]
         public async Task<IActionResult> VerifyEmail(string userId, string token)
         {
@@ -167,8 +203,8 @@ namespace Medical.Api.Controllers
         }
 
 
-
-       [Authorize(Roles ="Admin,SuperAdmin")]
+        [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles ="Admin,SuperAdmin")]
         [HttpGet("api/admin/profile")]
         public ActionResult Profile()
         {
@@ -189,7 +225,7 @@ namespace Medical.Api.Controllers
 
             return Ok(userDto);
         }
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "SuperAdmin")]
         [HttpGet("api/superadmin/adminAll")]
         public ActionResult<List<AdminGetDto>> GetAll(string? search = null)
@@ -197,7 +233,7 @@ namespace Medical.Api.Controllers
             var admins = _authService.GetAll(search);
             return Ok(admins);
         }
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "SuperAdmin")]
         [HttpGet("api/admin/adminAllByPage")]
         public ActionResult<PaginatedList<AdminPaginatedGetDto>> GetAllByPage(string? search = null, int page = 1, int size = 10)
@@ -206,6 +242,7 @@ namespace Medical.Api.Controllers
             return Ok(paginatedAdmins);
         }
 
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "SuperAdmin")]
         [HttpGet("api/admin/getById/{id}")]
         public ActionResult<AdminGetDto> GetById(string id)
@@ -213,8 +250,8 @@ namespace Medical.Api.Controllers
             var admin = _authService.GetById(id);
             return Ok(admin);
         }
-
-       [Authorize(Roles = "Admin,SuperAdmin")]
+        [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         [HttpPut("api/admin/update/{id}")]
         public IActionResult Update(string id, AdminUpdateDto updateDto)
         {
@@ -222,7 +259,7 @@ namespace Medical.Api.Controllers
             return NoContent();
         }
 
-       
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPut("api/admin/updatePassword")]
         public async Task<IActionResult> UpdatePassword(AdminUpdateDto updatePasswordDto)
         {
@@ -231,6 +268,7 @@ namespace Medical.Api.Controllers
             return NoContent();
 
         }
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles = "Member")]
         [HttpGet("api/GetUserProfile")]
         public ActionResult<MemberProfileGetDto> GetUserProfile()
@@ -250,8 +288,16 @@ namespace Medical.Api.Controllers
                 return StatusCode(ex.Code, new { message = ex.Message });
             }
         }
+        [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize]
+        [HttpGet("api/profileLayout")]
+        public ActionResult ProfileForLayout()
+        {
+            var userName = User.Identity.Name;
+            var role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
 
-
+            return Ok(new UserProfileDto { UserName = userName, Role = role });
+        }
 
         //[HttpGet("api/admin/createUser")]
         //public async Task<IActionResult> CreateUser()
@@ -261,7 +307,6 @@ namespace Medical.Api.Controllers
         //    await _roleManager.CreateAsync(new IdentityRole("Admin"));
         //    await _roleManager.CreateAsync(new IdentityRole("Member"));
 
-
         //    AppUser user1 = new AppUser
         //    {
         //        FullName = "Admin",
@@ -269,7 +314,7 @@ namespace Medical.Api.Controllers
         //    };
 
         //    await _userManager.CreateAsync(user1, "Admin123");
-
+ 
         //    AppUser user2 = new AppUser
         //    {
         //        FullName = "Member",

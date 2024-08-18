@@ -5,6 +5,7 @@ using Microsoft.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using Medical.UI.Models.OrderModels;
+using Medical.UI.Models.AdminModels;
 
 namespace Medical.UI.Service
 {
@@ -32,6 +33,27 @@ namespace Medical.UI.Service
             {
                 throw new HttpException(response.StatusCode, json);
             }
+        }
+
+
+        public async Task<string> ProcessGoogleResponseAsync(string returnUrl)
+        {
+            if (string.IsNullOrEmpty(returnUrl))
+            {
+                throw new ArgumentException("Return URL cannot be null or empty", nameof(returnUrl));
+            }
+
+            var response = await _client.GetAsync(baseUrl + "google-response?returnUrl=" + Uri.EscapeDataString(returnUrl));
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = JsonSerializer.Deserialize<GoogleResponseDto>(content);
+                return result.Token;
+            }
+
+          
+            throw new HttpException(response.StatusCode, content);
         }
 
 

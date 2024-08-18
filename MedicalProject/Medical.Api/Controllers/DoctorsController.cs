@@ -25,7 +25,7 @@ namespace Medical.Api.Controllers
             _cache = cache;
 
         }
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPost("api/admin/Doctors")]
         public ActionResult Create([FromForm] DoctorCreateDto createDto)
         {
@@ -44,7 +44,7 @@ namespace Medical.Api.Controllers
             return StatusCode(201, new { Id = newDoctorId });
         }
 
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Doctors")]
         public ActionResult<PaginatedList<DoctorPaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
         {
@@ -65,7 +65,7 @@ namespace Medical.Api.Controllers
 
             return Ok(result);
         }
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Doctors/all")]
         public ActionResult<List<DoctorGetDto>> GetAll()
         {
@@ -83,7 +83,7 @@ namespace Medical.Api.Controllers
 
             return Ok(result);
         }
-
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Doctors")]
         public ActionResult<List<DoctorGetDtoForUser>> GetAllForUserHome()
         {
@@ -101,7 +101,7 @@ namespace Medical.Api.Controllers
 
             return Ok(result);
         }
-
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Doctors/all")]
         public ActionResult<List<DoctorGetDtoForUser>> GetAllUser()
         {
@@ -120,7 +120,7 @@ namespace Medical.Api.Controllers
             return Ok(result);
         }
 
-
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Doctors/ForDownSide")]
         public ActionResult<List<DoctorForDownSideDto>> GetAllUserForDownSide()
         {
@@ -139,7 +139,7 @@ namespace Medical.Api.Controllers
             return Ok(result);
         }
 
-
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/ForAppointment/{departmentId}")]
         public IActionResult GetByIdForAppointment(int departmentId)
         {
@@ -158,6 +158,7 @@ namespace Medical.Api.Controllers
             return Ok(doctors);
         }
 
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Doctors/{id}")]
         public ActionResult<DoctorGetDetailDto> GetByIdForUser(int id)
         {
@@ -176,7 +177,7 @@ namespace Medical.Api.Controllers
             return Ok(result);
         }
 
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Doctors/{id}")]
         public ActionResult<DoctorGetDto> GetById(int id)
         {
@@ -200,7 +201,7 @@ namespace Medical.Api.Controllers
 
 
 
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpDelete("api/admin/Doctors/{id}")]
         public IActionResult Delete(int id)
         {
@@ -216,7 +217,7 @@ namespace Medical.Api.Controllers
         }
 
 
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPut("api/admin/Doctors/{id}")]
         public void Update(int id, [FromForm] DoctorUpdateDto updateDto)
         {

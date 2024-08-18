@@ -17,48 +17,52 @@ namespace Medical.Api.Controllers
         {
             _featureService = featureService;
         }
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPost("api/admin/Features")]
         public ActionResult Create([FromForm]  FeatureCreateDto createDto)
         {
             return StatusCode(201, new { Id = _featureService.Create(createDto) });
         }
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Features")]
         public ActionResult<PaginatedList<FeaturePaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
         {
             return StatusCode(200, _featureService.GetAllByPage(search, page, size));
         }
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Features/all")]
         public ActionResult<List<FeatureGetDto>> GetAll()
         {
             return StatusCode(200, _featureService.GetAll());
         }
 
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Features")]
         public ActionResult<List<FeatureGetDtoForUser>> GetAllForUserHome()
         {
             return StatusCode(200, _featureService.GetForUserHome());
         }
 
+        [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Features/all")]
         public ActionResult<List<FeatureGetDtoForUser>> GetAllUser()
         {
             return StatusCode(200, _featureService.GetAll());
         }
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Features/{id}")]
         public ActionResult<FeatureGetDto> GetById(int id)
         {
             return StatusCode(200, _featureService.GetById(id));
         }
-
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPut("api/admin/Features/{id}")]
         public void Update(int id, [FromForm] FeatureUpdateDto updateDto)
         {
             _featureService.Update(id, updateDto);
         }
 
+        [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpDelete("api/admin/Features/{id}")]
         public IActionResult Delete(int id)
         {

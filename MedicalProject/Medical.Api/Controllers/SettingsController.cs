@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Medical.Api.Controllers
 {
+    [ApiExplorerSettings(GroupName = "admin_v1")]
     [ApiController]
 	public class SettingsController:ControllerBase
 	{

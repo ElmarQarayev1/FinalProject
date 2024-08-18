@@ -47,7 +47,7 @@ namespace Medical.Api.Test.Services
              
 
          );
-        }
+    }
 
         [Fact]
         public void Create_DepartmentNotFound_ThrowsRestException()
