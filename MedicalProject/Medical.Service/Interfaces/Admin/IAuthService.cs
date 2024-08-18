@@ -34,7 +34,7 @@ namespace Medical.Service.Interfaces.Admin
 
         MemberProfileGetDto GetByIdForUserProfile(string appUserId);
 
-       Task<string> LoginWithGoogleAsync(ClaimsPrincipal principal);
+       //Task<string> LoginWithGoogleAsync(ClaimsPrincipal principal);
 
 
 

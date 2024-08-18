@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "s8/Ob8XWRqD6TipXvUVNDRcJ4ero1k/qN2qg8TJTOlc=",
+  "Hash": "synQnqwFlCoSDiADAyJisfKq9TwZLuaGBTKAj1QNYZ4=",
   "Source": "Medical.Api",
   "BasePath": "_content/Medical.Api",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/departments/17876a36-9374-46ba-841e-fe2f484cee8bportfolio-2.jpg",
+      "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/departments/236a157b-c28a-43e8-80fc-daa7378f61cfportfolio-1.jpg",
       "SourceId": "Medical.Api",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/",
       "BasePath": "_content/Medical.Api",
-      "RelativePath": "uploads/departments/17876a36-9374-46ba-841e-fe2f484cee8bportfolio-2.jpg",
+      "RelativePath": "uploads/departments/236a157b-c28a-43e8-80fc-daa7378f61cfportfolio-1.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -31,7 +31,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/uploads/departments/17876a36-9374-46ba-841e-fe2f484cee8bportfolio-2.jpg"
+      "OriginalItemSpec": "wwwroot/uploads/departments/236a157b-c28a-43e8-80fc-daa7378f61cfportfolio-1.jpg"
     },
     {
       "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/departments/6aa3ad99-4312-4004-961c-a98710958951portfolio-2.jpg",

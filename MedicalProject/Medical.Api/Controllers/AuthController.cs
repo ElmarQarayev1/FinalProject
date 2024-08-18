@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Configuration;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Medical.Core.Entities;
 using Medical.Service;
 using Medical.Service.Dtos.Admin.AuthDtos;
 using Medical.Service.Dtos.User.AuthDtos;
 using Medical.Service.Exceptions;
+using Medical.Service.Helpers;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Authentication;
@@ -13,6 +16,8 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Medical.Api.Controllers
 {
@@ -22,46 +27,121 @@ namespace Medical.Api.Controllers
         private readonly IAuthService _authService;
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+         private readonly IConfiguration configuration;
 
 
-        public AuthController(IAuthService authService, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
+
+        public AuthController(IAuthService authService, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager,IConfiguration _configuration)
         {
             _authService = authService;
             _userManager = userManager;
             _roleManager = roleManager;
+            configuration = _configuration;
 
         }
 
 
-        [ApiExplorerSettings(GroupName = "admin_v1")]
-        [HttpGet("api/admin/google-response")]
-        public async Task<IActionResult> GoogleResponse(string returnUrl = null)
+        [ApiExplorerSettings(GroupName = "user_v1")]
+        [HttpGet("api/signin-google")]
+        public async Task<IActionResult> GoogleLogin()
         {
-            if (string.IsNullOrEmpty(returnUrl))
+          
+            var response = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
+            if (response.Principal == null)
+                return BadRequest("Google authentication failed.");
+
+           
+            var email = response.Principal.FindFirstValue(ClaimTypes.Email);
+            var fullName = response.Principal.FindFirstValue(ClaimTypes.Name);
+            var userName = email;
+
+           
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(fullName) || string.IsNullOrEmpty(userName))
+                return BadRequest("Incomplete Google account information.");
+
+          
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null)
             {
-                return BadRequest(new { message = "Return URL is required." });
+              
+                return BadRequest("A user with this email address already exists.");
             }
 
-            var result = await HttpContext.AuthenticateAsync("Google");
-
-            if (result?.Principal == null)
+           
+            user = new AppUser
             {
-                return BadRequest(new { message = "Authentication failed. Please try again." });
+                Email = email,
+                UserName = userName,
+                FullName = fullName,
+                EmailConfirmed = true,
+            };
+            var createResult = await _userManager.CreateAsync(user);
+            if (!createResult.Succeeded)
+            {
+                return BadRequest("User creation failed.");
             }
 
+            var roleResult = await _userManager.AddToRoleAsync(user, "Member");
+            if (!roleResult.Succeeded)
+            {
+                return BadRequest("Failed to assign role to user.");
+            }
+
+            var token = await GenerateJwtToken(user);
+            if (token == null)
+                return BadRequest("Login failed. Please try again.");
+
+           
+            var redirectUrl = $"{configuration["Client:URL"]}/account/ExternalLoginCallback?token={token}";
+            return Redirect(redirectUrl);
+        }
+
+       
+
+
+        [ApiExplorerSettings(GroupName = "user_v1")]
+        [HttpPost("api/login")]
+        public async Task<IActionResult> LoginForUser([FromBody] MemberLoginDto loginDto)
+        {
+
+            var token = await _authService.LoginForUser(loginDto);
+
+
+            return Ok(new { Result = token });
+
+        }
+
+
+        [ApiExplorerSettings(GroupName = "user_v1")]
+        [HttpPost("api/register")]
+        public async Task<ActionResult> RegisterForUser([FromBody] MemberRegisterDto registerDto)
+        {
             try
             {
-                var token = await _authService.LoginWithGoogleAsync(result.Principal);
-                return Ok(new { token, returnUrl = returnUrl ?? Url.Content("~/") });
+                var Id = await _authService.Register(registerDto);
+                return Ok(new { Result = Id });
             }
             catch (RestException ex)
             {
-                return StatusCode(ex.Code, new { message = ex.Message });
+                var errorResponse = new
+                {
+                    message = ex.Message,
+                    errors = ex.Errors
+                };
+                return StatusCode(ex.Code, errorResponse);
             }
         }
 
 
+        [ApiExplorerSettings(GroupName = "user_v1")]
+        [HttpGet("api/login-google")]
+        public IActionResult Login()
+        {
+            var props = new AuthenticationProperties { RedirectUri = "api/signin-google" };
+            return Challenge(props, GoogleDefaults.AuthenticationScheme);
+        }
 
+     
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
@@ -84,38 +164,6 @@ namespace Medical.Api.Controllers
             return Ok(new { token });
         }
 
-
-        [ApiExplorerSettings(GroupName = "user_v1")]
-        [HttpPost("api/login")]
-        public async Task<IActionResult> LoginForUser([FromBody] MemberLoginDto loginDto)
-        {
-                     
-                var token = await _authService.LoginForUser(loginDto);
-
-                
-                return Ok(new {  Result =token});
-                     
-        }
-
-        [ApiExplorerSettings(GroupName = "user_v1")]
-        [HttpPost("api/register")]
-        public async Task<ActionResult> RegisterForUser([FromBody] MemberRegisterDto registerDto)
-        {
-            try
-            {
-                var Id = await _authService.Register(registerDto);
-                return Ok(new { Result = Id });
-            }
-            catch (RestException ex)
-            {
-                var errorResponse = new
-                {
-                    message = ex.Message,
-                    errors = ex.Errors
-                };
-                return StatusCode(ex.Code, errorResponse);
-            }
-        }
 
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpPost("api/forgetpassword")]
@@ -233,6 +281,9 @@ namespace Medical.Api.Controllers
             var admins = _authService.GetAll(search);
             return Ok(admins);
         }
+
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "SuperAdmin")]
         [HttpGet("api/admin/adminAllByPage")]
@@ -242,6 +293,9 @@ namespace Medical.Api.Controllers
             return Ok(paginatedAdmins);
         }
 
+
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "SuperAdmin")]
         [HttpGet("api/admin/getById/{id}")]
@@ -250,6 +304,9 @@ namespace Medical.Api.Controllers
             var admin = _authService.GetById(id);
             return Ok(admin);
         }
+
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "Admin,SuperAdmin")]
         [HttpPut("api/admin/update/{id}")]
@@ -258,6 +315,9 @@ namespace Medical.Api.Controllers
             _authService.Update(id, updateDto);
             return NoContent();
         }
+
+
+
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPut("api/admin/updatePassword")]
@@ -268,6 +328,9 @@ namespace Medical.Api.Controllers
             return NoContent();
 
         }
+
+
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles = "Member")]
         [HttpGet("api/GetUserProfile")]
@@ -288,6 +351,7 @@ namespace Medical.Api.Controllers
                 return StatusCode(ex.Code, new { message = ex.Message });
             }
         }
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize]
         [HttpGet("api/profileLayout")]
@@ -299,6 +363,33 @@ namespace Medical.Api.Controllers
             return Ok(new UserProfileDto { UserName = userName, Role = role });
         }
 
+        private async Task<string> GenerateJwtToken(AppUser user)
+        {
+            var claims = new List<Claim>
+        {
+        new Claim(ClaimTypes.NameIdentifier, user.Id),
+        new Claim(ClaimTypes.Name, user.UserName),
+        new Claim("FullName", user.FullName)
+         };
+
+
+            var roles = await _userManager.GetRolesAsync(user);
+            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
+
+
+            var secret = configuration.GetSection("JWT:Secret").Value;
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(secret));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                issuer: configuration.GetSection("JWT:Issuer").Value,
+                audience: configuration.GetSection("JWT:Audience").Value,
+                claims: claims,
+                expires: DateTime.Now.AddDays(1),
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
         //[HttpGet("api/admin/createUser")]
         //public async Task<IActionResult> CreateUser()
         //{
@@ -314,7 +405,7 @@ namespace Medical.Api.Controllers
         //    };
 
         //    await _userManager.CreateAsync(user1, "Admin123");
- 
+
         //    AppUser user2 = new AppUser
         //    {
         //        FullName = "Member",

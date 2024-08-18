@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Medical.UI.Controllers
 {
-   // [Authorize]
+  
     [ServiceFilter(typeof(AuthFilter))]
 	public class CategoryController:Controller
 	{

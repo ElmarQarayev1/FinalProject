@@ -36,25 +36,25 @@ namespace Medical.UI.Service
         }
 
 
-        public async Task<string> ProcessGoogleResponseAsync(string returnUrl)
-        {
-            if (string.IsNullOrEmpty(returnUrl))
-            {
-                throw new ArgumentException("Return URL cannot be null or empty", nameof(returnUrl));
-            }
+        //public async Task<string> ProcessGoogleResponseAsync(string returnUrl)
+        //{
+        //    if (string.IsNullOrEmpty(returnUrl))
+        //    {
+        //        throw new ArgumentException("Return URL cannot be null or empty", nameof(returnUrl));
+        //    }
 
-            var response = await _client.GetAsync(baseUrl + "google-response?returnUrl=" + Uri.EscapeDataString(returnUrl));
-            var content = await response.Content.ReadAsStringAsync();
+        //    var response = await _client.GetAsync(baseUrl + "google-response?returnUrl=" + Uri.EscapeDataString(returnUrl));
+        //    var content = await response.Content.ReadAsStringAsync();
 
-            if (response.IsSuccessStatusCode)
-            {
-                var result = JsonSerializer.Deserialize<GoogleResponseDto>(content);
-                return result.Token;
-            }
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        var result = JsonSerializer.Deserialize<GoogleResponseDto>(content);
+        //        return result.Token;
+        //    }
 
           
-            throw new HttpException(response.StatusCode, content);
-        }
+        //    throw new HttpException(response.StatusCode, content);
+        //}
 
 
         public async Task<int> GetPendingReviewCountAsync()

@@ -80,9 +80,6 @@ namespace Medical.Service.Implementations.Admin
             return result;
         }
 
-
-
-
         public async Task<int> Create(AppointmentCreateDto createDto,string userId)
         {
             var doctor = _doctorRepository.Get(x => x.Id == createDto.DoctorId);

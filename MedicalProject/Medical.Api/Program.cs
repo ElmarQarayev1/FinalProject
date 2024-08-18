@@ -26,7 +26,6 @@ using Quartz;
 var builder = WebApplication.CreateBuilder(args);
 
 
-
 builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
 {
     options.InvalidModelStateResponseFactory = context =>
@@ -100,26 +99,29 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
     opt.Password.RequireNonAlphanumeric = false;
     opt.Password.RequiredLength = 8;
     opt.Password.RequireUppercase = false;
+    opt.Password.RequireLowercase = false;
 
 }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
 
 
-
-builder.Services.AddAuthentication(options =>
-{
+builder.Services.AddAuthentication(options => {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
 })
-.AddCookie()
-.AddGoogle(googleOptions =>
-{
-    googleOptions.ClientId = builder.Configuration["GoogleKeys:ClientId"];
-    googleOptions.ClientSecret = builder.Configuration["GoogleKeys:ClientSecret"];
-    googleOptions.Scope.Add("openid");
-    googleOptions.Scope.Add("profile");
-    googleOptions.Scope.Add("email");
-
-
+.AddCookie(options => {
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+})
+.AddGoogle(options => {
+    options.ClientId = builder.Configuration.GetSection("Google:ClientId").Value!;
+    options.CallbackPath = "/signin-google";
+    options.ClientSecret = builder.Configuration.GetSection("Google:ClientSecret").Value!;
+    options.SaveTokens = true;
+    options.Scope.Add("https://www.googleapis.com/auth/userinfo.profile");
+    options.Scope.Add("https://www.googleapis.com/auth/userinfo.email");
+    options.Events.OnRedirectToAuthorizationEndpoint = context => {
+        context.HttpContext.Response.Redirect(context.RedirectUri);
+        return Task.CompletedTask;
+    };
 });
 
 

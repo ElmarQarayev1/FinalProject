@@ -12,6 +12,8 @@ namespace Medical.UI.Models
         public string Status { get; set; }
 
         public string Text { get; set; }
+
+       
     }
 }
 

@@ -17,6 +17,7 @@ namespace Medical.Service.Interfaces.Admin
         PaginatedList<ReviewPaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10);
         ReviewDetailDto GetById(int id);
         int GetPendingReviewCount();
+       
     }
 }
 

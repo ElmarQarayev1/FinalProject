@@ -17,19 +17,19 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddSession();
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-})
-.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
-.AddGoogle(googleOptions =>
-{
-    googleOptions.ClientId = configuration["GoogleKeys:ClientId"];
-    googleOptions.ClientSecret = configuration["GoogleKeys:ClientSecret"];
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+//    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+//})
+//.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+//.AddGoogle(googleOptions =>
+//{
+//    googleOptions.ClientId = configuration["GoogleKeys:ClientId"];
+//    googleOptions.ClientSecret = configuration["GoogleKeys:ClientSecret"];
   
 
-});
+//});
 
 builder.Services.AddScoped<AuthFilter>();
 builder.Services.AddHttpContextAccessor();

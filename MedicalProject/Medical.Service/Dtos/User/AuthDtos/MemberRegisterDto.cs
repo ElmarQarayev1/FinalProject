@@ -30,12 +30,11 @@ namespace Medical.Service.Dtos.Admin.AuthDtos
                 .NotEmpty().WithMessage("FullName is required.")
                 .MaximumLength(100).WithMessage("FullName must be less than 100 characters.");
 
-          
+
             RuleFor(x => x.Password)
                 .NotEmpty().WithMessage("Password is required.")
-                .MinimumLength(8).WithMessage("Password must be at least 8 characters.")
-                .Matches(@"^[A-Z]").WithMessage("Password must start with an uppercase letter.");
-
+                .MinimumLength(8).WithMessage("Password must be at least 8 characters.");
+              
            
             RuleFor(x => x.ConfirmPassword)
                 .NotEmpty().WithMessage("ConfirmPassword is required.")

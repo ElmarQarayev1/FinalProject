@@ -18,6 +18,7 @@ using Medical.Service.Dtos.User.DoctorDtos;
 using Medical.Service.Dtos.User.FeatureDtos;
 using Medical.Service.Dtos.User.FeedDtos;
 using Medical.Service.Dtos.User.MedicineDtos;
+using Medical.Service.Dtos.User.ReviewDtos;
 using Medical.Service.Dtos.User.ServiceDtos;
 using Medical.Service.Dtos.User.SliderDtos;
 using Microsoft.AspNetCore.Http;
@@ -274,7 +275,8 @@ namespace Medical.Service.Profiles
             CreateMap<AppUser, AdminGetDto>();
 
             CreateMap<AppUser, AdminPaginatedGetDto>();
-              
+
+  
 
         }
     }

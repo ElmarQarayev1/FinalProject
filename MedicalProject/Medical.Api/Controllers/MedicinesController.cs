@@ -9,6 +9,7 @@ using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Medical.Api.Controllers
 {
@@ -16,9 +17,10 @@ namespace Medical.Api.Controllers
 	public class MedicinesController:ControllerBase
 	{
 		public IMedicineService _medicineService;
+        private readonly IMemoryCache _cache;
+        private readonly TimeSpan _cacheExpiration = TimeSpan.FromSeconds(30);
 
-
-		public MedicinesController(IMedicineService medicineService)
+        public MedicinesController(IMedicineService medicineService)
 		{
 			_medicineService = medicineService;
 		}
@@ -26,50 +28,128 @@ namespace Medical.Api.Controllers
         [HttpPost("api/admin/Medicines")]
         public ActionResult Create([FromForm] MedicineCreateDto createDto)
         {
-            return StatusCode(201, new { Id = _medicineService.Create(createDto) });
+            var newMedicineId = _medicineService.Create(createDto);
+
+            
+            _cache.Remove("Medicines_GetAll_Admin");
+            _cache.Remove("Medicines_GetAllForUserHome");
+            _cache.Remove($"Medicine_GetById_{newMedicineId}");
+
+            return StatusCode(201, new { Id = newMedicineId });
         }
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Medicines")]
         public ActionResult<PaginatedList<MedicinePaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
         {
-            return StatusCode(200, _medicineService.GetAllByPage(search, page, size));
+            var cacheKey = $"Medicines_GetAll_{search}_{page}_{size}";
+            if (_cache.TryGetValue(cacheKey, out PaginatedList<MedicinePaginatedGetDto> cachedResult))
+            {
+                return Ok(cachedResult);
+            }
+
+            var result = _medicineService.GetAllByPage(search, page, size);
+            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = _cacheExpiration
+            });
+
+            return Ok(result);
         }
+
 
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Medicines/Filter")]
-        public ActionResult<PaginatedList<MedicinePaginatedGetDtoForUser>> GetAllForUser(string? search = null, int page = 1, int size =9, int? categoryId = null)
+        public ActionResult<PaginatedList<MedicinePaginatedGetDtoForUser>> GetAllForUser(string? search = null, int page = 1, int size = 9, int? categoryId = null)
         {
-            return StatusCode(200, _medicineService.GetAllByPageForUser(search, page, size,categoryId));
+            var cacheKey = $"Medicines_GetAllForUser_{search}_{page}_{size}_{categoryId}";
+            if (_cache.TryGetValue(cacheKey, out PaginatedList<MedicinePaginatedGetDtoForUser> cachedResult))
+            {
+                return Ok(cachedResult);
+            }
+
+            var result = _medicineService.GetAllByPageForUser(search, page, size, categoryId);
+            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = _cacheExpiration
+            });
+
+            return Ok(result);
         }
 
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Medicines/LatestMedicines")]
         public ActionResult<List<MedicineGetDtoLatest>> GetLatestMedicines()
         {
-            return StatusCode(200, _medicineService.GetAllLatest());
-        }
+            var cacheKey = "Medicines_GetLatestMedicines";
+            if (_cache.TryGetValue(cacheKey, out List<MedicineGetDtoLatest> cachedResult))
+            {
+                return Ok(cachedResult);
+            }
 
+            var result = _medicineService.GetAllLatest();
+            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = _cacheExpiration
+            });
+
+            return Ok(result);
+        }
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Medicines/all")]
-        public ActionResult<List<MedicineGetDto>> GetAll()
+        public ActionResult<List<MedicineGetDto>> GetAllAdmin()
         {
-            return StatusCode(200, _medicineService.GetAll());
+            var cacheKey = "Medicines_GetAll_Admin";
+            if (_cache.TryGetValue(cacheKey, out List<MedicineGetDto> cachedResult))
+            {
+                return Ok(cachedResult);
+            }
+
+            var result = _medicineService.GetAll();
+            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = _cacheExpiration
+            });
+
+            return Ok(result);
         }
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Medicines/{id}")]
         public ActionResult<MedicineDetailsDto> GetById(int id)
         {
-            return StatusCode(200, _medicineService.GetById(id));
-        }
+            var cacheKey = $"Medicine_GetById_{id}";
+            if (_cache.TryGetValue(cacheKey, out MedicineDetailsDto cachedResult))
+            {
+                return Ok(cachedResult);
+            }
 
+            var result = _medicineService.GetById(id);
+            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = _cacheExpiration
+            });
+
+            return Ok(result);
+        }
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Medicines/{id}")]
         public ActionResult<MedicineGetDtoForUser> GetByIdForUser(int id)
         {
-            return StatusCode(200, _medicineService.GetByIdForUser(id));
+            var cacheKey = $"Medicine_GetByIdForUser_{id}";
+            if (_cache.TryGetValue(cacheKey, out MedicineGetDtoForUser cachedResult))
+            {
+                return Ok(cachedResult);
+            }
+
+            var result = _medicineService.GetByIdForUser(id);
+            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = _cacheExpiration
+            });
+
+            return Ok(result);
         }
 
 
@@ -78,12 +158,27 @@ namespace Medical.Api.Controllers
         public void Update(int id, [FromForm] MedicineUpdateDto updateDto)
         {
             _medicineService.Update(id, updateDto);
+
+           
+            _cache.Remove($"Medicine_GetById_{id}");
+            _cache.Remove($"Medicine_GetByIdForUser_{id}");
+            _cache.Remove("Medicines_GetAll_Admin");
+            _cache.Remove("Medicines_GetAllForUserHome");
         }
+
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpDelete("api/admin/Medicines/{id}")]
         public IActionResult Delete(int id)
         {
             _medicineService.Delete(id);
+
+           
+            _cache.Remove($"Medicine_GetById_{id}");
+            _cache.Remove("Medicines_GetAll_Admin");
+            _cache.Remove("Medicines_GetAllForUserHome");
+
             return NoContent();
         }
 

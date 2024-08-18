@@ -5,6 +5,7 @@ using Medical.Core.Enum;
 using Medical.Data;
 using Medical.Data.Repositories.Implementations;
 using Medical.Data.Repositories.Interfaces;
+using Medical.Service.Dtos.User.DoctorDtos;
 using Medical.Service.Dtos.User.MedicineDtos;
 using Medical.Service.Dtos.User.OrderDtos;
 using Medical.Service.Dtos.User.ReviewDtos;
@@ -164,9 +165,13 @@ namespace Medical.Service.Implementations.Admin
                 CreatedAt = review.CreatedAt,
                 MedicineName = review.Medicine.Name,
                 Text = review.Text,
-                Status = review.Status.ToString()
+                Status = review.Status.ToString(),
+                Rate = review.Rate
             };
         }
+
+      
+
 
     }
 }

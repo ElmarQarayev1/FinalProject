@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Medical.Core.Enum;
 using System.Security.Claims;
+using Medical.Service.Dtos.User.CategoryDtos;
+using Medical.Service.Dtos.User.ReviewDtos;
 
 namespace Medical.Api.Controllers
 {
@@ -38,6 +40,7 @@ namespace Medical.Api.Controllers
             }
         }
 
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles = "Member")]
         [HttpPost("api/Reviews/CreateReview")]
@@ -52,6 +55,7 @@ namespace Medical.Api.Controllers
 
             return StatusCode(201, new { Id = reviewId });
         }
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles = "Member")]
         [HttpDelete("api/Reviews/DeleteReview")]
@@ -65,6 +69,7 @@ namespace Medical.Api.Controllers
             _reviewService.DeleteReview(deleteDto,userId);
             return NoContent();
         }
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/reviews/{id}")]
         public IActionResult GetReviewById(int id)

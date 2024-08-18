@@ -23,6 +23,10 @@ public class HomeController : Controller
     {
         return View();
     }
+    public IActionResult IndexForUser()
+    {
+        return View();
+    }
 
     public IActionResult Error()
     {

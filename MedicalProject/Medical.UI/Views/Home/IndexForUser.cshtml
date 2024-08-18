@@ -1,10 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Google Login";
     Layout = null;
-}
-@inject IConfiguration Configuration
-@{
-    var googleLoginUrl = $"{Configuration.GetSection("APIEndpoint").Value!}/login-google";
 }
 
 <!DOCTYPE html>
@@ -12,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
+    <title>Google Login Success</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
@@ -22,6 +17,7 @@
             align-items: center;
             height: 100vh;
             background-color: #f8f9fa;
+            margin: 0;
         }
 
         .container {
@@ -32,8 +28,20 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .btn-google {
-            background-color: #4285f4;
+        h1 {
+            color: #28a745; 
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #6c757d; 
+        }
+
+        .btn-back {
+            margin-top: 20px;
+            background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
@@ -43,25 +51,16 @@
             transition: background-color 0.3s ease;
         }
 
-            .btn-google:hover {
-                background-color: #357ae8;
+            .btn-back:hover {
+                background-color: #0056b3;
             }
-
-            .btn-google i {
-                margin-right: 10px;
-            }
-
-        h2 {
-            margin-bottom: 20px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>@ViewBag.Title</h2>
-        <a href="@googleLoginUrl" class="btn btn-google">
-            <i class="fab fa-google"></i> Google Login
-        </a>
+
+        <h1>You have successfully logged in with Google!</h1>
+        <p>Welcome to our site</p>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

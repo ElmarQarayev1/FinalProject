@@ -67,51 +67,7 @@ namespace Medical.Service.Implementations.Admin
             return token;
         }
 
-
-        public async Task<string> LoginWithGoogleAsync(ClaimsPrincipal principal)
-        {
-            var emailClaim = principal.FindFirst(claim => claim.Type == ClaimTypes.Email);
-            var email = emailClaim?.Value;
-
-            if (email == null)
-            {
-                throw new RestException(StatusCodes.Status400BadRequest, "Email claim not found.");
-            }
-
-            var appUser = await _userManager.FindByEmailAsync(email);
-            if (appUser == null)
-            {
-                var username = GenerateUserNameFromEmail(email);
-                appUser = new AppUser
-                {
-                    UserName = username,
-                    Email = email,
-                    FullName = username,
-                    EmailConfirmed = true,
-                };
-
-                var createResult = await _userManager.CreateAsync(appUser);
-                if (!createResult.Succeeded)
-                {
-                    throw new RestException(StatusCodes.Status400BadRequest, "User creation failed.");
-                }
-
-                await _userManager.AddToRoleAsync(appUser, "member");
-            }
-            else if (!appUser.EmailConfirmed)
-            {
-                appUser.EmailConfirmed = true;
-                await _userManager.UpdateAsync(appUser);
-            }
-
-            return await GenerateJwtToken(appUser);
-        }
-
-        private string GenerateUserNameFromEmail(string email)
-        {
-            return email.Substring(0, email.IndexOf('@'));
-        }
-
+      
 
 
         public MemberProfileGetDto GetByIdForUserProfile(string userId)
@@ -580,15 +536,17 @@ namespace Medical.Service.Implementations.Admin
             return userDto;
         }
 
-
-       
-
-
         public SendingLoginDto Login(AdminLoginDto loginDto)
         {
             AppUser? user = _userManager.FindByNameAsync(loginDto.UserName).Result;
 
             if (user == null || !_userManager.CheckPasswordAsync(user, loginDto.Password).Result)
+            {
+                throw new RestException(StatusCodes.Status401Unauthorized, "UserName or Password incorrect!");
+            }
+
+            var userRoles = _userManager.GetRolesAsync(user).Result;
+            if (!userRoles.Contains("SuperAdmin") && !userRoles.Contains("Admin"))
             {
                 throw new RestException(StatusCodes.Status401Unauthorized, "UserName or Password incorrect!");
             }
@@ -626,16 +584,6 @@ namespace Medical.Service.Implementations.Admin
 
             return new SendingLoginDto { Token = tokenStr, PasswordResetRequired = false };
         }
-
-
-
-
-     
-
-
-
-
-
 
 
 

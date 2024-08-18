@@ -35,57 +35,7 @@ namespace Medical.UI.Controllers
             return View();
         }
 
-
-        public IActionResult GoogleLoginSubmit(string returnUrl = null)
-        {
-
-            returnUrl = returnUrl ?? Url.Content("~/");
-
-
-            var properties = new AuthenticationProperties { RedirectUri = Url.Action("GoogleResponse", "Account", new { returnUrl }) };
-
-
-            return Challenge(properties, "Google");
-        }
-
-
-        public async Task<IActionResult> GoogleResponse(string returnUrl = null)
-        {
-            var result = await HttpContext.AuthenticateAsync("Google");
-
-            if (result?.Principal == null)
-            {
-                return RedirectToAction("Login", "Account", new { message = "Authentication failed. Please try again." });
-            }
-
-            var emailClaim = result.Principal.FindFirst(claim => claim.Type == ClaimTypes.Email);
-            var email = emailClaim?.Value;
-
-            if (email == null)
-            {
-                return RedirectToAction("Login", "Account", new { message = "Email claim not found. Please try again." });
-            }
-
-            try
-            {
-                var token = await _crudService.ProcessGoogleResponseAsync(returnUrl);
-                HttpContext.Response.Cookies.Append("AuthToken", token);
-                return Redirect(returnUrl ?? Url.Action("Index", "Home"));
-            }
-            catch (HttpException ex)
-            {
-                return RedirectToAction("Login", "Account", new { message = $"Error: {ex.Message}" });
-            }
-        }
-
-
-
-        //private string GenerateUserNameFromEmail(string email)
-        //{
-        //    var atIndex = email.IndexOf('@');
-        //    return atIndex > 0 ? email.Substring(0, atIndex) : email;
-        //}
-
+     
 
         public IActionResult Login()
         {
@@ -309,8 +259,26 @@ namespace Medical.UI.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-       
+        public IActionResult ExternalLoginCallback(string token)
+        {
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "Account");
+            }
 
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                Expires = DateTimeOffset.UtcNow.AddDays(1)
+            };
+
+            Response.Cookies.Append("token", "Bearer " + token, cookieOptions);
+
+            return RedirectToAction("IndexForUser", "Home");
+        }
     }
+
 }
+
 
