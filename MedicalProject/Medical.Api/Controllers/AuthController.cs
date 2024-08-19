@@ -27,7 +27,7 @@ namespace Medical.Api.Controllers
         private readonly IAuthService _authService;
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-         private readonly IConfiguration configuration;
+        private readonly IConfiguration configuration;
 
 
         public AuthController(IAuthService authService, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager,IConfiguration _configuration)
