@@ -9,6 +9,8 @@ namespace Medical.Core.Entities
         public string FullName { get; set; }
 
         public bool IsPasswordResetRequired { get; set; } = true;
+
+      
     }
 }
 

@@ -82,5 +82,6 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.1" />
     <PackageReference Include="EPPlus" Version="7.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
   </ItemGroup>
 </Project>

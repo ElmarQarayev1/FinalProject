@@ -8,6 +8,7 @@ using Medical.Service.Exceptions;
 using System.Collections.Generic;
 using Medical.Core.Enum;
 using Medical.Service.Dtos.Admin.OrderDtos;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Medical.Api.Controllers
 {
@@ -17,17 +18,19 @@ namespace Medical.Api.Controllers
     {
         private readonly IOrderService _orderService;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IHubContext<MedicalHub> _medicalHub;
 
-        public OrdersController(IOrderService orderService, IHttpContextAccessor httpContextAccessor)
+        public OrdersController(IOrderService orderService, IHttpContextAccessor httpContextAccessor, IHubContext<MedicalHub> medicalHub)
         {
             _orderService = orderService;
             _httpContextAccessor = httpContextAccessor;
+            _medicalHub = medicalHub;
         }
 
         [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles ="Member")]
         [HttpPost("api/orders/checkout")]
-        public IActionResult Checkout([FromBody] CheckOutDto checkoutDto)
+        public async Task<IActionResult> CheckoutAsync([FromBody] CheckOutDto checkoutDto)
         {
             try
             {
@@ -40,8 +43,9 @@ namespace Medical.Api.Controllers
 
 
                 var orderId = _orderService.CheckOut(checkoutDto,userId);
+                await _medicalHub.Clients.All.SendAsync("OrderCreated", new { OrderId = orderId, CreatedAt = DateTime.UtcNow.ToString("dd-MMM-yyyy") });
 
-               
+
                 return Ok(new { OrderId = orderId });
             }
             catch (RestException ex)

@@ -17,7 +17,7 @@ namespace Medical.Api.Controllers
         public IDoctorService _doctorService;
 
         private readonly IMemoryCache _cache;
-        private readonly TimeSpan _cacheExpiration = TimeSpan.FromSeconds(30);
+        private readonly TimeSpan _cacheExpiration = TimeSpan.FromSeconds(5);
 
         public DoctorsController(IDoctorService doctorService, IMemoryCache cache)
         {
@@ -48,21 +48,9 @@ namespace Medical.Api.Controllers
         [HttpGet("api/admin/Doctors")]
         public ActionResult<PaginatedList<DoctorPaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
         {
-            var cacheKey = $"Doctors_GetAll_{search}_{page}_{size}";
-            if (_cache.TryGetValue(cacheKey, out PaginatedList<DoctorPaginatedGetDto> cachedResult))
-            {
-                return Ok(cachedResult);
-            }
+            
 
             var result = _doctorService.GetAllByPage(search, page, size);
-
-            var cacheEntryOptions = new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = _cacheExpiration
-            };
-
-            _cache.Set(cacheKey, result, cacheEntryOptions);
-
             return Ok(result);
         }
         [ApiExplorerSettings(GroupName = "admin_v1")]

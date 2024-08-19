@@ -33,9 +33,7 @@ namespace Medical.UI.Controllers
         public IActionResult GoogleLogin()
         {
             return View();
-        }
-
-     
+        }   
 
         public IActionResult Login()
         {
@@ -265,16 +263,7 @@ namespace Medical.UI.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-
-            var cookieOptions = new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = true,
-                Expires = DateTimeOffset.UtcNow.AddDays(1)
-            };
-
-            Response.Cookies.Append("token", "Bearer " + token, cookieOptions);
-
+        
             return RedirectToAction("IndexForUser", "Home");
         }
     }

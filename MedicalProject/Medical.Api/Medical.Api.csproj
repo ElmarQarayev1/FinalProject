@@ -20,6 +20,8 @@
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="7.0.16" />
     <PackageReference Include="StackExchange.Redis" Version="2.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.16" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,10 +53,12 @@
     <Folder Include="wwwroot\uploads\medicines\" />
     <Folder Include="wwwroot\uploads\feeds\" />
     <Folder Include="Quartz\" />
+    <Folder Include="Hub\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="MiddleWares\" />
     <None Remove="Controllers\" />
     <None Remove="Quartz\" />
+    <None Remove="Hub\" />
   </ItemGroup>
 </Project>

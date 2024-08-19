@@ -122,5 +122,7 @@
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/Microsoft.Extensions.Logging.Abstractions.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/Pipelines.Sockets.Unofficial.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/StackExchange.Redis.dll
-/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/obj/Debug/net7.0/Medical.Api.csproj.CopyComplete
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.Google.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.InMemory.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Debug/net7.0/System.Net.WebSockets.WebSocketProtocol.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/obj/Debug/net7.0/Medical.Api.csproj.CopyComplete

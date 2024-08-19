@@ -18,12 +18,24 @@ namespace Medical.Api.Controllers
 	{
 		public IMedicineService _medicineService;
         private readonly IMemoryCache _cache;
-        private readonly TimeSpan _cacheExpiration = TimeSpan.FromSeconds(30);
+        private readonly TimeSpan _cacheExpiration = TimeSpan.FromSeconds(5);
 
-        public MedicinesController(IMedicineService medicineService)
+        public MedicinesController(IMedicineService medicineService,IMemoryCache cache)
 		{
 			_medicineService = medicineService;
+            _cache = cache;
 		}
+
+        [ApiExplorerSettings(GroupName = "admin_v1")]
+        [HttpGet("api/admin/Medicines")]
+        public ActionResult<PaginatedList<MedicinePaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
+        {
+            
+            var result = _medicineService.GetAllByPage(search, page, size);
+          
+            return Ok(result);
+        }
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPost("api/admin/Medicines")]
         public ActionResult Create([FromForm] MedicineCreateDto createDto)
@@ -38,24 +50,7 @@ namespace Medical.Api.Controllers
             return StatusCode(201, new { Id = newMedicineId });
         }
 
-        [ApiExplorerSettings(GroupName = "admin_v1")]
-        [HttpGet("api/admin/Medicines")]
-        public ActionResult<PaginatedList<MedicinePaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
-        {
-            var cacheKey = $"Medicines_GetAll_{search}_{page}_{size}";
-            if (_cache.TryGetValue(cacheKey, out PaginatedList<MedicinePaginatedGetDto> cachedResult))
-            {
-                return Ok(cachedResult);
-            }
-
-            var result = _medicineService.GetAllByPage(search, page, size);
-            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = _cacheExpiration
-            });
-
-            return Ok(result);
-        }
+       
 
 
         [ApiExplorerSettings(GroupName = "user_v1")]
@@ -157,16 +152,9 @@ namespace Medical.Api.Controllers
         [HttpPut("api/admin/Medicines/{id}")]
         public void Update(int id, [FromForm] MedicineUpdateDto updateDto)
         {
-            _medicineService.Update(id, updateDto);
-
+            _medicineService.Update(id, updateDto);        
            
-            _cache.Remove($"Medicine_GetById_{id}");
-            _cache.Remove($"Medicine_GetByIdForUser_{id}");
-            _cache.Remove("Medicines_GetAll_Admin");
-            _cache.Remove("Medicines_GetAllForUserHome");
         }
-
-
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpDelete("api/admin/Medicines/{id}")]
@@ -174,11 +162,7 @@ namespace Medical.Api.Controllers
         {
             _medicineService.Delete(id);
 
-           
-            _cache.Remove($"Medicine_GetById_{id}");
-            _cache.Remove("Medicines_GetAll_Admin");
-            _cache.Remove("Medicines_GetAllForUserHome");
-
+             
             return NoContent();
         }
 

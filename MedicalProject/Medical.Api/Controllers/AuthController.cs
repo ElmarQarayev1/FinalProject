@@ -81,6 +81,7 @@ namespace Medical.Api.Controllers
                 return BadRequest("User creation failed.");
             }
 
+          
             var roleResult = await _userManager.AddToRoleAsync(user, "Member");
             if (!roleResult.Succeeded)
             {
@@ -96,8 +97,7 @@ namespace Medical.Api.Controllers
             return Redirect(redirectUrl);
         }
 
-       
-
+      
 
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpPost("api/login")]
@@ -194,6 +194,7 @@ namespace Medical.Api.Controllers
                 return StatusCode(ex.Code, ex.Message);
             }
         }
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpPost("api/verify")]
         public async Task<IActionResult> Verify([FromBody] MemberVerifyDto verifyDto)
@@ -217,6 +218,7 @@ namespace Medical.Api.Controllers
         }
 
         [ApiExplorerSettings(GroupName = "user_v1")]
+        [Authorize(Roles ="Member")]
         [HttpPost("api/profile/update")]
         public async Task<IActionResult> UpdateProfile([FromBody] MemberProfileEditDto profileEditDto)
         {

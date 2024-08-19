@@ -219,7 +219,7 @@ namespace Medical.Service.Implementations.Admin
                     TotalPrice = order.OrderItems.Sum(oi => oi.SalePrice * oi.Count),
                     OrderItems = order.OrderItems.Select(oi => new OrderItemDto
                     {
-                        MedicineId = oi.MedicineId,
+                        MedicineName = oi.Medicine != null ? oi.Medicine.Name : "Unknown",
                         Count = oi.Count,
                         Price = oi.SalePrice
                     }).ToList()
@@ -248,7 +248,7 @@ namespace Medical.Service.Implementations.Admin
                 TotalPrice = order.OrderItems.Sum(oi => oi.SalePrice * oi.Count),
                 OrderItems = order.OrderItems.Select(oi => new OrderItemDto
                 {
-                    MedicineId = oi.MedicineId,
+                    MedicineName = oi.Medicine != null ? oi.Medicine.Name : "Unknown",
                     Count = oi.Count,
                     Price = oi.SalePrice
                 }).ToList()
@@ -258,7 +258,7 @@ namespace Medical.Service.Implementations.Admin
 
         public List<OrderDetailDto> GetDetailsOrder(string? search = null)
         {
-            var query = _orderRepository.GetAll(o => search == null || o.FullName.Contains(search) || o.Email.Contains(search))
+            var query = _orderRepository.GetAll(o => search == null || o.FullName.Contains(search) || o.Email.Contains(search),"Medicines")
                 .Select(order => new OrderDetailDto
                 {
                     Id = order.Id,
@@ -270,7 +270,7 @@ namespace Medical.Service.Implementations.Admin
                     TotalItemCount = order.OrderItems.Sum(oi => oi.Count),
                     OrderItems = order.OrderItems.Select(oi => new OrderItemDto
                     {
-                        MedicineId = oi.MedicineId,
+                        MedicineName = oi.Medicine != null ? oi.Medicine.Name : "Unknown",
                         Count = oi.Count,
                         Price = oi.SalePrice
                     }).ToList(),

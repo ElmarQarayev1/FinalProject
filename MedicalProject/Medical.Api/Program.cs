@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Medical.Api;
+using Medical.Api;
 using Medical.Api.MiddleWares;
 using Medical.Api.Quartz;
 using Medical.Core.Entities;
@@ -41,7 +43,7 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
 
 
 builder.Services.AddMemoryCache();
-
+builder.Services.AddSignalR();
 
 var serviceProvider = new ServiceCollection()
                .AddDbContext<AppDbContext>(options => options.UseSqlServer("Server=localhost;Database=MedicalProject;User ID=sa; Password=reallyStrongPwd123;TrustServerCertificate=true"))
@@ -274,10 +276,9 @@ app.UseCors("AllowSpecificOrigin");
 app.UseStaticFiles();
 
 app.MapControllers();
-
+app.MapHub<MedicalHub>("/hub");
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();
-
 
 app.Run();
 

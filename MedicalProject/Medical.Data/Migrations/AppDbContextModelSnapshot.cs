@@ -282,14 +282,9 @@ namespace Medical.Data.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int?>("TypeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("TypeId");
 
                     b.ToTable("Medicines");
                 });
@@ -499,23 +494,6 @@ namespace Medical.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Sliders");
-                });
-
-            modelBuilder.Entity("Medical.Core.Entities.Type", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Types");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -728,12 +706,18 @@ namespace Medical.Data.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
+                    b.Property<string>("ConnectionId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsPasswordResetRequired")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastConnectedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasDiscriminator().HasValue("AppUser");
                 });
@@ -792,10 +776,6 @@ namespace Medical.Data.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Medical.Core.Entities.Type", null)
-                        .WithMany("Medicines")
-                        .HasForeignKey("TypeId");
 
                     b.Navigation("Category");
                 });
@@ -932,11 +912,6 @@ namespace Medical.Data.Migrations
             modelBuilder.Entity("Medical.Core.Entities.Order", b =>
                 {
                     b.Navigation("OrderItems");
-                });
-
-            modelBuilder.Entity("Medical.Core.Entities.Type", b =>
-                {
-                    b.Navigation("Medicines");
                 });
 #pragma warning restore 612, 618
         }

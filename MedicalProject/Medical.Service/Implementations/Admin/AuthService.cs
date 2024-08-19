@@ -69,7 +69,6 @@ namespace Medical.Service.Implementations.Admin
 
       
 
-
         public MemberProfileGetDto GetByIdForUserProfile(string userId)
         {
             var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
@@ -86,7 +85,7 @@ namespace Medical.Service.Implementations.Admin
                     TotalItemCount = order.OrderItems.Sum(oi => oi.Count),
                     OrderItems = order.OrderItems.Select(oi => new OrderItemDto
                     {
-                        MedicineId = oi.MedicineId,
+                        MedicineName = oi.Medicine != null ? oi.Medicine.Name : "Unknown",
                         Count = oi.Count,
                         Price = oi.SalePrice
                     }).ToList(),
@@ -627,7 +626,7 @@ namespace Medical.Service.Implementations.Admin
 
 
 
-
+        
 
 
         public void Update(string id, AdminUpdateDto updateDto)
