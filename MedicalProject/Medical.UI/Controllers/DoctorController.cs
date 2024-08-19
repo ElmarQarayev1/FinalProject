@@ -26,27 +26,36 @@ namespace Medical.UI.Controllers
         {
             try
             {
+               
+                var paginatedData = await _crudService.GetAllPaginated<DoctorListitemGetResponse>("doctors", page, size);
 
-                return View(await _crudService.GetAllPaginated<DoctorListitemGetResponse>("doctors", page, size));
+               
+                if (page > paginatedData.TotalPages)
+                {
+                    return RedirectToAction("Index", new { page = paginatedData.TotalPages, size });
+                }
 
+              
+                return View(paginatedData);
             }
             catch (HttpException e)
             {
+               
                 if (e.Status == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    return RedirectToAction("login", "auth");
+                    return RedirectToAction("Login", "Auth");
                 }
-                else
-                {
-                    throw;
-                }
+                
+                return RedirectToAction("Error", "Home");
             }
             catch (System.Exception e)
             {
-                throw;
+               
+                return RedirectToAction("Error", "Home");
             }
-
         }
+
+
         public async Task<IActionResult> Delete(int id)
         {
             try

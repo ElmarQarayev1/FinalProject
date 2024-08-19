@@ -30,7 +30,6 @@ namespace Medical.Api.Controllers
          private readonly IConfiguration configuration;
 
 
-
         public AuthController(IAuthService authService, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager,IConfiguration _configuration)
         {
             _authService = authService;
@@ -225,8 +224,6 @@ namespace Medical.Api.Controllers
             await _authService.UpdateProfile(profileEditDto);
             return Ok(new { message = "Profile updated successfully!" });
         }
-
-
 
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/account/verifyemail")]

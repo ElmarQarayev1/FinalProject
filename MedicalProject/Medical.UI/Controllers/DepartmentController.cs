@@ -23,24 +23,37 @@ namespace Medical.UI.Controllers
         {
             try
             {
-                return View(await _crudService.GetAllPaginated<DepartmentListItemGetResponse>("departments", page, size));
+                var paginatedResponse = await _crudService.GetAllPaginated<DepartmentListItemGetResponse>("departments", page, size);
+
+              
+                if (page > paginatedResponse.TotalPages && paginatedResponse.TotalPages > 0)
+                {
+                   
+                    return RedirectToAction("Index", new { page = paginatedResponse.TotalPages, size });
+                }
+
+              
+                return View(paginatedResponse);
             }
             catch (HttpException e)
             {
                 if (e.Status == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    return RedirectToAction("login", "auth");
+                    return RedirectToAction("Login", "Auth");
                 }
                 else
                 {
+                  
                     throw;
                 }
             }
             catch (System.Exception e)
             {
+               
                 throw;
             }
         }
+
         public async Task<IActionResult> Create()
         {
             _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, Request.Cookies["token"]);

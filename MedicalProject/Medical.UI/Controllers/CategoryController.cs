@@ -22,32 +22,37 @@ namespace Medical.UI.Controllers
 			_crudService = crudService;
 		}
 
-		public async  Task<IActionResult> Index(int page=1)
-		{
-			try
-			{
-				var paginatedResponse = await _crudService.GetAllPaginated<CategoryListItemDetailedGetResponse>("categories", page);
+        public async Task<IActionResult> Index(int page = 1)
+        {
+            try
+            {
+                var paginatedResponse = await _crudService.GetAllPaginated<CategoryListItemDetailedGetResponse>("categories", page);
 
-				return View(paginatedResponse);
+              
+                if (page > paginatedResponse.TotalPages)
+                {
+                   
+                    return RedirectToAction("Index", new { page = paginatedResponse.TotalPages });
+                }
 
-			}
-			catch (HttpException ex)
-			{
-
-				if (ex.Status == System.Net.HttpStatusCode.Unauthorized)
-				{
+               
+                return View(paginatedResponse);
+            }
+            catch (HttpException ex)
+            {
+                if (ex.Status == System.Net.HttpStatusCode.Unauthorized)
+                {
                     return RedirectToAction("Login", "Auth");
                 }
 
                 return RedirectToAction("Error", "Home");
-
             }
             catch (System.Exception)
             {
                 return RedirectToAction("Error", "Home");
             }
-
         }
+
 
         public async Task<IActionResult> Delete(int id)
         {

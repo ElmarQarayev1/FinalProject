@@ -25,27 +25,35 @@ namespace Medical.UI.Controllers
             {
                 var paginatedResponse = await _crudService.GetAllPaginated<ReviewPaginatedGetResponse>("reviews", page);
 
-                return View(paginatedResponse);
+              
+                if (page > paginatedResponse.TotalPages && paginatedResponse.TotalPages > 0)
+                {
+                  
+                    return RedirectToAction("Index", new { page = paginatedResponse.TotalPages });
+                }
 
+              
+                return View(paginatedResponse);
             }
             catch (HttpException ex)
             {
-
+              
                 if (ex.Status == System.Net.HttpStatusCode.Unauthorized)
                 {
                     return RedirectToAction("Login", "Auth");
                 }
 
+              
                 return RedirectToAction("Error", "Home");
-
             }
             catch (System.Exception)
             {
+              
                 return RedirectToAction("Error", "Home");
             }
-
-
         }
+
+
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {

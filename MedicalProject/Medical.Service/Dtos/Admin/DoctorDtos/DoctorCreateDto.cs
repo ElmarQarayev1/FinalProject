@@ -55,11 +55,20 @@ namespace Medical.Service.Dtos.Admin.DoctorDtos
 
             RuleFor(x => x.Phone).NotEmpty().MaximumLength(30).MinimumLength(3);
 
-            RuleFor(x => x.ResilienceSkil).NotEmpty().GreaterThan(0);
+            RuleFor(x => x.ResilienceSkil)
+            .NotEmpty()
+            .GreaterThan(0)
+            .LessThan(100);
 
-            RuleFor(x => x.EthicSkil).NotEmpty().GreaterThan(0);
+            RuleFor(x => x.EthicSkil)
+                .NotEmpty()
+                .GreaterThan(0)
+                .LessThan(100);
 
-            RuleFor(x => x.CompassionSkil).NotEmpty().GreaterThan(0);
+            RuleFor(x => x.CompassionSkil)
+                .NotEmpty()
+                .GreaterThan(0)
+                .LessThan(100);
 
             RuleFor(x => x.TwitterUrl)
                .Matches(UrlPattern).When(x => !string.IsNullOrEmpty(x.TwitterUrl))

@@ -24,29 +24,36 @@ namespace Medical.UI.Controllers
         {
             try
             {
+               
                 var paginatedResponse = await _crudService.GetAllPaginated<OrderPaginatedGetResponse>("orders", page);
 
-                return View(paginatedResponse);
+                if (page > paginatedResponse.TotalPages && paginatedResponse.TotalPages > 0)
+                {
+                    
+                    return RedirectToAction("Index", new { page = paginatedResponse.TotalPages });
+                }
 
+             
+                return View(paginatedResponse);
             }
             catch (HttpException ex)
             {
-
+              
                 if (ex.Status == System.Net.HttpStatusCode.Unauthorized)
                 {
                     return RedirectToAction("Login", "Auth");
                 }
 
+              
                 return RedirectToAction("Error", "Home");
-
             }
             catch (System.Exception)
             {
+               
                 return RedirectToAction("Error", "Home");
             }
-
-
         }
+
 
 
         [HttpGet]
