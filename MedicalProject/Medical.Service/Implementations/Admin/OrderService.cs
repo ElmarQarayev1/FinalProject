@@ -48,6 +48,7 @@ namespace Medical.Service.Implementations.Admin
 
                 var totalSales = await _context.Orders
                     .Where(o => o.CreatedAt.HasValue && o.CreatedAt.Value.Year == yearInt)
+                    .Where(o => o.Status == OrderStatus.Accepted) 
                     .SelectMany(o => o.OrderItems)
                     .SumAsync(oi => oi.SalePrice * oi.Count);
 
@@ -60,7 +61,6 @@ namespace Medical.Service.Implementations.Admin
                 OrdersPrice = ordersPrice
             };
         }
-
 
         public async Task<OrderStatusCountsDto> GetOrderStatusCountsAsync()
         {
@@ -89,7 +89,7 @@ namespace Medical.Service.Implementations.Admin
             var today = DateTime.Today;
             return await _context.Orders.CountAsync(o => o.CreatedAt >= today
                 && o.CreatedAt < today.AddDays(1)
-                && o.Status!=OrderStatus.Canceled);
+                && o.Status==OrderStatus.Accepted);
         }
 
         public async Task<int> GetMonthlyOrdersCountAsync()
@@ -99,7 +99,7 @@ namespace Medical.Service.Implementations.Admin
 
             return await _context.Orders.CountAsync(o => o.CreatedAt >= firstDayOfMonth
                 && o.CreatedAt < firstDayOfNextMonth
-                && o.Status != OrderStatus.Canceled);
+                && o.Status == OrderStatus.Accepted);
         }
 
         public async Task<double> GetTodayOrdersTotalPriceAsync()
@@ -109,7 +109,7 @@ namespace Medical.Service.Implementations.Admin
             var totalPrice = await _context.Orders
                 .Where(o => o.CreatedAt >= today
                     && o.CreatedAt < today.AddDays(1)
-                    && o.Status != OrderStatus.Accepted)
+                    && o.Status == OrderStatus.Accepted)
                 .SelectMany(o => o.OrderItems)
                 .SumAsync(oi => oi.SalePrice * oi.Count);
 
@@ -124,7 +124,7 @@ namespace Medical.Service.Implementations.Admin
             var totalPrice = await _context.Orders
                 .Where(o => o.CreatedAt >= firstDayOfMonth
                     && o.CreatedAt < firstDayOfNextMonth
-                    && o.Status != OrderStatus.Accepted)
+                    && o.Status == OrderStatus.Accepted)
                 .SelectMany(o => o.OrderItems)
                 .SumAsync(oi => oi.SalePrice * oi.Count);
 
@@ -191,7 +191,8 @@ namespace Medical.Service.Implementations.Admin
         {
             var query = _orderRepository.GetAll(o =>
                 (search == null || o.FullName.Contains(search) || o.Email.Contains(search))
-                && o.Status != OrderStatus.Canceled) 
+                && o.Status != OrderStatus.Canceled)
+                .OrderByDescending(order => order.CreatedAt) 
                 .Select(order => new OrderPaginatedGetDto
                 {
                     Id = order.Id,
@@ -205,6 +206,7 @@ namespace Medical.Service.Implementations.Admin
 
             return PaginatedList<OrderPaginatedGetDto>.Create(query, page, size);
         }
+
 
         public List<OrderGetDto> GetAll(string? search = null)
         {

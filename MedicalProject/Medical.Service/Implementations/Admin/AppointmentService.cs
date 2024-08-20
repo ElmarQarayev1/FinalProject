@@ -130,7 +130,7 @@ namespace Medical.Service.Implementations.Admin
 
         public PaginatedList<AppointmentPaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10, int? doctorId = null)
         {
-            if (doctorId!=null)
+            if (doctorId != null)
             {
                 var doctor = _doctorRepository.Get(x => x.Id == doctorId.Value);
                 if (doctor == null)
@@ -143,7 +143,8 @@ namespace Medical.Service.Implementations.Admin
                 x => (x.FullName.Contains(search) || search == null) &&
                      (doctorId == null || x.DoctorId == doctorId),
                 "Doctor"
-            );
+            )
+            .OrderByDescending(x => x.Date); 
 
             var paginated = PaginatedList<Appointment>.Create(query, page, size);
 
@@ -160,8 +161,10 @@ namespace Medical.Service.Implementations.Admin
             {
                 throw new RestException(StatusCodes.Status404NotFound, "doctorId", "Doctor Not Found");
             }
+
             return _context.Appointments
                 .Where(a => a.DoctorId == doctorId)
+                .OrderByDescending(a => a.Date) 
                 .Select(a => new AppointmentGetDtoForFilter
                 {
                     Id = a.Id,
@@ -170,5 +173,6 @@ namespace Medical.Service.Implementations.Admin
                     Date = a.Date
                 }).ToList();
         }
+
     }
 }

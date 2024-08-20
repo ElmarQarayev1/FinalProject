@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bd2Fbs4PQNR3d3EnKNWxpwp/6g8rN6yBPintQHAj+2c=",
+  "Hash": "V8pC9/0zMZTrFk8UZJaKcJhFNuSNmX+HEYwc2JXaZjg=",
   "Source": "Medical.Api",
   "BasePath": "_content/Medical.Api",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/uploads/departments/6aa3ad99-4312-4004-961c-a98710958951portfolio-2.jpg"
+    },
+    {
+      "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/departments/a4079e13-e62e-4436-b01b-c135c8ee62d4portfolio-7.jpg",
+      "SourceId": "Medical.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/",
+      "BasePath": "_content/Medical.Api",
+      "RelativePath": "uploads/departments/a4079e13-e62e-4436-b01b-c135c8ee62d4portfolio-7.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/departments/a4079e13-e62e-4436-b01b-c135c8ee62d4portfolio-7.jpg"
     },
     {
       "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/wwwroot/uploads/departments/cd82f1b0-416d-44fe-835c-2c5f1fc3ce2eteam-1.jpg",

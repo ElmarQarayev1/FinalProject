@@ -22,12 +22,21 @@ namespace Medical.Service.Implementations.Admin
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _env;
 
+
+
+
+
         public DepartmentService(IDepartmentRepository departmentRepository, IMapper mapper, IWebHostEnvironment env)
         {
             _departmentRepository = departmentRepository;
             _mapper = mapper;
             _env = env;
         }
+
+
+
+
+
 
         public int Create(DepartmentCreateDto createDto)
         {
@@ -60,6 +69,9 @@ namespace Medical.Service.Implementations.Admin
             return department.Id;
         }
 
+
+
+
         public void Delete(int id)
         {
             Department department = _departmentRepository.Get(x => x.Id == id);
@@ -76,11 +88,20 @@ namespace Medical.Service.Implementations.Admin
             FileManager.Delete(_env.WebRootPath, "uploads/departments", department.ImageName);
         }
 
+
+
+
+
+
         public List<DepartmentGetDto> GetAll(string? search = null)
         {
             var departments = _departmentRepository.GetAll(x => search == null || x.Name.Contains(search)).ToList();
             return _mapper.Map<List<DepartmentGetDto>>(departments);
         }
+
+
+
+
 
         public PaginatedList<DepartmentPaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10)
         {
@@ -95,6 +116,11 @@ namespace Medical.Service.Implementations.Admin
         }
 
 
+
+
+
+
+
         public List<DepartmentGetDtoForUser> GetForUserHome(string? search = null)
         {
             var departments = _departmentRepository.GetAll(x => search == null || x.Name.Contains(search)).ToList();
@@ -106,12 +132,20 @@ namespace Medical.Service.Implementations.Admin
 
             return _mapper.Map<List<DepartmentGetDtoForUser>>(selectedDepartments);
         }
+
+
+
+
+
         public List<DepartmentGetDtoForUser> GetAllUser(string? search = null)
         {
             var departments = _departmentRepository.GetAll(x => search == null || x.Name.Contains(search)).ToList();
             return _mapper.Map<List<DepartmentGetDtoForUser>>(departments);
 
         }
+
+
+
 
         public DepartmentGetDto GetById(int id)
         {
@@ -122,6 +156,10 @@ namespace Medical.Service.Implementations.Admin
 
             return _mapper.Map<DepartmentGetDto>(department);
         }
+
+
+
+
 
         public void Update(int id, DepartmentUpdateDto updateDto)
         {

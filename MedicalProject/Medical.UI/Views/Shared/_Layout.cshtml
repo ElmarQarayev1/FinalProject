@@ -64,7 +64,6 @@
                 </div>
                 <div class="navbar-nav w-100">
                     <a asp-action="index" asp-controller="home" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-
                     <a asp-action="index" asp-controller="category" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Categories</a>
                     <a asp-controller="slider" asp-action="index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Sliders</a>
                     <a asp-controller="department" asp-action="index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Departments</a>
@@ -129,11 +128,10 @@
     </div>
 
     <!-- JavaScript "~/libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.12/signalr.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.12/signalr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="~/lib/chart/chart.min.js"></script>
     <script src="~/lib/easing/easing.min.js"></script>
     <script src="~/lib/waypoints/waypoints.min.js"></script>
@@ -142,15 +140,14 @@
     <script src="~/lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="~/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
+
     <!-- Template Javascript -->
     @RenderSection("scripts", required: false)
     <script src="~/js/main.js"></script>
 </body>
-
 </html>
-
 <script>var connection = new signalR.HubConnectionBuilder()
-    .withUrl("https://localhost:7061/hub")
+        .withUrl("https://localhost:7061/hub")
         .build();
 
     toastr.options = {
@@ -163,24 +160,30 @@
         "onclick": null,
         "showDuration": "300",
         "hideDuration": "1000",
-        "timeOut": "5000",
+        "timeOut": "10000",
         "extendedTimeOut": "1000",
         "showEasing": "swing",
         "hideEasing": "linear",
         "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
+        "hideMethod": "fadeOut",
+        "toastClass": "toastr-custom"
     };
 
     connection.on("OrderCreated", (data) => {
-        toastr["success"](`Order ID: ${data.orderId}, Created At: ${data.createdAt} - New order  created `);
+        console.log("OrderCreated event received:", data);
+        toastr["success"](`Created At: ${data.createdAt} - New order created. Please Check OrderList!`);
     });
 
-    connection.start().catch(function (err) {
-        console.error(err.toString());
-
-        connection.start().then(() => {
-            console.log("SignalR bağlantısı başarılı.");
-        }).catch(err => {
-            console.error("SignalR bağlantısı başarısız: ", err.toString());
-        });
+    connection.start().then(() => {
+        console.log("SignalR connection successful.");
+       // toastr["info"]("Connected to SignalR hub.");
+    }).catch(function (err) {
+        console.error("SignalR connection failed:", err.toString());
     });</script>
+
+<style>
+    .toastr-custom {
+        background-color: green !important;
+    }
+</style>
+

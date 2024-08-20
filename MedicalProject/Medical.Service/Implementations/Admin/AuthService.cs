@@ -87,7 +87,7 @@ namespace Medical.Service.Implementations.Admin
                     {
                         MedicineName = oi.Medicine != null ? oi.Medicine.Name : "Unknown",
                         Count = oi.Count,
-                        Price = oi.SalePrice
+                       Price = oi.SalePrice
                     }).ToList(),
                     Status = order.Status.ToString()
                 }).ToList();
@@ -128,6 +128,10 @@ namespace Medical.Service.Implementations.Admin
                 throw new RestException(StatusCodes.Status400BadRequest,"Email", "Email is not confirmed.");
             }
 
+            if (_userManager.Users.Any(x => x.UserName == profileEditDto.UserName && x.Id != user.Id))
+            {
+                throw new RestException(StatusCodes.Status400BadRequest, "UserName", "UserName is already taken.");
+            }
             user.UserName = profileEditDto.UserName;
             user.FullName = profileEditDto.FullName;
 

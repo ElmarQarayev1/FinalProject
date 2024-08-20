@@ -2,7 +2,6 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Medical.Api;
-using Medical.Api;
 using Medical.Api.MiddleWares;
 using Medical.Api.Quartz;
 using Medical.Core.Entities;
@@ -49,6 +48,7 @@ var serviceProvider = new ServiceCollection()
                .AddDbContext<AppDbContext>(options => options.UseSqlServer("Server=localhost;Database=MedicalProject;User ID=sa; Password=reallyStrongPwd123;TrustServerCertificate=true"))
                .AddTransient<ExcelExportService>()
                .BuildServiceProvider();
+
 
 
 using (var scope = serviceProvider.CreateScope())
