@@ -66,8 +66,7 @@ namespace Medical.Service.Implementations.Admin
 
             return token;
         }
-
-      
+    
 
         public MemberProfileGetDto GetByIdForUserProfile(string userId)
         {

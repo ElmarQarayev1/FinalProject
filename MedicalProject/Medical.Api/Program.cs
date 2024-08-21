@@ -41,8 +41,27 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
 });
 
 
+
+
+builder.Services.AddQuartz(options =>
+{
+    var key = JobKey.Create(nameof(PrintJob));
+    options.AddJob(typeof(PrintJob), key).AddTrigger(x => x.ForJob(key).WithCronSchedule("0 0 * * * ?").StartNow());
+});
+
+
+builder.Services.AddQuartzHostedService(options =>
+{
+    options.WaitForJobsToComplete = true;
+    options.AwaitApplicationStarted = true;
+});
+
+
+
+
 builder.Services.AddMemoryCache();
 builder.Services.AddSignalR();
+
 
 var serviceProvider = new ServiceCollection()
                .AddDbContext<AppDbContext>(options => options.UseSqlServer("Server=localhost;Database=MedicalProject;User ID=sa; Password=reallyStrongPwd123;TrustServerCertificate=true"))
@@ -63,20 +82,7 @@ using (var scope = serviceProvider.CreateScope())
 }
 
 
-//0 * * * * ?
 
-builder.Services.AddQuartz(options =>
-{
-    var key = JobKey.Create(nameof(PrintJob));
-    options.AddJob(typeof(PrintJob), key).AddTrigger(x => x.ForJob(key).WithCronSchedule("0 0 * * * ?").StartNow());
-});
-
-
-builder.Services.AddQuartzHostedService(options =>
-{
-    options.WaitForJobsToComplete = true;
-    options.AwaitApplicationStarted = true;
-});
 
 
 builder.Services.AddCors(options =>
@@ -87,6 +93,9 @@ builder.Services.AddCors(options =>
                           .AllowAnyMethod()
                           .AllowCredentials());
 });
+
+
+
 
 
 

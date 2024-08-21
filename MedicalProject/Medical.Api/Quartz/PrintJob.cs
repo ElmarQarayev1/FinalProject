@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using Medical.Data;
 using Medical.Service.Implementations.Admin;
 using Microsoft.EntityFrameworkCore;
@@ -70,4 +71,3 @@ namespace Medical.Api.Quartz
     }
 
 }
-

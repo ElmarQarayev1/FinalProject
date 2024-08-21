@@ -38,8 +38,6 @@ namespace Medical.Api.Controllers
             configuration = _configuration;
 
         }
-
-
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/signin-google")]
         public async Task<IActionResult> GoogleLogin()
@@ -352,7 +350,7 @@ namespace Medical.Api.Controllers
         }
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
-        [Authorize]
+       // [Authorize]
         [HttpGet("api/profileLayout")]
         public ActionResult ProfileForLayout()
         {
