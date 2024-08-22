@@ -60,6 +60,8 @@ namespace Medical.Service.Implementations.Admin
         }
 
 
+
+
         public int Create(DoctorCreateDto createDto)
         {
             var validator = new DoctorCreateDtoValidator();
@@ -122,6 +124,7 @@ namespace Medical.Service.Implementations.Admin
         }
 
 
+
         public void Delete(int id)
         {
             Doctor doctor = _doctorRepository.Get(x => x.Id == id);
@@ -171,7 +174,7 @@ namespace Medical.Service.Implementations.Admin
 
         public PaginatedList<DoctorPaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10)
         {
-            var query = _doctorRepository.GetAll(x => x.FullName.Contains(search) || search == null,"Department","Appointments");
+            var query = _doctorRepository.GetAll(x => x.FullName.Contains(search) || search == null,"Department","Appointments").OrderByDescending(x => x.CreateAt);
 
             var paginated = PaginatedList<Doctor>.Create(query, page, size);
 

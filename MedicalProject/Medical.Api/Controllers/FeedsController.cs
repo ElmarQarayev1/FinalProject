@@ -19,11 +19,14 @@ namespace Medical.Api.Controllers
         }
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+
         [HttpPost("api/admin/Feeds")]
         public ActionResult Create([FromForm] FeedCreateDto createDto)
         {
             return StatusCode(201, new { Id = _feedService.Create(createDto) });
         }
+
+
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Feeds")]
@@ -32,12 +35,16 @@ namespace Medical.Api.Controllers
             return StatusCode(200, _feedService.GetAllByPage(search, page, size));
         }
 
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Feeds/all")]
         public ActionResult<List<FeedGetDto>> GetAll()
         {
             return StatusCode(200, _feedService.GetAll());
         }
+
+
 
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Feeds")]
@@ -46,6 +53,8 @@ namespace Medical.Api.Controllers
             return StatusCode(200, _feedService.GetAllUser());
         }
 
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Feeds/{id}")]
         public ActionResult<FeedGetDto> GetById(int id)
@@ -53,12 +62,16 @@ namespace Medical.Api.Controllers
             return StatusCode(200, _feedService.GetById(id));
         }
 
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPut("api/admin/Feeds/{id}")]
         public void Update(int id, [FromForm] FeedUpdateDto updateDto)
         {
             _feedService.Update(id, updateDto);
         }
+
+
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpDelete("api/admin/Feeds/{id}")]

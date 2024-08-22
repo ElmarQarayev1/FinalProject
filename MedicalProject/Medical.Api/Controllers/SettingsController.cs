@@ -18,12 +18,16 @@ namespace Medical.Api.Controllers
 		{
 			_settingService = settingService;
 		}
- 
+
+
+
         [HttpGet("api/admin/Settings")]
         public ActionResult<PaginatedList<SettingPaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
         {
             return StatusCode(200, _settingService.GetAllByPage(search, page, size));
         }
+
+
 
         [HttpGet("api/admin/Settings/all")]
         public ActionResult<List<SettingGetDto>> GetAll()
@@ -31,17 +35,21 @@ namespace Medical.Api.Controllers
             return StatusCode(200, _settingService.GetAll());
         }
 
+
         [HttpGet("api/admin/Settings/{key}")]
         public ActionResult<SettingGetDto> GetByKey(string key)
         {
             return StatusCode(200, _settingService.GetByKey(key));
         }
 
+
         [HttpPut("api/admin/Settings/{key}")]
         public void Update(string key,  SettingUpdateDto updateDto)
         {
             _settingService.Update(key, updateDto);
         }
+
+
 
         [HttpDelete("api/admin/Settings/{key}")]
         public IActionResult Delete(string key)

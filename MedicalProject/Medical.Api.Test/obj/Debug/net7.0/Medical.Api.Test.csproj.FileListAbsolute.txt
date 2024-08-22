@@ -176,3 +176,4 @@
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Debug/net7.0/Medical.Api.Test.genruntimeconfig.cache
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Debug/net7.0/ref/Medical.Api.Test.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Debug/net7.0/Medical.Api.Test.csproj.CopyComplete
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/bin/Debug/net7.0/System.Net.WebSockets.WebSocketProtocol.dll

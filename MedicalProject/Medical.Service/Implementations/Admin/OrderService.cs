@@ -206,7 +206,7 @@ namespace Medical.Service.Implementations.Admin
 
             return PaginatedList<OrderPaginatedGetDto>.Create(query, page, size);
         }
-
+        
 
         public List<OrderGetDto> GetAll(string? search = null)
         {

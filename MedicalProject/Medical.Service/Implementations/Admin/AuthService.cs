@@ -47,6 +47,7 @@ namespace Medical.Service.Implementations.Admin
             _appointmentRepository = appointmentRepository;
         }
 
+
         public async Task<string> LoginForUser(MemberLoginDto loginDto)
         {
 
@@ -67,6 +68,7 @@ namespace Medical.Service.Implementations.Admin
             return token;
         }
     
+
 
         public MemberProfileGetDto GetByIdForUserProfile(string userId)
         {

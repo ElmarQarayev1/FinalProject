@@ -27,6 +27,7 @@ namespace Medical.Api.Controllers
             _medicalHub = medicalHub;
         }
 
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles ="Member")]
         [HttpPost("api/orders/checkout")]
@@ -57,6 +58,8 @@ namespace Medical.Api.Controllers
                 return StatusCode(500, "Internal server error.");
             }
         }
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles ="SuperAdmin,Admin")]
         [HttpGet("api/admin/orders/{id}")]
@@ -81,6 +84,8 @@ namespace Medical.Api.Controllers
             }
         }
 
+
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles ="Member")]
         [HttpGet("api/ordersDetails")]
@@ -96,6 +101,8 @@ namespace Medical.Api.Controllers
                 return StatusCode(500, "Internal server error.");
             }
         }
+
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles ="Member")]
         [HttpPut("api/ordersCancelled/{id}")]
@@ -108,6 +115,9 @@ namespace Medical.Api.Controllers
             
           
         }
+
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "Admin,SuperAdmin")]
         [HttpPut("api/admin/ordersAccepted/{id}")]
@@ -120,6 +130,9 @@ namespace Medical.Api.Controllers
             
            
         }
+
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "Admin,SuperAdmin")]
         [HttpPut("api/admin/ordersRejected/{id}")]
@@ -132,6 +145,7 @@ namespace Medical.Api.Controllers
                                
         }
 
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/today/orders/count")]
         public async Task<IActionResult> GetTodayOrdersCount()
@@ -139,6 +153,7 @@ namespace Medical.Api.Controllers
             var count = await _orderService.GetTodayOrdersCountAsync();
             return Ok(count);
         }
+
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/today/orders/total-price")]
@@ -148,6 +163,8 @@ namespace Medical.Api.Controllers
             return Ok(totalPrice);
         }
 
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/monthly/orders/count")]
         public async Task<IActionResult> GetMonthlyOrdersCount()
@@ -156,6 +173,8 @@ namespace Medical.Api.Controllers
             return Ok(count);
         }
 
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/monthly/orders/total-price")]
         public async Task<IActionResult> GetMonthlyOrdersTotalPrice()
@@ -163,6 +182,9 @@ namespace Medical.Api.Controllers
             var totalPrice = await _orderService.GetMonthlyOrdersTotalPriceAsync();
             return Ok(totalPrice);
         }
+
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/order-status-counts")]
         public async Task<ActionResult<OrderStatusCountsDto>> GetOrderStatusCounts()
@@ -178,6 +200,9 @@ namespace Medical.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
             }
         }
+
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/orders-price-per-year")]
         public async Task<ActionResult<OrdersPricePerYearDto>> GetOrdersPricePerYear()

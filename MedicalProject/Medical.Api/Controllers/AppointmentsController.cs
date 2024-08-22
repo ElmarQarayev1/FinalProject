@@ -43,6 +43,8 @@ namespace Medical.Api.Controllers
             return StatusCode(201, new { Id = appointmentId });
         }
 
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/daily-count")]
         public async Task<IActionResult> GetDailyAppointmentsCount()
@@ -58,6 +60,9 @@ namespace Medical.Api.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/yearly-count")]
         public async Task<IActionResult> GetYearlyAppointmentsCount()
@@ -73,6 +78,8 @@ namespace Medical.Api.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
+
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/monthly-count")]
@@ -97,6 +104,8 @@ namespace Medical.Api.Controllers
             }
         }
 
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/appointments")]
@@ -104,6 +113,9 @@ namespace Medical.Api.Controllers
         {
             return StatusCode(200, _appointmentService.GetAllByPage(search, page, size,doctorId));
         }
+
+
+
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "SuperAdmin,Admin")]

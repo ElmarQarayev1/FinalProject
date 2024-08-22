@@ -46,7 +46,6 @@ namespace Medical.Service.Implementations.Admin
       
 
 
-
         public int Create(MedicineCreateDto createDto)
         {
 
@@ -139,7 +138,7 @@ namespace Medical.Service.Implementations.Admin
         public PaginatedList<MedicinePaginatedGetDto> GetAllByPage(string? search = null, int page = 1, int size = 10)
         {
 
-            var query = _medicineRepository.GetAll(x => x.Name.Contains(search) || search == null,"Category");
+            var query = _medicineRepository.GetAll(x => x.Name.Contains(search) || search == null, "Category").OrderByDescending(x => x.CreateAt);
 
 
             var paginated = PaginatedList<Medicine>.Create(query, page, size);

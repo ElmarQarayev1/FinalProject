@@ -24,7 +24,10 @@ namespace Medical.Api.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
+          [Authorize(Roles ="SuperAdmin,Admin")]
         [HttpGet("api/admin/Reviews")]
         public IActionResult GetAllRewiews(string? search = null, int page = 1, int size = 10)
         {
@@ -39,6 +42,8 @@ namespace Medical.Api.Controllers
 
             }
         }
+
+
 
 
         [ApiExplorerSettings(GroupName = "user_v1")]
@@ -56,6 +61,9 @@ namespace Medical.Api.Controllers
             return StatusCode(201, new { Id = reviewId });
         }
 
+
+
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles = "Member")]
         [HttpDelete("api/Reviews/DeleteReview")]
@@ -70,12 +78,16 @@ namespace Medical.Api.Controllers
             return NoContent();
         }
 
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/reviews/{id}")]
         public IActionResult GetReviewById(int id)
         {
             return StatusCode(200, _reviewService.GetById(id));
         }
+
+
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPut("api/admin/reviewsAccepted/{id}")]
@@ -85,6 +97,9 @@ namespace Medical.Api.Controllers
             _reviewService.UpdateReviewStatus(id, ReviewStatus.Accepted);
             return NoContent();
         }
+
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPut("api/admin/reviewsRejected/{id}")]
         public IActionResult RejectOrder(int id)
@@ -94,6 +109,7 @@ namespace Medical.Api.Controllers
             return NoContent();
 
         }
+
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Reviews/PendingCount")]

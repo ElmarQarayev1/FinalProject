@@ -17,8 +17,8 @@
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
-      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/img/elmar1.jpeg",
-      "PackagePath": "staticwebassets/img/elmar1.jpeg"
+      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/img/owner.jpeg",
+      "PackagePath": "staticwebassets/img/owner.jpeg"
     },
     {
       "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/img/testimonial-1.jpg",
@@ -27,10 +27,6 @@
     {
       "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/img/testimonial-2.jpg",
       "PackagePath": "staticwebassets/img/testimonial-2.jpg"
-    },
-    {
-      "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/img/user.jpg",
-      "PackagePath": "staticwebassets/img/user.jpg"
     },
     {
       "Id": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/js/main.js",

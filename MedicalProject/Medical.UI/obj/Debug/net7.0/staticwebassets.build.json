@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "w2dq9ZxXOZGX05hBEMs6KdzFu81lBECCpF6Au3GzFsw=",
+  "Hash": "xetwT6tVWblaRPbsOt4r2sgEKQ5Vopz5/ZarTvK80zI=",
   "Source": "Medical.UI",
   "BasePath": "_content/Medical.UI",
   "Mode": "Default",
@@ -102,12 +102,12 @@
       "OriginalItemSpec": "wwwroot/favicon.ico"
     },
     {
-      "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/img/elmar1.jpeg",
+      "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/img/owner.jpeg",
       "SourceId": "Medical.UI",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/",
       "BasePath": "_content/Medical.UI",
-      "RelativePath": "img/elmar1.jpeg",
+      "RelativePath": "img/owner.jpeg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -116,7 +116,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/img/elmar1.jpeg"
+      "OriginalItemSpec": "wwwroot/img/owner.jpeg"
     },
     {
       "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/img/testimonial-1.jpg",
@@ -151,23 +151,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/img/testimonial-2.jpg"
-    },
-    {
-      "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/img/user.jpg",
-      "SourceId": "Medical.UI",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/",
-      "BasePath": "_content/Medical.UI",
-      "RelativePath": "img/user.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/img/user.jpg"
     },
     {
       "Identity": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/wwwroot/js/main.js",

@@ -26,7 +26,9 @@ namespace Medical.Api.Controllers
             _cache = cache;
 		}
 
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/Medicines")]
         public ActionResult<PaginatedList<MedicinePaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
         {
@@ -36,7 +38,10 @@ namespace Medical.Api.Controllers
             return Ok(result);
         }
 
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
+          [Authorize(Roles ="SuperAdmin,Admin")]
         [HttpPost("api/admin/Medicines")]
         public ActionResult Create([FromForm] MedicineCreateDto createDto)
         {
@@ -72,6 +77,7 @@ namespace Medical.Api.Controllers
             return Ok(result);
         }
 
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Medicines/LatestMedicines")]
         public ActionResult<List<MedicineGetDtoLatest>> GetLatestMedicines()
@@ -90,6 +96,8 @@ namespace Medical.Api.Controllers
 
             return Ok(result);
         }
+
+
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Medicines/all")]
@@ -110,6 +118,8 @@ namespace Medical.Api.Controllers
             return Ok(result);
         }
 
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Medicines/{id}")]
         public ActionResult<MedicineDetailsDto> GetById(int id)
@@ -128,6 +138,9 @@ namespace Medical.Api.Controllers
 
             return Ok(result);
         }
+
+
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Medicines/{id}")]
         public ActionResult<MedicineGetDtoForUser> GetByIdForUser(int id)
@@ -181,6 +194,9 @@ namespace Medical.Api.Controllers
             return StatusCode(201, new { Id = basketId });
            
         }
+
+
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles = "Member")]
         [HttpDelete("api/Medicines/RemoveFromBasket")]
@@ -194,6 +210,8 @@ namespace Medical.Api.Controllers
             _medicineService.RemoveItemFromBasket(deleteDto,userId);
             return NoContent();
         }
+
+
 
         [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles = "Member")]

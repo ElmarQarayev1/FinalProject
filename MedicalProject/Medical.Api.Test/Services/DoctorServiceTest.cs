@@ -35,7 +35,6 @@ namespace Medical.Api.Test.Services
             _departmentRepository = new Mock<IDepartmentRepository>();
           
 
-
             _env.Setup(e => e.WebRootPath).Returns("wwwroot");
             _mapper.Setup(m => m.Map<Doctor>(It.IsAny<DoctorCreateDto>())).Returns(new Doctor());
 

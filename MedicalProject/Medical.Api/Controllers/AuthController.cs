@@ -38,6 +38,10 @@ namespace Medical.Api.Controllers
             configuration = _configuration;
 
         }
+
+
+
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/signin-google")]
         public async Task<IActionResult> GoogleLogin()
@@ -63,7 +67,6 @@ namespace Medical.Api.Controllers
               
                 return BadRequest("A user with this email address already exists.");
             }
-
            
             user = new AppUser
             {
@@ -72,13 +75,13 @@ namespace Medical.Api.Controllers
                 FullName = fullName,
                 EmailConfirmed = true,
             };
+
             var createResult = await _userManager.CreateAsync(user);
             if (!createResult.Succeeded)
             {
                 return BadRequest("User creation failed.");
             }
-
-          
+            
             var roleResult = await _userManager.AddToRoleAsync(user, "Member");
             if (!roleResult.Succeeded)
             {
@@ -94,8 +97,8 @@ namespace Medical.Api.Controllers
             return Redirect(redirectUrl);
         }
 
+        
       
-
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpPost("api/login")]
         public async Task<IActionResult> LoginForUser([FromBody] MemberLoginDto loginDto)
@@ -129,6 +132,8 @@ namespace Medical.Api.Controllers
             }
         }
 
+        
+
 
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/login-google")]
@@ -152,7 +157,6 @@ namespace Medical.Api.Controllers
 
 
 
-
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPost("api/admin/login")]
         public ActionResult Login(AdminLoginDto loginDto)
@@ -169,13 +173,15 @@ namespace Medical.Api.Controllers
             try
             {
                 var resetUrl = await _authService.ForgetPassword(forgetPasswordDto);
-                return Ok(new { Message = "Password reset link has been sent to your email.", ResetUrl = resetUrl });
+                return Ok(new { Message = "Password reset link has been sent to your email." });
             }
             catch (RestException ex)
             {
                 return StatusCode(ex.Code, ex.Message);
             }
         }
+
+
 
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpPost("api/resetpassword")]
@@ -184,13 +190,16 @@ namespace Medical.Api.Controllers
             try
             {
                 await _authService.ResetPassword(resetPasswordDto);
-                return Ok("Password has been reset successfully. Please log in with your new password.");
+                return Ok(new { Message = "Password has been reset successfully. Please log in with your new password." });
             }
             catch (RestException ex)
             {
                 return StatusCode(ex.Code, ex.Message);
             }
         }
+
+
+
 
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpPost("api/verify")]
@@ -214,6 +223,8 @@ namespace Medical.Api.Controllers
             }
         }
 
+
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles ="Member")]
         [HttpPost("api/profile/update")]
@@ -222,6 +233,9 @@ namespace Medical.Api.Controllers
             await _authService.UpdateProfile(profileEditDto);
             return Ok(new { message = "Profile updated successfully!" });
         }
+
+
+
 
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/account/verifyemail")]
@@ -248,6 +262,8 @@ namespace Medical.Api.Controllers
         }
 
 
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles ="Admin,SuperAdmin")]
         [HttpGet("api/admin/profile")]
@@ -270,6 +286,9 @@ namespace Medical.Api.Controllers
 
             return Ok(userDto);
         }
+
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "SuperAdmin")]
         [HttpGet("api/superadmin/adminAll")]
@@ -349,6 +368,9 @@ namespace Medical.Api.Controllers
             }
         }
 
+
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
        // [Authorize]
         [HttpGet("api/profileLayout")]
@@ -359,6 +381,9 @@ namespace Medical.Api.Controllers
 
             return Ok(new UserProfileDto { UserName = userName, Role = role });
         }
+
+
+
 
         private async Task<string> GenerateJwtToken(AppUser user)
         {

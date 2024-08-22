@@ -20,6 +20,9 @@ namespace Medical.Api.Controllers
             var fileContent = await _excelExportService.ExportOrdersAsync();
             return File(fileContent, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Orders.xlsx");
         }
+
+
+
         [HttpGet("api/admin/excel/DownloadAllTables")]
         public async Task<IActionResult> DownloadAllTables()
         {

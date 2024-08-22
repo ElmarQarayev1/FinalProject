@@ -17,7 +17,7 @@ namespace Medical.Api.Controllers
         public IDoctorService _doctorService;
 
         private readonly IMemoryCache _cache;
-        private readonly TimeSpan _cacheExpiration = TimeSpan.FromSeconds(5);
+        private readonly TimeSpan _cacheExpiration = TimeSpan.FromSeconds(10);
 
         public DoctorsController(IDoctorService doctorService, IMemoryCache cache)
         {
@@ -25,6 +25,9 @@ namespace Medical.Api.Controllers
             _cache = cache;
 
         }
+
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPost("api/admin/Doctors")]
         public ActionResult Create([FromForm] DoctorCreateDto createDto)
@@ -44,15 +47,19 @@ namespace Medical.Api.Controllers
             return StatusCode(201, new { Id = newDoctorId });
         }
 
+       
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Doctors")]
         public ActionResult<PaginatedList<DoctorPaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
         {
-            
+           
 
             var result = _doctorService.GetAllByPage(search, page, size);
             return Ok(result);
         }
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Doctors/all")]
         public ActionResult<List<DoctorGetDto>> GetAll()
@@ -69,8 +76,11 @@ namespace Medical.Api.Controllers
                 AbsoluteExpirationRelativeToNow = _cacheExpiration
             });
 
+
             return Ok(result);
         }
+
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Doctors")]
         public ActionResult<List<DoctorGetDtoForUser>> GetAllForUserHome()
@@ -89,6 +99,10 @@ namespace Medical.Api.Controllers
 
             return Ok(result);
         }
+
+
+
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Doctors/all")]
         public ActionResult<List<DoctorGetDtoForUser>> GetAllUser()
@@ -108,10 +122,13 @@ namespace Medical.Api.Controllers
             return Ok(result);
         }
 
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Doctors/ForDownSide")]
-        public ActionResult<List<DoctorForDownSideDto>> GetAllUserForDownSide()
+        public async Task<ActionResult<List<DoctorForDownSideDto>>> GetAllUserForDownSide()
         {
+           
+
             var cacheKey = "Doctors_GetAllUserForDownSide";
             if (_cache.TryGetValue(cacheKey, out List<DoctorForDownSideDto> cachedResult))
             {
@@ -124,8 +141,11 @@ namespace Medical.Api.Controllers
                 AbsoluteExpirationRelativeToNow = _cacheExpiration
             });
 
+            await Task.Delay(TimeSpan.FromSeconds(3));
+
             return Ok(result);
         }
+
 
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/ForAppointment/{departmentId}")]
@@ -146,6 +166,8 @@ namespace Medical.Api.Controllers
             return Ok(doctors);
         }
 
+
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Doctors/{id}")]
         public ActionResult<DoctorGetDetailDto> GetByIdForUser(int id)
@@ -164,6 +186,8 @@ namespace Medical.Api.Controllers
 
             return Ok(result);
         }
+
+
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Doctors/{id}")]
@@ -203,6 +227,7 @@ namespace Medical.Api.Controllers
 
             return NoContent();
         }
+
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
