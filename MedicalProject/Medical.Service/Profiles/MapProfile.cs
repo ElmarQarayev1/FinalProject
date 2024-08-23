@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using AutoMapper;
 using Medical.Core.Entities;
+using Medical.Core.Enum;
 using Medical.Service.Dtos.Admin.AuthDtos;
 using Medical.Service.Dtos.Admin.CategoryDtos;
 using Medical.Service.Dtos.Admin.DepartmentDtos;
@@ -213,60 +215,68 @@ namespace Medical.Service.Profiles
 
 
 
-
             CreateMap<Medicine, MedicinePaginatedGetDtoForUser>()
-                         .ForMember(dest => dest.ImagaUrl, opt => opt.MapFrom(src =>
-                             src.MedicineImages != null && src.MedicineImages.Any()
-                                 ? $"{baseUrl}/uploads/medicines/{src.MedicineImages.First().ImageName}"
-                                 : $"{baseUrl}/uploads/medicines/default.jpg"))
-                         .ForMember(dest => dest.TotalReviewsCount, opt => opt.MapFrom(src =>
-                             src.MedicineReviews != null
-                                 ? src.MedicineReviews.Count
-                                 : 0))
-                         .ForMember(dest => dest.AvgRate, opt => opt.MapFrom(src =>
-                             src.MedicineReviews != null && src.MedicineReviews.Any()
-                                 ? (int)src.MedicineReviews.Average(r => r.Rate)
-                                 : 0));
+                .ForMember(dest => dest.ImagaUrl, opt => opt.MapFrom(src =>
+                    src.MedicineImages != null && src.MedicineImages.Any()
+                        ? $"{baseUrl}/uploads/medicines/{src.MedicineImages.First().ImageName}"
+                        : $"{baseUrl}/uploads/medicines/default.jpg"))
+                .ForMember(dest => dest.TotalReviewsCount, opt => opt.MapFrom(src =>
+                    src.MedicineReviews != null
+                        ? src.MedicineReviews.Count(r => r.Status == ReviewStatus.Accepted)
+                        : 0))
+                .ForMember(dest => dest.AvgRate, opt => opt.MapFrom(src =>
+                    src.MedicineReviews != null && src.MedicineReviews.Any(r => r.Status == ReviewStatus.Accepted)
+                        ? (int)src.MedicineReviews
+                            .Where(r => r.Status == ReviewStatus.Accepted)
+                            .Average(r => r.Rate)
+                        : 0));
 
 
             CreateMap<Medicine, MedicineGetDtoLatest>()
-                        .ForMember(dest => dest.ImagaUrl, opt => opt.MapFrom(src =>
-                            src.MedicineImages != null && src.MedicineImages.Any()
-                                ? $"{baseUrl}/uploads/medicines/{src.MedicineImages.First().ImageName}"
-                                : $"{baseUrl}/uploads/medicines/default.jpg"))
-                        .ForMember(dest => dest.TotalReviewsCount, opt => opt.MapFrom(src =>
-                            src.MedicineReviews != null
-                                ? src.MedicineReviews.Count
-                                : 0))
-                        .ForMember(dest => dest.AvgRate, opt => opt.MapFrom(src =>
-                            src.MedicineReviews != null && src.MedicineReviews.Any()
-                                ? (int)src.MedicineReviews.Average(r => r.Rate)
-                                : 0));
-
+                .ForMember(dest => dest.ImagaUrl, opt => opt.MapFrom(src =>
+                    src.MedicineImages != null && src.MedicineImages.Any()
+                        ? $"{baseUrl}/uploads/medicines/{src.MedicineImages.First().ImageName}"
+                        : $"{baseUrl}/uploads/medicines/default.jpg"))
+                .ForMember(dest => dest.TotalReviewsCount, opt => opt.MapFrom(src =>
+                    src.MedicineReviews != null
+                        ? src.MedicineReviews.Count(r => r.Status == ReviewStatus.Accepted)
+                        : 0))
+                .ForMember(dest => dest.AvgRate, opt => opt.MapFrom(src =>
+                    src.MedicineReviews != null && src.MedicineReviews.Any(r => r.Status == ReviewStatus.Accepted)
+                        ? (int)src.MedicineReviews
+                            .Where(r => r.Status == ReviewStatus.Accepted)
+                            .Average(r => r.Rate)
+                        : 0));
 
 
             CreateMap<Medicine, MedicineGetDtoForUser>()
-    .ForMember(dest => dest.MedicineImages, opt => opt.MapFrom(src =>
-        src.MedicineImages.Select(img => new MedicineImageResponseDto
-        {
-            Id = img.Id,
-            Url = baseUrl + "/uploads/medicines/" + img.ImageName
-        }).ToList()))
-    .ForMember(dest => dest.Reviews, opt => opt.MapFrom(src =>
-        src.MedicineReviews.Select(review => new MedicineReviewForDetails
-        {
-            AppUserName = review.AppUser.UserName,
-            MedicineId = review.MedicineId,
-            Text = review.Text,
-            Date = review.CreatedAt.ToString("MMMM-dd-yyyy HH:mm"),
-            Rate = review.Rate
-        }).ToList()))
-    .ForMember(dest => dest.TotalReviewsCount, opt => opt.MapFrom(src =>
-        src.MedicineReviews != null ? src.MedicineReviews.Count : 0))
-    .ForMember(dest => dest.AvgRate, opt => opt.MapFrom(src =>
-        src.MedicineReviews != null && src.MedicineReviews.Any()
-            ? (int)src.MedicineReviews.Average(r => r.Rate)
-            : 0));
+                .ForMember(dest => dest.MedicineImages, opt => opt.MapFrom(src =>
+                    src.MedicineImages.Select(img => new MedicineImageResponseDto
+                    {
+                        Id = img.Id,
+                        Url = baseUrl + "/uploads/medicines/" + img.ImageName
+                    }).ToList()))
+                .ForMember(dest => dest.Reviews, opt => opt.MapFrom(src =>
+                    src.MedicineReviews
+                        .Where(review => review.Status == ReviewStatus.Accepted)  
+                        .Select(review => new MedicineReviewForDetails
+                        {
+                            AppUserName = review.AppUser.UserName,
+                            MedicineId = review.MedicineId,
+                            Text = review.Text,
+                            Date = review.CreatedAt.ToString("MMMM-dd-yyyy HH:mm"),
+                            Rate = review.Rate
+                        }).ToList()))
+                .ForMember(dest => dest.TotalReviewsCount, opt => opt.MapFrom(src =>
+                    src.MedicineReviews != null
+                        ? src.MedicineReviews.Count(r => r.Status == ReviewStatus.Accepted)  
+                        : 0))
+                .ForMember(dest => dest.AvgRate, opt => opt.MapFrom(src =>
+                    src.MedicineReviews != null && src.MedicineReviews.Any(r => r.Status == ReviewStatus.Accepted)
+                        ? (int)src.MedicineReviews
+                            .Where(r => r.Status == ReviewStatus.Accepted)
+                            .Average(r => r.Rate)  
+                        : 0));
 
 
 

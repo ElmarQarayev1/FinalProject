@@ -42,8 +42,7 @@ namespace Medical.UI.Controllers
                 {
                     return RedirectToAction("Login", "Auth");
                 }
-
-              
+                
                 return RedirectToAction("Error", "Home");
             }
             catch (System.Exception)
@@ -52,7 +51,6 @@ namespace Medical.UI.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
-
 
         [HttpGet]
         public async Task<IActionResult> Details(int id)

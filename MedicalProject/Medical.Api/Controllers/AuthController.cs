@@ -39,8 +39,7 @@ namespace Medical.Api.Controllers
 
         }
 
-
-
+  
 
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/signin-google")]

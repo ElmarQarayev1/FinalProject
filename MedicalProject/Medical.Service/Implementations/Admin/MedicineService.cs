@@ -172,7 +172,7 @@ namespace Medical.Service.Implementations.Admin
            
             var paginated = PaginatedList<Medicine>.Create(query, page, size);
 
-          
+   
             var medicineDtos = _mapper.Map<List<MedicinePaginatedGetDtoForUser>>(paginated.Items);
 
           

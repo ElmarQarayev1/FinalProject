@@ -1,21 +1,16 @@
 ﻿<Properties StartupConfiguration="Birden Çok Proje">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Controllers/FeatureController.cs" relfile="Medical.UI/Controllers/FeatureController.cs" line="99" column="1" />
-    </BreakpointStore>
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.Medical.UI PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
   <MonoDevelop.Ide.ItemProperties.Medical.Api.Test PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Medical.Api/Quartz/PrintJob.cs">
+  <MonoDevelop.Ide.ItemProperties.Medical.Api PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.ItemProperties.Medical.UI PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Medical.UI/Controllers/AccountController.cs">
     <Files>
-      <File FileName="Medical.Api/Controllers/AuthController.cs" Line="43" Column="1" />
+      <File FileName="Medical.Api/Controllers/AuthController.cs" />
       <File FileName="Medical.Service/Dtos/Admin/DoctorDtos/DoctorCreateDto.cs" />
       <File FileName="Medical.Api/Controllers/ExcelController.cs" />
       <File FileName="Medical.Service/Implementations/Admin/DoctorService.cs" />
-      <File FileName="Medical.Service/Implementations/Admin/AppointmentService.cs" />
+      <File FileName="Medical.Service/Implementations/Admin/AppointmentService.cs" Line="32" Column="8" />
       <File FileName="Medical.Service/Implementations/Admin/AuthService.cs" />
-      <File FileName="Medical.Service/Implementations/Admin/OrderService.cs" />
+      <File FileName="Medical.Service/Implementations/Admin/OrderService.cs" Line="126" Column="10" />
       <File FileName="Medical.Service/Implementations/Admin/SettingService.cs" />
       <File FileName="Medical.Service/Implementations/Admin/MedicineService.cs" />
       <File FileName="Medical.Service/Implementations/Admin/CategoryService.cs" />
@@ -23,7 +18,7 @@
       <File FileName="Medical.Api.Test/Services/CategoryServiceTest.cs" />
       <File FileName="Medical.Api.Test/Services/MedicineServiceTest.cs" />
       <File FileName="Medical.Core/Entities/Medicine.cs" />
-      <File FileName="Medical.Api.Test/Services/DoctorServiceTest.cs" Line="37" Column="1" />
+      <File FileName="Medical.Api.Test/Services/DoctorServiceTest.cs" />
       <File FileName="Medical.Api/Controllers/AppointmentsController.cs" />
       <File FileName="Medical.Api/Hub/MedicalHub.cs" />
       <File FileName="Medical.Api/appsettings.json" />
@@ -46,7 +41,7 @@
       <File FileName="Medical.UI/Service/LayoutService.cs" />
       <File FileName="Medical.UI/Service/ILayoutService.cs" />
       <File FileName="Medical.UI/Models/AdminModels/UserProfileResponse.cs" />
-      <File FileName="Medical.UI/Views/Shared/_Layout.cshtml" Line="189" Column="1" />
+      <File FileName="Medical.UI/Views/Shared/_Layout.cshtml" />
       <File FileName="Medical.UI/Views/Setting/Index.cshtml" />
       <File FileName="Medical.Core/Entities/Appointment.cs" />
       <File FileName="Medical.Api/MiddleWares/ExceptionHandlerMiddleware.cs" />
@@ -54,11 +49,11 @@
       <File FileName="Medical.Core/Enum/OrderStatus.cs" />
       <File FileName="Medical.UI/Views/Home/Index.cshtml" />
       <File FileName="Medical.Api/Controllers/FeedsController.cs" />
-      <File FileName="Medical.UI/Controllers/AccountController.cs" />
+      <File FileName="Medical.UI/Controllers/AccountController.cs" Line="89" Column="12" />
       <File FileName="Medical.UI/Extentions/SessionExtentions.cs" />
       <File FileName="Medical.UI/Middlewares/PasswordResetMiddleware.cs" />
       <File FileName="Medical.UI/Middlewares/ExceptionHandlerMiddleware.cs" />
-      <File FileName="Medical.UI/Service/CrudService.cs" Line="1" Column="1" />
+      <File FileName="Medical.UI/Service/CrudService.cs" />
       <File FileName="Medical.UI/Controllers/HomeController.cs" />
       <File FileName="Medical.Data/AppDbContext.cs" />
       <File FileName="Medical.Data/Repositories/Implementations/OrderRepository.cs" />
@@ -70,7 +65,7 @@
       <File FileName="Medical.UI/Views/Doctor/Index.cshtml" />
       <File FileName="Medical.UI/Views/Category/Index.cshtml" />
       <File FileName="Medical.UI/Views/Service/Index.cshtml" />
-      <File FileName="Medical.Api/Quartz/PrintJob.cs" Line="52" Column="42" />
+      <File FileName="Medical.Api/Quartz/PrintJob.cs" />
       <File FileName="Medical.Service/Implementations/Admin/FeedService.cs" />
       <File FileName="Medical.UI/Views/Feed/Index.cshtml" />
       <File FileName="Medical.Api/Controllers/DepartmentsController.cs" />
@@ -97,48 +92,52 @@
       <File FileName="Medical.Service/Implementations/Admin/FeatureService.cs" />
       <File FileName="Medical.Core/Entities/BaseEntity.cs" />
       <File FileName="Medical.UI/Controllers/AppointmentController.cs" />
-      <File FileName="Medical.UI/Controllers/FeatureController.cs" Line="42" Column="12" />
+      <File FileName="Medical.UI/Controllers/FeatureController.cs" />
       <File FileName="Medical.Core/Entities/Feed.cs" />
-      <File FileName="Medical.UI/Service/ICrudService.cs" Line="1" Column="1" />
+      <File FileName="Medical.UI/Service/ICrudService.cs" />
+      <File FileName="Medical.Service/Exceptions/RestException.cs" />
+      <File FileName="Medical.UI/Controllers/DoctorController.cs" Line="58" Column="1" />
+      <File FileName="Medical.UI/Controllers/SettingController.cs" />
+      <File FileName="Medical.UI/Controllers/SliderController.cs" />
+      <File FileName="Medical.Core/Entities/AppUser.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="MedicalProject" expanded="True">
+          <Node name="MedicalProject">
             <Node name="Medical.Api" expanded="True">
               <Node name="Controllers" expanded="True" />
-              <Node name="Hub" expanded="True" />
-              <Node name="MiddleWares" expanded="True" />
-              <Node name="Properties" expanded="True" />
-              <Node name="Quartz" expanded="True">
-                <Node name="PrintJob.cs" selected="True" />
-              </Node>
             </Node>
-            <Node name="Medical.Api.Test" expanded="True">
+            <Node name="Medical.Api.Test">
               <Node name="Services" expanded="True" />
             </Node>
-            <Node name="Medical.Core" expanded="True">
-              <Node name="Entities" expanded="True" />
+            <Node name="Medical.Core" expanded="True" />
+            <Node name="Medical.Service" expanded="True">
+              <Node name="Exceptions" expanded="True" />
+              <Node name="Implementations" expanded="True">
+                <Node name="Admin" expanded="True" />
+              </Node>
             </Node>
-            <Node name="Medical.Data" expanded="True" />
-            <Node name="Medical.Service" expanded="True" />
             <Node name="Medical.UI">
-              <Node name="Controllers" expanded="True" />
-              <Node name="Service" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="AccountController.cs" selected="True" />
+              </Node>
               <Node name="Views" expanded="True">
                 <Node name="Home" expanded="True" />
+                <Node name="Shared" expanded="True" />
               </Node>
             </Node>
           </Node>
         </State>
       </Pad>
-      <Pad Id="MonoDevelop.UnitTesting.TestPad">
-        <State name="__root__">
-          <Node name="MedicalProject" selected="True" />
-        </State>
-      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/Controllers/FeatureController.cs" relfile="Medical.UI/Controllers/FeatureController.cs" line="99" column="1" />
+      <Breakpoint file="/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Service/Implementations/Admin/AuthService.cs" relfile="Medical.Service/Implementations/Admin/AuthService.cs" line="303" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations>
     <MultiItemSolutionRunConfiguration Id="Birden Çok Proje" Name="Birden Çok Proje">
       <Items>
@@ -148,5 +147,5 @@
     </MultiItemSolutionRunConfiguration>
   </MultiItemStartupConfigurations>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MonoDevelop.Ide.ItemProperties.Medical.Api PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

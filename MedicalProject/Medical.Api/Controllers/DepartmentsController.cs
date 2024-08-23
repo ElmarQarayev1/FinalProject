@@ -66,7 +66,7 @@ namespace Medical.Api.Controllers
             return StatusCode(200, _departmentService.GetAll());
         }
 
-
+   
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Departments/{id}")]
