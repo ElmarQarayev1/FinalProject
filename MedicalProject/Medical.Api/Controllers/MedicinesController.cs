@@ -98,7 +98,6 @@ namespace Medical.Api.Controllers
         }
 
 
-
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Medicines/all")]
         public ActionResult<List<MedicineGetDto>> GetAllAdmin()

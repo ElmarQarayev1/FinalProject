@@ -59,6 +59,7 @@ namespace Medical.Service.Implementations.Admin
             return feature.Id;
         }
 
+
         public void Delete(int id)
         {
             Feature feature = _featureRepository.Get(x => x.Id == id);

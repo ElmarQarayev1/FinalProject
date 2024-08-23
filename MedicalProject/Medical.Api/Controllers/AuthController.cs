@@ -239,14 +239,14 @@ namespace Medical.Api.Controllers
 
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/account/verifyemail")]
-        public async Task<IActionResult> VerifyEmail(string userId, string token)
+        public async Task<IActionResult> VerifyEmail(string email, string token)
         {
-            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(token))
             {
                 return BadRequest("Invalid email verification request.");
             }
 
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
             {
                 return NotFound("User not found.");

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Medical.UI.Controllers
 {
 
-
     [ServiceFilter(typeof(AuthFilter))]
     public class AppointmentController:Controller
 	{

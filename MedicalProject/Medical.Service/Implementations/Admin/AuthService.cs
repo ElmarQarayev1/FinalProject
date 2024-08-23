@@ -348,7 +348,7 @@ namespace Medical.Service.Implementations.Admin
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
 
 
-            var confirmationUrl = $"{_configuration["AppSettings:AppBaseUrl"]}/api/account/verifyemail?userId={appUser.Id}&token={Uri.EscapeDataString(token)}";
+            var confirmationUrl = $"{_configuration["AppSettings:AppBaseUrl"]}/api/account/verifyemail?email={appUser.Email}&token={Uri.EscapeDataString(token)}";
 
 
             var emailTemplate = @"

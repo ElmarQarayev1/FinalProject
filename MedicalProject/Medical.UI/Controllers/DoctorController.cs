@@ -156,7 +156,7 @@ namespace Medical.UI.Controllers
                 return View(editRequest);
             }
         }
-
+      
         private async Task<List<DepartmentListItemGetResponseForDoctor>> getDepartments()
         {
             using (var response = await _client.GetAsync("https://localhost:7061/api/admin/Departments/all"))

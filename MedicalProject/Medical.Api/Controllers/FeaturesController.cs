@@ -29,7 +29,6 @@ namespace Medical.Api.Controllers
         }
 
 
-
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Features")]
         public ActionResult<PaginatedList<FeaturePaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)

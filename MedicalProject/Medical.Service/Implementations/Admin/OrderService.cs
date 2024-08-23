@@ -131,7 +131,7 @@ namespace Medical.Service.Implementations.Admin
             return totalPrice;
         }
 
-
+        
         public int CheckOut(CheckOutDto createDto,string userId)
            {
             var user = _context.AppUsers.FirstOrDefault(u => u.Id == userId);
@@ -155,6 +155,7 @@ namespace Medical.Service.Implementations.Admin
                 if (basketItem == null)
                 {
                     throw new RestException(StatusCodes.Status404NotFound, $"Basket item not found for medicine ID {dtoItem.MedicineId}");
+                  
                 }
 
                 if (basketItem.Count != dtoItem.Count)
