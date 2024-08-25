@@ -23,8 +23,8 @@ namespace Medical.Api.Controllers
         {
             _doctorService = doctorService;
             _cache = cache;
-
         }
+
 
 
 
@@ -210,6 +210,7 @@ namespace Medical.Api.Controllers
 
             return Ok(result);
         }
+
 
 
 

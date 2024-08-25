@@ -98,6 +98,22 @@ namespace Medical.Api.Controllers
         }
 
 
+        [ApiExplorerSettings(GroupName = "user_v1")]
+        [Authorize(Roles = "Member")]
+        [HttpGet("api/Medicines/BasketItems")]
+        public ActionResult<List<MedicineBasketItemDtoForView>> GetAllBasktemItem(string? search = null)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var result = _medicineService.GetAllBasketItem(search, userId);
+
+            return Ok(result);
+        }
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpGet("api/admin/Medicines/all")]
         public ActionResult<List<MedicineGetDto>> GetAllAdmin()
@@ -224,8 +240,7 @@ namespace Medical.Api.Controllers
             }
             _medicineService.UpdateItemCountInBasket(updateDto,userId);
         }
-       
-
+     
     }
 }
 

@@ -25,6 +25,7 @@ namespace Medical.Service.Interfaces.Admin
         List<MedicineGetDtoLatest> GetAllLatest(string? search = null);
 
         MedicineGetDtoForUser GetByIdForUser(int id);
+        List<MedicineBasketItemDtoForView> GetAllBasketItem(string? search = null, string? userId = null);
 
 
 

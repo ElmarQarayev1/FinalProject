@@ -1,60 +1,98 @@
 ﻿@model ServiceEditRequest
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Service";
 }
 
+<!-- Begin Page Content -->
 <div class="container-fluid">
+
+    <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Services</h1>
+        <h1 class="h3 mb-0 text-gray-800">Edit Service</h1>
+        <a asp-action="index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-arrow-left"></i> Back to List
+        </a>
     </div>
+
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <form class="user" asp-action="Edit" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="title1Input">Name</label>
-                    <input asp-for="Name" class="form-control" id="title1Input" placeholder=" " style="background-color:white;" />
-                    <span class="text-danger" asp-validation-for="Name"></span>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Edit Service</h6>
                 </div>
-                <div class="form-group">
-                    <label for="title1Input">Desc</label>
-                    <input asp-for="Desc" class="form-control" id="title1Input" placeholder=" " style="background-color:white;" />
-                    <span class="text-danger" asp-validation-for="Desc"></span>
-                </div>
+                <div class="card-body">
+                    <form class="user" asp-action="Edit" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="title1Input">
+                                <i class="fas fa-pen"></i> Service Name
+                            </label>
+                            <input asp-for="Name" class="form-control" id="title1Input" placeholder="Enter service name" style="background-color:white;" />
+                            <span class="text-danger" asp-validation-for="Name"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="descInput">
+                                <i class="fas fa-info-circle"></i> Description
+                            </label>
+                            <input asp-for="Desc" class="form-control" id="descInput" placeholder="Enter description" style="background-color:white;" />
+                            <span class="text-danger" asp-validation-for="Desc"></span>
+                        </div>
 
-                <div class="form-group">
-                    <label for="imgInput">File</label>
-                    <input asp-for="File" class="form-control imgInput" type="file" accept="image/*" style="background-color:white;" />
-                    <span class="text-danger" asp-validation-for="File"></span>
-                    <div class="preview-box">
-                        <img width="200" class="previewImg" src="@Model.FileUrl" />
-                    </div>
+                        <div class="form-group">
+                            <label for="imgInput">
+                                <i class="fas fa-image"></i> Upload New Image
+                            </label>
+                            <input asp-for="File" class="form-control imgInput" type="file" accept="image/*" style="background-color:white;" />
+                            <span class="text-danger" asp-validation-for="File"></span>
+
+                            <div class="preview-box mt-3 text-center">
+                                @if (!string.IsNullOrEmpty(Model.FileUrl))
+                                {
+                                    <img width="200" class="previewImg" src="@Model.FileUrl" alt="Current Image" />
+                                }
+                                else
+                                {
+                                    <p class="text-muted">No current image available</p>
+                                }
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary btn-block mt-4" type="submit">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                    </form>
                 </div>
-                <button class="btn btn-primary" type="submit">
-                    Edit Service
-                </button>
-            </form>
+            </div>
         </div>
     </div>
 </div>
+
 @section scripts {
     @Html.Partial("_ValidationScriptsPartial")
 
-    <script>$(document).ready(function () {
+    <script>
+        $(document).ready(function () {
             $(".imgInput").change(function (e) {
                 let box = $(this).parent().find(".preview-box");
+                box.empty();
 
                 if (e.target.files.length > 0) {
                     let reader = new FileReader();
                     reader.readAsDataURL(e.target.files[0]);
                     reader.onload = () => {
-                        let img = $(box).find(".previewImg");
-                        if (img.length == 0) {
-                            img = $("<img>").addClass("previewImg").css("width", "200px");
-                            $(box).append(img);
-                        }
+                        let img = $("<img>").addClass("previewImg").css("width", "200px");
                         img.attr("src", reader.result);
+                        box.append(img);
+                    }
+                } else {
+                    if ("@Model.FileUrl") {
+                        let img = $("<img>").addClass("previewImg").css("width", "200px");
+                        img.attr("src", "@Model.FileUrl");
+                        box.append(img);
+                    } else {
+                        box.append('<p class="text-muted">No current image available</p>');
                     }
                 }
             });
-        });</script>
+        });
+    </script>
 }

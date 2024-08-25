@@ -119,6 +119,18 @@ namespace Medical.Service.Implementations.Admin
             return _mapper.Map<List<MedicineGetDto>>(medicines);
         }
 
+        
+        public List<MedicineBasketItemDtoForView> GetAllBasketItem(string? search = null, string? userId = null)
+        {
+            var basketItems = _basketRepository.GetAll(x =>
+                (search == null || x.AppUser.FullName.Contains(search)) &&
+                x.AppUserId == userId,
+                "AppUser", "Medicine" 
+            ).ToList();
+
+            return _mapper.Map<List<MedicineBasketItemDtoForView>>(basketItems);
+        }
+
 
         public List<MedicineGetDtoLatest> GetAllLatest(string? search = null)
         {
@@ -220,12 +232,9 @@ namespace Medical.Service.Implementations.Admin
             {
                 throw new RestException(StatusCodes.Status404NotFound, "Id", "Medicine not found by given Id");
             }
+            if (medicine.Name != updateDto.Name && _medicineRepository.Exists(x => x.Name.ToLower() == updateDto.Name.ToLower()))
+                throw new RestException(StatusCodes.Status400BadRequest, "Name", "MedicineName already taken");
 
-            if (!string.Equals(medicine.Name, updateDto.Name, StringComparison.OrdinalIgnoreCase) &&
-                _medicineRepository.Exists(x => x.Name.ToUpper() == updateDto.Name.ToUpper() && x.Id != id))
-            {
-                throw new RestException(StatusCodes.Status400BadRequest, "Name", "MedicineName already exists");
-            }
 
             medicine.Name = updateDto.Name;
             medicine.Price = updateDto.Price;

@@ -28,6 +28,7 @@ namespace Medical.Api.Controllers
             _mapper = mapper;
         }
 
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles = "Member")]
         [HttpPost("api/appointments")]

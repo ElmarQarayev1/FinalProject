@@ -286,9 +286,13 @@ namespace Medical.Service.Profiles
 
             CreateMap<AppUser, AdminPaginatedGetDto>();
 
-  
-
+            CreateMap<BasketItem, MedicineBasketItemDtoForView>()
+            .ForMember(dest => dest.MedicineName, opt => opt.MapFrom(src => src.Medicine.Name))
+            .ForMember(dest => dest.Count, opt => opt.MapFrom(src => src.Count));
+           
         }
+
+    
     }
 }
 
