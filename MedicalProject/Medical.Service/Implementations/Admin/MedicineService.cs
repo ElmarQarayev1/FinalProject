@@ -233,7 +233,7 @@ namespace Medical.Service.Implementations.Admin
                 throw new RestException(StatusCodes.Status404NotFound, "Id", "Medicine not found by given Id");
             }
             if (medicine.Name != updateDto.Name && _medicineRepository.Exists(x => x.Name.ToLower() == updateDto.Name.ToLower()))
-                throw new RestException(StatusCodes.Status400BadRequest, "Name", "MedicineName already taken");
+                throw new RestException(StatusCodes.Status400BadRequest, "Name", "MedicineName already exists");
 
 
             medicine.Name = updateDto.Name;
