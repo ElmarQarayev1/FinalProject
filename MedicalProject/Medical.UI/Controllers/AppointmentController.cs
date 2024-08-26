@@ -97,7 +97,6 @@ namespace Medical.UI.Controllers
         }
 
 
-
     }
 }
 
