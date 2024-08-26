@@ -175,5 +175,6 @@
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Debug/net7.0/Medical.Api.Test.pdb
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Debug/net7.0/Medical.Api.Test.genruntimeconfig.cache
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Debug/net7.0/ref/Medical.Api.Test.dll
-/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Debug/net7.0/Medical.Api.Test.csproj.CopyComplete
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/bin/Debug/net7.0/System.Net.WebSockets.WebSocketProtocol.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Debug/net7.0/Medical.Api.Test.sourcelink.json
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Debug/net7.0/Medical..DCA498C9.Up2Date

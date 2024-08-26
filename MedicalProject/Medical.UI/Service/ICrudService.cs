@@ -30,7 +30,7 @@ namespace Medical.UI.Service
         Task<OrdersPricePerYearDto> GetOrdersPricePerYearAsync();
 
        
-       // Task<string> ProcessGoogleResponseAsync(string returnUrl);
+       
 
     }
 }

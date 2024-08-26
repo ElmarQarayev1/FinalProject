@@ -5,6 +5,7 @@ using Medical.Service.Dtos.User.CategoryDtos;
 using Medical.Service.Dtos.User.FeatureDtos;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Medical.Api.Controllers
@@ -23,6 +24,7 @@ namespace Medical.Api.Controllers
         [ApiExplorerSettings(GroupName = "admin_v1")]
 
         [HttpPost("api/admin/categories")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         public ActionResult Create(CategoryCreateDto createDto)
         {
             return StatusCode(201, new { Id = _categoryService.Create(createDto) });
@@ -30,6 +32,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/categories")]
         public ActionResult<PaginatedList<CategoryPaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
         {
@@ -39,6 +42,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/categories/all")]
         public ActionResult<List<CategoryGetDto>> GetAll()
         {
@@ -59,6 +63,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/categories/{id}")]
         public ActionResult<CategoryGetDto> GetById(int id)
         {
@@ -69,6 +74,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPut("api/admin/Categories/{id}")]
         public IActionResult Update(int id, CategoryUpdateDto updateDto)
         {
@@ -79,6 +85,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpDelete("api/admin/categories/{id}")]
         public IActionResult Delete(int id)
         {

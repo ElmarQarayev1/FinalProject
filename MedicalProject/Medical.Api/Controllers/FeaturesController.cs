@@ -23,6 +23,7 @@ namespace Medical.Api.Controllers
         [ApiExplorerSettings(GroupName = "admin_v1")]
      
         [HttpPost("api/admin/Features")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         public ActionResult Create([FromForm]  FeatureCreateDto createDto)
         {
             return StatusCode(201, new { Id = _featureService.Create(createDto) });
@@ -30,6 +31,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/Features")]
         public ActionResult<PaginatedList<FeaturePaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
         {
@@ -39,6 +41,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/Features/all")]
         public ActionResult<List<FeatureGetDto>> GetAll()
         {
@@ -66,6 +69,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/Features/{id}")]
         public ActionResult<FeatureGetDto> GetById(int id)
         {
@@ -75,6 +79,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPut("api/admin/Features/{id}")]
         public void Update(int id, [FromForm] FeatureUpdateDto updateDto)
         {
@@ -84,6 +89,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpDelete("api/admin/Features/{id}")]
         public IActionResult Delete(int id)
         {

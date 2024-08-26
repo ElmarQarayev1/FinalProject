@@ -115,6 +115,7 @@ namespace Medical.Api.Controllers
         }
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/Medicines/all")]
         public ActionResult<List<MedicineGetDto>> GetAllAdmin()
         {
@@ -136,6 +137,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/Medicines/{id}")]
         public ActionResult<MedicineDetailsDto> GetById(int id)
         {
@@ -157,6 +159,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "user_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/Medicines/{id}")]
         public ActionResult<MedicineGetDtoForUser> GetByIdForUser(int id)
         {
@@ -177,6 +180,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPut("api/admin/Medicines/{id}")]
         public void Update(int id, [FromForm] MedicineUpdateDto updateDto)
         {
@@ -185,6 +189,7 @@ namespace Medical.Api.Controllers
         }
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpDelete("api/admin/Medicines/{id}")]
         public IActionResult Delete(int id)
         {

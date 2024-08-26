@@ -6,6 +6,7 @@ using Medical.Service.Dtos.User.FeatureDtos;
 using Medical.Service.Exceptions;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -24,9 +25,6 @@ namespace Medical.Api.Controllers
             _doctorService = doctorService;
             _cache = cache;
         }
-
-
-
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [HttpPost("api/admin/Doctors")]
@@ -50,6 +48,7 @@ namespace Medical.Api.Controllers
        
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/Doctors")]
         public ActionResult<PaginatedList<DoctorPaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
         {
@@ -59,8 +58,9 @@ namespace Medical.Api.Controllers
             return Ok(result);
         }
 
-
+      
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/Doctors/all")]
         public ActionResult<List<DoctorGetDto>> GetAll()
         {
@@ -124,6 +124,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "user_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/Doctors/ForDownSide")]
         public async Task<ActionResult<List<DoctorForDownSideDto>>> GetAllUserForDownSide()
         {
@@ -190,6 +191,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/Doctors/{id}")]
         public ActionResult<DoctorGetDto> GetById(int id)
         {
@@ -215,6 +217,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpDelete("api/admin/Doctors/{id}")]
         public IActionResult Delete(int id)
         {
@@ -232,6 +235,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPut("api/admin/Doctors/{id}")]
         public void Update(int id, [FromForm] DoctorUpdateDto updateDto)
         {

@@ -5,6 +5,7 @@ using Medical.Service.Dtos.User.DepartmentDtos;
 using Medical.Service.Dtos.User.FeatureDtos;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Medical.Api.Controllers
@@ -21,6 +22,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPost("api/admin/Departments")]
         public ActionResult Create([FromForm] DepartmentCreateDto createDto)
         {
@@ -30,6 +32,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/Departments")]
         public ActionResult<PaginatedList<DepartmentPaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
         {
@@ -40,6 +43,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/Departments/all")]
         public ActionResult<List<DepartmentGetDto>> GetAll()
         {
@@ -69,6 +73,7 @@ namespace Medical.Api.Controllers
    
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/Departments/{id}")]
         public ActionResult<DepartmentGetDto> GetById(int id)
         {
@@ -78,6 +83,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPut("api/admin/Departments/{id}")]
         public void Update(int id, [FromForm] DepartmentUpdateDto updateDto)
         {
@@ -86,6 +92,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpDelete("api/admin/Departments/{id}")]
         public IActionResult Delete(int id)
         {
