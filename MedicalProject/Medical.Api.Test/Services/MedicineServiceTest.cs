@@ -44,7 +44,7 @@ namespace Medical.Api.Test.Services
                 null 
             );
         }
-
+       
         [Fact]
         public void Create_CategoryDoesNotExist_ThrowRestException()
         {

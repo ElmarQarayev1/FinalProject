@@ -113,7 +113,7 @@ namespace Medical.Api.Controllers
 
             return Ok(result);
         }
-
+     
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/Medicines/all")]

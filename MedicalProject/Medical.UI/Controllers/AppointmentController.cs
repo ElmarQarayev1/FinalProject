@@ -5,6 +5,7 @@ using Medical.UI.Filter;
 using Medical.UI.Models;
 using Medical.UI.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 
 namespace Medical.UI.Controllers
 {
@@ -14,11 +15,13 @@ namespace Medical.UI.Controllers
 	{
         private HttpClient _client;
         private readonly ICrudService _crudService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AppointmentController(HttpClient httpClient, ICrudService crudService)
+        public AppointmentController(HttpClient httpClient, ICrudService crudService,IHttpContextAccessor httpContextAccessor)
         {
             _client = httpClient;
             _crudService = crudService;
+            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<IActionResult> Index(int page = 1)
         {
@@ -77,6 +80,9 @@ namespace Medical.UI.Controllers
         }
         private async Task<List<DoctorGetResponseForAppointmentResponse>> getDoctors()
         {
+            _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
+            _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
+
             using (var response = await _client.GetAsync("https://localhost:7061/api/admin/Doctors/all"))
             {
                 if (response.IsSuccessStatusCode)
