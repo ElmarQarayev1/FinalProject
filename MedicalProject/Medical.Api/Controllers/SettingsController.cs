@@ -21,6 +21,7 @@ namespace Medical.Api.Controllers
 
 
 
+
         [HttpGet("api/admin/Settings")]
         public ActionResult<PaginatedList<SettingPaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
         {

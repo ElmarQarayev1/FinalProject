@@ -264,7 +264,7 @@ builder.Services.AddValidatorsFromAssemblyContaining<CategoryCreateDtoValidator>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+//Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -272,6 +272,7 @@ if (app.Environment.IsDevelopment())
     {
         options.SwaggerEndpoint("/swagger/admin_v1/swagger.json", "Admin API v1");
         options.SwaggerEndpoint("/swagger/user_v1/swagger.json", "User API v1");
+
     });
 }
 

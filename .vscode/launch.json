@@ -2,13 +2,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch API",
+            "name": "Launch API in Release Mode",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/MedicalProject/Medical.Api/bin/Debug/net7.0/Medical.Api.dll",
+            "program": "${workspaceFolder}/MedicalProject/Medical.Api/bin/Release/net7.0/Medical.Api.dll",
             "args": [],
-            "cwd": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.API",
+            "cwd": "${workspaceFolder}/MedicalProject/Medical.Api",
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",
@@ -22,23 +22,21 @@
                 "/Views": "${workspaceFolder}/Views"
             }
         },
-        
         {
-            "name": "Launch UI",
+            "name": "Launch UI in Release Mode",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/MedicalProject/Medical.UI/bin/Debug/net7.0/Medical.UI.dll",
+            "program": "${workspaceFolder}/MedicalProject/Medical.UI/bin/Release/net7.0/Medical.UI.dll",
             "args": [],
-            "cwd": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI",
-
+            "cwd": "${workspaceFolder}/MedicalProject/Medical.UI",
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",
                 "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Production"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
@@ -47,8 +45,8 @@
     ],
     "compounds": [
         {
-            "name": "Launch API and UI",
-            "configurations": ["Launch API", "Launch UI"]
+            "name": "Launch API and UI in Release Mode",
+            "configurations": ["Launch API in Release Mode", "Launch UI in Release Mode"]
         }
     ]
 }

@@ -208,7 +208,7 @@ namespace Medical.Api.Test.Services
 
             // Act
             var result = _medicineService.GetAllLatest();
-
+            
             // Assert
             Assert.NotNull(result);
             Assert.Equal(2, result.Count);

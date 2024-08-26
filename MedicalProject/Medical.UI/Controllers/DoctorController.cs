@@ -68,6 +68,7 @@ namespace Medical.UI.Controllers
                 return StatusCode((int)e.Status);
             }
         }
+       
 
         public async Task<IActionResult> Create()
         {

@@ -32,7 +32,7 @@ namespace Medical.Service.Implementations.Admin
             _doctorRepository = doctorRepository;
             _mapper = mapper;
         }
-
+       
         public async Task<int> GetDailyAppointmentsCountAsync()
         {
             var today = DateTime.Today;
