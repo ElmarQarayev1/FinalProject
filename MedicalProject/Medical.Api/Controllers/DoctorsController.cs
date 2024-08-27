@@ -27,21 +27,14 @@ namespace Medical.Api.Controllers
         }
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPost("api/admin/Doctors")]
         public ActionResult Create([FromForm] DoctorCreateDto createDto)
         {
           
             var newDoctorId = _doctorService.Create(createDto);
-
-           
-            _cache.Remove("Doctors_GetAll_Admin"); 
-            _cache.Remove("Doctors_GetAllForUserHome"); 
-            _cache.Remove("Doctors_GetAllUser"); 
-            _cache.Remove("Doctors_GetAllUserForDownSide"); 
-
+     
           
-            _cache.Remove($"Doctor_GetById_{newDoctorId}");
-
             return StatusCode(201, new { Id = newDoctorId });
         }
 
@@ -64,18 +57,9 @@ namespace Medical.Api.Controllers
         [HttpGet("api/admin/Doctors/all")]
         public ActionResult<List<DoctorGetDto>> GetAll()
         {
-            var cacheKey = "Doctors_GetAll_Admin";
-            if (_cache.TryGetValue(cacheKey, out List<DoctorGetDto> cachedResult))
-            {
-                return Ok(cachedResult);
-            }
-
+          
             var result = _doctorService.GetAll();
-            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = _cacheExpiration
-            });
-
+           
 
             return Ok(result);
         }
@@ -124,7 +108,6 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "user_v1")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/Doctors/ForDownSide")]
         public async Task<ActionResult<List<DoctorForDownSideDto>>> GetAllUserForDownSide()
         {
@@ -173,17 +156,9 @@ namespace Medical.Api.Controllers
         [HttpGet("api/Doctors/{id}")]
         public ActionResult<DoctorGetDetailDto> GetByIdForUser(int id)
         {
-            var cacheKey = $"Doctors_GetByIdForUser_{id}";
-            if (_cache.TryGetValue(cacheKey, out DoctorGetDetailDto cachedResult))
-            {
-                return Ok(cachedResult);
-            }
-
+           
             var result = _doctorService.GetByIdForUser(id);
-            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = _cacheExpiration
-            });
+           
 
             return Ok(result);
         }
@@ -195,25 +170,12 @@ namespace Medical.Api.Controllers
         [HttpGet("api/admin/Doctors/{id}")]
         public ActionResult<DoctorGetDto> GetById(int id)
         {
-            var cacheKey = $"Doctor_GetById_{id}";
-            if (_cache.TryGetValue(cacheKey, out DoctorGetDto cachedResult))
-            {
-                return Ok(cachedResult);
-            }
+          
 
-            var result = _doctorService.GetById(id);
-
-            var cacheEntryOptions = new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = _cacheExpiration
-            };
-
-            _cache.Set(cacheKey, result, cacheEntryOptions);
+            var result = _doctorService.GetById(id);           
 
             return Ok(result);
         }
-
-
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
@@ -222,12 +184,6 @@ namespace Medical.Api.Controllers
         public IActionResult Delete(int id)
         {
             _doctorService.Delete(id);
-
-
-            _cache.Remove($"Doctor_GetById_{id}");
-
-
-            _cache.Remove("Doctors_GetAll");
 
             return NoContent();
         }
@@ -241,15 +197,8 @@ namespace Medical.Api.Controllers
         {
             _doctorService.Update(id, updateDto);
 
-           
-            _cache.Remove($"Doctor_GetById_{id}");
-            _cache.Remove($"Doctors_GetByIdForUser_{id}");
-            _cache.Remove("Doctors_GetAll_Admin");
-            _cache.Remove("Doctors_GetAllForUserHome");
-            _cache.Remove("Doctors_GetAllUser");
-            _cache.Remove("Doctors_GetAllUserForDownSide");
+             
         }
-
 
     }
 

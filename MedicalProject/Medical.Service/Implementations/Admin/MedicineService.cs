@@ -119,17 +119,17 @@ namespace Medical.Service.Implementations.Admin
             return _mapper.Map<List<MedicineGetDto>>(medicines);
         }
 
-        
-        public List<MedicineBasketItemDtoForView> GetAllBasketItem(string? search = null, string? userId = null)
+
+        public List<MedicineBasketItemDtoForView> GetAllBasketItem(string? userId = null)
         {
             var basketItems = _basketRepository.GetAll(x =>
-                (search == null || x.AppUser.FullName.Contains(search)) &&
                 x.AppUserId == userId,
-                "AppUser", "Medicine" 
+                "AppUser", "Medicine"
             ).ToList();
 
             return _mapper.Map<List<MedicineBasketItemDtoForView>>(basketItems);
         }
+
 
 
         public List<MedicineGetDtoLatest> GetAllLatest(string? search = null)

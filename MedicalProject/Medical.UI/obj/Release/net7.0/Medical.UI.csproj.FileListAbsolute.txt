@@ -64,5 +64,4 @@
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/bin/Release/net7.0/Microsoft.AspNetCore.Authentication.Google.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/bin/Release/net7.0/Newtonsoft.Json.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/bin/Release/net7.0/System.Net.WebSockets.WebSocketProtocol.dll
-/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/obj/Release/net7.0/Medical.UI.sourcelink.json
-/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/obj/Release/net7.0/Medical.UI.csproj.Up2Date
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.UI/obj/Release/net7.0/Medical.UI.csproj.CopyComplete

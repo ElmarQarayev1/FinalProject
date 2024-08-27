@@ -5,6 +5,7 @@ using Medical.UI.Filter;
 using Medical.UI.Models;
 using Medical.UI.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 
 namespace Medical.UI.Controllers
 {
@@ -14,11 +15,13 @@ namespace Medical.UI.Controllers
 
         private HttpClient _client;
         private readonly ICrudService _crudService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public DoctorController(ICrudService crudService)
+        public DoctorController(ICrudService crudService,IHttpContextAccessor httpContextAccessor)
         {
             _crudService = crudService;
             _client = new HttpClient();
+            _httpContextAccessor = httpContextAccessor;
         }
 
 
@@ -160,6 +163,8 @@ namespace Medical.UI.Controllers
       
         private async Task<List<DepartmentListItemGetResponseForDoctor>> getDepartments()
         {
+            _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);
+            _client.DefaultRequestHeaders.Add(HeaderNames.Authorization, _httpContextAccessor.HttpContext.Request.Cookies["token"]);
             using (var response = await _client.GetAsync("https://localhost:7061/api/admin/Departments/all"))
             {
                 if (response.IsSuccessStatusCode)

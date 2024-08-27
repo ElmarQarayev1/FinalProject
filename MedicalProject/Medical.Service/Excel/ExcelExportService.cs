@@ -28,12 +28,14 @@ namespace Medical.Service.Excel
             {
                 var worksheet = package.Workbook.Worksheets.Add("Orders");
 
-
+               
                 worksheet.Cells[1, 1].Value = "Full Name";
                 worksheet.Cells[1, 2].Value = "Email";
                 worksheet.Cells[1, 3].Value = "Total Price";
                 worksheet.Cells[1, 4].Value = "Status";
+                worksheet.Cells[1, 5].Value = "Created At"; 
 
+              
                 for (int i = 0; i < orders.Count; i++)
                 {
                     var order = orders[i];
@@ -43,6 +45,7 @@ namespace Medical.Service.Excel
                     worksheet.Cells[i + 2, 2].Value = order.Email;
                     worksheet.Cells[i + 2, 3].Value = totalPrice;
                     worksheet.Cells[i + 2, 4].Value = order.Status.ToString();
+                    worksheet.Cells[i + 2, 5].Value = order.CreatedAt?.ToString("yyyy-MM-dd HH:mm:ss"); 
                 }
 
                 return package.GetAsByteArray();

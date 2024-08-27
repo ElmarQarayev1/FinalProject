@@ -91,6 +91,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPut("api/admin/reviewsAccepted/{id}")]
         public IActionResult AcceptReview(int id)
         {
@@ -102,6 +103,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPut("api/admin/reviewsRejected/{id}")]
         public IActionResult RejectOrder(int id)
         {

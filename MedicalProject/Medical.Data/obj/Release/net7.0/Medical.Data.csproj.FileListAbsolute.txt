@@ -14,5 +14,4 @@
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Data/obj/Release/net7.0/Medical.Data.pdb
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Data/obj/Release/net7.0/Medical.Data.genruntimeconfig.cache
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Data/obj/Release/net7.0/ref/Medical.Data.dll
-/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Data/obj/Release/net7.0/Medical.Data.sourcelink.json
-/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Data/obj/Release/net7.0/Medical..3D098DCF.Up2Date
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Data/obj/Release/net7.0/Medical.Data.csproj.CopyComplete

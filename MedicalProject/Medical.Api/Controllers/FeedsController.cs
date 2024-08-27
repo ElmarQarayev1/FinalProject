@@ -5,6 +5,7 @@ using Medical.Service.Dtos.Admin.FeedDtos;
 using Medical.Service.Dtos.User.FeedDtos;
 using Medical.Service.Implementations.Admin;
 using Medical.Service.Interfaces.Admin;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Medical.Api.Controllers
@@ -19,7 +20,7 @@ namespace Medical.Api.Controllers
         }
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
-
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPost("api/admin/Feeds")]
         public ActionResult Create([FromForm] FeedCreateDto createDto)
         {
@@ -29,6 +30,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/Feeds")]
         public ActionResult<PaginatedList<FeedPaginatedGetDto>> GetAll(string? search = null, int page = 1, int size = 10)
         {
@@ -38,6 +40,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/Feeds/all")]
         public ActionResult<List<FeedGetDto>> GetAll()
         {
@@ -56,6 +59,8 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/Feeds/{id}")]
         public ActionResult<FeedGetDto> GetById(int id)
         {
@@ -65,6 +70,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPut("api/admin/Feeds/{id}")]
         public void Update(int id, [FromForm] FeedUpdateDto updateDto)
         {
@@ -74,6 +80,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpDelete("api/admin/Feeds/{id}")]
         public IActionResult Delete(int id)
         {

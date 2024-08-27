@@ -22,6 +22,7 @@ namespace Medical.Service.Dtos.User.AppointmentDtos
                 .Must(date => date >= DateTime.Now)
                 .WithMessage("Date cannot be in the past.");
             RuleFor(x => x.Phone).NotNull().MinimumLength(9);
+
                           
         }
 

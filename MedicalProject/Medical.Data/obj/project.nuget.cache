@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "vzJMD+QB394=",
+  "dgSpecHash": "3mPdV/5mXcrsAu0csmSXV5yg5tCt0FoQdRQIf4BQ00nNdDhf6L62/pqCWoNUYMvaqKEgsjF0/C3ELUvA9a8OmA==",
   "success": true,
   "projectFilePath": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Data/Medical.Data.csproj",
   "expectedPackageFiles": [
@@ -106,12 +106,5 @@
     "/Users/elmar/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "/Users/elmar/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Paket güvenlik açığı verileri alınırken hata oluştu: https://api.nuget.org/v3/index.json kaynağı için hizmet dizini yüklenemiyor."
-    }
-  ]
+  "logs": []
 }

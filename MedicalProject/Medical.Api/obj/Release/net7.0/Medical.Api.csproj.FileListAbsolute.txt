@@ -125,5 +125,4 @@
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Release/net7.0/Microsoft.AspNetCore.Authentication.Google.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Release/net7.0/Microsoft.EntityFrameworkCore.InMemory.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/bin/Release/net7.0/System.Net.WebSockets.WebSocketProtocol.dll
-/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/obj/Release/net7.0/Medical.Api.sourcelink.json
-/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/obj/Release/net7.0/Medical..4933C338.Up2Date
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api/obj/Release/net7.0/Medical.Api.csproj.CopyComplete

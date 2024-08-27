@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9bRNQBymWKI=",
+  "dgSpecHash": "Z2pndjem+C1dcRaGmUtg/Rpy62UXzJ3ZlrlgSM7nANBezQ20KwJLQjiGhagBSIfa3DG9Bz7+UO9tSmdD6nZtEQ==",
   "success": true,
   "projectFilePath": "/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/Medical.Api.Test.csproj",
   "expectedPackageFiles": [
@@ -205,12 +205,5 @@
     "/Users/elmar/.nuget/packages/xunit.extensibility.execution/2.4.2/xunit.extensibility.execution.2.4.2.nupkg.sha512",
     "/Users/elmar/.nuget/packages/xunit.runner.visualstudio/2.4.5/xunit.runner.visualstudio.2.4.5.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Paket güvenlik açığı verileri alınırken hata oluştu: https://api.nuget.org/v3/index.json kaynağı için hizmet dizini yüklenemiyor."
-    }
-  ]
+  "logs": []
 }

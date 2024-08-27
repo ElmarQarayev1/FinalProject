@@ -41,16 +41,12 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
-          [Authorize(Roles ="SuperAdmin,Admin")]
+        [Authorize(Roles ="SuperAdmin,Admin")]
         [HttpPost("api/admin/Medicines")]
         public ActionResult Create([FromForm] MedicineCreateDto createDto)
         {
             var newMedicineId = _medicineService.Create(createDto);
-
-            
-            _cache.Remove("Medicines_GetAll_Admin");
-            _cache.Remove("Medicines_GetAllForUserHome");
-            _cache.Remove($"Medicine_GetById_{newMedicineId}");
+         
 
             return StatusCode(201, new { Id = newMedicineId });
         }
@@ -73,6 +69,7 @@ namespace Medical.Api.Controllers
             {
                 AbsoluteExpirationRelativeToNow = _cacheExpiration
             });
+
 
             return Ok(result);
         }
@@ -100,7 +97,7 @@ namespace Medical.Api.Controllers
         [ApiExplorerSettings(GroupName = "user_v1")]
         [Authorize(Roles = "Member")]
         [HttpGet("api/Medicines/BasketItems")]
-        public ActionResult<List<MedicineBasketItemDtoForView>> GetAllBasktemItem(string? search = null)
+        public ActionResult<List<MedicineBasketItemDtoForView>> GetAllBasktemItem()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
@@ -108,7 +105,7 @@ namespace Medical.Api.Controllers
                 return Unauthorized();
             }
 
-            var result = _medicineService.GetAllBasketItem(search, userId);
+            var result = _medicineService.GetAllBasketItem(userId);
 
             return Ok(result);
         }
@@ -118,17 +115,9 @@ namespace Medical.Api.Controllers
         [HttpGet("api/admin/Medicines/all")]
         public ActionResult<List<MedicineGetDto>> GetAllAdmin()
         {
-            var cacheKey = "Medicines_GetAll_Admin";
-            if (_cache.TryGetValue(cacheKey, out List<MedicineGetDto> cachedResult))
-            {
-                return Ok(cachedResult);
-            }
-
+           
             var result = _medicineService.GetAll();
-            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = _cacheExpiration
-            });
+           
 
             return Ok(result);
         }
@@ -140,25 +129,16 @@ namespace Medical.Api.Controllers
         [HttpGet("api/admin/Medicines/{id}")]
         public ActionResult<MedicineDetailsDto> GetById(int id)
         {
-            var cacheKey = $"Medicine_GetById_{id}";
-            if (_cache.TryGetValue(cacheKey, out MedicineDetailsDto cachedResult))
-            {
-                return Ok(cachedResult);
-            }
+            
 
             var result = _medicineService.GetById(id);
-            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = _cacheExpiration
-            });
+         
 
             return Ok(result);
         }
 
 
-
         [ApiExplorerSettings(GroupName = "user_v1")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/Medicines/{id}")]
         public ActionResult<MedicineGetDtoForUser> GetByIdForUser(int id)
         {
