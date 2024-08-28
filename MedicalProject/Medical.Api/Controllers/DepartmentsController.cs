@@ -41,7 +41,6 @@ namespace Medical.Api.Controllers
 
 
 
-
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/Departments/all")]

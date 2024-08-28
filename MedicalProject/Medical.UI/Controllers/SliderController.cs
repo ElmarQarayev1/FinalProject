@@ -43,8 +43,7 @@ namespace Medical.UI.Controllers
                 {
                     return RedirectToAction("Login", "Auth");
                 }
-
-               
+                
                 return RedirectToAction("Error", "Home");
             }
             catch (System.Exception)

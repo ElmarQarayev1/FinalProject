@@ -21,7 +21,7 @@ namespace Medical.Api.Controllers
 
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
-     
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPost("api/admin/Features")]
         [Authorize(Roles = "SuperAdmin,Admin")]
         public ActionResult Create([FromForm]  FeatureCreateDto createDto)
@@ -37,6 +37,7 @@ namespace Medical.Api.Controllers
         {
             return StatusCode(200, _featureService.GetAllByPage(search, page, size));
         }
+
 
 
 

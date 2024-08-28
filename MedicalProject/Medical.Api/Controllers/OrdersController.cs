@@ -67,6 +67,10 @@ namespace Medical.Api.Controllers
         {
             return StatusCode(200, _orderService.GetById(id));
         }
+
+
+
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles ="Admin,SuperAdmin")]
         [HttpGet("api/admin/orders")]

@@ -137,11 +137,11 @@
         async function fetchData() {
             try {
                 let response = await fetch('/Home/GetTodayOrdersTotalPrice');
-                let dailySale = await response.json();
+                let dailySale = await response.json()+" AZN";
                 document.getElementById('daily-sale').textContent = dailySale;
 
                 response = await fetch('/Home/GetMonthlyOrdersTotalPrice');
-                let monthlySale = await response.json();
+                let monthlySale = await response.json()+" AZN";
                 document.getElementById('monthly-sale').textContent = monthlySale;
 
                 response = await fetch('/Home/GetMonthlyOrdersCount');
@@ -313,7 +313,7 @@
                                     beginAtZero: true,
                                     suggestedMax: Math.max(...yearlyData.ordersPrice) + 2000,
                                     ticks: {
-                                        stepSize: Math.ceil((Math.max(...yearlyData.ordersPrice) + 2000) / 10)
+                                        stepSize: 500
                                     }
                                 },
                                 x: {

@@ -40,7 +40,7 @@
                                     <td>@item.Name</td>
                                     <td>@(item.Desc.Length > 50 ? item.Desc.Substring(0, 50) + "..." : item.Desc)</td>
                                     <td>
-                                        <img width="200" src="@item.FileUrl" alt="@item.Name" />
+                                        <img width="140" src="@item.FileUrl" alt="@item.Name" />
                                     </td>
                                     <td>
                                         <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">

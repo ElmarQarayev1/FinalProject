@@ -9,9 +9,9 @@
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Data/obj/Release/net7.0/Medical.Data.AssemblyInfoInputs.cache
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Data/obj/Release/net7.0/Medical.Data.AssemblyInfo.cs
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Data/obj/Release/net7.0/Medical.Data.csproj.CoreCompileInputs.cache
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Data/obj/Release/net7.0/Medical.Data.csproj.CopyComplete
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Data/obj/Release/net7.0/Medical.Data.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Data/obj/Release/net7.0/refint/Medical.Data.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Data/obj/Release/net7.0/Medical.Data.pdb
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Data/obj/Release/net7.0/Medical.Data.genruntimeconfig.cache
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Data/obj/Release/net7.0/ref/Medical.Data.dll
-/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Data/obj/Release/net7.0/Medical.Data.csproj.CopyComplete

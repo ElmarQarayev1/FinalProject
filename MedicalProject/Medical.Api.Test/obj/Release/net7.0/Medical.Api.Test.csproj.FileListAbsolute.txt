@@ -68,6 +68,7 @@
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/bin/Release/net7.0/System.Formats.Asn1.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/bin/Release/net7.0/System.IdentityModel.Tokens.Jwt.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/bin/Release/net7.0/System.Memory.Data.dll
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/bin/Release/net7.0/System.Net.WebSockets.WebSocketProtocol.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/bin/Release/net7.0/System.Runtime.Caching.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/bin/Release/net7.0/System.Security.Cryptography.Pkcs.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/bin/Release/net7.0/System.Security.Cryptography.ProtectedData.dll
@@ -170,10 +171,9 @@
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Release/net7.0/Medical.Api.Test.AssemblyInfoInputs.cache
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Release/net7.0/Medical.Api.Test.AssemblyInfo.cs
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Release/net7.0/Medical.Api.Test.csproj.CoreCompileInputs.cache
+/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Release/net7.0/Medical.Api.Test.csproj.CopyComplete
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Release/net7.0/Medical.Api.Test.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Release/net7.0/refint/Medical.Api.Test.dll
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Release/net7.0/Medical.Api.Test.pdb
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Release/net7.0/Medical.Api.Test.genruntimeconfig.cache
 /Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Release/net7.0/ref/Medical.Api.Test.dll
-/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/bin/Release/net7.0/System.Net.WebSockets.WebSocketProtocol.dll
-/Users/elmar/Desktop/CodeAcademy/FinalProject/MedicalProject/Medical.Api.Test/obj/Release/net7.0/Medical.Api.Test.csproj.CopyComplete

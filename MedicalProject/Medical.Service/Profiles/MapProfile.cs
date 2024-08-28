@@ -45,6 +45,10 @@ namespace Medical.Service.Profiles
 
 
 
+
+
+
+
             //appointments
 
             CreateMap<Appointment, AppointmentPaginatedGetDto>()
@@ -66,6 +70,11 @@ namespace Medical.Service.Profiles
 
 
 
+
+
+
+
+
             //sliders
             CreateMap<Slider, SliderCreateDto>().ReverseMap();
             CreateMap<Slider, SliderPaginatedGetDto>()
@@ -79,7 +88,12 @@ namespace Medical.Service.Profiles
 
 
 
-           
+
+
+
+
+
+
 
 
             //departments
@@ -93,6 +107,10 @@ namespace Medical.Service.Profiles
 
             CreateMap<Department, DepartmentGetDtoForUser>()
                 .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/departments/" + src.ImageName));
+
+
+
+
 
 
 
@@ -118,6 +136,11 @@ namespace Medical.Service.Profiles
 
 
 
+
+
+
+
+
             //features
             CreateMap<Feature, FeatureCreateDto>().ReverseMap();
             CreateMap<Feature, FeaturePaginatedGetDto>()
@@ -129,6 +152,10 @@ namespace Medical.Service.Profiles
 
             CreateMap<Feature, FeatureGetDtoForUser>()
                  .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => baseUrl + "/uploads/features/" + src.ImageName));
+
+
+
+
 
 
 
@@ -156,9 +183,16 @@ namespace Medical.Service.Profiles
 
 
 
+
+
+
             //settings
             CreateMap<Setting, SettingGetDto>();
             CreateMap<Setting, SettingPaginatedGetDto>();
+
+
+
+
 
 
 
@@ -187,6 +221,10 @@ namespace Medical.Service.Profiles
 
             CreateMap<Doctor, DoctorForDownSideDto>();
               
+
+
+
+
 
 
 
@@ -277,6 +315,14 @@ namespace Medical.Service.Profiles
                             .Where(r => r.Status == ReviewStatus.Accepted)
                             .Average(r => r.Rate)  
                         : 0));
+
+
+
+
+
+
+
+
 
 
 

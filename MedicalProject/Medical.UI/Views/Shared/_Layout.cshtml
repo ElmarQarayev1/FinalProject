@@ -69,7 +69,6 @@
                     <a asp-controller="department" asp-action="index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Departments</a>
                     <a asp-controller="feature" asp-action="index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Features</a>
                     <a asp-controller="service" asp-action="index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Services</a>
-                    <a asp-controller="setting" asp-action="index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Settings</a>
                     <a asp-controller="doctor" asp-action="index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Doctors</a>
                     <a asp-controller="medicine" asp-action="index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Medicines</a>
                     <a asp-controller="feed" asp-action="index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Feeds</a>
@@ -82,6 +81,7 @@
                         <a asp-controller="account" asp-action="ShowAdmin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Admins</a>
 
                     }
+                    <a asp-controller="setting" asp-action="index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Settings</a>
 
 
                 </div>
@@ -111,6 +111,7 @@
                             <span class="nav-link-text ms-1">@profile.UserName</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                            <span class="dropdown-item">Role-@profile.Role</span>
                             <a asp-action="profile" asp-controller="account" class="dropdown-item">Profile</a>
                             <a asp-action="logout" asp-controller="account" class="dropdown-item">Log Out</a>
                         </div>

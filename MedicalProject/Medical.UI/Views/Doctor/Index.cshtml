@@ -30,9 +30,6 @@
                                 <th scope="col">DepartmentName</th>
                                 <th scope="col">AppointmentCount</th>
                                 <th scope="col">TodayAppCount</th>
-
-
-
                                 <th scope="col">Image</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -48,7 +45,7 @@
                                     <td>@item.TodayAppointmentCount</td>
 
                                     <td>
-                                        <img width="200" src="@item.FileUrl" alt="@item.FullName" />
+                                        <img width="120" src="@item.FileUrl" alt="@item.FullName" />
                                     </td>
                                     <td>
                                         <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">
