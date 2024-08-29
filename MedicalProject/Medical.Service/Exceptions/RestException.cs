@@ -21,7 +21,7 @@ namespace Medical.Service.Exceptions
         public int Code { get; set; }
         public string Message { get; set; }
         public List<RestExceptionError> Errors { get; set; } = new List<RestExceptionError>();
-
+       
     }
 
     public class RestExceptionError

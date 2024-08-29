@@ -39,7 +39,7 @@ namespace Medical.Api.Controllers
             return StatusCode(200, _departmentService.GetAllByPage(search, page, size));
         }
 
-
+        
 
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "SuperAdmin,Admin")]

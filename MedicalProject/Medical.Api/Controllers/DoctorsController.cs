@@ -26,6 +26,7 @@ namespace Medical.Api.Controllers
             _cache = cache;
         }
 
+
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPost("api/admin/Doctors")]

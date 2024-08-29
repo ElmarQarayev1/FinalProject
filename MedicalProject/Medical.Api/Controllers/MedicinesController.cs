@@ -74,6 +74,7 @@ namespace Medical.Api.Controllers
             return Ok(result);
         }
 
+
         [ApiExplorerSettings(GroupName = "user_v1")]
         [HttpGet("api/Medicines/LatestMedicines")]
         public ActionResult<List<MedicineGetDtoLatest>> GetLatestMedicines()

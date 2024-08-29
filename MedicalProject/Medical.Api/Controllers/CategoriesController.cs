@@ -40,7 +40,7 @@ namespace Medical.Api.Controllers
         }
 
 
-
+       
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("api/admin/categories/all")]
@@ -69,7 +69,6 @@ namespace Medical.Api.Controllers
         {
             return StatusCode(200, _categoryService.GetById(id));
         }
-
 
 
 

@@ -42,7 +42,7 @@
                                     <th scope="row">@(++order)</th>
                                     <td>@item.Name</td>
                                     <td>@(item.Desc.Length > 50 ? item.Desc.Substring(0, 50) + "..." : item.Desc)</td>
-                                    <td>@item.Date.ToString("MMMM-dd,yyyyy")</td>
+                                    <td>@item.Date.ToString("dd-MMMM-yyyy")</td>
                                     <td>
                                         <img width="140" class="img-thumbnail" src="@item.FileUrl" alt="@item.Name" />
                                     </td>
