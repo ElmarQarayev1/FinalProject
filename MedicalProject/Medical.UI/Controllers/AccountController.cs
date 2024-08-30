@@ -226,12 +226,14 @@ namespace Medical.UI.Controllers
                 TempData["UserId"] = id;
                 return View(editRequest);
             }
-
             try
             {
-                await _crudService.Update<AdminProfileEditRequest>(editRequest, "update/" + id);
+                if (Request.Cookies.ContainsKey("token"))
+                {
+                    Response.Cookies.Delete("token");
+                }
 
-               
+                await _crudService.Update<AdminProfileEditRequest>(editRequest, "update/" + id);    
                 return RedirectToAction("login", "account");
             }
             catch (ModelException e)
