@@ -1,6 +1,6 @@
 ﻿@model PaginatedResponse<SliderListItemGetResponse>
 @{
-    var order = 0;
+    var order = (Model.PageIndex - 1) * Model.PageSize;
     ViewData["Title"] = "Index";
 }
 

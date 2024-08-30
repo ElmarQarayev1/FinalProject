@@ -27,7 +27,6 @@ namespace Medical.Api.Controllers
             return StatusCode(201, new { Id = _feedService.Create(createDto) });
         }
 
-
        
         [ApiExplorerSettings(GroupName = "admin_v1")]
         [Authorize(Roles = "SuperAdmin,Admin")]

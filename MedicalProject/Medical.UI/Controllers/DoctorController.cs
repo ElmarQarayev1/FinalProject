@@ -71,7 +71,7 @@ namespace Medical.UI.Controllers
                 return StatusCode((int)e.Status);
             }
         }
-       
+
 
         public async Task<IActionResult> Create()
         {
@@ -83,6 +83,7 @@ namespace Medical.UI.Controllers
 
             return View();
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] DoctorCreateRequest createRequest)
@@ -102,6 +103,7 @@ namespace Medical.UI.Controllers
                 return View();
             }
         }
+
 
         public async Task<IActionResult> Edit(int id)
         {
@@ -137,6 +139,7 @@ namespace Medical.UI.Controllers
             return View(doctorEdit);
         }
 
+
         [HttpPost]
         public async Task<IActionResult> Edit(int id, [FromForm] DoctorEditRequest editRequest)
         {
@@ -160,7 +163,8 @@ namespace Medical.UI.Controllers
                 return View(editRequest);
             }
         }
-      
+
+        
         private async Task<List<DepartmentListItemGetResponseForDoctor>> getDepartments()
         {
             _client.DefaultRequestHeaders.Remove(HeaderNames.Authorization);

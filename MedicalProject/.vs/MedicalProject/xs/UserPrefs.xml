@@ -1,12 +1,14 @@
 ﻿<Properties StartupConfiguration="Birden Çok Proje">
+  <MultiItemStartupConfigurations>
+    <MultiItemSolutionRunConfiguration Id="Birden Çok Proje" Name="Birden Çok Proje">
+      <Items>
+        <StartupItem ItemId="{5DF610E8-7126-4BF7-9557-B9AF63AB645E}" ItemName="Medical.Api" ConfigurationId="https" />
+        <StartupItem ItemId="{13434F5E-1E8C-4C53-86C5-259788FB8D0E}" ItemName="Medical.UI" ConfigurationId="https" />
+      </Items>
+    </MultiItemSolutionRunConfiguration>
+  </MultiItemStartupConfigurations>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.Medical.Api.Test PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MonoDevelop.Ide.ItemProperties.Medical.UI PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Medical.Api/Controllers/DoctorsController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Medical.UI/Controllers/DoctorController.cs">
     <Files>
       <File FileName="Medical.Api/Controllers/AuthController.cs" />
       <File FileName="Medical.Service/Dtos/Admin/DoctorDtos/DoctorCreateDto.cs" />
@@ -29,7 +31,7 @@
       <File FileName="Medical.Api.Test/Usings.cs" />
       <File FileName="Medical.Api/Controllers/CategoriesController.cs" />
       <File FileName="Medical.Service/Implementations/Admin/EmailService.cs" />
-      <File FileName="Medical.Api/Controllers/DoctorsController.cs" Line="89" Column="1" />
+      <File FileName="Medical.Api/Controllers/DoctorsController.cs" />
       <File FileName="Medical.Api/Controllers/MedicinesController.cs" />
       <File FileName="Medical.UI/Filter/AuthFilter.cs" />
       <File FileName="Medical.Api/Program.cs" />
@@ -97,7 +99,7 @@
       <File FileName="Medical.Core/Entities/Feed.cs" />
       <File FileName="Medical.UI/Service/ICrudService.cs" />
       <File FileName="Medical.Service/Exceptions/RestException.cs" />
-      <File FileName="Medical.UI/Controllers/DoctorController.cs" />
+      <File FileName="Medical.UI/Controllers/DoctorController.cs" Line="27" Column="1" />
       <File FileName="Medical.UI/Controllers/SettingController.cs" />
       <File FileName="Medical.UI/Controllers/SliderController.cs" />
       <File FileName="Medical.UI/Controllers/ReviewController.cs" />
@@ -151,28 +153,23 @@
         <State name="__root__">
           <Node name="MedicalProject" expanded="True">
             <Node name="Medical.Api" expanded="True">
+              <Node name="Controllers" expanded="True" />
+            </Node>
+            <Node name="Medical.UI" expanded="True">
               <Node name="Controllers" expanded="True">
-                <Node name="DoctorsController.cs" selected="True" />
+                <Node name="DoctorController.cs" selected="True" />
               </Node>
-            </Node>
-            <Node name="Medical.Api.Test" expanded="True">
-              <Node name="Services" expanded="True" />
-            </Node>
-            <Node name="Medical.Core" expanded="True">
-              <Node name="Entities" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Medical.Api.Test PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Medical.UI PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
   <MonoDevelop.Ide.ItemProperties.Medical.Api PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
-  <MultiItemStartupConfigurations>
-    <MultiItemSolutionRunConfiguration Id="Birden Çok Proje" Name="Birden Çok Proje">
-      <Items>
-        <StartupItem ItemId="{5DF610E8-7126-4BF7-9557-B9AF63AB645E}" ItemName="Medical.Api" ConfigurationId="https" />
-        <StartupItem ItemId="{13434F5E-1E8C-4C53-86C5-259788FB8D0E}" ItemName="Medical.UI" ConfigurationId="https" />
-      </Items>
-    </MultiItemSolutionRunConfiguration>
-  </MultiItemStartupConfigurations>
 </Properties>
